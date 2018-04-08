@@ -1,0 +1,134 @@
+//////////////////////
+// PAGE LOAD
+//////////////////////
+window.addEventListener("load",function() {
+
+	// Check for hours passed in the URL
+	var hours = getParameterByName('hours'); // "lorem"
+	if (hours !== undefined && hours !== null && hours !== "") {
+		$("#hours").html(hours);
+		$("#hours-worked").show();
+	}
+	
+	// Botomatic for testing
+	//botamatic();
+	
+	// Setup datetime picker
+	$("#datetime-picker").datetimepicker({
+		"useCurrent": true,
+		"stepping":5
+	});
+
+	// Setup datetime picker
+	console.log("SETUP DATETIME");
+	$(".datetime-picker").datetimepicker({
+		"useCurrent": true,
+		"stepping":5
+	});
+	
+	// Check / Set preferences
+	checkPreferences();
+
+	//////////////////////
+	// SERVICE CALLS
+	//////////////////////
+	var service_calls = $(".npcb-service");
+	for (var i = 0; i < service_calls.length; i++) {
+		var service_call = service_calls[i];
+		if($(service_call).data("npcb-service")) {
+			// Only run if data is populated
+			var service = $(service_call).data("npcb-service");
+			var callback = "";
+			if ($(service_call).data("npcb-callback") !== "") {
+				callback = $(service_call).data("npcb-callback");
+			}		
+			loadServiceData(service_call, service, callback, "");
+		}
+	}
+	
+	//////////////////////
+	// ON EVENT HANDLERS
+	//////////////////////
+
+	// Set datetime picker time and flip the ok switch on that input
+	$("#datetime-picker").on("blur",function() {
+		if ($(this).val() !== "") {
+			flipInputGroupIcon(".signin-time .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".signin-time .input-group-addon", "error");
+		}
+	});
+	$("#datetime-picker").focus().blur();
+	$("#quick-sign-in-name").focus();
+
+	// Setup on change for task drop down
+	$("#task").on("change",function() {
+		if ($(this).find(":selected").val() !== "") {
+			flipInputGroupIcon(".task .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".task .input-group-addon", "error");
+		}
+	});
+	
+	// Setup on change for email
+	$("#quick-sign-in-name").on("blur",function() {
+		if ($(this).val() !== "") {
+			flipInputGroupIcon(".email .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".email .input-group-addon", "error");
+		}
+	});
+	
+	// Setup on change for first and last name
+	$("#first-name").on("blur",function() {
+		if ($(this).val() !== "") {
+			flipInputGroupIcon(".first-name .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".first-name .input-group-addon", "error");
+		}
+	});
+	
+	// Setup on change for first and last name
+	$("#last-name").on("blur",function() {
+		if ($(this).val() !== "") {
+			flipInputGroupIcon(".last-name .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".last-name .input-group-addon", "error");
+		}
+	});
+	
+	// Expand / Collapse release forms sections
+	$(".release-handler").on("click",function() {
+
+		// Remove in on ALL to cover our bases
+		$(".panel-collapse").each(function() {
+			$(this).removeClass("in");
+		});
+
+		// Remove and add 'in' to expand/collapse
+		var parents = $(this).parents(".panel-collapse");
+		if (parents.length > 0) {
+			// Remove the in, collapsing the panel
+			var parent_item = parents[0];
+			$(parent_item).removeClass("in");
+			$(parent_item).siblings().find("a").addClass("collapsed");
+
+			// Go up another level to find the next panel
+			var panel_items = $(parent_item).parents(".panel");
+			if (panel_items.length > 0) {
+				// get next panel
+				var panel_item = panel_items[0];
+				var next_items = $(panel_item).next(".panel");
+				if (next_items.length > 0) {
+					// We have another panel, expand it
+					var next_item = next_items[0];
+					$($(next_item).children(".panel-heading")[0]).find("a").removeClass("collapsed");
+					$($(next_item).children(".panel-collapse")[0]).addClass("in");
+				}
+			}
+		}
+	});
+	
+	// Scroll to top
+	jQuery('html,body').animate({scrollTop:0},200);
+});
