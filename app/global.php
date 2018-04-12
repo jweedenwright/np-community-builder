@@ -81,5 +81,6 @@
 	$dashboard_url = $root_dir . "/pages/manage.php";
 	$login_url = $root_dir . "/pages/login.php";
 	$logout_url = $root_dir . "/pages/logout.php";
+	$signout_url = $root_dir . "/pages/sign-out.php";
 	$reset_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/reset.php";
 ?>
