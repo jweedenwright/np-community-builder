@@ -91,29 +91,3 @@
 	}
 	include_once '../footer.php';
 ?>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(".add").on("click", function() {
-			var attendee_count = document.getElementsByClassName("attendee").length,
-				attendee_wrapper = $("#bulk-import .attendee-wrap"),
-				attendee_field_wrapper = $("<div id=\"attendee" + attendee_count + "\" class=\"row attendee\">"),
-				attendee_email = $("<div class=\"form-group col-sm-3\"><label for=\"email\">Email</label><input type=\"text\" class=\"form-control\" id=\"quick-sign-in-name\" name=\"email\" autocomplete=\"on\" placeholder=\"Enter an email\"></div>"),
-				attendee_first_name = $("<div class=\"form-group col-sm-3\"><label for=\"firstName\">First Name</label><input type=\"text\" class=\"form-control\" id=\"firstName\" name=\"firstName\" autocomplete=\"on\" placeholder=\"First Name\"></div>"),
-				attendee_last_name = $("<div class=\"form-group col-sm-3\"><label for=\"lastName\">Last Name</label><input type=\"text\" class=\"form-control\" id=\"lastName\" name=\"lastName\" autocomplete=\"on\" placeholder=\"Last Name\"></div>"),
-				attendee_first_time = $("<div class=\"form-group col-sm-2\"><div class=\"checkbox\"><label><input type=\"checkbox\" name=\"first-time\"> First Time</label></div></div>")
-				attendee_removal = $("<div class=\"pull-left\"><button type=\"button\" class=\"remove btn btn-default active\"><i class='glyphicon glyphicon-minus' aria-hidden=\"true\"></i><span class=\"sr-only\">Remove a field</span></button></div>");
-
-			attendee_field_wrapper.append(attendee_email);
-			attendee_field_wrapper.append(attendee_first_name);
-			attendee_field_wrapper.append(attendee_last_name);
-			attendee_field_wrapper.append(attendee_first_time);
-			attendee_field_wrapper.append(attendee_removal);
-			attendee_wrapper.append(attendee_field_wrapper);
-
-			$(".remove").on("click", function() {
-				$(this).parents(".attendee").remove();
-			});
-		});
-	});
-</script>
