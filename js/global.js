@@ -5,6 +5,7 @@ var service_url = protocol + "//" + domain + "/app/services.php?service=";
 var signin_url = protocol + "//" + domain + "/app/signin.php";
 var signout_url = protocol + "//" + domain + "/app/signout.php";
 var quick_signin = $("#quick-sign-in-name");
+var code_version = "2.1.1";
 
 //////////////////////
 // AUTOPOPULATE DATES

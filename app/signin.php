@@ -89,7 +89,7 @@
 		$results = $db->executeStatement($check_query, array($email))->fetchAll();
 		// Without fetchAll, result count won't be checked
 		if (sizeof($results) == 0) {
-			// Result found - sign out session (get first item returned)
+			// Didn't find anyone with a matching email - insert the new volunteer
 			$volunteer_insert = "INSERT INTO volunteer (first_name,last_name,email,skills,emergency_contact_phone,interests,availability,find_out_about_us,include_email_dist)"
 				." VALUES ('".$first_name."','".$last_name."','".$email."','".$skills."','".$emergency_phone_number."','','','".$find_out_about_us."',".$include_email_dist.")";
 			if ($db->executeStatement($volunteer_insert,[])) {

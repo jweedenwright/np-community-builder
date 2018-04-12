@@ -169,6 +169,10 @@ function bulkImport() {
 	if (valid_form) {
 		var attendees = document.getElementsByClassName("attendee");
 		if (attendees.length > 0) {
+			// Need to verify ALL attendees before saving any to keep some saving some before an error occurs
+			// - EX: 20 attendees sign in, the first 10 pass and are saved, the 11th has an issue...we now have 10 saved and 10 not in the DB
+			// - This check makes sure that all data is valid BEFORE saving attendees
+			var all_valid_attendees = true;
 			for (var i = 0; i < attendees.length; i++) {
 				valid_attendee = true;
 				var attendee = attendees[i];
@@ -187,14 +191,22 @@ function bulkImport() {
 				valid_attendee = (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email.value);
 				if(!valid_attendee) { return handleInvalid("Please be sure all emails are in the correct format. Issue found on volunteer " + current_attendee + "."); }
 
-				// If all valid - start to process one at a time
-				// - Need to setup form data in the following format to pass to the existing signin.php page:
-				// "first-time=0&email=jeremiah.weedenwright%40gmail.com&firstname=Jeremiah&lastname=Weeden-Wright
-				//		&location=2&task=3&signintime=04%2F12%2F2018+1%3A30+PM
-				//		&general-liability-check=1&agree=no&health-release-check=1&agree=no&photo-release-check=1&agree=no
-				//		&include-email-dist=0&community-service=0&affiliation=&emergency-phone-number=&skills=&find-out-about-us="
-				if (valid_attendee) {
+				if (!valid_attendee) {
+					all_valid_attendees = false;
+					break;
+				}
+			}
+			
+			// If all valid - start to process one at a time
+			// - Need to setup form data in the following format to pass to the existing signin.php page:
+			// "first-time=0&email=jeremiah.weedenwright%40gmail.com&firstname=Jeremiah&lastname=Weeden-Wright
+			//		&location=2&task=3&signintime=04%2F12%2F2018+1%3A30+PM
+			//		&general-liability-check=1&agree=no&health-release-check=1&agree=no&photo-release-check=1&agree=no
+			//		&include-email-dist=0&community-service=0&affiliation=&emergency-phone-number=&skills=&find-out-about-us="
+			if(all_valid_attendees) {
+				for (var i = 0; i < attendees.length; i++) {
 					// Look over each Login
+					var attendee = attendees[i];
 					var vol_data = "first-time=" + attendee.querySelectorAll("[name=first-time]")[0].checked
 								+ "&email=" + attendee.querySelectorAll("[name=email]")[0].value
 								+ "&firstname=" + attendee.querySelectorAll("[name=firstName]")[0].value
