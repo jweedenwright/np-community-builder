@@ -17,3 +17,4 @@
 // @codekit-append "pagination.js";
 // @codekit-append "report.js";
 // @codekit-append "login.js";
+// @codekit-append "bulk-import.js";

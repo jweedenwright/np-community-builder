@@ -65,6 +65,7 @@
 				<form id="volunteer-management-form">
 					<h3>Volunteer Fields</h3>
 					<ul>
+						<li><?=$volunteer["id"]?></li>
 						<li><?=$volunteer["first_name"]?></li>
 						<li><?=$volunteer["last_name"]?></li>
 						<li><a href="?email=<?=$volunteer["email"]?>"><?=$volunteer["email"]?></a></li>
@@ -83,7 +84,7 @@
 								// QUERY JOB AND LOCATION
 						
 							?>
-								<li><?=$vol_period["check_in_time"]?> - <?=$vol_period["check_out_time"]?> = <?=$vol_period["hours"]?> 
+								<li>ID: <?=$vol_period["id"]?>: <?=$vol_period["check_in_time"]?> - <?=$vol_period["check_out_time"]?> = <?=$vol_period["hours"]?> 
 									| <?=$vol_period["first_time"]?>
 									| <?=$vol_period["health_release"]?>
 									| <?=$vol_period["check_in_time"]?>
