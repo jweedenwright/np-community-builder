@@ -83,6 +83,7 @@
 		//////////////////////
 		// Insert Volunteer IF IT DOES NOT already exist
 		//////////////////////
+		//TODO: Remove - already in global
 		$db = new pdo_dblib_mssql();
 
 		// First time - will need to insert into Volunteer table - if already exists, don't insert

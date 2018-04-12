@@ -15,10 +15,22 @@
 		"oAP": "\/app\/db-util.php",
 		"oF": 0
 		},
+	"\/app\/email-util.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/email-util.php",
+		"oF": 0
+		},
 	"\/app\/global.php": {
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/app\/global.php",
+		"oF": 0
+		},
+	"\/app\/php-info.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/php-info.php",
 		"oF": 0
 		},
 	"\/app\/services.php": {
@@ -37,6 +49,12 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/app\/signout.php",
+		"oF": 0
+		},
+	"\/app\/test\/email-test.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/test\/email-test.php",
 		"oF": 0
 		},
 	"\/css\/app-build-styles.less": {
@@ -395,10 +413,33 @@
 		"sC": 1,
 		"tS": 0
 		},
+	"\/NPCB-ER-Diagram.png": {
+		"ft": 32768,
+		"iS": 21339,
+		"oA": 0,
+		"oAP": "\/NPCB-ER-Diagram.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/pages\/bulk.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/bulk.php",
+		"oF": 0
+		},
 	"\/pages\/dashboard.php": {
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/pages\/dashboard.php",
+		"oF": 0
+		},
+	"\/pages\/data-management.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/data-management.php",
 		"oF": 0
 		},
 	"\/pages\/login.php": {
@@ -484,17 +525,6 @@
 		"oA": 2,
 		"oAP": "\/robots.txt",
 		"oF": 0
-		},
-	"\/TNFP-ER-Diagram.png": {
-		"ft": 32768,
-		"iS": 21339,
-		"oA": 0,
-		"oAP": "\/TNFP-ER-Diagram.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
 		},
 	"\/web.config": {
 		"ft": 8192,
