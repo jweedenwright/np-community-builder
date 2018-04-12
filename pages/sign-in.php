@@ -122,7 +122,7 @@
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<div class="input-group signin-time">
-								<input type='text' class="form-control" id="datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signintime" placeholder="MM/DD/YYYY 12:01 AM" />
+								<input type='text' class="form-control datetime-picker" id="signin-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signintime" placeholder="MM/DD/YYYY 12:01 AM" />
 								<span class='input-group-addon field-error'><i class='glyphicon glyphicon-asterisk'></i></span>
 							</div>
 						</div>

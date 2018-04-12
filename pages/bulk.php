@@ -37,7 +37,7 @@
 			<div class="form-group col-sm-3">
 				<div class="input-group signin-time">
 					<label for="signintime" class="sr-only">Date *</label>
-					<input type='text' class="form-control" id="datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signintime" placeholder="MM/DD/YYYY 12:01 AM" />
+					<input type='text' class="form-control datetime-picker" id="bulk-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signintime" placeholder="MM/DD/YYYY 12:01 AM" />
 					<span class='input-group-addon field-error'><i class='glyphicon glyphicon-asterisk'></i></span>
 				</div>
 			</div>

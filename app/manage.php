@@ -14,8 +14,43 @@
 		ini_set('display_errors', 1);
 	
 		// Only process if email was passed
-	if(isset($_POST['email'])) {
+		if(isset($_POST['type'])) {
+			$manage_type = $_POST['type'];
+			if ($manage_type == "volunteer") {
+				
+			} elseif ($manage_type == "volunteer-period") {
+
+
+
+				if(!isset($_POST['id'])) {
+					?> <p class='alert alert-danger'>Volunteer period id was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+				} elseif(!isset($_POST['signin-datetime'])) {
+					?> <p class='alert alert-danger'>Sign in time was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+				} elseif(!isset($_POST['signout-datetime'])) {
+					?> <p class='alert alert-danger'>Sign out time was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+				} elseif(!isset($_POST['location-id'])) {
+					?> <p class='alert alert-danger'>Location id was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+				} elseif(!isset($_POST['task-id'])) {
+					?> <p class='alert alert-danger'>Task id was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+				} elseif(!isset($_POST['organization'])) {
+					?> <p class='alert alert-danger'>Organization was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+				} else {
+					
+					
+				}
+				
+				
 	
+				
+			} else {
+				?><p class='alert alert-danger'>Sorry! You requested an unsupported action.  <span class="hidden">ERROR: Type passed in POST did not match a supported type. Type was: <?=$manage_type?>.</span></p><?php 				
+			}
+		} else {
+			?><p class='alert alert-danger'>Sorry! There was an issue with the action you attempted to take.  <span class="hidden">ERROR: Did not pass type in POST to signal type of update.</span></p><?php 
+		}	
+
+
+
 		$email = $_POST['email'];
 		if(isset($_POST['signouttime'])) {
 			$signout_time = $_POST['signouttime'];

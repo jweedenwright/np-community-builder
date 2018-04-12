@@ -14,13 +14,13 @@ window.addEventListener("load",function() {
 	//botamatic();
 	
 	// Setup datetime picker
+/*
 	$("#datetime-picker").datetimepicker({
 		"useCurrent": true,
 		"stepping":5
 	});
-
+*/
 	// Setup datetime picker
-	console.log("SETUP DATETIME");
 	$(".datetime-picker").datetimepicker({
 		"useCurrent": true,
 		"stepping":5
@@ -51,14 +51,14 @@ window.addEventListener("load",function() {
 	//////////////////////
 
 	// Set datetime picker time and flip the ok switch on that input
-	$("#datetime-picker").on("blur",function() {
+	$(".datetime-picker").on("blur",function() {
 		if ($(this).val() !== "") {
 			flipInputGroupIcon(".signin-time .input-group-addon", "ok");
 		} else {
 			flipInputGroupIcon(".signin-time .input-group-addon", "error");
 		}
 	});
-	$("#datetime-picker").focus().blur();
+	$(".datetime-picker").focus().blur();
 	$("#quick-sign-in-name").focus();
 
 	// Setup on change for organization
