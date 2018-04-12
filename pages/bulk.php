@@ -85,8 +85,8 @@
 		<h2>Attendees</h2>
 		<div class="attendee-wrap"></div>
 	</form>
-	<button type="button" class="add btn btn-info">Add a field</button>
-	<button type="button" class="save btn btn-success pull-right" onclick="bulkImport();">Save</button>
+	<button type="button" class="add-attendee btn btn-info">Add a field</button>
+	<button type="button" class="save-attendees btn btn-success pull-right" onclick="bulkImport();">Save</button>
 <?php
 	}
 	include_once '../footer.php';
