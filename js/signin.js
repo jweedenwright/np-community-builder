@@ -117,7 +117,7 @@ function signIn() {
 
 	if (valid_form) {
 		// AJAX Post to PHP
-	    $.ajax({
+		$.ajax({
 			type: "POST",
 			url: signin_url,
 			data: $("#sign-in-form").serialize(), // serializes the form's elements.
@@ -130,6 +130,79 @@ function signIn() {
 				}
 			}
 		});
+	}
+	return false;
+}
+
+function bulkImport() {
+	// Used by the Bulk Import page to sign in many people at once
+	// Clear old errors
+	clearErrorMsgs();
+	
+	// Validate Fields
+	var valid_form = true;
+	
+	// required validations
+	// Date: 02/07/2017 6:48 PM
+	var datetime = document.getElementsByName("signintime")[0];
+	valid_form = datetime.value !== "";
+	if(!valid_form) { return handleInvalid("Please be sure to provide your sign in date."); }
+
+	// Affiliation
+	valid_form = document.getElementsByName("affiliation")[0].value !== "";
+	if(!valid_form) { return handleInvalid("Please be sure to provide an organization or affiliation name."); }
+
+	// Task
+	var task_item = document.getElementsByName("task")[0];
+	valid_form = (/^[0-9]*$/).test(task_item.options[task_item.selectedIndex].value);
+	if(!valid_form) { return handleInvalid("Please be sure to select a program."); }
+
+	// Location
+	var location_item = document.getElementsByName("location")[0];
+	valid_form = (/^[0-9]*$/).test(location_item.options[location_item.selectedIndex].value);
+	if(!valid_form) { return handleInvalid("Please be sure to select a location."); }
+
+	// Loop through all first / last / email / checkbox combos
+	// .attendee
+
+/*
+	valid_form = document.getElementsByName("firstname")[0].value !== "";
+	if(!valid_form) { return handleInvalid("Please be sure to provide your first name."); }
+	valid_form = document.getElementsByName("lastname")[0].value !== "";
+	if(!valid_form) { return handleInvalid("Please be sure to provide your last name."); }
+	valid_form = document.getElementsByName("first-time")[0].checked || document.getElementsByName("first-time")[1].checked;
+	if(!valid_form) { return handleInvalid("Please be sure to indicate if this is your first time."); }
+	
+	// Complex validations
+	var email = document.getElementsByName("email")[0];
+	valid_form = email.value !== "";
+	if(!valid_form) { return handleInvalid("Please be sure to provide your email."); }
+	valid_form = (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email.value);
+	if(!valid_form) { return handleInvalid("Please be sure your email is in the correct format."); }
+*/
+
+	// If all valid - start to process one at a time
+	// - Need to setup form data in the following format to pass to the existing signin.php page:
+	// "first-time=0&email=jeremiah.weedenwright%40gmail.com&firstname=Jeremiah&lastname=Weeden-Wright&location=2&task=3&signintime=04%2F12%2F2018+1%3A30+PM&general-liability-check=1&agree=no&health-release-check=1&agree=no&photo-release-check=1&agree=no&include-email-dist=0&community-service=0&affiliation=&emergency-phone-number=&skills=&find-out-about-us="
+	if (valid_form) {
+		// Look over each Login
+		
+		/*
+		// AJAX Post to PHP
+		$.ajax({
+			type: "POST",
+			url: signin_url,
+			data: $("#sign-in-form").serialize(), // serializes the form's elements.
+			success: function(data) {
+				if (data.indexOf("ERROR") !== -1) {
+					$(".danger").html(data);
+				} else {
+					// Redirect to thank you
+					location.href = 'thank-you.php';
+				}
+			}
+		});
+		*/
 	}
 	return false;
 }

@@ -147,7 +147,7 @@
 						$previous_signin_time = $previous_login['sign_in'];
 						$process_fail = true;
 						$log_time_period = false;
-						?><p class='alert alert-danger'>It appears you have already signed in today at <?= $previous_signin_time ?> but not signed out! Please <a href='sign-out.html'>sign out</a> before signing in again. <span class="hidden">ERROR: previously signed in today </span></p><?php 
+						?><p class='alert alert-danger'>It appears you have already signed in today at <?= $previous_signin_time ?> but not signed out! Please <a href='<?=$signout_url?>'>sign out</a> before signing in again. <span class="hidden">ERROR: previously signed in today </span></p><?php 
 					}
 				}
 			}

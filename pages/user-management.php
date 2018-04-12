@@ -22,6 +22,9 @@
 			<a href="?">Back</a>
 		<?php
 		}
+
+/////////////////////////////////////
+// Not individual - list of volunteers page
 		if (sizeof($results) > 1) {
 		?>
 			<table>
@@ -59,9 +62,13 @@
 				</tbody>
 			</table>
 		<?php
+/////////////////////////////////////
+//  Individual - Page
 		} elseif (sizeof($results) == 1)  {
 			$volunteer = $results[0];
 			?>
+				<h3>Can use the variable edit_mode (pass the value 'edit' in URL as a parameter) as a flag between edit mode and not edit mode</h3>
+				<h4>Edit Mode? <?=$edit_mode?></h4>
 				<form id="volunteer-management-form">
 					<h3>Volunteer Fields</h3>
 					<ul>

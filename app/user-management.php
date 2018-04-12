@@ -2,6 +2,11 @@
 	// Setup Globals
 	include_once 'global.php';
 	$is_individual = false;
+	$edit_mode = false;
+
+	if (isset($_GET['edit'])) {
+		$edit_mode = true;
+	}
 
 	// Individual Lookup / Manage
 	if (isset($_GET['email'])) {
