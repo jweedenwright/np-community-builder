@@ -61,12 +61,30 @@ window.addEventListener("load",function() {
 	$("#datetime-picker").focus().blur();
 	$("#quick-sign-in-name").focus();
 
+	// Setup on change for organization
+	$("#organization").on("change",function() {
+		if ($(this).val() !== "") {
+			flipInputGroupIcon(".organization .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".organization .input-group-addon", "error");
+		}
+	});
+
 	// Setup on change for task drop down
 	$("#task").on("change",function() {
 		if ($(this).find(":selected").val() !== "") {
 			flipInputGroupIcon(".task .input-group-addon", "ok");
 		} else {
 			flipInputGroupIcon(".task .input-group-addon", "error");
+		}
+	});
+	
+	// Setup on change for location drop down
+	$("#location").on("change",function() {
+		if ($(this).find(":selected").val() !== "") {
+			flipInputGroupIcon(".location .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".location .input-group-addon", "error");
 		}
 	});
 	

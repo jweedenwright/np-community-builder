@@ -144,65 +144,99 @@ function bulkImport() {
 	
 	// required validations
 	// Date: 02/07/2017 6:48 PM
-	var datetime = document.getElementsByName("signintime")[0];
-	valid_form = datetime.value !== "";
+	var datetime = document.getElementsByName("signintime")[0].value;
+	valid_form = datetime !== "";
 	if(!valid_form) { return handleInvalid("Please be sure to provide your sign in date."); }
 
 	// Affiliation
-	valid_form = document.getElementsByName("affiliation")[0].value !== "";
+	var affiliation = document.getElementsByName("organization")[0].value;
+	valid_form = affiliation !== "";
 	if(!valid_form) { return handleInvalid("Please be sure to provide an organization or affiliation name."); }
 
 	// Task
 	var task_item = document.getElementsByName("task")[0];
-	valid_form = (/^[0-9]*$/).test(task_item.options[task_item.selectedIndex].value);
+	var task_id = task_item.options[task_item.selectedIndex].value;
+	valid_form = (/^[0-9]*$/).test(task_id);
 	if(!valid_form) { return handleInvalid("Please be sure to select a program."); }
 
 	// Location
 	var location_item = document.getElementsByName("location")[0];
-	valid_form = (/^[0-9]*$/).test(location_item.options[location_item.selectedIndex].value);
+	var location_id = location_item.options[location_item.selectedIndex].value;
+	valid_form = (/^[0-9]*$/).test(location_id);
 	if(!valid_form) { return handleInvalid("Please be sure to select a location."); }
 
 	// Loop through all first / last / email / checkbox combos
-	// .attendee
-
-/*
-	valid_form = document.getElementsByName("firstname")[0].value !== "";
-	if(!valid_form) { return handleInvalid("Please be sure to provide your first name."); }
-	valid_form = document.getElementsByName("lastname")[0].value !== "";
-	if(!valid_form) { return handleInvalid("Please be sure to provide your last name."); }
-	valid_form = document.getElementsByName("first-time")[0].checked || document.getElementsByName("first-time")[1].checked;
-	if(!valid_form) { return handleInvalid("Please be sure to indicate if this is your first time."); }
-	
-	// Complex validations
-	var email = document.getElementsByName("email")[0];
-	valid_form = email.value !== "";
-	if(!valid_form) { return handleInvalid("Please be sure to provide your email."); }
-	valid_form = (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email.value);
-	if(!valid_form) { return handleInvalid("Please be sure your email is in the correct format."); }
-*/
-
-	// If all valid - start to process one at a time
-	// - Need to setup form data in the following format to pass to the existing signin.php page:
-	// "first-time=0&email=jeremiah.weedenwright%40gmail.com&firstname=Jeremiah&lastname=Weeden-Wright&location=2&task=3&signintime=04%2F12%2F2018+1%3A30+PM&general-liability-check=1&agree=no&health-release-check=1&agree=no&photo-release-check=1&agree=no&include-email-dist=0&community-service=0&affiliation=&emergency-phone-number=&skills=&find-out-about-us="
 	if (valid_form) {
-		// Look over each Login
-		
-		/*
-		// AJAX Post to PHP
-		$.ajax({
-			type: "POST",
-			url: signin_url,
-			data: $("#sign-in-form").serialize(), // serializes the form's elements.
-			success: function(data) {
-				if (data.indexOf("ERROR") !== -1) {
-					$(".danger").html(data);
-				} else {
-					// Redirect to thank you
-					location.href = 'thank-you.php';
-				}
+		var attendees = document.getElementsByClassName("attendee");
+		if (attendees.length > 0) {
+			for (var i = 0; i < attendees.length; i++) {
+				valid_attendee = true;
+				var attendee = attendees[i];
+				current_attendee = i + 1;
+						
+				// Validation
+				valid_attendee = attendee.querySelectorAll("[name=firstName]")[0].value !== "";
+				if(!valid_attendee) { return handleInvalid("Please be sure to provide first names for all volunteers. Issue found on volunteer " + current_attendee + "."); }
+				valid_attendee = attendee.querySelectorAll("[name=lastName]")[0].value !== "";
+				if(!valid_attendee) { return handleInvalid("Please be sure to provide last names for all volunteers. Issue found on volunteer " + current_attendee + "."); }
+	
+				// Complex validations
+				var email = attendee.querySelectorAll("[name=email]")[0];
+				valid_attendee = email.value !== "";
+				if(!valid_attendee) { return handleInvalid("Please be sure to provide email addresses for all volunteers. Issue found on volunteer " + current_attendee + "."); }
+				valid_attendee = (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email.value);
+				if(!valid_attendee) { return handleInvalid("Please be sure all emails are in the correct format. Issue found on volunteer " + current_attendee + "."); }
+
+				// If all valid - start to process one at a time
+				// - Need to setup form data in the following format to pass to the existing signin.php page:
+				// "first-time=0&email=jeremiah.weedenwright%40gmail.com&firstname=Jeremiah&lastname=Weeden-Wright
+				//		&location=2&task=3&signintime=04%2F12%2F2018+1%3A30+PM
+				//		&general-liability-check=1&agree=no&health-release-check=1&agree=no&photo-release-check=1&agree=no
+				//		&include-email-dist=0&community-service=0&affiliation=&emergency-phone-number=&skills=&find-out-about-us="
+				if (valid_attendee) {
+					// Look over each Login
+					var vol_data = "first-time=" + attendee.querySelectorAll("[name=first-time]")[0].checked
+								+ "&email=" + attendee.querySelectorAll("[name=email]")[0].value
+								+ "&firstname=" + attendee.querySelectorAll("[name=firstName]")[0].value
+								+ "&lastname=" + attendee.querySelectorAll("[name=lastName]")[0].value
+								+ "&location=" + location_id
+								+ "&task=" + task_id
+								+ "&signintime=" + datetime
+								+ "&general-liability-check=1&health-release-check=1&photo-release-check=1&include-email-dist=0&community-service=0"
+								+ "&affiliation=" + affiliation
+								+ "&emergency-phone-number=&skills=&find-out-about-us=";
+
+					// AJAX Post to PHP - need to try ALL attendees before failing/succeeding
+					var attendees_returned = 0; // compare to attendees.length
+					var issues = "";
+					$.ajax({
+						type: "POST",
+						url: signin_url,
+						data: vol_data, // serializes the form's elements.
+						success: function(data) {
+							// Increment the number of attendees to return
+							attendees_returned++;
+							// Check for an error
+							if (data.indexOf("ERROR") !== -1) {
+								issues = issues + data;
+							}
+							// Check if this was the last attendee to return
+							if (attendees_returned === attendees.length) {
+								if (issues !== "") {
+									$(".danger").html(issues);		
+								} else {
+									// Redirect to thank you
+									location.href = 'thank-you.php';
+								}
+							}							
+						}
+					});
+				}	
 			}
-		});
-		*/
+		} else {
+			// There were no attendees on the form!
+			return handleInvalid("Please be sure to add attendees!");
+		}
 	}
 	return false;
 }
