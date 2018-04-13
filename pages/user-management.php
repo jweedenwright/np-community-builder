@@ -165,7 +165,7 @@
 								<h4 class="modal-title" id="edit-label">Edit Period</h4>
 							</div>
 							<div class="modal-body">
-								<form id="edit-period-form" method="POST" action="manage.php">
+								<form id="edit-period-form" method="POST" action="../app/manage.php">
 									<input type="hidden" id="vol-id" name="vol-id" value="">
 									<input type="hidden" id="type" name="type" value="volunteer-period">
 
