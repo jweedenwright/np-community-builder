@@ -82,5 +82,18 @@
 	$login_url = $root_dir . "/pages/login.php";
 	$logout_url = $root_dir . "/pages/logout.php";
 	$signout_url = $root_dir . "/pages/sign-out.php";
+	$current_url = $root_dir . $_SERVER['REQUEST_URI'];
 	$reset_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/reset.php";
+	
+	// Global Functions
+	function calculateHours($in_time, $out_time) {
+		$hours = $out_time["hour"] - $in_time["hour"];
+		if ($in_time["minute"] != $out_time["minute"]) {
+			$minutes = (60 - $in_time["minute"]) + $out_time["minute"];
+			if ($minutes >= 30) {
+				$hours = $hours + .5;
+			}
+		}
+		return $hours;
+	}
 ?>

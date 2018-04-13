@@ -12,6 +12,7 @@
 		// Error display
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
+		$return_message = "";
 	
 		// Only process if email was passed
 		if(isset($_POST['type'])) {
@@ -19,159 +20,67 @@
 			if ($manage_type == "volunteer") {
 				
 			} elseif ($manage_type == "volunteer-period") {
-
-
-
-				if(!isset($_POST['id'])) {
-					?> <p class='alert alert-danger'>Volunteer period id was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+				// Make sure we have required values
+				if(!isset($_POST['vol-id'])) {
+					$return_message = "<p class='alert alert-danger'>Volunteer period id was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
 				} elseif(!isset($_POST['signin-datetime'])) {
-					?> <p class='alert alert-danger'>Sign in time was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+					$return_message = "<p class='alert alert-danger'>Sign in time was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
 				} elseif(!isset($_POST['signout-datetime'])) {
-					?> <p class='alert alert-danger'>Sign out time was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+					$return_message = "<p class='alert alert-danger'>Sign out time was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
 				} elseif(!isset($_POST['location-id'])) {
-					?> <p class='alert alert-danger'>Location id was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+					$return_message = "<p class='alert alert-danger'>Location id was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
 				} elseif(!isset($_POST['task-id'])) {
-					?> <p class='alert alert-danger'>Task id was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+					$return_message = "<p class='alert alert-danger'>Task id was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
 				} elseif(!isset($_POST['organization'])) {
-					?> <p class='alert alert-danger'>Organization was not provided. <span class="hidden">ERROR: Missing field</span></p> <?php
+					$return_message = "<p class='alert alert-danger'>Organization was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
 				} else {
+					// Sanitize Strings
+					$vol_period_id = filter_var ( $_POST['vol-id'], FILTER_SANITIZE_STRING);
+					$signin_datetime = filter_var ( $_POST['signin-datetime'], FILTER_SANITIZE_STRING);
+					$signout_datetime = filter_var ( $_POST['signout-datetime'], FILTER_SANITIZE_STRING);
+					$location_id = filter_var ( $_POST['location-id'], FILTER_SANITIZE_STRING);
+					$task_id = filter_var ( $_POST['task-id'], FILTER_SANITIZE_STRING);
+					$organization = filter_var ( $_POST['organization'], FILTER_SANITIZE_STRING);					
 					
-					
-				}
-				
-				
-	
-				
-			} else {
-				?><p class='alert alert-danger'>Sorry! You requested an unsupported action.  <span class="hidden">ERROR: Type passed in POST did not match a supported type. Type was: <?=$manage_type?>.</span></p><?php 				
-			}
-		} else {
-			?><p class='alert alert-danger'>Sorry! There was an issue with the action you attempted to take.  <span class="hidden">ERROR: Did not pass type in POST to signal type of update.</span></p><?php 
-		}	
+					// Format Dates
+					$signin_date = date_parse_from_format ( $ui_date_format , $signin_datetime );
+					$sign_in_time = $signin_date["year"] . "-" . $signin_date["month"] . "-" . $signin_date["day"] 
+										. " " . $signin_date["hour"] . ":" . $signin_date["minute"] .":00";
+					$signout_date = date_parse_from_format ( $ui_date_format , $signout_datetime );
+					$sign_out_time = $signout_date["year"] . "-" . $signout_date["month"] . "-" . $signout_date["day"] 
+										. " " . $signout_date["hour"] . ":" . $signout_date["minute"] .":00";
 
-
-
-		$email = $_POST['email'];
-		if(isset($_POST['signouttime'])) {
-			$signout_time = $_POST['signouttime'];
-		}
-		$feedback = "";
-		if(isset($_POST['feedback'])) {
-			$feedback = filter_var ( $_POST['feedback'], FILTER_SANITIZE_STRING);
-		}
-
-		// Filter the email address
-		$clean_email = filter_var ( $email, FILTER_SANITIZE_EMAIL);
-		// parse the date
-		if (isset($signout_time)) {
-			// Use passed date time to sign out - date format is: 2016-10-12 (yyyy-mm-dd) and time 
-			$clean_date = date_parse_from_format ( $ui_date_format , $signout_time );
-
-		} else {
-			// Use current date time to sign out - fixing issue because on west coa
-			$clean_date = date( $date_format );
-			$clean_date = date_parse_from_format ( $date_format , $clean_date );
-		}
-
-		// set signin time max and min for querying signins
-		$lower_bound_date = $clean_date["year"] . "-" . $clean_date["month"] . "-" . $clean_date["day"] . " 00:00:00";
-		$upper_bound_date = $clean_date["year"] . "-" . $clean_date["month"] . "-" . $clean_date["day"] . " 23:59:59";
-	
-	////////////////////////////////////////////
-	// PULL SIGN IN TO SEE IF THEY ARE THERE
-	////////////////////////////////////////////
-		$db = new pdo_dblib_mssql();
-		
-		// Pull volunteer periods that match the incoming 'sign out' email for the date entered )or today if no date entered)
-		$query_string = "SELECT v.email as 'email', vp.id as 'id', vp.check_in_time as 'sign_in', vp.hours as 'hours', v.id as 'vid'
-							FROM volunteer v
-							JOIN volunteer_period vp on vp.volunteer_id = v.id
-							WHERE v.email = '".$clean_email."'
-							AND vp.check_in_time > '".$lower_bound_date."' and vp.check_in_time < '".$upper_bound_date."'";
-
-		$results = $db->executeStatement($query_string,[])->fetchAll();
-		if (sizeof($results) > 0) {
-			$found_sign_in = false;
-			foreach ($results as $previous_login) {
-				$volunteer_id = $previous_login['vid'];
-				$previous_hours = $previous_login['hours'];
-				if ($previous_hours == 0.0) {
-					// Record this one
-					$found_sign_in = true;
-					// Result found - sign out EACH session and determine the one to close out
-					$to_update = $previous_login;
-					$volunteer_period_id = $to_update['id'];
-					$sign_in_date = date_parse_from_format ( $sql_date_format , $to_update['sign_in'] );
-
-					// Format Sign Out Time
-					$sign_out_time = $clean_date["year"]."-".$clean_date["month"]."-".$clean_date["day"] 
-										." ".$clean_date["hour"].":".$clean_date["minute"].":00";
-			
-					// Calculate Hours - End hours - Start Hours (minutes over 30 = add .5)
-					$hours = $clean_date["hour"] - $sign_in_date["hour"];
-					if ($sign_in_date["minute"] != $clean_date["minute"]) {
-						$minutes = (60 - $sign_in_date["minute"]) + $clean_date["minute"];
-						if ($minutes >= 30) {
-							$hours = $hours + .5;
-						}
-					}
-					if ($hours < 0) {
-						// Format display of time for error message
-						$sign_in_date_display = $sign_in_date["month"]."-".$sign_in_date["day"]."-".$sign_in_date["year"];
-						if ($sign_in_date["hour"] == 00) {
-							$sign_in_ampm_display = "am";
-							$sign_in_time_display = 12;
-						} elseif ($sign_in_date["hour"] > 12) {
-							$sign_in_ampm_display = "pm";
-							$sign_in_time_display = ($sign_in_date["hour"] - 12);
-						} else {
-							$sign_in_ampm_display = "am";
-							$sign_in_time_display = $sign_in_date["hour"];
-						}
-						if ($sign_in_date["minute"] < 10) {
-							$sign_in_time_display = $sign_in_time_display.":0".$sign_in_date["minute"]." ".$sign_in_ampm_display;	
-						} else {
-							$sign_in_time_display = $sign_in_time_display.":".$sign_in_date["minute"]." ".$sign_in_ampm_display;						
-						}
-						?><p class='alert alert-danger'>For the date <?= $sign_in_date_display ?>, it looks like you didn't sign out after your <?= $sign_in_time_display ?> sign in.  We need  you to sign out of that day after the sign in time. Thanks!. <span class="hidden">ERROR: Signing out on a day where they did not sign in.</span></p><?php 						
+					// Update value in volunteer period
+					$hours = calculateHours($sign_in_time, $sign_out_time);
+					if ($hours < 0) {						
+						?><p class='alert alert-danger'>For the date <?= $sign_out_time ?>, it looks like you didn't sign out after your <?= $sign_in_time ?> sign in.  We need  you to sign out of that day after the sign in time. Thanks!. <span class='hidden'>ERROR: Signing out on a day where they did not sign in.</span></p><?php 						
 					} else {
-						// Track errors
-						try {
-							$feedback_insert = "INSERT INTO feedback (volunteer_id, feedback) VALUES ('".$volunteer_id."','".$feedback."')";
-							$feedback_id = $db->executeStatement($feedback_insert,[]);
-							if ($feedback_id > 0) {
-								// Update String Query
-								$update_string = "UPDATE volunteer_period
-													SET check_out_time = '".$sign_out_time."',hours = '".$hours."',feedback_id = '".$feedback_id."'
-												  	WHERE id = ".$volunteer_period_id;
-								if ($db->executeStatement($update_string,[])) {
-									// Success
-									?><p>Successfully Signed Out! ||<?= $hours ?>|| <span class="hidden">SUCCESS</p><?php
-								} else {
-									// Failure
-									?><p class='alert alert-danger'>Sorry! Was unable to log your sign out time. <span class="hidden">ERROR: <?= $db->errorInfo() ?> </span></p><?php 
-								}
-							} else {
-								?><p class='alert alert-danger'>Sorry! Was unable to log your feedback or sign out time. <span class="hidden">ERROR: <?= $db->errorInfo() ?> </span></p><?php 
-							}
-						} catch (PDOException $e) {
-							?><p class='alert alert-danger'>Sorry! We're having issues logging users off. <span class="hidden">ERROR: <?= $e->getMessage() ?> </span></p><?php 
+						// Update String Query
+						$update_string = "UPDATE volunteer_period
+											SET check_out_time = '".$sign_out_time."'
+												,hours = '".$hours."'
+												,check_in_time = '".$sign_in_time."'
+												,affiliation = '".$organization."'
+												,job_type_id = '".$task_id."'
+												,location_id = '".$location_id."'
+										  	WHERE id = ".$vol_period_id;
+						if ($db->executeStatement($update_string,[])) {
+							// Success
+							$return_message = "<p>Successfully Updated Volunteer Period!</p><span class='hidden'>SUCCESS</p>";
+						} else {
+							// Failure
+							$return_message = "<p class='alert alert-danger'>Sorry! Was unable to update the volunteer period. <span class='hidden'>ERROR: <?= $db->errorInfo() ?> </span></p>";
 						}
 					}
 				}
-			}
-			if (!$found_sign_in) {
-				// Report error
-				$sign_in_date_display = $clean_date["month"]."-".$clean_date["day"]."-".$clean_date["year"];
-				?><p class='alert alert-danger'>All sign ins for '<?= $sign_in_date_display ?>' have been signed out for the email '<?= $clean_email ?>'. If this is an issue, please <a href="/sign-in.html">sign in again</a> at the correct time and then sign out. <span class="hidden">ERROR: Of sign ins found, all were signed out. Searched between <?= $lower_bound_date ?> and <?= $upper_bound_date ?>. </span></p><?php
+			} else {
+				$return_message = "<p class='alert alert-danger'>Sorry! You requested an unsupported action.  <span class='hidden'>ERROR: Type passed in POST did not match a supported type. Type was: <?=$manage_type?>.</span></p>";
 			}
 		} else {
-			// Report error
-			?><p class='alert alert-danger'>No sign ins were found for the email '<?= $clean_email ?>' for the date entered.<span class="hidden">ERROR: No sign in found. Searched between '<?= $lower_bound_date ?>' and '<?= $upper_bound_date ?>'. </span></p><?php
-		}
-		// Close db connection
-		$db->close();
-	} else {
-		?><p class='alert alert-danger'>Email address was not recieved by the server<span class="hidden">ERROR: No email passed</span></p><?php
+			$return_message = "<p class='alert alert-danger'>Sorry! There was an issue with the action you attempted to take.  <span class='hidden'>ERROR: Did not pass type in POST to signal type of update.</span></p>";
+		}	
+		//	Session variable not set - redirect to login
+		//TODO: - Change to REFERRER!!
+		header("Location: " . $current_url . "&message=".$return_message);
 	}
 ?>

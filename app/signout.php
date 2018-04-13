@@ -69,15 +69,9 @@
 					// Format Sign Out Time
 					$sign_out_time = $clean_date["year"]."-".$clean_date["month"]."-".$clean_date["day"] 
 										." ".$clean_date["hour"].":".$clean_date["minute"].":00";
-			
+
 					// Calculate Hours - End hours - Start Hours (minutes over 30 = add .5)
-					$hours = $clean_date["hour"] - $sign_in_date["hour"];
-					if ($sign_in_date["minute"] != $clean_date["minute"]) {
-						$minutes = (60 - $sign_in_date["minute"]) + $clean_date["minute"];
-						if ($minutes >= 30) {
-							$hours = $hours + .5;
-						}
-					}
+					$hours = calculateHours($sign_in_date, $clean_date);
 					if ($hours < 0) {
 						// Format display of time for error message
 						$sign_in_date_display = $sign_in_date["month"]."-".$sign_in_date["day"]."-".$sign_in_date["year"];

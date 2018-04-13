@@ -14,17 +14,11 @@ window.addEventListener("load",function() {
 	//botamatic();
 	
 	// Setup datetime picker
-/*
-	$("#datetime-picker").datetimepicker({
-		"useCurrent": true,
-		"stepping":5
-	});
-*/
-	// Setup datetime picker
 	$(".datetime-picker").datetimepicker({
 		"useCurrent": true,
 		"stepping":5
 	});
+	console.log("You're a rich girl, and you've gone too far");
 	
 	// Check / Set preferences
 	checkPreferences();
