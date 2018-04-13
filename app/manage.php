@@ -17,29 +17,43 @@
 		// Only process if email was passed
 		if(isset($_POST['type'])) {
 			$manage_type = $_POST['type'];
+
+////////////////////////////////////////////////////				
+// MANAGE VOLUNTEER
+
 			if ($manage_type == "volunteer") {
-				
+				// Make sure we have required values for a VOLUNTEER update
+
+////////////////////////////////////////////////////				
+// MANAGE VOLUNTEER PERIOD
+// - TEST: 
+
+// vol-id=1
+// 0&email=jeremiah.weedenwright%40gmail.com&firstname=Jeremiah&lastname=Weeden-Wright
+//		&location=2&task=3&signintime=04%2F12%2F2018+1%3A30+PM
+//		&general-liability-check=1&agree=no&health-release-check=1&agree=no&photo-release-check=1&agree=no
+
 			} elseif ($manage_type == "volunteer-period") {
-				// Make sure we have required values
+				// Make sure we have required values for a VOLUNTEER PERIOD UPDATE
 				if(!isset($_POST['vol-id'])) {
-					$return_message = "<p class='alert alert-danger'>Volunteer period id was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
-				} elseif(!isset($_POST['signin-datetime'])) {
-					$return_message = "<p class='alert alert-danger'>Sign in time was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
-				} elseif(!isset($_POST['signout-datetime'])) {
-					$return_message = "<p class='alert alert-danger'>Sign out time was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
-				} elseif(!isset($_POST['location-id'])) {
-					$return_message = "<p class='alert alert-danger'>Location id was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
-				} elseif(!isset($_POST['task-id'])) {
-					$return_message = "<p class='alert alert-danger'>Task id was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
+					$return_message = "Volunteer period id was not provided.";
+				} elseif(!isset($_POST['signintime'])) {
+					$return_message = "Sign in time was not provided.";
+				} elseif(!isset($_POST['signouttime'])) {
+					$return_message = "Sign out time was not provided.";
+				} elseif(!isset($_POST['location'])) {
+					$return_message = "Location id was not provided.";
+				} elseif(!isset($_POST['task'])) {
+					$return_message = "Task id was not provided.";
 				} elseif(!isset($_POST['organization'])) {
-					$return_message = "<p class='alert alert-danger'>Organization was not provided. <span class='hidden'>ERROR: Missing field</span></p>";
+					$return_message = "Organization was not provided.";
 				} else {
 					// Sanitize Strings
 					$vol_period_id = filter_var ( $_POST['vol-id'], FILTER_SANITIZE_STRING);
-					$signin_datetime = filter_var ( $_POST['signin-datetime'], FILTER_SANITIZE_STRING);
-					$signout_datetime = filter_var ( $_POST['signout-datetime'], FILTER_SANITIZE_STRING);
-					$location_id = filter_var ( $_POST['location-id'], FILTER_SANITIZE_STRING);
-					$task_id = filter_var ( $_POST['task-id'], FILTER_SANITIZE_STRING);
+					$signin_datetime = filter_var ( $_POST['signintime'], FILTER_SANITIZE_STRING);
+					$signout_datetime = filter_var ( $_POST['signouttime'], FILTER_SANITIZE_STRING);
+					$location_id = filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
+					$task_id = filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
 					$organization = filter_var ( $_POST['organization'], FILTER_SANITIZE_STRING);					
 					
 					// Format Dates
@@ -53,7 +67,7 @@
 					// Update value in volunteer period
 					$hours = calculateHours($sign_in_time, $sign_out_time);
 					if ($hours < 0) {						
-						?><p class='alert alert-danger'>For the date <?= $sign_out_time ?>, it looks like you didn't sign out after your <?= $sign_in_time ?> sign in.  We need  you to sign out of that day after the sign in time. Thanks!. <span class='hidden'>ERROR: Signing out on a day where they did not sign in.</span></p><?php 						
+						?>For the date <?= $sign_out_time ?>, it looks like you didn't sign out after your <?= $sign_in_time ?> sign in.  We need  you to sign out of that day after the sign in time. Thanks!. <span class='hidden'>ERROR: Signing out on a day where they did not sign in.</span></p><?php 						
 					} else {
 						// Update String Query
 						$update_string = "UPDATE volunteer_period
@@ -66,21 +80,23 @@
 										  	WHERE id = ".$vol_period_id;
 						if ($db->executeStatement($update_string,[])) {
 							// Success
-							$return_message = "<p>Successfully Updated Volunteer Period!</p><span class='hidden'>SUCCESS</p>";
+							$return_message = "Successfully Updated Volunteer Period!";
 						} else {
 							// Failure
-							$return_message = "<p class='alert alert-danger'>Sorry! Was unable to update the volunteer period. <span class='hidden'>ERROR: <?= $db->errorInfo() ?> </span></p>";
+							$return_message = "Sorry! Was unable to update the volunteer period.";
 						}
 					}
 				}
 			} else {
-				$return_message = "<p class='alert alert-danger'>Sorry! You requested an unsupported action.  <span class='hidden'>ERROR: Type passed in POST did not match a supported type. Type was: <?=$manage_type?>.</span></p>";
+				$return_message = "Sorry! You requested an unsupported action/type (type requested was <?=$manage_type?>).";
 			}
 		} else {
-			$return_message = "<p class='alert alert-danger'>Sorry! There was an issue with the action you attempted to take.  <span class='hidden'>ERROR: Did not pass type in POST to signal type of update.</span></p>";
+			$return_message = "Sorry! There was an issue with the action/type you attempted to take.";
 		}	
-		//	Session variable not set - redirect to login
-		//TODO: - Change to REFERRER!!
-		header("Location: " . $current_url . "&message=".$return_message);
+		if (strrpos($referring_url, "?")) {
+			header("Location: " . $referring_url . "&message=".$return_message);	
+		} else {
+			header("Location: " . $referring_url . "?message=".$return_message);			
+		}
 	}
 ?>
