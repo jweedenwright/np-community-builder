@@ -161,6 +161,8 @@ window.addEventListener("load",function() {
 		attendee_field_wrapper.append(attendee_first_time);
 		attendee_field_wrapper.append(attendee_removal);
 		attendee_wrapper.append(attendee_field_wrapper);
+		// Set the focus
+		$('.attendee').last().find('input').first().focus();
 
 		$(".attendee-wrap .remove").on("click", function() {
 			$(this).parents(".attendee").remove();

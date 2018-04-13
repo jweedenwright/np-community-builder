@@ -86,7 +86,7 @@
 		<h2>Attendees</h2>
 		<div class="attendee-wrap"></div>
 	</form>
-	<button type="button" class="add-attendee btn btn-info">Add a field</button>
+	<button type="button" class="add-attendee btn btn-info">Add an Attendee</button>
 	<button type="button" class="save-attendees btn btn-success pull-right" onclick="bulkImport();">Save</button>
 </div><!-- /container -->
 <?php
