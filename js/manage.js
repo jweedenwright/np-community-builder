@@ -1,3 +1,4 @@
+// Update the Volunteer Period Modal
 function editPeriod(vol_period_sel) {
 	var vol_period_id = $(vol_period_sel).data("id"),
 		vol_period_signin = $(vol_period_sel).data("signin"),
@@ -14,3 +15,17 @@ function editPeriod(vol_period_sel) {
 	$("#location").val(vol_period_loc);
 }
 
+// Search volunteers
+var vol_search_rows = document.getElementsByClassName("search-row");
+function filterVolunteers(search_field) {
+	// Start the search
+	for (var i = 0; i < vol_search_rows.length; i++) {
+		vol_search_row = vol_search_rows[i];
+		var found = vol_search_row.dataset.search.toLowerCase().indexOf(search_field.value.toLowerCase());
+		if (found === -1) {
+			vol_search_row.classList.add("hidden");
+		} else if (found !== -1) {
+			vol_search_row.classList.remove("hidden");
+		}
+	}
+}

@@ -78,7 +78,7 @@
 	$sql_date_format = "Y-m-d g:i:s"; // 2016-10-13 07:00:00
 	// Variables
 	$root_dir = "";
-	$dashboard_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/manage.php";
+	$dashboard_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/dashboard.php";
 	$login_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/login.php";
 	$logout_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/logout.php";
 	$signout_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/sign-out.php";
