@@ -69,6 +69,7 @@ function checkEmailCallback(element, results) {
 
 // Sign in Volunteer
 function signIn() {
+
 	// Clear old errors
 	clearErrorMsgs();
 	
@@ -136,6 +137,9 @@ function signIn() {
 
 function bulkImport() {
 	// Used by the Bulk Import page to sign in many people at once
+	// Scroll to top
+	jQuery('html,body').animate({scrollTop:0},200);
+	
 	// Clear old errors
 	clearErrorMsgs();
 	
