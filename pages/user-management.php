@@ -140,7 +140,7 @@
 					?>
 						<td><?=$vol_period["affiliation"]?></td>
 						<td>
-							<a href="#" class="edit-period" data-id="<?=$vol_period["id"]?>" data-signin="<?=$vol_period["check_in_time"]?>" data-signout="<?=$vol_period["check_in_time"]?>" data-activity="<?=$vol_period["job_type_id"]?>" data-location="<?=$vol_period["location_id"]?>" data-org="<?=$vol_period["affiliation"]?>" data-toggle="modal" data-target="#edit-modal" onclick="editPeriod(this); return false;">
+							<a href="#" class="edit-period" data-id="<?=$vol_period["id"]?>" data-signin="<?=$vol_period["check_in_time"]?>" data-signout="<?=$vol_period["check_out_time"]?>" data-activity="<?=$vol_period["job_type_id"]?>" data-location="<?=$vol_period["location_id"]?>" data-org="<?=$vol_period["affiliation"]?>" data-toggle="modal" data-target="#edit-modal" onclick="editPeriod(this); return false;">
 									<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
 									<span class="sr-only">Edit</span>
 							</a>
