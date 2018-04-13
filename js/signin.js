@@ -18,19 +18,14 @@ function checkEmailCallback(element, results) {
 		// Populate fields and hide everything unnecessary
 		$("#returning-volunteer-not-found").addClass("hidden");
 		$("#returning-volunteer-found").removeClass("hidden");
-		
-		var person = results.data[0];
+
+		var person = results.data[0]; 
 		var first_name = person.firstName;
 		var last_name = person.lastName;
 		// Check and collapse liability boxes (previously logged in)
 		document.getElementById("general-liability-check").checked = true;
-		document.getElementById("health-release-check").checked = true;
 		document.getElementById("photo-release-check").checked = true;
-		document.getElementById("not-first-time").checked = true;
-		var collapses = document.querySelectorAll(".sign-in-page #accordion.terms a");
-		for (var i in collapses) {
-			collapses[i].className += " collapsed";
-		}
+		document.getElementById("health-release-check-collapse").classList.add("in");
 		
 		// Set first and last name (previously logged in)
 		document.getElementById("first-name").value = first_name;
@@ -38,7 +33,8 @@ function checkEmailCallback(element, results) {
 		// Hide Fields
 		document.getElementsByClassName("first-name")[0].style.display = "none";
 		document.getElementsByClassName("last-name")[0].style.display = "none";
-		document.getElementById("accordion").style.display = "none";
+		document.getElementById("photo-release-check-panel").style.display = "none";
+		document.getElementById("general-liability-check-panel").style.display = "none";
 		document.getElementById("sign-in-opts-accordion").style.display = "none";
 
 		// Change field-error/glyphicon-remove to field-ok/glyphicon-ok
@@ -50,14 +46,14 @@ function checkEmailCallback(element, results) {
 		document.getElementById("general-liability-check").checked = false;
 		document.getElementById("health-release-check").checked = false;
 		document.getElementById("photo-release-check").checked = false;
-		document.getElementById("is-first-time").checked = true;
 
 		// Show fields
 		document.getElementsByClassName("first-name")[0].style.display = "table";
 		document.getElementById("first-name").value = "";
 		document.getElementsByClassName("last-name")[0].style.display = "table";
 		document.getElementById("last-name").value = "";
-		document.getElementById("accordion").style.display = "block";
+		document.getElementById("photo-release-check-panel").style.display = "block";
+		document.getElementById("general-liability-check-panel").style.display = "block";
 		document.getElementById("sign-in-opts-accordion").style.display = "block";
 		
 		// Change field-ok/glyphicon-ok to field-error/glyphicon-remove
@@ -87,8 +83,6 @@ function signIn() {
 	if(!valid_form) { return handleInvalid("Please be sure to provide your first name."); }
 	valid_form = document.getElementsByName("lastname")[0].value !== "";
 	if(!valid_form) { return handleInvalid("Please be sure to provide your last name."); }
-	valid_form = document.getElementsByName("first-time")[0].checked || document.getElementsByName("first-time")[1].checked;
-	if(!valid_form) { return handleInvalid("Please be sure to indicate if this is your first time."); }
 	
 	// Complex validations
 	var email = document.getElementsByName("email")[0];
@@ -211,7 +205,7 @@ function bulkImport() {
 				for (var i = 0; i < attendees.length; i++) {
 					// Look over each Login
 					var attendee = attendees[i];
-					var vol_data = "first-time=" + attendee.querySelectorAll("[name=first-time]")[0].checked
+					var vol_data = "first-time=0"
 								+ "&email=" + attendee.querySelectorAll("[name=email]")[0].value
 								+ "&firstname=" + attendee.querySelectorAll("[name=firstName]")[0].value
 								+ "&lastname=" + attendee.querySelectorAll("[name=lastName]")[0].value
