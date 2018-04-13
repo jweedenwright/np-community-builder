@@ -1,7 +1,7 @@
 <?php
-    // Error display
-    //error_reporting(E_ALL);
-    //ini_set('display_errors', 1);
+	// Error display
+	//error_reporting(E_ALL);
+	//ini_set('display_errors', 1);
 	include_once 'app/global.php';
 
 	//	Header
@@ -62,31 +62,133 @@
 		} elseif (sizeof($results) == 1)  {
 			$volunteer = $results[0];
 			?>
-				<!--<h3>Can use the variable edit_mode (pass the value 'edit' in URL as a parameter) as a flag between edit mode and not edit mode</h3>-->
-				<!--<h4>Edit Mode? <?=$edit_mode?></h4>-->
-				<form id="volunteer-management-form">
-					<div class="pull-right">
-						<a href="#" class="edit-details-btn" onclick="editDetails(); return false;">Edit</a>
-					</div>
-					<h1><font color ="#00008B"><?=$volunteer["first_name"]?>&nbsp;<?=$volunteer["last_name"]?></font></h1>
-					<h4><?=$volunteer["email"]?></h4>
-					<h4><?=$volunteer["emergency_contact_phone"]?></h4>
-					<?php
+			<!--<h3>Can use the variable edit_mode (pass the value 'edit' in URL as a parameter) as a flag between edit mode and not edit mode</h3>-->
+			<!--<h4>Edit Mode? <?=$edit_mode?></h4>-->
+			<form id="volunteer-management-form">
+				<div class="pull-right">
+					<a href="#" class="edit-details" data-fn="<?=$volunteer["first_name"]?>" data-ln="<?=$volunteer["last_name"]?>" data-email="<?=$volunteer["email"]?>" data-phone="<?=volunteer["emergency_contact_phone"]?>" data-toggle="modal" data-target="#edit-details" onclick="return false;">
+						<span>Edit</span>
+					</a>
+				</div>
+
+				<h2 style="color: #00008B;"><?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?></h2>
+				<p>Email Address - <?=$volunteer["email"]?></p>
+				<p>Emergency Contact - <?=$volunteer["emergency_contact_phone"]?></p>
+				<p>Skills - <?=$volunteer["skills"]?></p>
+				<p>Interests - <?=$volunteer["interests"]?></p>
+				<p>Availability - <?=$volunteer["availability"]?></p>
+				<p>How did you find out about us - <?=$volunteer["find_out_about_us"]?></p>
+
+				<?php
+					$email_dist = 'Yes';
+
+					if($volunteer["include_email_dist"] == 0){
+						$email_dist = 'No';
+					}
+
 					$volunteer_time = $vol_periods[0];
 					$vol_start_date = date_parse_from_format ( $sql_date_format , $volunteer_time["check_in_time"]);
-					//$monthNum  = $vol_start_date["month"];
-					?>
-					<h4>Volunteer since <?=$vol_start_date["month"]." ".$vol_start_date["day"]." ".$vol_start_date["year"]?></h4>
-					<?php
+					$date1 = new DateTime("now");
+					$vol_duration = date_diff($date1, $volunteer_time["check_in_time"]);
+				?>
+
+				<p>Email Distribution - <?=$email_dist?></p>
+				<p>Volunteer for <?=$vol_duration?></p>
+
+				<?php
 					$total_visits = sizeof($vol_periods);
+
 					if ($total_visits > 0) {
 						$total_time = 0;
+
 						foreach ($vol_periods as $vol_period) {
 							$total_time = $total_time + $vol_period["hours"];
 						}
 					}
-					?>
-				<h4>Activity <?=$total_time?> hours and <?=$total_visits?> visits</h4>
+				?>
+				
+				<p>Activity <?=$total_time?> hours and <?=$total_visits?> visits</p>
+				
+				<!-- Edit volunteer details-->
+				<div class="modal fade" id="edit-details" tabindex="-1" role="dialog" aria-labelledby="edit-label">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="edit-label">Edit Volunteer Details</h4>
+							</div>
+							<div class="modal-body">
+								<form id="edit-details-form" method="POST" action="../app/manage.php">
+									<input type="hidden" id="vol-id" name="vol-id">
+									<script type="text/javascript"> 
+											document.getElementById("vol-id").setAttribute('value','<?=$volunteer["id"]?>');
+									</script>
+									<input type="hidden" id="type" name="type" value="volunteer">
+
+									<div class="form-group">
+										<label for="First Name">First Name</label>
+										<input class="form-control" type="text" id="fn" name="fn">
+										<script type="text/javascript"> 
+											document.getElementById("fn").setAttribute('value','<?=$volunteer["first_name"]?>');
+										</script>
+									</div>
+									<div class="form-group">
+										<label for="Last Name">Last Name</label>
+										<input class="form-control" type="text" id="ln" name="ln">
+										<script type="text/javascript"> 
+											document.getElementById("ln").setAttribute('value','<?=$volunteer["last_name"]?>');
+										</script>
+									</div>
+									<div class="form-group">
+										<label for="Email">Email Address</label>
+										<input class="form-control" type="text" id="email" name="email">
+										<script type="text/javascript"> 
+											document.getElementById("email").setAttribute('value','<?=$volunteer["email"]?>');
+										</script>
+									</div>
+									<div class="form-group">
+										<label for="Phone">Emergency Contact Number</label>
+										<input class="form-control" type="text" id="phone" name="phone">
+										<script type="text/javascript"> 
+											document.getElementById("phone").setAttribute('value','<?=$volunteer["emergency_contact_phone"]?>');
+										</script>
+									</div>
+									<div class="form-group">
+										<label for="Skills">Skills</label>
+										<input class="form-control" type="text" id="skills" name="skills">
+										<script type="text/javascript"> 
+											document.getElementById("skills").setAttribute('value','<?=$volunteer["skills"]?>');
+										</script>
+									</div>
+									<div class="form-group">
+										<label for="Interests">Interests</label>
+										<input class="form-control" type="text" id="interests" name="interests">
+										<script type="text/javascript"> 
+											document.getElementById("interests").setAttribute('value','<?=$volunteer["interests"]?>');
+										</script>
+									</div>
+									<div class="form-group">
+										<label for="Availability">Availability</label>
+										<input class="form-control" type="text" id="availability" name="availability">
+										<script type="text/javascript"> 
+											document.getElementById("availability").setAttribute('value','<?=$volunteer["availability"]?>');
+										</script>
+									</div>
+									<div class="form-group">
+										<label for="email_dist">Include me in the email distribution</label>
+										<input class="block" type="checkBox" id="email_dist" name="email_dist">
+										<script type="text/javascript"> 
+											document.getElementById("email_dist").setAttribute('value','<?=$volunteer["include_email_dist"]?>');
+										</script>
+									</div>
+									<button type="submit" class="btn btn-success">Save changes</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Retrieve volunteer periods -->
 				<div class="table-responsive">
 				<table class="table table-striped">
 				<thead>
@@ -166,7 +268,7 @@
 							</div>
 							<div class="modal-body">
 								<form id="edit-period-form" method="POST" action="../app/manage.php">
-									<input type="hidden" id="vol-id" name="vol-id" value="">
+									<input type="hidden" id="vol-period-id" name="vol-period-id" value="">
 									<input type="hidden" id="type" name="type" value="volunteer-period">
 
 									<div class="form-group">
