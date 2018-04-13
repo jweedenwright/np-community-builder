@@ -46,3 +46,11 @@
 				</div>
 			</div>
 		</header>
+		<?php
+			if(isset($_GET['message'])) {
+				$special_msg = filter_var ( $_GET['message'], FILTER_SANITIZE_STRING);
+		?>
+			<div id="message-container"><p class='alert alert-danger'><?=$special_msg?></p></div>
+		<?php
+			}
+		?>

@@ -18,7 +18,6 @@ window.addEventListener("load",function() {
 		"useCurrent": true,
 		"stepping":5
 	});
-	console.log("You're a rich girl, and you've gone too far");
 	
 	// Check / Set preferences
 	checkPreferences();
