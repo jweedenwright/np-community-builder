@@ -72,52 +72,56 @@
 				</div>
 
 				<h2 style="color: #00008B;"><?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?></h2>
-				<p>Email Address - <?=$volunteer["email"]?></p>
-				<p>Emergency Contact - <?=$volunteer["emergency_contact_phone"]?></p>
-				<p>Skills - <?=$volunteer["skills"]?></p>
-				<p>Interests - <?=$volunteer["interests"]?></p>
-				<p>Availability - <?=$volunteer["availability"]?></p>
-				<p>How did you find out about us - <?=$volunteer["find_out_about_us"]?></p>
+				<ul>
+					<li><strong>Email Address</strong> - <?=$volunteer["email"]?></li>
+					<li><strong>Emergency Contact</strong> - <?=$volunteer["emergency_contact_phone"]?></li>
+					<li><strong>Skills</strong> - <?=$volunteer["skills"]?></li>
+					<li><strong>Interests</strong> - <?=$volunteer["interests"]?></li>
+					<li><strong>Availability</strong> - <?=$volunteer["availability"]?></li>
+					<li><strong>How did you find out about us</strong> - <?=$volunteer["find_out_about_us"]?></li>
 
-				<?php
-					$email_dist = 'Yes';
+					<?php
+						$email_dist = 'Yes';
 
-					if($volunteer["include_email_dist"] == 0){
-						$email_dist = 'No';
-					}
-
-					$volunteer_time = $vol_periods[0];
-					$vol_start_date = date_parse_from_format ( $sql_date_format , $volunteer_time["check_in_time"]);
-					$date1 = $vol_start_date["month"] . "-" . $vol_start_date["day"] . "-" . $vol_start_date["year"];
-					$current_date = date("m-d-Y");
-					//$vol_duration = date_diff($current_date, $date1);
-				?>
-
-				<p>Email Distribution - <?=$email_dist?></p>
-				<p>Volunteer for <?=$vol_duration?></p>
-
-				<?php
-					$total_visits = sizeof($vol_periods);
-
-					if ($total_visits > 0) {
-						$total_time = 0;
-
-						foreach ($vol_periods as $vol_period) {
-							$total_time = $total_time + $vol_period["hours"];
+						if($volunteer["include_email_dist"] == 0){
+							$email_dist = 'No';
 						}
-					}
-				?>
+
+						$volunteer_time = $vol_periods[0];
+						$vol_start_date = date_parse_from_format ( $sql_date_format , $volunteer_time["check_in_time"]);
+						$start_date = $vol_start_date["month"] . "-" . $vol_start_date["day"] . "-" . $vol_start_date["year"];
+						$current_year =  date("Y");
+						$vol_duration = $current_year - $vol_start_date["year"];
+						if ($vol_duration < 1) {
+							$vol_duration = "<1";
+						}
+					?>
+
+					<li><strong>Email Distribution</strong> - <?=$email_dist?></li>
+					<li><strong>Volunteer since</strong> <?=$start_date?> (<?=$vol_duration?> year(s))</li>
+
+					<?php
+						$total_visits = sizeof($vol_periods);
+
+						if ($total_visits > 0) {
+							$total_time = 0;
+
+							foreach ($vol_periods as $vol_period) {
+								$total_time = $total_time + $vol_period["hours"];
+							}
+						}
+					?>
 				
-				<p>Activity <?=$total_time?> hours and <?=$total_visits?> visits</p>
-				
+					<li><strong>Activity</strong> - <?=$total_time?> hours and <?=$total_visits?> visits</li>
+				</ul>
 				<!-- Retrieve volunteer periods -->
 				<div class="table-responsive">
 				<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>ID</th>
 						<th>Date</th>
-						<th>Time</th>
+						<th>Sign In</th>
+						<th>Sign Out</th>
 						<th>Duration</th>
 						<th>Activity</th>
 						<th>Location</th>
@@ -134,17 +138,62 @@
 								// QUERY JOB AND LOCATION
 							?>
 						<tr>
-							<td><?=$vol_period["id"]?></td>
 							<?php
-							$checkin_date = date_parse_from_format ( $sql_date_format , $vol_period["check_in_time"]);
-							$checkedin_date = $checkin_date["month"] . "-" . $checkin_date["day"] . "-" . $checkin_date["year"]; 
-							if($checkin_date["minute"] == 0)
-							$checkedin_time = $checkin_date["hour"] . ":00" . ":00";
-							else
-							$checkedin_time = $checkin_date["hour"] . ":" . $checkin_date["minute"]. ":00";	
+								$checkin_date = date_parse_from_format ( $sql_date_format , $vol_period["check_in_time"]);
+								$checkedin_date = $checkin_date["month"] . "-" . $checkin_date["day"] . "-" . $checkin_date["year"]; 
+								$checkout_date = date_parse_from_format ( $sql_date_format , $vol_period["check_out_time"]);
+
+								// Time stamps
+								$checkin_day = $checkin_date["day"];
+								if(strlen($checkin_day."") == 1) {
+									$checkin_day = "0".$checkin_day;
+								}
+									
+								$checkin_month = $checkin_date["month"];
+								if(strlen($checkin_month."") == 1) {
+									$checkin_month = "0".$checkin_month;
+								}
+
+								$checkin_minute = $checkin_date["minute"];
+								if(strlen($checkin_minute."") == 1) {
+									$checkin_minute = "0".$checkin_minute;
+								}
+
+								$checkin_ampm = "AM";
+								$checkin_hour = $checkin_date["hour"];
+								if(strlen($checkin_hour."") > 1) {
+									if ($checkin_date["hour"] > 12) {
+										$checkin_hour = $checkin_date["hour"] - 12;
+										if ($checkin_hour["hour"] != 24) {
+											$checkin_ampm = "PM";
+										}
+									} elseif ($checkin_date["hour"] == 12) {
+										$checkin_ampm = "PM";
+									}
+								}
+
+								$checkout_minute = $checkout_date["minute"];
+								if(strlen($checkout_minute."") == 1) {
+									$checkout_minute = "0".$checkout_minute;
+								}
+
+								$checkout_ampm = "AM";
+								$checkout_hour = $checkout_date["hour"];
+								if(strlen($checkout_hour."") > 1) {
+									if ($checkout_date["hour"] > 12) {
+										$checkout_hour = $checkout_date["hour"] - 12;
+										if ($checkout_date["hour"] != 24) {
+											$checkout_ampm = "PM";
+										}
+									} elseif ($checkout_date["hour"] == 12) {
+										$checkout_ampm = "PM";
+									} 
+								}
+
 							?>
-							<td><?=$checkedin_date?></td>
-							<td><?=$checkedin_time?></td>
+							<td><?=$checkin_month?>/<?=$checkin_day?>/<?=$checkin_date["year"]?></td>
+							<td><?=$checkin_hour?>:<?=$checkin_minute?> <?=$checkin_ampm?></td>
+							<td><?=$checkout_hour?>:<?=$checkout_minute?> <?=$checkout_ampm?></td>
 							<td><?=$vol_period["hours"]?></td>
 						<?php
 						foreach ($type_results as $job_type_row) {
@@ -163,8 +212,16 @@
 					}
 					?>
 						<td><?=$vol_period["affiliation"]?></td>
-						<td>
-							<a href="#" class="edit-period" data-id="<?=$vol_period["id"]?>" data-signin="<?=$vol_period["check_in_time"]?>" data-signout="<?=$vol_period["check_out_time"]?>" data-activity="<?=$vol_period["job_type_id"]?>" data-location="<?=$vol_period["location_id"]?>" data-org="<?=$vol_period["affiliation"]?>" data-toggle="modal" data-target="#edit-modal" onclick="editPeriod(this); return false;">
+						<td>							
+							<a href="#" class="edit-period" data-id="<?=$vol_period["id"]?>" 
+														data-signin="<?=$checkin_month?>/<?=$checkin_day?>/<?=$checkin_date["year"]?> <?=$checkin_hour?>:<?=$checkin_minute?> <?=$checkin_ampm?>" 
+														data-signout="<?=$checkin_month?>/<?=$checkin_day?>/<?=$checkin_date["year"]?> <?=$checkout_hour?>:<?=$checkout_minute?> <?=$checkout_ampm?>" 
+														data-activity="<?=$vol_period["job_type_id"]?>" 
+														data-location="<?=$vol_period["location_id"]?>" 
+														data-org="<?=$vol_period["affiliation"]?>" 
+														data-toggle="modal" 
+														data-target="#edit-modal" 
+														onclick="editPeriod(this); return false;">
 									<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
 									<span class="sr-only">Edit</span>
 							</a>

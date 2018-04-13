@@ -19,7 +19,8 @@
 		$query_string = "SELECT *
 							FROM volunteer v
 							JOIN volunteer_period vp on vp.volunteer_id = v.id
-							WHERE v.email = '".$email."'";		
+							WHERE v.email = '".$email."'
+							ORDER BY vp.check_in_time";		
 		$vol_periods = $db->executeStatement($query_string, [])->fetchAll();			
 		// Pull locations
 		$query_string = "SELECT id, location_name
