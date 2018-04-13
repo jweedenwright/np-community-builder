@@ -79,8 +79,6 @@
 		} else {
 			$return_message = "<p class='alert alert-danger'>Sorry! There was an issue with the action you attempted to take.  <span class='hidden'>ERROR: Did not pass type in POST to signal type of update.</span></p>";
 		}	
-		//	Session variable not set - redirect to login
-		//TODO: - Change to REFERRER!!
-		header("Location: " . $current_url . "&message=".$return_message);
+		header("Location: " . $referring_url . "&message=".$return_message);
 	}
 ?>
