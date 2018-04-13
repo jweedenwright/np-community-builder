@@ -29,8 +29,6 @@
 		?> <p class='alert alert-danger'>Location is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 	} elseif(!isset($_POST['task'])) {
 		?> <p class='alert alert-danger'>Task is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
-	} elseif(!isset($_POST['first-time'])) {
-		?> <p class='alert alert-danger'>Volunteer must indicate if this is their first time. <span class="hidden">ERROR: Missing field</span></p> <?php
 	} else {
 		
 		//////////////////////
@@ -45,7 +43,7 @@
 		$signin_date = filter_var ( $_POST['signintime'], FILTER_SANITIZE_STRING); // 02/07/2017 6:48 PM
 		$location_id = (int) filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
 		$task_id = (int) filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
-		$first_time = (int) filter_var ( $_POST['first-time'], FILTER_SANITIZE_STRING);
+		$first_time = 0;
 
 		$affiliation = "";
 		if(isset($_POST['affiliation'])) {
