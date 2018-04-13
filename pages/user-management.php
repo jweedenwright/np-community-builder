@@ -140,9 +140,9 @@
 					?>
 						<td><?=$vol_period["affiliation"]?></td>
 						<td>
-							<a href="#" class="edit-period" data-id="<?=$vol_period["id"]?>" data-signin="<?=$vol_period["check_in_time"]?>" data-signout="<?=$vol_period["check_in_time"]?>" data-activity="<?=$job_type_row["job_type"]?>" data-location="<?=$location_row["location_name"]?>" data-org="<?=$vol_period["affiliation"]?>" data-toggle="modal" data-target="#edit-modal" onclick="editPeriod(this); return false;">
-								<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
-								<span class="sr-only">Edit</span>
+							<a href="#" class="edit-period" data-id="<?=$vol_period["id"]?>" data-signin="<?=$vol_period["check_in_time"]?>" data-signout="<?=$vol_period["check_out_time"]?>" data-activity="<?=$vol_period["job_type_id"]?>" data-location="<?=$vol_period["location_id"]?>" data-org="<?=$vol_period["affiliation"]?>" data-toggle="modal" data-target="#edit-modal" onclick="editPeriod(this); return false;">
+									<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+									<span class="sr-only">Edit</span>
 							</a>
 						</td>
 						</tr>
@@ -165,8 +165,9 @@
 								<h4 class="modal-title" id="edit-label">Edit Period</h4>
 							</div>
 							<div class="modal-body">
-								<form id="edit-period-form">
+								<form id="edit-period-form" method="POST" action="../app/manage.php">
 									<input type="hidden" id="vol-id" name="vol-id" value="">
+									<input type="hidden" id="type" name="type" value="volunteer-period">
 
 									<div class="form-group">
 										<label for="datetime-picker">Sign In</label>
@@ -206,15 +207,12 @@
 										<label for="organization">Affiliation</label>
 										<input class="form-control" type="text" id="organization" name="organization" value="">
 									</div>
+									<button type="submit" class="btn btn-success">Save changes</button>
 								</form>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-success">Save changes</button>
-							</div>
-						</div>
-					</div>
-				</div>
+							</div><!-- /modal-body -->
+						</div><!-- /modal-content -->
+					</div><!-- /modal-dialog -->
+				</div><!-- /modal -->
 
 			<?php
 		}
