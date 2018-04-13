@@ -49,8 +49,14 @@
 		<?php
 			if(isset($_GET['message'])) {
 				$special_msg = filter_var ( $_GET['message'], FILTER_SANITIZE_STRING);
+				$message_class = "alert alert-danger";
+
+				echo strrpos($special_msg, "uccess");
+				if (strrpos($special_msg, "uccess")) {
+					$message_class = "alert alert-success";					
+				}
 		?>
-			<div id="message-container"><p class='alert alert-danger'><?=$special_msg?></p></div>
+			<div id="message-container"><p class='<?=$message_class?>'><?=$special_msg?></p></div>
 		<?php
 			}
 		?>

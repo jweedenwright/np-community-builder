@@ -12,5 +12,4 @@ function editPeriod(vol_period_sel) {
 	$("#organization").attr("value", vol_period_org);
 	$("#task").val(vol_period_act);
 	$("#location").val(vol_period_loc);
-
 }

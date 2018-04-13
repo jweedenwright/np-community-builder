@@ -13,7 +13,7 @@
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
 		$return_message = "";
-	
+
 		// Only process if email was passed
 		if(isset($_POST['type'])) {
 			$manage_type = $_POST['type'];
@@ -26,14 +26,10 @@
 
 ////////////////////////////////////////////////////				
 // MANAGE VOLUNTEER PERIOD
-// - TEST: 
-
-// vol-id=1
-// 0&email=jeremiah.weedenwright%40gmail.com&firstname=Jeremiah&lastname=Weeden-Wright
-//		&location=2&task=3&signintime=04%2F12%2F2018+1%3A30+PM
-//		&general-liability-check=1&agree=no&health-release-check=1&agree=no&photo-release-check=1&agree=no
+// - TEST: type=volunteer-period&vol-id=1&signintime=03/15/2018 1:30 PM&signouttime=03/15/2018 3:30 PM&location=7&task=1&organization=HCA
 
 			} elseif ($manage_type == "volunteer-period") {
+
 				// Make sure we have required values for a VOLUNTEER PERIOD UPDATE
 				if(!isset($_POST['vol-id'])) {
 					$return_message = "Volunteer period id was not provided.";
@@ -65,7 +61,7 @@
 										. " " . $signout_date["hour"] . ":" . $signout_date["minute"] .":00";
 
 					// Update value in volunteer period
-					$hours = calculateHours($sign_in_time, $sign_out_time);
+					$hours = calculateHours($signin_date, $signout_date);
 					if ($hours < 0) {						
 						?>For the date <?= $sign_out_time ?>, it looks like you didn't sign out after your <?= $sign_in_time ?> sign in.  We need  you to sign out of that day after the sign in time. Thanks!. <span class='hidden'>ERROR: Signing out on a day where they did not sign in.</span></p><?php 						
 					} else {
@@ -92,11 +88,13 @@
 			}
 		} else {
 			$return_message = "Sorry! There was an issue with the action/type you attempted to take.";
-		}	
+		}
+
 		if (strrpos($referring_url, "?")) {
 			header("Location: " . $referring_url . "&message=".$return_message);	
 		} else {
 			header("Location: " . $referring_url . "?message=".$return_message);			
 		}
+
 	}
 ?>
