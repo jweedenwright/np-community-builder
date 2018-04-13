@@ -24,11 +24,13 @@
 		<header>
 			<div class="jumbotron">
 				<div class="container">
-					<div class="staff-log-out">
-						<a href="<?=$root_dir?>/pages/logout.php">
-							Staff log out
-						</a>
-					</div>
+					<?php if (isset($_SESSION['email'])) { ?>
+						<div class="staff-log-out">
+							<a href="<?=$root_dir?>/pages/logout.php">
+								Staff Log Out
+							</a>
+						</div>
+					<?php } ?>
 					<div class="hero-image">
 						<a href="<?=$root_dir?>/index.php"><img src="<?=$root_dir?>/img/knockout-logo.png" title="<?=$org_name?> Logo"/></a>
 					</div>
@@ -36,7 +38,7 @@
 						<ul>
 							<li>
 								<a href="<?=$root_dir?>/pages/dashboard.php">
-									Staff dashboard
+									Staff Dashboard
 								</a>
 							</li>
 							<li>
@@ -46,12 +48,12 @@
 							</li>
 							<li>
 								<a href="<?=$root_dir?>/pages/bulk.php">
-									Bulk signin
+									Bulk Sign In
 								</a>
 							</li>
 							<li>
-								<a href="<?=$root_dir?>/pages/sign-in.php" class="nav-signin-btn">
-									Volunteer sign-in/out
+								<a href="<?=$root_dir?>/index.php" class="nav-signin-btn">
+									Volunteer Sign In/Out
 								</a>
 							</li>
 						</ul>

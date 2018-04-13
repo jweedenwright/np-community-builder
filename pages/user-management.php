@@ -62,15 +62,14 @@
 			$volunteer = $results[0];
 			?>
 			<div id="volunteer-management-form" class="container">
-				<a class="back" href="?">Back</a>
-				<h1>Volunteer Detail</h1>
-				<div class="pull-right">
-					<a href="#" class="edit-details-btn" data-toggle="modal" data-target="#edit-details" onclick="return false;">
-						<span>Edit</span>
+				<span><a class="back details-btn" href="?">Back</a></span>
+				<span class="pull-right">
+					<a href="#" class="details-btn" data-toggle="modal" data-target="#edit-details" onclick="return false;">
+						Edit
 					</a>
-				</div>
+				</span>
 
-				<h2><?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?></h2>
+				<h1><?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?></h1>
 				<ul>
 					<li><strong>Email Address</strong> - <?=$volunteer["email"]?></li>
 					<li><strong>Emergency Contact</strong> - <?=$volunteer["emergency_contact_phone"]?></li>
