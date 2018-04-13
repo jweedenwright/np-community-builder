@@ -60,20 +60,6 @@
 					</nav>
 				</div>
 			</div>
-			<!--div id="nav-items" class="clearfix">
-				<div class="col-sm-3 text-center">
-					<a href="<?=$root_dir?>/pages/sign-in.php" class="sign-in line-link"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Sign In</a>
-				</div>
-				<div class="col-sm-3 text-center">
-					<a href="<?=$root_dir?>/pages/sign-out.php" class="sign-out line-link"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Sign Out</a>
-				</div>
-				<div class="col-sm-3 text-center">
-					<a href="<?=$root_dir?>/pages/dashboard.php" class="sign-out line-link"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Dashboard</a>
-				</div>
-				<div class="col-sm-3 text-center">
-					<a href="<?=$root_dir?>/pages/manage.php" class="sign-out line-link"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Manage</a>
-				</div>
-			</div-->
 		</header>
 		<?php
 			if(isset($_GET['message'])) {
