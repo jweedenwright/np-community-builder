@@ -50,8 +50,6 @@
 			if(isset($_GET['message'])) {
 				$special_msg = filter_var ( $_GET['message'], FILTER_SANITIZE_STRING);
 				$message_class = "alert alert-danger";
-
-				echo strrpos($special_msg, "uccess");
 				if (strrpos($special_msg, "uccess")) {
 					$message_class = "alert alert-success";					
 				}
