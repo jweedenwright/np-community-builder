@@ -66,7 +66,7 @@
 			<!--<h4>Edit Mode? <?=$edit_mode?></h4>-->
 			<form id="volunteer-management-form">
 				<div class="pull-right">
-					<a href="#" class="edit-details" data-fn="<?=$volunteer["first_name"]?>" data-ln="<?=$volunteer["last_name"]?>" data-email="<?=$volunteer["email"]?>" data-phone="<?=volunteer["emergency_contact_phone"]?>" data-toggle="modal" data-target="#edit-details" onclick="return false;">
+					<a href="#" class="edit-details-btn" data-toggle="modal" data-target="#edit-details" onclick="return false;">
 						<span>Edit</span>
 					</a>
 				</div>
@@ -88,8 +88,9 @@
 
 					$volunteer_time = $vol_periods[0];
 					$vol_start_date = date_parse_from_format ( $sql_date_format , $volunteer_time["check_in_time"]);
-					$date1 = new DateTime("now");
-					$vol_duration = date_diff($date1, $volunteer_time["check_in_time"]);
+					$date1 = $vol_start_date["month"] . "-" . $vol_start_date["day"] . "-" . $vol_start_date["year"];
+					$current_date = date("m-d-Y");
+					//$vol_duration = date_diff($current_date, $date1);
 				?>
 
 				<p>Email Distribution - <?=$email_dist?></p>
@@ -108,85 +109,6 @@
 				?>
 				
 				<p>Activity <?=$total_time?> hours and <?=$total_visits?> visits</p>
-				
-				<!-- Edit volunteer details-->
-				<div class="modal fade" id="edit-details" tabindex="-1" role="dialog" aria-labelledby="edit-label">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="edit-label">Edit Volunteer Details</h4>
-							</div>
-							<div class="modal-body">
-								<form id="edit-details-form" method="POST" action="../app/manage.php">
-									<input type="hidden" id="vol-id" name="vol-id">
-									<script type="text/javascript"> 
-											document.getElementById("vol-id").setAttribute('value','<?=$volunteer["id"]?>');
-									</script>
-									<input type="hidden" id="type" name="type" value="volunteer">
-
-									<div class="form-group">
-										<label for="First Name">First Name</label>
-										<input class="form-control" type="text" id="fn" name="fn">
-										<script type="text/javascript"> 
-											document.getElementById("fn").setAttribute('value','<?=$volunteer["first_name"]?>');
-										</script>
-									</div>
-									<div class="form-group">
-										<label for="Last Name">Last Name</label>
-										<input class="form-control" type="text" id="ln" name="ln">
-										<script type="text/javascript"> 
-											document.getElementById("ln").setAttribute('value','<?=$volunteer["last_name"]?>');
-										</script>
-									</div>
-									<div class="form-group">
-										<label for="Email">Email Address</label>
-										<input class="form-control" type="text" id="email" name="email">
-										<script type="text/javascript"> 
-											document.getElementById("email").setAttribute('value','<?=$volunteer["email"]?>');
-										</script>
-									</div>
-									<div class="form-group">
-										<label for="Phone">Emergency Contact Number</label>
-										<input class="form-control" type="text" id="phone" name="phone">
-										<script type="text/javascript"> 
-											document.getElementById("phone").setAttribute('value','<?=$volunteer["emergency_contact_phone"]?>');
-										</script>
-									</div>
-									<div class="form-group">
-										<label for="Skills">Skills</label>
-										<input class="form-control" type="text" id="skills" name="skills">
-										<script type="text/javascript"> 
-											document.getElementById("skills").setAttribute('value','<?=$volunteer["skills"]?>');
-										</script>
-									</div>
-									<div class="form-group">
-										<label for="Interests">Interests</label>
-										<input class="form-control" type="text" id="interests" name="interests">
-										<script type="text/javascript"> 
-											document.getElementById("interests").setAttribute('value','<?=$volunteer["interests"]?>');
-										</script>
-									</div>
-									<div class="form-group">
-										<label for="Availability">Availability</label>
-										<input class="form-control" type="text" id="availability" name="availability">
-										<script type="text/javascript"> 
-											document.getElementById("availability").setAttribute('value','<?=$volunteer["availability"]?>');
-										</script>
-									</div>
-									<div class="form-group">
-										<label for="email_dist">Include me in the email distribution</label>
-										<input class="block" type="checkBox" id="email_dist" name="email_dist">
-										<script type="text/javascript"> 
-											document.getElementById("email_dist").setAttribute('value','<?=$volunteer["include_email_dist"]?>');
-										</script>
-									</div>
-									<button type="submit" class="btn btn-success">Save changes</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
 				
 				<!-- Retrieve volunteer periods -->
 				<div class="table-responsive">
@@ -259,6 +181,59 @@
 				</div>
 				</form>
 
+				<!-- Volunteer Details Modal -->
+				<div class="modal fade" id="edit-details" tabindex="-1" role="dialog" aria-labelledby="edit-label">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="edit-label">Edit Volunteer Details</h4>
+							</div>
+							<div class="modal-body">
+								<form id="edit-details-form" method="POST" action="../app/manage.php">
+									<input type="hidden" id="vol-id" name="vol-id" value="<?=$volunteer["id"]?>">
+									<input type="hidden" id="type" name="type" value="volunteer">
+
+									<div class="form-group">
+										<label for="fn">First Name</label>
+										<input class="form-control" type="text" id="fn" name="fn" value="<?=$volunteer["first_name"]?>">
+									</div>
+									<div class="form-group">
+										<label for="ln">Last Name</label>
+										<input class="form-control" type="text" id="ln" name="ln" value="<?=$volunteer["last_name"]?>">
+									</div>
+									<div class="form-group">
+										<label for="email">Email Address</label>
+										<input class="form-control" type="text" id="email" name="email" value="<?=$volunteer["email"]?>">
+									</div>
+									<div class="form-group">
+										<label for="phone">Emergency Contact Number</label>
+										<input class="form-control" type="text" id="phone" name="phone" value="<?=$volunteer["emergency_contact_phone"]?>">
+									</div>
+									<div class="form-group">
+										<label for="skills">Skills</label>
+										<input class="form-control" type="text" id="skills" name="skills" value="<?=$volunteer["skills"]?>">
+									</div>
+									<div class="form-group">
+										<label for="interests">Interests</label>
+										<input class="form-control" type="text" id="interests" name="interests" value="<?=$volunteer["interests"]?>">
+									</div>
+									<div class="form-group">
+										<label for="availability">Availability</label>
+										<input class="form-control" type="text" id="availability" name="availability" value="<?=$volunteer["availability"]?>">
+									</div>
+									<div class="form-group">
+										<label for="email_dist">Include me in the email distribution</label>
+										<input class="block" type="checkBox" id="email_dist" name="email_dist" value="<?=$volunteer["include_email_dist"]?>">
+									</div>
+									<button type="submit" class="btn btn-success">Save changes</button>
+								</form>
+							</div><!-- /modal-body -->
+						</div><!-- /modal-content -->
+					</div><!-- /modal-dialog -->
+				</div><!-- /modal -->
+
+				<!-- Volunteer Period Modal -->
 				<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-label">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
