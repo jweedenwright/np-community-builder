@@ -81,7 +81,7 @@
 			} elseif ($manage_type == "volunteer-period") {
 
 				// Make sure we have required values for a VOLUNTEER PERIOD UPDATE
-				if(!isset($_POST['vol-id'])) {
+				if(!isset($_POST['vol-period-id'])) {
 					$return_message = "Volunteer period id was not provided.";
 				} elseif(!isset($_POST['signintime'])) {
 					$return_message = "Sign in time was not provided.";
@@ -95,7 +95,7 @@
 					$return_message = "Organization was not provided.";
 				} else {
 					// Sanitize Strings
-					$vol_period_id = filter_var ( $_POST['vol-id'], FILTER_SANITIZE_STRING);
+					$vol_period_id = filter_var ( $_POST['vol-period-id'], FILTER_SANITIZE_STRING);
 					$signin_datetime = filter_var ( $_POST['signintime'], FILTER_SANITIZE_STRING);
 					$signout_datetime = filter_var ( $_POST['signouttime'], FILTER_SANITIZE_STRING);
 					$location_id = filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
@@ -124,6 +124,9 @@
 												,job_type_id = '".$task_id."'
 												,location_id = '".$location_id."'
 										  	WHERE id = ".$vol_period_id;
+
+		echo $update_string;
+
 						if ($db->executeStatement($update_string,[])) {
 							// Success
 							$return_message = "Successfully Updated Volunteer Period!";
