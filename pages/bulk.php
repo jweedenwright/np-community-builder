@@ -23,6 +23,7 @@
 		header("Location: " . $login_url);
 	} else {
 ?>
+<div class="container">
 	<div class="danger"></div>
 	<form id="bulk-import">
 		<div class="row">
@@ -87,6 +88,7 @@
 	</form>
 	<button type="button" class="add-attendee btn btn-info">Add a field</button>
 	<button type="button" class="save-attendees btn btn-success pull-right" onclick="bulkImport();">Save</button>
+</div><!-- /container -->
 <?php
 	}
 	include_once '../footer.php';

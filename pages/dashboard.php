@@ -10,7 +10,9 @@
 		header("Location: " . $login_url);
 	} else {
 ?>
+<div class="container">
 	<h1>Here we go</h1>
+</div><!-- /container -->
 <?php
 	}
 	include_once '../footer.php';
