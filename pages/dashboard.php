@@ -11,7 +11,8 @@
 	} else {
 ?>
 <div class="container">
-	<h1>Here we go</h1>
+	<h1>Staff Dashboard</h1>
+	<img src="../img/dashboard-demo.jpg">
 </div><!-- /container -->
 <?php
 	}
