@@ -9,6 +9,12 @@
 	],
 "creatorBuild": "25813",
 "files": {
+	"\/app\/dashboard-util.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/dashboard-util.php",
+		"oF": 0
+		},
 	"\/app\/db-util.php": {
 		"ft": 8192,
 		"oA": 2,
@@ -25,6 +31,12 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/app\/global.php",
+		"oF": 0
+		},
+	"\/app\/manage.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/manage.php",
 		"oF": 0
 		},
 	"\/app\/php-info.php": {
@@ -55,6 +67,18 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/app\/test\/email-test.php",
+		"oF": 0
+		},
+	"\/app\/user-management.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/user-management.php",
+		"oF": 0
+		},
+	"\/app\/util\/autosignout.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/util\/autosignout.php",
 		"oF": 0
 		},
 	"\/css\/app-build-styles.less": {
@@ -296,20 +320,20 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"\/js\/main.min-min.js": {
-		"ft": 64,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/main.min-min-min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
 	"\/js\/main.min.js": {
 		"ft": 64,
 		"mi": 1,
 		"oA": 0,
 		"oAP": "\/js\/main.min-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/manage.js": {
+		"ft": 64,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/js\/manage-min.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 0
@@ -320,7 +344,7 @@
 		"oA": 1,
 		"oAP": "\/js\/pageload-min.js",
 		"oF": 0,
-		"sC": 0,
+		"sC": 1,
 		"tS": 0
 		},
 	"\/js\/pagination.js": {
@@ -356,7 +380,7 @@
 		"oA": 1,
 		"oAP": "\/js\/signin-min.js",
 		"oF": 0,
-		"sC": 0,
+		"sC": 1,
 		"tS": 0
 		},
 	"\/js\/signout.js": {
@@ -388,11 +412,11 @@
 		},
 	"\/js\/vendor\/chart.bundle.min.js": {
 		"ft": 64,
-		"mi": 1,
-		"oA": 0,
+		"mi": 0,
+		"oA": 1,
 		"oAP": "\/js\/vendor\/chart.bundle.min-min.js",
-		"oF": 0,
-		"sC": 1,
+		"oF": 1,
+		"sC": 0,
 		"tS": 0
 		},
 	"\/js\/vendor\/jquery-1.11.2.min.js": {
@@ -434,12 +458,6 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/pages\/dashboard.php",
-		"oF": 0
-		},
-	"\/pages\/data-management.php": {
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/pages\/data-management.php",
 		"oF": 0
 		},
 	"\/pages\/login.php": {
@@ -500,6 +518,12 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/pages\/thank-you.php",
+		"oF": 0
+		},
+	"\/pages\/user-management.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/user-management.php",
 		"oF": 0
 		},
 	"\/README.md": {
@@ -2579,7 +2603,7 @@
 			"flagValue": -1
 			},
 		"mangle": {
-			"active": 1,
+			"active": 0,
 			"flagValue": -1
 			},
 		"max-line-len": {
