@@ -36,7 +36,7 @@
 
 	// Get All Users
 	} else {
-		$all_users = "SELECT * FROM volunteer";
-		$results = $db->executeStatement($all_users,[])->fetchAll();
+		$all_vols = "SELECT * FROM volunteer";
+		$results = $db->executeStatement($all_vols,[])->fetchAll();
 	}
 ?>

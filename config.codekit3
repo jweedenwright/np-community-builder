@@ -33,6 +33,30 @@
 		"oAP": "\/app\/global.php",
 		"oF": 0
 		},
+	"\/app\/manage-locations.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/manage-locations.php",
+		"oF": 0
+		},
+	"\/app\/manage-metrics.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/manage-metrics.php",
+		"oF": 0
+		},
+	"\/app\/manage-tasks.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/manage-tasks.php",
+		"oF": 0
+		},
+	"\/app\/manage-volunteers.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/manage-volunteers.php",
+		"oF": 0
+		},
 	"\/app\/manage.php": {
 		"ft": 8192,
 		"oA": 2,
@@ -67,12 +91,6 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/app\/test\/email-test.php",
-		"oF": 0
-		},
-	"\/app\/user-management.php": {
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/app\/user-management.php",
 		"oF": 0
 		},
 	"\/app\/util\/autosignout.php": {
@@ -472,6 +490,30 @@
 		"oAP": "\/pages\/logout.php",
 		"oF": 0
 		},
+	"\/pages\/manage-locations.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/manage-locations.php",
+		"oF": 0
+		},
+	"\/pages\/manage-metrics.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/manage-metrics.php",
+		"oF": 0
+		},
+	"\/pages\/manage-tasks.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/manage-tasks.php",
+		"oF": 0
+		},
+	"\/pages\/manage-volunteers.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/manage-volunteers.php",
+		"oF": 0
+		},
 	"\/pages\/manage.php": {
 		"ft": 8192,
 		"oA": 2,
@@ -518,12 +560,6 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/pages\/thank-you.php",
-		"oF": 0
-		},
-	"\/pages\/user-management.php": {
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/pages\/user-management.php",
 		"oF": 0
 		},
 	"\/README.md": {

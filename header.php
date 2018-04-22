@@ -42,7 +42,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="<?=$root_dir?>/pages/user-management.php">
+								<a href="<?=$root_dir?>/pages/manage.php">
 									Manage
 								</a>
 							</li>

@@ -20,9 +20,15 @@
 </style>
 
 <div id="npcb-report" class="container">
-	<h1>Maintenance</h1>
-
-	<!-- Nav tabs -->
+	<h1>Website Management</h1>
+	<ul>
+		<li><a href="/pages/manage-volunteers.php">Manage Volunteers</a></li>
+		<li><a href="/pages/manage-locations.php">Manage Locations</a></li>
+		<li><a href="/pages/manage-tasks.php">Manage Tasks</a></li>
+		<li><a href="/pages/manage-metrics.php">Manage Metrics - Coming Soon!</a></li>
+	</ul>
+	
+<!--
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active">
 			<a href="#meals" aria-controls="meals" role="tab" data-toggle="tab">Meals</a>
@@ -37,9 +43,9 @@
 			<a href="#programs" aria-controls="programs" role="tab" data-toggle="tab">Programs</a>
 		</li>
 	</ul>
-	<!-- Tab panes -->
+
 	<div class="tab-content">
-		<!-- Meals Form -->
+Meals Form
 		<div role="tabpanel" class="tab-pane active" id="meals">
 			<h3>Meals</h3>
 			<form id="meals-form">
@@ -132,7 +138,7 @@
 			</form>
 		</div>
 
-		<!-- Food Donations Form -->
+Food Donations Form
 		<div role="tabpanel" class="tab-pane" id="food-donations">
 			<form id="donation-form">
 				<h3>Food Donations</h3>
@@ -173,7 +179,7 @@
 			</form>
 		</div>
 
-		<!-- Garden Form -->
+Garden Form
 		<div role="tabpanel" class="tab-pane" id="garden">
 			<form id="garden-form">
 				<h3>Garden</h3>
@@ -210,7 +216,7 @@
 			</form>
 		</div>
 
-		<!-- Programs Form -->
+Programs Form
 		<div role="tabpanel" class="tab-pane" id="programs">
 			<form id="program-form">
 				<h3>Programs</h3>
@@ -266,6 +272,8 @@
 		</div>
 
 	</div>
+	-->
+	
 </div>
 <?php
 	}

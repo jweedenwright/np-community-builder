@@ -82,7 +82,7 @@
 				<td><?=$latest_date['month']."/".$latest_date['day']."/".$latest_date['year']?></td>
 				<td><?=$first_date['month']."/".$first_date['day']."/".$first_date['year']?></td>
 				<td><?=$result['name'] ?></td>
-				<td><a href="/pages/user-management.php?email=<?= $result['email'] ?>"><?= $result['email'] ?></a></td>
+				<td><a href="/pages/manage-volunteers.php?email=<?= $result['email'] ?>"><?= $result['email'] ?></a></td>
 			</tr>
 		<?php
 			}

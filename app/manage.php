@@ -1,4 +1,5 @@
 <?php
+	// Logic for ALL Management Pages
 	include_once 'global.php';
 	if (!isset($_SESSION['email'])) {
 		//	Session variable not set - redirect to login
@@ -23,7 +24,6 @@
 // - TEST: type=volunteer-period&vol-id=1&signintime=03/15/2018 1:30 PM&signouttime=03/15/2018 3:30 PM&location=7&task=1&organization=HCA
 
 			if ($manage_type == "volunteer") {
-				echo "VOLUNTEER!";
 				// Make sure we have required values for a VOLUNTEER update
 				if(!isset($_POST['fn'])) {
 					$return_message = "Must provide first name for volunteer.";
@@ -124,9 +124,6 @@
 												,job_type_id = '".$task_id."'
 												,location_id = '".$location_id."'
 										  	WHERE id = ".$vol_period_id;
-
-		echo $update_string;
-
 						if ($db->executeStatement($update_string,[])) {
 							// Success
 							$return_message = "Successfully Updated Volunteer Period!";

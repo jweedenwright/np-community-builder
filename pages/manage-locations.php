@@ -13,7 +13,7 @@
 		header("Location: " . $login_url);
 	} else {
 		// Logic
-		include_once '../app/user-management.php';
+		include_once '../app/manage-volunteers.php';
 		
 /////////////////////////////////////
 // Not individual - list of volunteers page
