@@ -78,8 +78,26 @@
 	$sql_date_format = "Y-m-d g:i:s"; // 2016-10-13 07:00:00
 	// Variables
 	$root_dir = "";
-	$dashboard_url = $root_dir . "/pages/manage.php";
-	$login_url = $root_dir . "/pages/login.php";
-	$logout_url = $root_dir . "/pages/logout.php";
+	$dashboard_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/dashboard.php";
+	$login_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/login.php";
+	$logout_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/logout.php";
+	$signout_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/sign-out.php";
+	$current_url = "https://".$GLOBALS['current_domain'] . $root_dir . $_SERVER['REQUEST_URI'];
+	$referring_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/index.php";
+	if (isset($_SERVER['HTTP_REFERER'])) {
+		$referring_url = $_SERVER['HTTP_REFERER'];
+	}
 	$reset_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/reset.php";
+	
+	// Global Functions
+	function calculateHours($in_time, $out_time) {
+		$hours = $out_time["hour"] - $in_time["hour"];
+		if ($in_time["minute"] != $out_time["minute"]) {
+			$minutes = (60 - $in_time["minute"]) + $out_time["minute"];
+			if ($minutes >= 30) {
+				$hours = $hours + .5;
+			}
+		}
+		return $hours;
+	}
 ?>

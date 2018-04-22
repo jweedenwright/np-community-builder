@@ -37,7 +37,7 @@
 									$message .= "<p>Password reset successful! You may now <a href='".$login_url."'>log in</a>.</p>";
 								}
 							} else {
-								$message .= "<p>Sorry, no password reset attempt was detected for this email address. You must first visit the <a href='".$loginUrl."'>login page</a> and click the 'Reset Password' link.</p>";
+								$message .= "<p>Sorry, no password reset attempt was detected for this email address. You must first visit the <a href='".$login_url."'>login page</a> and click the 'Reset Password' link.</p>";
 							}
 						}
 					} else {

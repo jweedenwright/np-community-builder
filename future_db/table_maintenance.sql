@@ -136,6 +136,14 @@ CREATE TABLE dbo.metric (
 
 -- DATA IMPORT
 INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('jeremiah.weedenwright@gmail.com','tester', '2016-12-05',1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('mcallaro88@gmail.com','tester', '2018-04-12',1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('divya.guntu@hcahealthcare.com','tester', '2018-04-12',1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('teri@thenashvillefoodproject.org','tester','2018-04-12',1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('munderwood@c3-consult.com','tester','2018-04-12',1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('justin.threlkeld@gmail.com','tester','2018-04-12',1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('joyce.pfeffer@hcahealthcare.com','tester','2018-04-12',1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('mariah@thenashvillefoodproject.org','tester','2018-04-12',1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('malinda@thenashvillefoodproject.org','tester','2018-04-12',1);
 
 SET IDENTITY_INSERT dbo.location ON
 INSERT INTO dbo.location (id,location_name,internal) VALUES (1,'Blackman Road Garden',0);

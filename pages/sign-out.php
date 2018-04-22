@@ -29,7 +29,7 @@
 								placeholder="Please enter your email" >
 					</div>
 					<div class="form-group col-md-12 col-xs-12">
-						<input type='text' class="form-control" id="datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signouttime" placeholder="MM/DD/YYYY 12:01 AM" />
+						<input type='text' class="form-control datetime-picker" id="signout-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signouttime" placeholder="MM/DD/YYYY 12:01 AM" />
 					</div>
 					<div class="form-group col-md-12 col-xs-12">
 						<label for="feedback">Feedback</label>

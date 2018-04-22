@@ -7,6 +7,7 @@
 // @codekit-prepend "/vendor/bootstrap.min.js";
 // @codekit-prepend "/vendor/moment.min.js";
 // @codekit-prepend "/vendor/bootstrap-datetimepicker.min.js";
+// @codekit-prepend "/vendor/chart.bundle.min.js";
 
 // @codekit-append "global.js";
 // @codekit-append "callbacks.js";
@@ -17,3 +18,4 @@
 // @codekit-append "pagination.js";
 // @codekit-append "report.js";
 // @codekit-append "login.js";
+// @codekit-append "manage.js";

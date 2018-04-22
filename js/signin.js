@@ -18,19 +18,14 @@ function checkEmailCallback(element, results) {
 		// Populate fields and hide everything unnecessary
 		$("#returning-volunteer-not-found").addClass("hidden");
 		$("#returning-volunteer-found").removeClass("hidden");
-		
-		var person = results.data[0];
+
+		var person = results.data[0]; 
 		var first_name = person.firstName;
 		var last_name = person.lastName;
 		// Check and collapse liability boxes (previously logged in)
 		document.getElementById("general-liability-check").checked = true;
-		document.getElementById("health-release-check").checked = true;
 		document.getElementById("photo-release-check").checked = true;
-		document.getElementById("not-first-time").checked = true;
-		var collapses = document.querySelectorAll(".sign-in-page #accordion.terms a");
-		for (var i in collapses) {
-			collapses[i].className += " collapsed";
-		}
+		document.getElementById("health-release-check-collapse").classList.add("in");
 		
 		// Set first and last name (previously logged in)
 		document.getElementById("first-name").value = first_name;
@@ -38,7 +33,8 @@ function checkEmailCallback(element, results) {
 		// Hide Fields
 		document.getElementsByClassName("first-name")[0].style.display = "none";
 		document.getElementsByClassName("last-name")[0].style.display = "none";
-		document.getElementById("accordion").style.display = "none";
+		document.getElementById("photo-release-check-panel").style.display = "none";
+		document.getElementById("general-liability-check-panel").style.display = "none";
 		document.getElementById("sign-in-opts-accordion").style.display = "none";
 
 		// Change field-error/glyphicon-remove to field-ok/glyphicon-ok
@@ -50,14 +46,14 @@ function checkEmailCallback(element, results) {
 		document.getElementById("general-liability-check").checked = false;
 		document.getElementById("health-release-check").checked = false;
 		document.getElementById("photo-release-check").checked = false;
-		document.getElementById("is-first-time").checked = true;
 
 		// Show fields
 		document.getElementsByClassName("first-name")[0].style.display = "table";
 		document.getElementById("first-name").value = "";
 		document.getElementsByClassName("last-name")[0].style.display = "table";
 		document.getElementById("last-name").value = "";
-		document.getElementById("accordion").style.display = "block";
+		document.getElementById("photo-release-check-panel").style.display = "block";
+		document.getElementById("general-liability-check-panel").style.display = "block";
 		document.getElementById("sign-in-opts-accordion").style.display = "block";
 		
 		// Change field-ok/glyphicon-ok to field-error/glyphicon-remove
@@ -69,6 +65,7 @@ function checkEmailCallback(element, results) {
 
 // Sign in Volunteer
 function signIn() {
+
 	// Clear old errors
 	clearErrorMsgs();
 	
@@ -86,8 +83,6 @@ function signIn() {
 	if(!valid_form) { return handleInvalid("Please be sure to provide your first name."); }
 	valid_form = document.getElementsByName("lastname")[0].value !== "";
 	if(!valid_form) { return handleInvalid("Please be sure to provide your last name."); }
-	valid_form = document.getElementsByName("first-time")[0].checked || document.getElementsByName("first-time")[1].checked;
-	if(!valid_form) { return handleInvalid("Please be sure to indicate if this is your first time."); }
 	
 	// Complex validations
 	var email = document.getElementsByName("email")[0];
@@ -117,7 +112,7 @@ function signIn() {
 
 	if (valid_form) {
 		// AJAX Post to PHP
-	    $.ajax({
+		$.ajax({
 			type: "POST",
 			url: signin_url,
 			data: $("#sign-in-form").serialize(), // serializes the form's elements.
@@ -130,6 +125,128 @@ function signIn() {
 				}
 			}
 		});
+	}
+	return false;
+}
+
+function bulkImport() {
+	// Used by the Bulk Import page to sign in many people at once
+	// Scroll to top
+	jQuery('html,body').animate({scrollTop:0},200);
+	
+	// Clear old errors
+	clearErrorMsgs();
+	
+	// Validate Fields
+	var valid_form = true;
+	
+	// required validations
+	// Date: 02/07/2017 6:48 PM
+	var datetime = document.getElementsByName("signintime")[0].value;
+	valid_form = datetime !== "";
+	if(!valid_form) { return handleInvalid("Please be sure to provide your sign in date."); }
+
+	// Affiliation
+	var affiliation = document.getElementsByName("organization")[0].value;
+	valid_form = affiliation !== "";
+	if(!valid_form) { return handleInvalid("Please be sure to provide an organization or affiliation name."); }
+
+	// Task
+	var task_item = document.getElementsByName("task")[0];
+	var task_id = task_item.options[task_item.selectedIndex].value;
+	valid_form = (/^[0-9]*$/).test(task_id);
+	if(!valid_form) { return handleInvalid("Please be sure to select a program."); }
+
+	// Location
+	var location_item = document.getElementsByName("location")[0];
+	var location_id = location_item.options[location_item.selectedIndex].value;
+	valid_form = (/^[0-9]*$/).test(location_id);
+	if(!valid_form) { return handleInvalid("Please be sure to select a location."); }
+
+	// Loop through all first / last / email / checkbox combos
+	if (valid_form) {
+		var attendees = document.getElementsByClassName("attendee");
+		if (attendees.length > 0) {
+			// Need to verify ALL attendees before saving any to keep some saving some before an error occurs
+			// - EX: 20 attendees sign in, the first 10 pass and are saved, the 11th has an issue...we now have 10 saved and 10 not in the DB
+			// - This check makes sure that all data is valid BEFORE saving attendees
+			var all_valid_attendees = true;
+			for (var i = 0; i < attendees.length; i++) {
+				valid_attendee = true;
+				var attendee = attendees[i];
+				current_attendee = i + 1;
+						
+				// Validation
+				valid_attendee = attendee.querySelectorAll("[name=firstName]")[0].value !== "";
+				if(!valid_attendee) { return handleInvalid("Please be sure to provide first names for all volunteers. Issue found on volunteer " + current_attendee + "."); }
+				valid_attendee = attendee.querySelectorAll("[name=lastName]")[0].value !== "";
+				if(!valid_attendee) { return handleInvalid("Please be sure to provide last names for all volunteers. Issue found on volunteer " + current_attendee + "."); }
+	
+				// Complex validations
+				var email = attendee.querySelectorAll("[name=email]")[0];
+				valid_attendee = email.value !== "";
+				if(!valid_attendee) { return handleInvalid("Please be sure to provide email addresses for all volunteers. Issue found on volunteer " + current_attendee + "."); }
+				valid_attendee = (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email.value);
+				if(!valid_attendee) { return handleInvalid("Please be sure all emails are in the correct format. Issue found on volunteer " + current_attendee + "."); }
+
+				if (!valid_attendee) {
+					all_valid_attendees = false;
+					break;
+				}
+			}
+			
+			// If all valid - start to process one at a time
+			// - Need to setup form data in the following format to pass to the existing signin.php page:
+			// "first-time=0&email=jeremiah.weedenwright%40gmail.com&firstname=Jeremiah&lastname=Weeden-Wright
+			//		&location=2&task=3&signintime=04%2F12%2F2018+1%3A30+PM
+			//		&general-liability-check=1&agree=no&health-release-check=1&agree=no&photo-release-check=1&agree=no
+			//		&include-email-dist=0&community-service=0&affiliation=&emergency-phone-number=&skills=&find-out-about-us="
+			if(all_valid_attendees) {
+				for (var i = 0; i < attendees.length; i++) {
+					// Look over each Login
+					var attendee = attendees[i];
+					var vol_data = "first-time=0"
+								+ "&email=" + attendee.querySelectorAll("[name=email]")[0].value
+								+ "&firstname=" + attendee.querySelectorAll("[name=firstName]")[0].value
+								+ "&lastname=" + attendee.querySelectorAll("[name=lastName]")[0].value
+								+ "&location=" + location_id
+								+ "&task=" + task_id
+								+ "&signintime=" + datetime
+								+ "&general-liability-check=1&health-release-check=1&photo-release-check=1&include-email-dist=0&community-service=0"
+								+ "&affiliation=" + affiliation
+								+ "&emergency-phone-number=&skills=&find-out-about-us=";
+
+					// AJAX Post to PHP - need to try ALL attendees before failing/succeeding
+					var attendees_returned = 0; // compare to attendees.length
+					var issues = "";
+					$.ajax({
+						type: "POST",
+						url: signin_url,
+						data: vol_data, // serializes the form's elements.
+						success: function(data) {
+							// Increment the number of attendees to return
+							attendees_returned++;
+							// Check for an error
+							if (data.indexOf("ERROR") !== -1) {
+								issues = issues + data;
+							}
+							// Check if this was the last attendee to return
+							if (attendees_returned === attendees.length) {
+								if (issues !== "") {
+									$(".danger").html(issues);		
+								} else {
+									// Redirect to thank you
+									location.href = 'thank-you.php';
+								}
+							}							
+						}
+					});
+				}	
+			}
+		} else {
+			// There were no attendees on the form!
+			return handleInvalid("Please be sure to add attendees!");
+		}
 	}
 	return false;
 }

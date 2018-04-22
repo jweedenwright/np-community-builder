@@ -9,16 +9,64 @@
 	],
 "creatorBuild": "25813",
 "files": {
+	"\/app\/dashboard-util.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/dashboard-util.php",
+		"oF": 0
+		},
 	"\/app\/db-util.php": {
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/app\/db-util.php",
 		"oF": 0
 		},
+	"\/app\/email-util.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/email-util.php",
+		"oF": 0
+		},
 	"\/app\/global.php": {
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/app\/global.php",
+		"oF": 0
+		},
+	"\/app\/manage-locations.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/manage-locations.php",
+		"oF": 0
+		},
+	"\/app\/manage-metrics.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/manage-metrics.php",
+		"oF": 0
+		},
+	"\/app\/manage-tasks.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/manage-tasks.php",
+		"oF": 0
+		},
+	"\/app\/manage-volunteers.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/manage-volunteers.php",
+		"oF": 0
+		},
+	"\/app\/manage.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/manage.php",
+		"oF": 0
+		},
+	"\/app\/php-info.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/php-info.php",
 		"oF": 0
 		},
 	"\/app\/services.php": {
@@ -37,6 +85,18 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/app\/signout.php",
+		"oF": 0
+		},
+	"\/app\/test\/email-test.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/test\/email-test.php",
+		"oF": 0
+		},
+	"\/app\/util\/autosignout.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/util\/autosignout.php",
 		"oF": 0
 		},
 	"\/css\/app-build-styles.less": {
@@ -278,20 +338,20 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"\/js\/main.min-min.js": {
-		"ft": 64,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/main.min-min-min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
 	"\/js\/main.min.js": {
 		"ft": 64,
 		"mi": 1,
 		"oA": 0,
 		"oAP": "\/js\/main.min-min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"\/js\/manage.js": {
+		"ft": 64,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/js\/manage-min.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 0
@@ -302,7 +362,7 @@
 		"oA": 1,
 		"oAP": "\/js\/pageload-min.js",
 		"oF": 0,
-		"sC": 0,
+		"sC": 1,
 		"tS": 0
 		},
 	"\/js\/pagination.js": {
@@ -338,7 +398,7 @@
 		"oA": 1,
 		"oAP": "\/js\/signin-min.js",
 		"oF": 0,
-		"sC": 0,
+		"sC": 1,
 		"tS": 0
 		},
 	"\/js\/signout.js": {
@@ -370,11 +430,11 @@
 		},
 	"\/js\/vendor\/chart.bundle.min.js": {
 		"ft": 64,
-		"mi": 1,
-		"oA": 0,
+		"mi": 0,
+		"oA": 1,
 		"oAP": "\/js\/vendor\/chart.bundle.min-min.js",
-		"oF": 0,
-		"sC": 1,
+		"oF": 1,
+		"sC": 0,
 		"tS": 0
 		},
 	"\/js\/vendor\/jquery-1.11.2.min.js": {
@@ -395,6 +455,23 @@
 		"sC": 1,
 		"tS": 0
 		},
+	"\/NPCB-ER-Diagram.png": {
+		"ft": 32768,
+		"iS": 21339,
+		"oA": 0,
+		"oAP": "\/NPCB-ER-Diagram.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/pages\/bulk.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/bulk.php",
+		"oF": 0
+		},
 	"\/pages\/dashboard.php": {
 		"ft": 8192,
 		"oA": 2,
@@ -411,6 +488,30 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/pages\/logout.php",
+		"oF": 0
+		},
+	"\/pages\/manage-locations.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/manage-locations.php",
+		"oF": 0
+		},
+	"\/pages\/manage-metrics.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/manage-metrics.php",
+		"oF": 0
+		},
+	"\/pages\/manage-tasks.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/manage-tasks.php",
+		"oF": 0
+		},
+	"\/pages\/manage-volunteers.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/manage-volunteers.php",
 		"oF": 0
 		},
 	"\/pages\/manage.php": {
@@ -484,17 +585,6 @@
 		"oA": 2,
 		"oAP": "\/robots.txt",
 		"oF": 0
-		},
-	"\/TNFP-ER-Diagram.png": {
-		"ft": 32768,
-		"iS": 21339,
-		"oA": 0,
-		"oAP": "\/TNFP-ER-Diagram.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
 		},
 	"\/web.config": {
 		"ft": 8192,
@@ -2549,7 +2639,7 @@
 			"flagValue": -1
 			},
 		"mangle": {
-			"active": 1,
+			"active": 0,
 			"flagValue": -1
 			},
 		"max-line-len": {

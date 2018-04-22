@@ -5,6 +5,7 @@ var service_url = protocol + "//" + domain + "/app/services.php?service=";
 var signin_url = protocol + "//" + domain + "/app/signin.php";
 var signout_url = protocol + "//" + domain + "/app/signout.php";
 var quick_signin = $("#quick-sign-in-name");
+var code_version = "2.1.1";
 
 //////////////////////
 // AUTOPOPULATE DATES
@@ -17,7 +18,7 @@ $('#myDate').val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slic
 function handleInvalid(msg) {
 	var error_divs = document.querySelectorAll(".danger");
 	for (var i = 0; i < error_divs.length; i++) {
-		error_divs[i].innerHTML = "<p class='alert'>" + msg + "</p>";
+		error_divs[i].innerHTML = "<p class='alert alert-danger'>" + msg + "</p>";
 	}
 	return false;
 }

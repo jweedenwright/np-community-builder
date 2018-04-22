@@ -1,5 +1,5 @@
-		<footer class="row">
-			<div class="address">
+		<footer class="container">
+			<div class="row address">
 				<div class="footer-section col-sm-3 col-xs-12">
 					<h4>
 						<img src="<?=$root_dir?>/img/knockout-logo.png" title="<?=$org_name?>"/>

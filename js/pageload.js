@@ -14,13 +14,6 @@ window.addEventListener("load",function() {
 	//botamatic();
 	
 	// Setup datetime picker
-	$("#datetime-picker").datetimepicker({
-		"useCurrent": true,
-		"stepping":5
-	});
-
-	// Setup datetime picker
-	console.log("SETUP DATETIME");
 	$(".datetime-picker").datetimepicker({
 		"useCurrent": true,
 		"stepping":5
@@ -51,15 +44,24 @@ window.addEventListener("load",function() {
 	//////////////////////
 
 	// Set datetime picker time and flip the ok switch on that input
-	$("#datetime-picker").on("blur",function() {
+	$(".datetime-picker").on("blur",function() {
 		if ($(this).val() !== "") {
 			flipInputGroupIcon(".signin-time .input-group-addon", "ok");
 		} else {
 			flipInputGroupIcon(".signin-time .input-group-addon", "error");
 		}
 	});
-	$("#datetime-picker").focus().blur();
+	$(".datetime-picker").focus().blur();
 	$("#quick-sign-in-name").focus();
+
+	// Setup on change for organization
+	$("#organization").on("change",function() {
+		if ($(this).val() !== "") {
+			flipInputGroupIcon(".organization .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".organization .input-group-addon", "error");
+		}
+	});
 
 	// Setup on change for task drop down
 	$("#task").on("change",function() {
@@ -67,6 +69,15 @@ window.addEventListener("load",function() {
 			flipInputGroupIcon(".task .input-group-addon", "ok");
 		} else {
 			flipInputGroupIcon(".task .input-group-addon", "error");
+		}
+	});
+	
+	// Setup on change for location drop down
+	$("#location").on("change",function() {
+		if ($(this).find(":selected").val() !== "") {
+			flipInputGroupIcon(".location .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".location .input-group-addon", "error");
 		}
 	});
 	
@@ -131,4 +142,28 @@ window.addEventListener("load",function() {
 	
 	// Scroll to top
 	jQuery('html,body').animate({scrollTop:0},200);
+	
+	//////////////////////////////////
+	// PAGE SPECIFIC LOGIC - Bulk Page
+	$(".add-attendee").on("click", function() {
+		var attendee_count = document.getElementsByClassName("attendee").length,
+			attendee_wrapper = $("#bulk-import .attendee-wrap"),
+			attendee_field_wrapper = $("<div id=\"attendee" + attendee_count + "\" class=\"row attendee\">"),
+			attendee_email = $("<div class=\"form-group col-sm-3\"><label for=\"email\">Email</label><input type=\"text\" class=\"form-control\" id=\"quick-sign-in-name\" name=\"email\" autocomplete=\"on\" placeholder=\"Enter an email\"></div>"),
+			attendee_first_name = $("<div class=\"form-group col-sm-3\"><label for=\"firstName\">First Name</label><input type=\"text\" class=\"form-control\" id=\"firstName\" name=\"firstName\" autocomplete=\"on\" placeholder=\"First Name\"></div>"),
+			attendee_last_name = $("<div class=\"form-group col-sm-3\"><label for=\"lastName\">Last Name</label><input type=\"text\" class=\"form-control\" id=\"lastName\" name=\"lastName\" autocomplete=\"on\" placeholder=\"Last Name\"></div>"),
+			attendee_removal = $("<div class=\"pull-left\"><button type=\"button\" class=\"remove btn btn-default active\"><i class='glyphicon glyphicon-minus' aria-hidden=\"true\"></i><span class=\"sr-only\">Remove a field</span></button></div>");
+
+		attendee_field_wrapper.append(attendee_email);
+		attendee_field_wrapper.append(attendee_first_name);
+		attendee_field_wrapper.append(attendee_last_name);
+		attendee_field_wrapper.append(attendee_removal);
+		attendee_wrapper.append(attendee_field_wrapper);
+		// Set the focus
+		$('.attendee').last().find('input').first().focus();
+
+		$(".attendee-wrap .remove").on("click", function() {
+			$(this).parents(".attendee").remove();
+		});
+	});
 });

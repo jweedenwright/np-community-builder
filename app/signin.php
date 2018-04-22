@@ -29,8 +29,6 @@
 		?> <p class='alert alert-danger'>Location is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 	} elseif(!isset($_POST['task'])) {
 		?> <p class='alert alert-danger'>Task is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
-	} elseif(!isset($_POST['first-time'])) {
-		?> <p class='alert alert-danger'>Volunteer must indicate if this is their first time. <span class="hidden">ERROR: Missing field</span></p> <?php
 	} else {
 		
 		//////////////////////
@@ -45,7 +43,7 @@
 		$signin_date = filter_var ( $_POST['signintime'], FILTER_SANITIZE_STRING); // 02/07/2017 6:48 PM
 		$location_id = (int) filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
 		$task_id = (int) filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
-		$first_time = (int) filter_var ( $_POST['first-time'], FILTER_SANITIZE_STRING);
+		$first_time = 0;
 
 		$affiliation = "";
 		if(isset($_POST['affiliation'])) {
@@ -83,15 +81,13 @@
 		//////////////////////
 		// Insert Volunteer IF IT DOES NOT already exist
 		//////////////////////
-		$db = new pdo_dblib_mssql();
-
 		// First time - will need to insert into Volunteer table - if already exists, don't insert
 		$process_fail = false;
 		$check_query = "SELECT id FROM volunteer WHERE email = ?";
 		$results = $db->executeStatement($check_query, array($email))->fetchAll();
 		// Without fetchAll, result count won't be checked
 		if (sizeof($results) == 0) {
-			// Result found - sign out session (get first item returned)
+			// Didn't find anyone with a matching email - insert the new volunteer
 			$volunteer_insert = "INSERT INTO volunteer (first_name,last_name,email,skills,emergency_contact_phone,interests,availability,find_out_about_us,include_email_dist)"
 				." VALUES ('".$first_name."','".$last_name."','".$email."','".$skills."','".$emergency_phone_number."','','','".$find_out_about_us."',".$include_email_dist.")";
 			if ($db->executeStatement($volunteer_insert,[])) {
@@ -146,7 +142,7 @@
 						$previous_signin_time = $previous_login['sign_in'];
 						$process_fail = true;
 						$log_time_period = false;
-						?><p class='alert alert-danger'>It appears you have already signed in today at <?= $previous_signin_time ?> but not signed out! Please <a href='sign-out.html'>sign out</a> before signing in again. <span class="hidden">ERROR: previously signed in today </span></p><?php 
+						?><p class='alert alert-danger'>It appears <?= $email ?> have already signed in today at <?= $previous_signin_time ?> but not signed out! Please <a href='<?=$signout_url?>'>sign out</a> before signing in again. <span class="hidden">ERROR: previously signed in today </span></p><?php 
 					}
 				}
 			}

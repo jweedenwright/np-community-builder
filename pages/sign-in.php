@@ -40,19 +40,6 @@
 					</div>
 					<div class="danger"></div>
 					<div class="row">
-						<div id="first-time-vol" class="form-group col-md-12 col-xs-12">
-							<label for="first-time">First Time Volunteering?</label>
-							<label class="first-time">
-								Yes
-								<input type="radio" name="first-time" checked id="is-first-time" value="1">
-							</label>
-							<label class="first-time">
-								No
-								<input type="radio" name="first-time" id="not-first-time" value="0">
-							</label>
-						</div>
-					</div>
-					<div class="row">
 						<div class="form-group col-sm-8 col-xs-12">
 							<label for="quick-sign-in-email" class="sr-only">Enter your email</label>
 							<div class="input-group email">
@@ -122,7 +109,7 @@
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<div class="input-group signin-time">
-								<input type='text' class="form-control" id="datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signintime" placeholder="MM/DD/YYYY 12:01 AM" />
+								<input type='text' class="form-control datetime-picker" id="signin-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signintime" placeholder="MM/DD/YYYY 12:01 AM" />
 								<span class='input-group-addon field-error'><i class='glyphicon glyphicon-asterisk'></i></span>
 							</div>
 						</div>
@@ -132,7 +119,7 @@
 
 			<div class="col-xs-12">
 				<div class="panel-group terms" id="accordion">
-					<div class="panel panel-default">
+					<div id="general-liability-check-panel" class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion" href="#general-liability-check-collapse"><i class="glyphicon glyphicon-plus"></i>General Liability *</a>
@@ -150,7 +137,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="panel panel-default">
+					<div id="health-release-check-panel" class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion" href="#health-release-check-collapse" class="collapsed"><i class="glyphicon glyphicon-plus"></i>Health Release *</a>
@@ -168,7 +155,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="panel panel-default">
+					<div id="photo-release-check-panel" class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion" href="#photo-release-check-collapse" class="collapsed"><i class="glyphicon glyphicon-plus"></i>Photo Release *</a>
