@@ -12,7 +12,7 @@
 	} else {
 ?>
 <div class="container">
-	<h1><strong>Staff Dashboard<strong></h1>
+	<h1>Staff Dashboard</h1>
 	<div class="row">
 		<div id="total-vols-display-wrapper" class="col-sm-4 stat-item text-center">
 			<div id="total-vols-display" class="card boom">
@@ -36,70 +36,60 @@
 	<h2>Program Stats
 		<span class="program-chart-options">
 			<a href="?chart-filter=hours">Hours</a>
-			<a href="?chart-filter=volunteers">Volunteers</a>
 			<a href="?chart-filter=visits">Visits</a>
 		</span>
 	</h2>
 	<div class="row">
 		<div id="location-stats-wrapper" class="col-sm-6 stat-item">
 			<div id="location-stats" class="card">
-				Pie chart of all locations with % of hours worked at each location
+				<?php
+					foreach ($location_percentages as $location_percentage) {
+						echo "<input class='location-chart-metric' type='hidden' name='".$location_percentage['name']."' value='".$location_percentage['percent']."'>";
+					}
+				?>
+				<canvas id="location-chart"></canvas>
 			</div>
 		</div>
 		<div id="task-stats-wrapper" class="col-sm-6 stat-item">
 			<div id="task-stats" class="card">
-				Pie chart of all tasks with % of hours worked at each task
+				<?php									 
+					foreach ($job_type_percentages as $job_type_percentage) {
+						echo "<input class='task-chart-metric' type='hidden' name='".$job_type_percentage['name']."' value='".$job_type_percentage['percent']."'>";
+					}	
+				?>
+				<canvas id="task-chart"></canvas>
 			</div>
 		</div>
 	</div>
 	
 	<h2>Volunteer Data</h2>
-	<table id="report-table" class="table table-condensed table-striped table-hover sortable">					
+	<table id="report-table" class="table table-condensed table-striped table-hover sortable">
 		<thead>
 			<tr>
-				<th>Email</th><th>Name</th><th class="text-center">Hours</th><th class="text-center">Count</th><th class="hidden">Skills</th><th  class="hidden">Emer Phone</th><th  class="hidden">Interests</th><th  class="hidden">Found Out</th><th class="hidden">Email Include</th><th class="hidden">Latest Vounteer Date</th><th class="hidden">First Volunteer Date</th>
+				<th class="text-center">Total Hours</th><th class="text-center">Count</th><th>Last Visit</th><th>First Visit</th><th>Name</th><th>Email</th>
 			</tr>
 		</thead>
 		<tbody>
 		<?php
-			$total_hours = 0;
-			$total_vol_count = 0;
-			//Need to find out the SQL query for results
-			$total_vols = sizeOf($results);
-			foreach ($results as $result) {
-				$hours = $result['hours'];
-				$total_hours = $total_hours + $hours;
-				$vol_count = $result['vol_count'];
-				$total_vol_count = $total_vol_count + $vol_count;
+			foreach ($volunteer_query_results as $result) {
+				// format dates
+				$first_date = date_parse_from_format ( $sql_date_format , $result['first']  );
+				$latest_date = date_parse_from_format ( $sql_date_format , $result['latest']  );
 		?>
-		<tr>
-			<td><?= $result['email'] ?></td>
-			<td><?=$result['last_name'] ?>, <?= $result['first_name'] ?></td>
-			<td class="text-center"><?= $hours ?></td>
-			<td class="text-center"><?= $vol_count ?></td>
-			<td class="hidden"><?= $result['skills'] ?></td>
-			<td class="hidden"><?= $result['emergency_contact_phone'] ?></td>
-			<td class="hidden"><?= $result['interests'] ?></td>
-			<td class="hidden"><?= $result['find_out_about_us'] ?></td>
-			<td class="hidden">
+			<tr class="paginate-row">
+				<td class="text-center"><?= $result['hours'] ?></td>
+				<td class="text-center"><?= $result['num'] ?></td>
+				<td><?=$latest_date['month']."/".$latest_date['day']."/".$latest_date['year']?></td>
+				<td><?=$first_date['month']."/".$first_date['day']."/".$first_date['year']?></td>
+				<td><?=$result['name'] ?></td>
+				<td><a href="/pages/user-management.php?email=<?= $result['email'] ?>"><?= $result['email'] ?></a></td>
+			</tr>
 		<?php
-			if ($result['include_email_dist'] == "1") {
-		?>
-			Yes
-		<?php } else { ?>
-			No
-		<?php 
-		}
-		?>
-		</td>
-		<!--<td class="hidden"><?= $result['latest'] ?></td>
-		<td class="hidden"><?= $result['first'] ?></td> -->
-		</tr>
-		<?php
-		}
+			}
 		?>
 		</tbody>
 	</table>	
+	<div class="pagination"></div>
 </div>
 <?php
 	}

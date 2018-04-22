@@ -1,6 +1,62 @@
 //////////////////////////////////////////
 // REPORTING
 //////////////////////////////////////////
+
+window.addEventListener("load",function() {
+	// Chart logic
+	var location_chart_metrics = document.getElementsByClassName("location-chart-metric");
+	var task_chart_metrics = document.getElementsByClassName("task-chart-metric");
+	var location_ctx = document.getElementById("location-chart");
+	var task_ctx = document.getElementById("task-chart");
+	var backgroundColor = ["#3498db","#2ecc71","#8e44ad","#f1c40f","#34495e","#f39c12","#e67e22","#e74c3c","#16a085"];
+	var options = { legend: { display: true, position: "right" } };
+
+	// Location Chart Data
+	var location_chart_dataset = [];
+	var location_chart_labels = [];
+	for (var i = 0; i < location_chart_metrics.length; i++) {
+		location_chart_metric = location_chart_metrics[i];
+		location_chart_dataset.push(location_chart_metric.value);
+		// location_chart_dataset.push({value: location_chart_metric.value, color:backgroundColor[i], label: location_chart_metric.name, labelColor : 'white', labelFontSize : '16'});
+		location_chart_labels.push(location_chart_metric.name);
+	}
+	var location_chart_data = {
+		datasets: [{
+			data: location_chart_dataset,
+			backgroundColor: backgroundColor
+		}],
+		labels: location_chart_labels
+	};
+	var location_chart = new Chart(location_ctx,{
+		type: 'pie',
+		data: location_chart_data,
+		options: options
+	});
+
+	// Task Chart Data
+	var task_chart_dataset = [];
+	var task_chart_labels = [];
+	for (var i = 0; i < task_chart_metrics.length; i++) {
+		task_chart_metric = task_chart_metrics[i];
+		task_chart_dataset.push(task_chart_metric.value);
+		task_chart_labels.push(task_chart_metric.name);
+	}
+	var task_chart_data = {
+		datasets: [{
+			data: task_chart_dataset,
+			backgroundColor: backgroundColor
+		}],
+		labels: task_chart_labels
+	};
+	var task_chart = new Chart(task_ctx,{
+		type: 'pie',
+		data: task_chart_data,
+		options: options
+	});
+
+	setupPagination(".paginate-row",".pagination",1,10)
+});
+
 if (false) {
 	window.addEventListener("load",function() {
 

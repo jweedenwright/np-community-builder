@@ -62,7 +62,7 @@
 			$volunteer = $results[0];
 			?>
 			<div id="volunteer-management-form" class="container">
-				<span><a class="back details-btn" href="?">Back</a></span>
+				<span><a class="back details-btn" onclick="window.history.back();">Back</a></span>
 				<span class="pull-right">
 					<a href="#" class="details-btn" data-toggle="modal" data-target="#edit-details" onclick="return false;">
 						Edit
