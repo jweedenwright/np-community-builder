@@ -14,22 +14,71 @@
 <div class="container">
 	<h1>Staff Dashboard</h1>
 	<div class="row">
+		<div id="filter-section" class="col-sm-12">
+			<form id="data-filter" method="POST">
+				<div class="form-group col-sm-3">
+					<label for="datetime-picker">Start Date</label>
+					<input type='text' class="form-control datetime-picker" id="start-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="starttime" placeholder="MM/DD/YYYY 12:01 AM"  value="<?=$start_filter?>"/>
+				</div>
+				<div class="form-group col-sm-3">
+					<label for="datetime-picker">End Date</label>
+					<input type='text' class="form-control datetime-picker" id="end-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="endtime" placeholder="MM/DD/YYYY 12:01 AM" value="<?=$end_filter?>"/>
+				</div>
+				<div class="form-group col-sm-3">
+					<label for="activity">Activity</label>
+					<select class="form-control" id="task" name="task">
+						<option selected="true" value="">Please Select A Task</option>
+						<?php
+							foreach ($type_results as $row) {
+								?>
+									<option <?php if ($task_filter == $row['id']) { echo "selected=selected"; } ?>
+									 value="<?=$row['id']?>"><?=$row['job_type']?></option>
+								<?php
+							}
+						?>
+					</select>
+				</div>
+				<div class="form-group col-sm-3">
+					<label for="location">Location</label>
+					<select class="form-control" id="location" name="location">
+						<option selected="true" value="">Please Choose A Location</option>
+						<?php
+							foreach ($location_results as $row) {
+								?>
+									<option <?php if ($location_filter == $row['id']) { echo "selected=selected"; } ?>
+									value="<?=$row['id']?>"><?=$row['location_name']?></option>
+								<?php
+							}
+						?>
+					</select>
+				</div>
+				<div class="form-group col-sm-12 text-right">
+					<button type="submit" class="btn btn-primary">Search</button>
+					<button class="btn btn-warning">Download CSV</button>
+					<button class="btn btn-danger" onclick="resetDashboard(); return false;">Reset Filters</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<h2>By the Numbers</h2>
+	<div class="row">
 		<div id="total-vols-display-wrapper" class="col-sm-4 stat-item text-center">
 			<div id="total-vols-display" class="card boom">
 				<div class="stat-label">Total Volunteers</div>
-				<span class="value"><?=sizeof($volunteer_results)?></span>
+				<span class="value"><?=$volunteer_results[0]['userCount']?></span>
 			</div>
 		</div>
 		<div id="total-hours-display-wrapper" class="col-sm-4 stat-item text-center">
 			<div id="total-hours-display" class="card boom">
 				<div class="stat-label">Total Hours</div>
-				<span class="value"><?=sizeof($vol_periods)?></span>
+				<span class="value"><?=$vol_periods[0]['volHours']?></span>
 			</div>
 		</div>
 		<div id="total-times-display-wrapper" class="col-sm-4 stat-item text-center">
 			<div id="total-times-display" class="card boom">
 				<div class="stat-label">Total Visits</div>
-				<span class="value"><?=count($vol_hours)?></span>
+				<span class="value"><?=$vol_periods[0]['volVisits']?></span>
 			</div>
 		</div>
 	</div>

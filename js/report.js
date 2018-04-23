@@ -17,7 +17,6 @@ window.addEventListener("load",function() {
 	for (var i = 0; i < location_chart_metrics.length; i++) {
 		location_chart_metric = location_chart_metrics[i];
 		location_chart_dataset.push(location_chart_metric.value);
-		// location_chart_dataset.push({value: location_chart_metric.value, color:backgroundColor[i], label: location_chart_metric.name, labelColor : 'white', labelFontSize : '16'});
 		location_chart_labels.push(location_chart_metric.name);
 	}
 	var location_chart_data = {
@@ -56,6 +55,13 @@ window.addEventListener("load",function() {
 
 	setupPagination(".paginate-row",".pagination",1,10)
 });
+
+function resetDashboard() {
+	document.getElementsByName("task")[0].options[0].selected = "selected";
+	document.getElementsByName("location")[0].options[0].selected = "selected";
+	document.getElementsByName("endtime")[0].value="";
+	document.getElementsByName("starttime")[0].value="";
+}
 
 if (false) {
 	window.addEventListener("load",function() {
