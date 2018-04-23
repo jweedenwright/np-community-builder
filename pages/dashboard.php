@@ -54,8 +54,8 @@
 				</div>
 				<div class="form-group col-sm-12 text-right">
 					<button type="submit" class="btn btn-primary">Search</button>
-					<button class="btn btn-warning">Download CSV</button>
-					<button class="btn btn-danger" onclick="resetDashboard(); return false;">Reset Filters</button>
+					<button class="btn btn-warning" onclick="getCsv();return false;">Download CSV</button>
+					<button class="btn btn-danger" onclick="resetDashboard();return false;">Reset Filters</button>
 				</div>
 			</form>
 		</div>
@@ -128,8 +128,8 @@
 			<tr class="paginate-row">
 				<td class="text-center"><?= $result['hours'] ?></td>
 				<td class="text-center"><?= $result['num'] ?></td>
-				<td><?=$latest_date['month']."/".$latest_date['day']."/".$latest_date['year']?></td>
 				<td><?=$first_date['month']."/".$first_date['day']."/".$first_date['year']?></td>
+				<td><?=$latest_date['month']."/".$latest_date['day']."/".$latest_date['year']?></td>
 				<td><?=$result['name'] ?></td>
 				<td><a href="/pages/manage-volunteers.php?email=<?= $result['email'] ?>"><?= $result['email'] ?></a></td>
 			</tr>

@@ -11,7 +11,7 @@
 	// Setup query
 	$filter_query = ($task_filter != "") ? " where jt.id = '".$task_filter."'" : "";
 	if ($filter_query != "") {
-		$filter_query = ($location_filter != "") ? $filter_query." and l.id = '".$location_filter."'" : "";
+		$filter_query = ($location_filter != "") ? $filter_query." and l.id = '".$location_filter."'" : $filter_query;
 	} else {
 		$filter_query = ($location_filter != "") ? " where l.id = '".$location_filter."'" : "";
 	}
