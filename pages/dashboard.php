@@ -18,11 +18,13 @@
 			<form id="data-filter" method="POST">
 				<div class="form-group col-sm-3">
 					<label for="datetime-picker">Start Date</label>
-					<input type='text' class="form-control datetime-picker" id="start-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="starttime" placeholder="MM/DD/YYYY 12:01 AM"  value="<?=$start_filter?>"/>
+					<input type='text' class="form-control datetime-picker" id="start-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="starttime" placeholder="MM/DD/YYYY 12:01 AM" />
+					<input type="hidden" id="startdate-default" value="<?=$start_filter?>">
 				</div>
 				<div class="form-group col-sm-3">
 					<label for="datetime-picker">End Date</label>
-					<input type='text' class="form-control datetime-picker" id="end-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="endtime" placeholder="MM/DD/YYYY 12:01 AM" value="<?=$end_filter?>"/>
+					<input type='text' class="form-control datetime-picker" id="end-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="endtime" placeholder="MM/DD/YYYY 12:01 AM" />
+					<input type="hidden" id="enddate-default" value="<?=$end_filter?>">
 				</div>
 				<div class="form-group col-sm-3">
 					<label for="activity">Activity</label>

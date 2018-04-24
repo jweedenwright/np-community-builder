@@ -13,12 +13,41 @@ window.addEventListener("load",function() {
 	// Botomatic for testing
 	//botamatic();
 	
-	// Setup datetime picker
-	$(".datetime-picker").datetimepicker({
+	// Setup datetime picker / check for status page
+	if (document.getElementById("startdate-default")) {
+		var default_start_date = document.getElementById("startdate-default").value;
+	}
+	if (document.getElementById("enddate-default")) {
+		var default_end_date = document.getElementById("enddate-default").value;		
+	}
+	var default_datetime_picker_options = {
 		"useCurrent": true,
 		"stepping":5
-	});
+	};
 	
+	// Dashboard Page
+	if (default_start_date || default_end_date) {
+		console.log('test');
+		if(default_end_date) {
+			$("#end-datetime-picker").datetimepicker({
+				"defaultDate": default_end_date,
+				"stepping":5
+			});
+		} else {
+			$("#end-datetime-picker").datetimepicker(default_datetime_picker_options);			
+		}
+		if(default_start_date) {
+			$("#start-datetime-picker").datetimepicker({
+				"defaultDate": default_start_date,
+				"stepping":5
+			});
+		} else {
+			$("#start-datetime-picker").datetimepicker(default_datetime_picker_options);
+		}
+	// All other pages
+	} else {		
+		$(".datetime-picker").datetimepicker(default_datetime_picker_options);
+	}
 	// Check / Set preferences
 	checkPreferences();
 
