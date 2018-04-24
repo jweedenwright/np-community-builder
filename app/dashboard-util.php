@@ -5,18 +5,43 @@
 	// Check for Filter Posts and grab to change queries	
 	$task_filter = (isset($_POST['task']) && $_POST['task'] != "") ? filter_var ( $_POST['task'], FILTER_SANITIZE_STRING) : "";
 	$location_filter = (isset($_POST['location']) && $_POST['location'] != "") ? filter_var ( $_POST['location'], FILTER_SANITIZE_STRING) : "";
-	$start_filter = (isset($_POST['starttime']) && $_POST['starttime'] != "") ? filter_var ( $_POST['starttime'], FILTER_SANITIZE_STRING) : "";
-	$end_filter = (isset($_POST['endtime']) && $_POST['endtime'] != "") ? filter_var ( $_POST['endtime'], FILTER_SANITIZE_STRING) : "";
-	
-	// Setup query
+	$start_date_parsed = (isset($_POST['starttime']) && $_POST['starttime'] != "") ? date_parse_from_format ( $ui_date_format, filter_var ( $_POST['starttime'], FILTER_SANITIZE_STRING)) : "";
+	if ($start_date_parsed != "") {
+		$start_filter = $start_date_parsed["year"] . "-" . $start_date_parsed["month"] . "-" . $start_date_parsed["day"] 
+						. " " . $start_date_parsed["hour"] . ":" . $start_date_parsed["minute"] .":00";	
+	} else {
+		$start_filter = "";
+	}
+	$end_date_parsed = (isset($_POST['endtime']) && $_POST['endtime'] != "") ? date_parse_from_format ( $ui_date_format, filter_var ( $_POST['endtime'], FILTER_SANITIZE_STRING)) : "";
+	if ($end_date_parsed != "") {
+		$end_filter = $end_date_parsed["year"] . "-" . $end_date_parsed["month"] . "-" . $end_date_parsed["day"] 
+						. " " . $end_date_parsed["hour"] . ":" . $end_date_parsed["minute"] .":00";
+	} else {
+		$end_filter = "";
+	}
+
+	// Setup query - Task Filter
 	$filter_query = ($task_filter != "") ? " where jt.id = '".$task_filter."'" : "";
+	// Setup query - Location Filter
 	if ($filter_query != "") {
 		$filter_query = ($location_filter != "") ? $filter_query." and l.id = '".$location_filter."'" : $filter_query;
 	} else {
 		$filter_query = ($location_filter != "") ? " where l.id = '".$location_filter."'" : "";
 	}
-
-	// Check for arguments
+	// Setup query - start date
+	if ($filter_query != "") {
+		$filter_query = ($start_filter != "") ? $filter_query." and vp.check_in_time > '".$start_filter."'" : $filter_query;
+	} else {
+		$filter_query = ($start_filter != "") ? " where vp.check_in_time > '".$start_filter."'" : "";
+	}
+	// Setup query - end date
+	if ($filter_query != "") {
+		$filter_query = ($end_filter != "") ? $filter_query." and vp.check_in_time < '".$end_filter."'" : $filter_query;
+	} else {
+		$filter_query = ($end_filter != "") ? " where vp.check_in_time < '".$end_filter."'" : "";
+	}
+	
+	// Check for which set of charts to show
 	$chart_filter = "";
 	if (isset($_GET['chart-filter'])) {
 		 $chart_filter = filter_var ( $_GET['chart-filter'], FILTER_SANITIZE_STRING);
