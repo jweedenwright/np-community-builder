@@ -25,7 +25,7 @@
 			<form id="vol-search">
 				<div class="form-group">
 					<label for="search-vols" class="sr-only">Search Volunteers</label>
-					<input class="form-control" id="search-vols" name="search-vols" placeholder="Search Volunteers" type="text" onkeyup="filterVolunteers(this);return true;">
+					<input class="form-control" id="search-vols" name="search-vols" placeholder="Search Volunteers" type="text" onkeyup="filterItems(this);return true;">
 				</div>
 			</form>
 
