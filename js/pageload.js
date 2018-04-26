@@ -1,6 +1,10 @@
 //////////////////////
 // PAGE LOAD
 //////////////////////
+
+// For safari specific functionality
+var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+
 window.addEventListener("load",function() {
 
 	// Check for hours passed in the URL

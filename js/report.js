@@ -78,8 +78,7 @@ window.addEventListener("load",function() {
 });
 
 // CSV Download
-var table_data = "data:text/csv;charset=utf-8," +
-					"Total Hours," +
+var table_data = "Total Hours," +
 					"Visit Count," +
 					"First Visit," +
 					"Last Visit," +
@@ -96,6 +95,31 @@ function resetDashboard() {
 
 // Get the CSV Data
 function getCsv() {
-	var encodedUri = encodeURI(table_data);
-	window.open(encodedUri);
+	if (isSafari) {
+		var link = document.createElement("a");
+		link.id = "csvDwnLink";
+		document.body.appendChild(link);
+		window.URL = window.URL || window.webkitURL;
+		var csv = "\ufeff" + table_data,
+			csvData = 'data:attachment/csv;charset=utf-8,' + encodeURIComponent(csv),
+			filename = 'dashboard-report.csv';
+		$("#csvDwnLink").attr({'download': filename, 'href': csvData});
+		$('#csvDwnLink')[0].click();
+		document.body.removeChild(link);	
+	} else {
+		var csvData = new Blob([table_data], {type: 'text/csv;charset=utf-8;'});
+		var exportFilename = "dashboard-report.csv";
+		// IE11 & Edge
+		if (navigator.msSaveBlob) {
+			navigator.msSaveBlob(csvData, exportFilename);
+		} else {
+			// In FF link must be added to DOM to be clicked
+			var link = document.createElement('a');
+			link.href = window.URL.createObjectURL(csvData);
+			link.setAttribute('download', exportFilename);
+			document.body.appendChild(link);    
+			link.click();
+			document.body.removeChild(link);    
+		}
+	}
 }
