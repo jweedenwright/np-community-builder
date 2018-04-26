@@ -1,8 +1,15 @@
 // Update a Location Modal
 function editLocation(loc_period_sel) {
-	$("#loc-name").attr("value", $(loc_period_sel).data("name"));
-	$("#loc-internal").attr("value", $(loc_period_sel).data("internal"));
-	$("#loc-id").attr("value", $(loc_period_sel).data("id"));
+	var id = $(loc_period_sel).data("id");
+	if (id !== "new") {
+		$("#loc-name").attr("value", $(loc_period_sel).data("name"));
+		$("#loc-internal").attr("value", $(loc_period_sel).data("internal"));
+		$("#loc-id").attr("value", id);
+	} else {
+		$("#loc-name").attr("value", "");
+		$("#loc-internal").attr("value", "");
+		$("#loc-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
+	}
 }
 
 // Update the Volunteer Period Modal
@@ -13,6 +20,27 @@ function editPeriod(vol_period_sel) {
 	$("#organization").attr("value", $(vol_period_sel).data("org"));
 	$("#task").val($(vol_period_sel).data("activity"));
 	$("#location").val($(vol_period_sel).data("location"));
+}
+
+// Deactivate
+function deactivate(item_to_deactivate) {
+	var id = item_to_deactivate.dataset.id;
+	var type = item_to_deactivate.dataset.type;
+	if (confirm("Are you sure you want to deactivate this " + type + "? This will disable this item everywhere except in reporting.")) {
+		post("../app/manage.php", { id: id, 'item-type': type, type: "deactivate" }, "POST");
+	} else {
+		return handleInvalid("Deactivation of " + type + " cancelled.");
+	}
+}
+// Activate
+function activate(item_to_activate) {
+	var id = item_to_activate.dataset.id;
+	var type = item_to_activate.dataset.type;
+	if (confirm("Are you sure you want to activate this " + type + "?")) {
+		post("../app/manage.php", { id: id, 'item-type': type, type: "activate" }, "POST");
+	} else {
+		return handleInvalid("Activation of " + type + " cancelled.");
+	}
 }
 
 // Search volunteers

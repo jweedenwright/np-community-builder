@@ -150,17 +150,57 @@
 					$location_id = filter_var ( $_POST['loc-id'], FILTER_SANITIZE_STRING);
 					$location_name = filter_var ( $_POST['loc-name'], FILTER_SANITIZE_STRING);
 					$location_internal = filter_var ( $_POST['loc-internal'], FILTER_SANITIZE_STRING);
-					// Update String Query
-					$update_string = "UPDATE location
-										SET location_name = '".$location_name."'
-											,internal = ".$location_internal.
-									  	"WHERE id = ".$location_id;
+					// Determine if this is create or update
+					if ($location_id == "new") {
+						// Update String Query
+						$update_type = "create";
+						$update_string = "INSERT INTO location (location_name, internal)
+											VALUES ('".$location_name."',".$location_internal.")";
+						echo $update_string;
+					} else {
+						// Update String Query
+						$update_type = "update";
+						$update_string = "UPDATE location
+											SET location_name = '".$location_name."'
+												,internal = ".$location_internal.
+										  	"WHERE id = ".$location_id;
+					}					
 					if ($db->executeStatement($update_string,[])) {
 						// Success
-						$return_message = "Successfully Updated Location!";
+						$return_message = "Successfully ".$update_type."d location!";
 					} else {
 						// Failure
-						$return_message = "Sorry! Was unable to update the location.";
+						$return_message = "Sorry! Was unable to ".$update_type." the location.";
+					}
+				}
+
+///////////////////////////////////////////////////				
+// MANAGE ACTIVATE / DEACTIVATE
+			} elseif ($manage_type == "activate" || $manage_type == "deactivate") {
+				if(!isset($_POST['id'])) {
+					$return_message = "Item id was not provided.";
+				} elseif(!isset($_POST['item-type'])) {
+					$return_message = "Item type was not provided.";
+				} else {
+					// Sanitize Strings
+					$item_id = filter_var ( $_POST['id'], FILTER_SANITIZE_STRING);
+					$item_type = filter_var ( $_POST['item-type'], FILTER_SANITIZE_STRING);
+					$is_active = 1;
+					$message = "Successfully Activated Item!";
+					if ($manage_type == "deactivate") {
+						$is_active = 0;
+						$message = "Successfully Deactivated Item!";
+					}
+					
+					// Update String Query
+					$update_string = "UPDATE ".$item_type.
+										" SET active = ".$is_active." WHERE id = ".$item_id;					
+					if ($db->executeStatement($update_string,[])) {
+						// Success
+						$return_message = $message;
+					} else {
+						// Failure
+						$return_message = "Sorry! Was unable to update the item.";
 					}
 				}
 			} else {

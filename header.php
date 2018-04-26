@@ -69,7 +69,7 @@
 					$message_class = "alert alert-success";					
 				}
 		?>
-			<div id="message-container"><p class='<?=$message_class?>'><?=$special_msg?></p></div>
+			<div id="message-container" class="col-sm-12"><p class='<?=$message_class?>'><?=$special_msg?></p></div>
 		<?php
 			}
 		?>

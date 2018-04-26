@@ -21,9 +21,16 @@
 ?>
 			<div class="container">
 				<h1>Location Listing</h1>
-			
 				<form id="vol-search">
-					<div class="form-group">
+					<div class="form-group col-sm-2">
+						<a href="#" class="btn btn-primary create-location" data-id="new"
+													data-toggle="modal" 
+													data-target="#edit-details" 
+													onclick="editLocation(this); return false;">
+							<span><i class="glyphicon glyphicon-plus manage-action" aria-hidden="true"></i>Add New</span>
+						</a>
+					</div>
+					<div class="form-group col-sm-10">
 						<label for="search-locs" class="sr-only">Search Locations</label>
 						<input class="form-control" id="search-locs" name="search-locs" placeholder="Search Locations" type="text" onkeyup="filterItems(this);return true;">
 					</div>
@@ -35,6 +42,7 @@
 							<th>ID</th>
 							<th>Location Name</th>
 							<th>Internal Use Only</th>
+							<th>Is Active</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -45,9 +53,10 @@
 						<tr class="search-row" data-search="<?=$location["location_name"]?>">
 							<td><?=$location["id"]?></td>
 							<td><?=$location["location_name"]?></td>
-							<td><?=$location["internal"]?>
+							<td><?=$location["internal"]?></td>
+							<td><?=$location["active"]?></td>
 							<td>							
-								<a href="#" class="edit-location" data-id="<?=$location["id"]?>" 
+								<a href="#" class="edit-location manage-action" data-id="<?=$location["id"]?>" 
 															data-name="<?=$location["location_name"]?>" 
 															data-internal="<?=$location["internal"]?>"
 															data-toggle="modal" 
@@ -56,6 +65,21 @@
 										<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
 										<span class="sr-only">Edit</span>
 								</a>
+								<?php if ($location["active"] == 1) { ?>
+									<a href="#" class="deactivate-location manage-action" data-id="<?=$location["id"]?>" 
+																data-type='location'
+																onclick="deactivate(this); return false;">
+											<i class="glyphicon glyphicon-ban-circle" aria-hidden="true"></i>
+											<span class="sr-only">Deactivate</span>
+									</a>
+								<?php } else { ?>
+									<a href="#" class="activate-location manage-action" data-id="<?=$location["id"]?>" 
+																data-type='location'
+																onclick="activate(this); return false;">
+											<i class="glyphicon glyphicon-certificate" aria-hidden="true"></i>
+											<span class="sr-only">Activate</span>
+									</a>
+								<?php } ?>
 							</td>
 						</tr>
 						<?php
@@ -71,7 +95,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="edit-label">Edit Location Details</h4>
+							<h4 class="modal-title" id="edit-label">Location Details</h4>
 						</div>
 						<div class="modal-body">
 							<form id="edit-details-form" method="POST" action="../app/manage.php">

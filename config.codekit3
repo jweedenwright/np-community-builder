@@ -243,6 +243,12 @@
 		"oAP": "\/footer.php",
 		"oF": 0
 		},
+	"\/future_db\/add_active.sql": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/future_db\/add_active.sql",
+		"oF": 0
+		},
 	"\/future_db\/drop_tables.sql": {
 		"ft": 8192,
 		"oA": 2,

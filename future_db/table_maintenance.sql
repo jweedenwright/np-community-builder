@@ -15,6 +15,7 @@ IF OBJECT_ID('dbo.location', 'U') IS NOT NULL DROP TABLE dbo.location
 CREATE TABLE dbo.job_type (
 	id int NOT NULL IDENTITY(1,1),
 	job_type varchar(100) NOT NULL,
+	active bit NOT NULL DEFAULT(1),
 	CONSTRAINT PK_job_type PRIMARY KEY (id)
 )
 CREATE UNIQUE INDEX UQ_job_type ON dbo.job_type (job_type)
@@ -23,6 +24,7 @@ CREATE TABLE dbo.location (
 	id int NOT NULL IDENTITY(1,1),
 	location_name varchar(100) NOT NULL,
 	internal BIT NULL,
+	active bit NOT NULL DEFAULT(1),
 	CONSTRAINT PK_location PRIMARY KEY (id)
 )
 CREATE UNIQUE INDEX UQ_location_name ON dbo.location (location_name)
@@ -38,6 +40,7 @@ CREATE TABLE dbo.volunteer (
 	availability varchar(255) NULL,
 	find_out_about_us varchar(255) NULL,
 	include_email_dist bit NULL,
+	active bit NOT NULL DEFAULT(1),
 	CONSTRAINT PK_volunteer PRIMARY KEY (id)
 )
 CREATE UNIQUE INDEX UQ_volunteer_email ON dbo.volunteer (email)
@@ -98,6 +101,7 @@ CREATE UNIQUE INDEX UQ_measure_type ON dbo.measure_type (measure_type)
 CREATE TABLE dbo.program (
 	id int NOT NULL IDENTITY(1,1),
 	program varchar(100) NOT NULL,
+	active bit NOT NULL DEFAULT(1),
 	CONSTRAINT PK_program PRIMARY KEY (id)
 )
 CREATE UNIQUE INDEX UQ_program ON dbo.program (program)
@@ -110,6 +114,7 @@ CREATE TABLE dbo.app_user (
 	date_added datetime NOT NULL,
 	reset_id varchar(200) NULL,
 	is_admin bit NOT NULL,
+	active bit NOT NULL DEFAULT(1),
 	CONSTRAINT PK_app_user PRIMARY KEY(id)
 )
 CREATE UNIQUE INDEX UQ_users ON dbo.app_user (username)
@@ -135,38 +140,38 @@ CREATE TABLE dbo.metric (
 ) 
 
 -- DATA IMPORT
-INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('jeremiah.weedenwright@gmail.com','tester', '2016-12-05',1);
-INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('mcallaro88@gmail.com','tester', '2018-04-12',1);
-INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('divya.guntu@hcahealthcare.com','tester', '2018-04-12',1);
-INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('teri@thenashvillefoodproject.org','tester','2018-04-12',1);
-INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('munderwood@c3-consult.com','tester','2018-04-12',1);
-INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('justin.threlkeld@gmail.com','tester','2018-04-12',1);
-INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('joyce.pfeffer@hcahealthcare.com','tester','2018-04-12',1);
-INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('mariah@thenashvillefoodproject.org','tester','2018-04-12',1);
-INSERT INTO dbo.app_user (username, password, date_added, is_admin) VALUES ('malinda@thenashvillefoodproject.org','tester','2018-04-12',1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('jeremiah.weedenwright@gmail.com','tester', '2016-12-05',1, 1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('mcallaro88@gmail.com','tester', '2018-04-12',1, 1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('divya.guntu@hcahealthcare.com','tester', '2018-04-12',1, 1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('teri@thenashvillefoodproject.org','tester','2018-04-12',1, 1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('munderwood@c3-consult.com','tester','2018-04-12',1, 1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('justin.threlkeld@gmail.com','tester','2018-04-12',1, 1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('joyce.pfeffer@hcahealthcare.com','tester','2018-04-12',1, 1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('mariah@thenashvillefoodproject.org','tester','2018-04-12',1, 1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('malinda@thenashvillefoodproject.org','tester','2018-04-12',1, 1);
 
 SET IDENTITY_INSERT dbo.location ON
-INSERT INTO dbo.location (id,location_name,internal) VALUES (1,'Blackman Road Garden',0);
-INSERT INTO dbo.location (id,location_name,internal) VALUES (2,'Haywood Lane Garden',0);
-INSERT INTO dbo.location (id,location_name,internal) VALUES (5,'McGruder Garden',0);
-INSERT INTO dbo.location (id,location_name,internal) VALUES (4,'South Hall Kitchen',0);
-INSERT INTO dbo.location (id,location_name,internal) VALUES (6,'St Luke''s Kitchen',0);
-INSERT INTO dbo.location (id,location_name,internal) VALUES (7,'Wedgewood Garden',0);
-INSERT INTO dbo.location (id,location_name,internal) VALUES (3,'Woodmont Garden',0);
-INSERT INTO dbo.location (id,location_name,internal) VALUES (9,'Fall Hamilton',1)
-INSERT INTO dbo.location (id,location_name,internal) VALUES (10,'Cottage Cove',1)
-INSERT INTO dbo.location (id,location_name,internal) VALUES (11,'Harvest Hands',1)
-INSERT INTO dbo.location (id,location_name,internal) VALUES (12,'Wedgewood Garden Neighbors',1)
+INSERT INTO dbo.location (id,location_name,internal,active) VALUES (1,'Blackman Road Garden',0,1);
+INSERT INTO dbo.location (id,location_name,internal,active) VALUES (2,'Haywood Lane Garden',0,1);
+INSERT INTO dbo.location (id,location_name,internal,active) VALUES (5,'McGruder Garden',0,1);
+INSERT INTO dbo.location (id,location_name,internal,active) VALUES (4,'South Hall Kitchen',0,1);
+INSERT INTO dbo.location (id,location_name,internal,active) VALUES (6,'St Luke''s Kitchen',0,1);
+INSERT INTO dbo.location (id,location_name,internal,active) VALUES (7,'Wedgewood Garden',0,1);
+INSERT INTO dbo.location (id,location_name,internal,active) VALUES (3,'Woodmont Garden',0,1);
+INSERT INTO dbo.location (id,location_name,internal,active) VALUES (9,'Fall Hamilton',1,1);
+INSERT INTO dbo.location (id,location_name,internal,active) VALUES (10,'Cottage Cove',1,1);
+INSERT INTO dbo.location (id,location_name,internal,active) VALUES (11,'Harvest Hands',1,1);
+INSERT INTO dbo.location (id,location_name,internal,active) VALUES (12,'Wedgewood Garden Neighbors',1,1);
 SET IDENTITY_INSERT dbo.location OFF
 
 SET IDENTITY_INSERT dbo.job_type ON
-INSERT INTO dbo.job_type (id,job_type) VALUES (1,'Cook');
-INSERT INTO dbo.job_type (id,job_type) VALUES (3,'Delivery');
-INSERT INTO dbo.job_type (id,job_type) VALUES (4,'Garden');
-INSERT INTO dbo.job_type (id,job_type) VALUES (11,'Gleaning');
-INSERT INTO dbo.job_type (id,job_type) VALUES (2,'Meal Prep');
-INSERT INTO dbo.job_type (id,job_type) VALUES (5,'Other');
-INSERT INTO dbo.job_type (id,job_type) VALUES (21,'Web / IT');
+INSERT INTO dbo.job_type (id,job_type,active) VALUES (1,'Cook',1);
+INSERT INTO dbo.job_type (id,job_type,active) VALUES (3,'Delivery',1);
+INSERT INTO dbo.job_type (id,job_type,active) VALUES (4,'Garden',1);
+INSERT INTO dbo.job_type (id,job_type,active) VALUES (11,'Gleaning',1);
+INSERT INTO dbo.job_type (id,job_type,active) VALUES (2,'Meal Prep',1);
+INSERT INTO dbo.job_type (id,job_type,active) VALUES (5,'Other',1);
+INSERT INTO dbo.job_type (id,job_type,active) VALUES (21,'Web / IT',1);
 SET IDENTITY_INSERT dbo.job_type OFF
 
 SET IDENTITY_INSERT dbo.metric_category ON
@@ -211,10 +216,10 @@ INSERT INTO dbo.measure_type (id,measure_type,measure_data_type) VALUES (5,'Dona
 SET IDENTITY_INSERT dbo.measure_type OFF
 
 SET IDENTITY_INSERT dbo.program ON
-INSERT INTO dbo.program (id,program) VALUES (1,'Nashville CARES')
-INSERT INTO dbo.program (id,program) VALUES (2,'Community Garden')
-INSERT INTO dbo.program (id,program) VALUES (3,'Market Gardens')
-INSERT INTO dbo.program (id,program) VALUES (4,'Garden Education')
+INSERT INTO dbo.program (id,program,active) VALUES (1,'Nashville CARES',1)
+INSERT INTO dbo.program (id,program,active) VALUES (2,'Community Garden',1)
+INSERT INTO dbo.program (id,program,active) VALUES (3,'Market Gardens',1)
+INSERT INTO dbo.program (id,program,active) VALUES (4,'Garden Education',1)
 SET IDENTITY_INSERT dbo.program OFF
 
 SELECT * from dbo.metric_name
