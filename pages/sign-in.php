@@ -5,13 +5,14 @@
 	// Pull locations
 	$query_string = "SELECT id, location_name
 						FROM location
-						WHERE internal = 0
+						WHERE internal = 0 AND active = 1
 						ORDER BY location_name";			
 	$location_results = $db->executeStatement($query_string,[])->fetchAll();
 
 	// Pull Job Types
 	$query_string = "SELECT id, job_type
 						FROM job_type
+						WHERE active = 1
 						ORDER BY job_type";
 	$type_results = $db->executeStatement($query_string,[])->fetchAll();
 ?>

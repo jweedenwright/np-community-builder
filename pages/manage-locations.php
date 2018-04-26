@@ -21,7 +21,7 @@
 ?>
 			<div class="container">
 				<h1>Location Listing</h1>
-				<form id="vol-search">
+				<form id="loc-search">
 					<div class="form-group col-sm-2">
 						<a href="#" class="btn btn-primary create-location" data-id="new"
 													data-toggle="modal" 

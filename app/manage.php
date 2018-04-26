@@ -137,7 +137,6 @@
 ///////////////////////////////////////////////////				
 // MANAGE LOCATION
 			} elseif ($manage_type == "location") {
-				// TODO: Remove - Add functionality also
 				// Make sure we have required values for a Location change 
 				if(!isset($_POST['loc-name'])) {
 					$return_message = "Location name was not provided.";
@@ -156,7 +155,6 @@
 						$update_type = "create";
 						$update_string = "INSERT INTO location (location_name, internal)
 											VALUES ('".$location_name."',".$location_internal.")";
-						echo $update_string;
 					} else {
 						// Update String Query
 						$update_type = "update";
@@ -171,6 +169,40 @@
 					} else {
 						// Failure
 						$return_message = "Sorry! Was unable to ".$update_type." the location.";
+					}
+				}
+
+///////////////////////////////////////////////////				
+// MANAGE TASK / Job Type
+			} elseif ($manage_type == "job_type") {
+				// Make sure we have required values for a Task change 
+				if(!isset($_POST['task-name'])) {
+					$return_message = "Task name was not provided.";
+				} elseif(!isset($_POST['task-id'])) {
+					$return_message = "Task id was not provided.";
+				} else {
+					// Sanitize Strings
+					$task_id = filter_var ( $_POST['task-id'], FILTER_SANITIZE_STRING);
+					$task_name = filter_var ( $_POST['task-name'], FILTER_SANITIZE_STRING);
+					// Determine if this is create or update
+					if ($task_id == "new") {
+						// Update String Query
+						$update_type = "create";
+						$update_string = "INSERT INTO job_type (job_type)
+											VALUES ('".$task_name."')";
+					} else {
+						// Update String Query
+						$update_type = "update";
+						$update_string = "UPDATE job_type
+											SET job_type = '".$task_name."'
+											WHERE id = ".$task_id;
+					}					
+					if ($db->executeStatement($update_string,[])) {
+						// Success
+						$return_message = "Successfully ".$update_type."d task!";
+					} else {
+						// Failure
+						$return_message = "Sorry! Was unable to ".$update_type." the task.";
 					}
 				}
 

@@ -1,14 +1,26 @@
 // Update a Location Modal
-function editLocation(loc_period_sel) {
-	var id = $(loc_period_sel).data("id");
+function editLocation(location_sel) {
+	var id = $(location_sel).data("id");
 	if (id !== "new") {
-		$("#loc-name").attr("value", $(loc_period_sel).data("name"));
-		$("#loc-internal").attr("value", $(loc_period_sel).data("internal"));
+		$("#loc-name").attr("value", $(location_sel).data("name"));
+		$("#loc-internal").attr("value", $(location_sel).data("internal"));
 		$("#loc-id").attr("value", id);
 	} else {
 		$("#loc-name").attr("value", "");
 		$("#loc-internal").attr("value", "");
 		$("#loc-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
+	}
+}
+
+// Update a Task Modal
+function editTask(task_sel) {
+	var id = $(task_sel).data("id");
+	if (id !== "new") {
+		$("#task-name").attr("value", $(task_sel).data("name"));
+		$("#task-id").attr("value", id);
+	} else {
+		$("#task-name").attr("value", "");
+		$("#task-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
 	}
 }
 
