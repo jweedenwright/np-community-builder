@@ -45,6 +45,12 @@
 		"oAP": "\/app\/manage-metrics.php",
 		"oF": 0
 		},
+	"\/app\/manage-programs.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/app\/manage-programs.php",
+		"oF": 0
+		},
 	"\/app\/manage-tasks.php": {
 		"ft": 8192,
 		"oA": 2,
@@ -241,12 +247,6 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/footer.php",
-		"oF": 0
-		},
-	"\/future_db\/add_active.sql": {
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/future_db\/add_active.sql",
 		"oF": 0
 		},
 	"\/future_db\/drop_tables.sql": {
@@ -506,6 +506,12 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/pages\/manage-metrics.php",
+		"oF": 0
+		},
+	"\/pages\/manage-programs.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/manage-programs.php",
 		"oF": 0
 		},
 	"\/pages\/manage-tasks.php": {

@@ -12,6 +12,18 @@ function editLocation(location_sel) {
 	}
 }
 
+// Update a Program Modal
+function editProgram(prog_sel) {
+	var id = $(prog_sel).data("id");
+	if (id !== "new") {
+		$("#program-name").attr("value", $(prog_sel).data("name"));
+		$("#program-id").attr("value", id);
+	} else {
+		$("#program-name").attr("value", "");
+		$("#program-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
+	}
+}
+
 // Update a Task Modal
 function editTask(task_sel) {
 	var id = $(task_sel).data("id");

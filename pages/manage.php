@@ -24,6 +24,7 @@
 	<ul>
 		<li><a href="/pages/manage-volunteers.php">Manage Volunteers</a></li>
 		<li><a href="/pages/manage-locations.php">Manage Locations</a></li>
+		<li><a href="/pages/manage-programs.php">Manage Programs</a></li>
 		<li><a href="/pages/manage-tasks.php">Manage Tasks</a></li>
 		<li><a href="/pages/manage-metrics.php">Manage Metrics - Coming Soon!</a></li>
 	</ul>

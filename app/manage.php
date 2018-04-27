@@ -174,6 +174,40 @@
 
 ///////////////////////////////////////////////////				
 // MANAGE TASK / Job Type
+			} elseif ($manage_type == "program") {
+				// Make sure we have required values for a Task change 
+				if(!isset($_POST['program-name'])) {
+					$return_message = "Program name was not provided.";
+				} elseif(!isset($_POST['program-id'])) {
+					$return_message = "Program id was not provided.";
+				} else {
+					// Sanitize Strings
+					$program_id = filter_var ( $_POST['program-id'], FILTER_SANITIZE_STRING);
+					$program_name = filter_var ( $_POST['program-name'], FILTER_SANITIZE_STRING);
+					// Determine if this is create or update
+					if ($program_id == "new") {
+						// Update String Query
+						$update_type = "create";
+						$update_string = "INSERT INTO program (program)
+											VALUES ('".$program_name."')";
+					} else {
+						// Update String Query
+						$update_type = "update";
+						$update_string = "UPDATE program
+											SET program = '".$program_name."'
+											WHERE id = ".$program_id;
+					}					
+					if ($db->executeStatement($update_string,[])) {
+						// Success
+						$return_message = "Successfully ".$update_type."d task!";
+					} else {
+						// Failure
+						$return_message = "Sorry! Was unable to ".$update_type." the task.";
+					}
+				}
+
+///////////////////////////////////////////////////				
+// MANAGE TASK / Job Type
 			} elseif ($manage_type == "job_type") {
 				// Make sure we have required values for a Task change 
 				if(!isset($_POST['task-name'])) {
