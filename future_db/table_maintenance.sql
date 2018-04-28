@@ -83,13 +83,6 @@ CREATE TABLE dbo.metric_category (
 )
 CREATE UNIQUE INDEX UQ_metric_category ON dbo.metric_category (metric_category)
 
-CREATE TABLE dbo.metric_name (
-	id int NOT NULL IDENTITY(1,1),
-	metric_name varchar(100) NOT NULL,
-	CONSTRAINT PK_metric_name PRIMARY KEY (id)
-)
-CREATE UNIQUE INDEX UQ_metric_name ON dbo.metric_name (metric_name)
-
 CREATE TABLE dbo.measure_type (
 	id int NOT NULL IDENTITY(1,1),
 	measure_type varchar(100) NOT NULL,
@@ -97,6 +90,17 @@ CREATE TABLE dbo.measure_type (
 	CONSTRAINT PK_measure_type PRIMARY KEY (id)
 )
 CREATE UNIQUE INDEX UQ_measure_type ON dbo.measure_type (measure_type)
+
+CREATE TABLE dbo.metric (
+	id int NOT NULL IDENTITY(1,1),
+	metric_name varchar(100) NOT NULL,
+	metric_category_id int NOT NULL,
+	measure_type_id int NOT NULL,
+	CONSTRAINT FK_metric_metric_category FOREIGN KEY (metric_category_id) REFERENCES dbo.metric_category(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_metric_measure_type FOREIGN KEY (measure_type_id) REFERENCES dbo.measure_type(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT PK_metric PRIMARY KEY (id)
+)
+CREATE UNIQUE INDEX UQ_metric ON dbo.metric (metric_name)
 
 CREATE TABLE dbo.program (
 	id int NOT NULL IDENTITY(1,1),
@@ -119,24 +123,20 @@ CREATE TABLE dbo.app_user (
 )
 CREATE UNIQUE INDEX UQ_users ON dbo.app_user (username)
 
--- NEW METRIC TABLE TO HANDLE ALL METRICS
-CREATE TABLE dbo.metric (
+-- NEW METRIC ENTRY TABLE TO HANDLE LOGGED METRICS
+CREATE TABLE dbo.metric_entry (
 	id int NOT NULL IDENTITY(1,1),
 	timestamp datetime NOT NULL,
-	metric_category_id int NOT NULL,
-	metric_name_id int NOT NULL,
-	measure_type_id int NOT NULL,
+	metric_id int NOT NULL,
 	location_id int NULL,
 	program_id int NULL,
 	app_user_id int NOT NULL,
 	value varchar(200) NOT NULL,
-	CONSTRAINT PK_metric PRIMARY KEY (id),
-	CONSTRAINT FK_metric_metric_category FOREIGN KEY (metric_category_id) REFERENCES dbo.metric_category(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_metric_metric_name FOREIGN KEY (metric_name_id) REFERENCES dbo.metric_name(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_metric_measure_type FOREIGN KEY (measure_type_id) REFERENCES dbo.measure_type(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_metric_location FOREIGN KEY (location_id) REFERENCES dbo.location(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_metric_program FOREIGN KEY (program_id) REFERENCES dbo.program(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_metric_app_user FOREIGN KEY (app_user_id) REFERENCES dbo.app_user(id) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT PK_metric_entry PRIMARY KEY (id),
+	CONSTRAINT FK_metric_entry_metric FOREIGN KEY (metric_id) REFERENCES dbo.metric(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_metric_entry_location FOREIGN KEY (location_id) REFERENCES dbo.location(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_metric_entry_program FOREIGN KEY (program_id) REFERENCES dbo.program(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_metric_entry_app_user FOREIGN KEY (app_user_id) REFERENCES dbo.app_user(id) ON DELETE CASCADE ON UPDATE CASCADE
 ) 
 
 -- DATA IMPORT
@@ -177,35 +177,7 @@ SET IDENTITY_INSERT dbo.job_type OFF
 SET IDENTITY_INSERT dbo.metric_category ON
 INSERT INTO dbo.metric_category (id,metric_category) VALUES (1,'Meals')
 INSERT INTO dbo.metric_category (id,metric_category) VALUES (2,'Garden')
-INSERT INTO dbo.metric_category (id,metric_category) VALUES (3,'Donations')
-INSERT INTO dbo.metric_category (id,metric_category) VALUES (4,'Food Donations')
-INSERT INTO dbo.metric_category (id,metric_category) VALUES (5,'Programs')
 SET IDENTITY_INSERT dbo.metric_category OFF
-
-SET IDENTITY_INSERT dbo.metric_name ON
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (1,'Total Meals Shared')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (2,'Total Meals Reported')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (3,'Total Non-Program Meals')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (4,'Food Costs')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (5,'Local Farm Investment')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (6,'Meal Distribution Partners')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (7,'Program Participants')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (8,'Fruit')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (9,'Greens')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (10,'Salad')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (11,'Herbs')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (12,'Eggs')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (13,'Other - Food')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (14,'Roots')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (15,'Farm/Garden')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (16,'Restaurant')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (17,'Caterer')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (18,'Individual')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (19,'School')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (20,'Other - Business')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (21,'Shared with Others')
-INSERT INTO dbo.metric_name (id,metric_name) VALUES (22,'Compost')
-SET IDENTITY_INSERT dbo.metric_name OFF
 
 SET IDENTITY_INSERT dbo.measure_type ON
 INSERT INTO dbo.measure_type (id,measure_type,measure_data_type) VALUES (1,'Harvested in Lbs','decimal')
@@ -213,7 +185,35 @@ INSERT INTO dbo.measure_type (id,measure_type,measure_data_type) VALUES (2,'Numb
 INSERT INTO dbo.measure_type (id,measure_type,measure_data_type) VALUES (3,'Currency','decimal')
 INSERT INTO dbo.measure_type (id,measure_type,measure_data_type) VALUES (4,'Servings','number')
 INSERT INTO dbo.measure_type (id,measure_type,measure_data_type) VALUES (5,'Donated in Lbs','decimal')
+INSERT INTO dbo.measure_type (id,measure_type,measure_data_type) VALUES (6,'Lbs','decimal')
 SET IDENTITY_INSERT dbo.measure_type OFF
+
+SET IDENTITY_INSERT dbo.metric ON
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (1,'Total Meals Shared',1,2)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (2,'Total Meals Reported',1,2)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (3,'Total Non-Program Meals',1,2)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (4,'Food Costs',1,3)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (5,'Local Farm Investment',1,3)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (6,'Meal Distribution Partners',1,2)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (7,'Program Participants - Meals',1,2)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (8,'Grocery Store',1,5)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (9,'Farm/Garden',1,5)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (10,'Restaurant',1,5)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (11,'Caterer',1,5)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (12,'Individual',1,5)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (13,'School',1,5)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (14,'Other - Food Donations',1,5)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (15,'Shared with Others',1,5)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (16,'Compost',1,6)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (17,'Fruit',2,1)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (18,'Greens',2,1)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (19,'Salad',2,1)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (20,'Herbs',2,1)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (21,'Eggs',2,1)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (22,'Other - Food Harvested',2,1)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (23,'Roots',2,1)
+INSERT INTO dbo.metric (id,metric_name,metric_category_id,measure_type_id) VALUES (24,'Program Participants - Gardens',2,2)
+SET IDENTITY_INSERT dbo.metric OFF
 
 SET IDENTITY_INSERT dbo.program ON
 INSERT INTO dbo.program (id,program,active) VALUES (1,'Nashville CARES',1)
@@ -222,4 +222,4 @@ INSERT INTO dbo.program (id,program,active) VALUES (3,'Market Gardens',1)
 INSERT INTO dbo.program (id,program,active) VALUES (4,'Garden Education',1)
 SET IDENTITY_INSERT dbo.program OFF
 
-SELECT * from dbo.metric_name
+SELECT * from dbo.metric
