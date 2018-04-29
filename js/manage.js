@@ -16,12 +16,12 @@ function editLocation(location_sel) {
 function editMeasureType(mt_sel) {
 	var id = $(mt_sel).data("id");
 	if (id !== "new") {
-		$("#mt-name").attr("value", $(mt_sel).data("name"));
-		$("#mt-type").attr("value", $(mt_sel).data("type"));
+		$("#mt-name").attr("value", $(mt_sel).data("name"));	
+		$("#mt-type").val($(mt_sel).data("type"));
 		$("#mt-id").attr("value", id);
 	} else {
 		$("#mt-name").attr("value", "");
-		$("#mt-type").attr("value", "");
+		$("#mt-type").val("");
 		$("#mt-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
 	}
 }

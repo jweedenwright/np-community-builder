@@ -188,7 +188,13 @@
 								</div>
 								<div class="form-group">
 									<label for="mt-type">Measure Data Type</label>
-									<input class="form-control" type="text" id="mt-type" name="mt-type" value="">
+									<select required class="form-control" id="mt-type" name="mt-type">
+										<option value="">Please Select A Data Type</option>
+										<option value="decimal">decimal (2.33, $1.99)</option>
+										<option value="number">number (0, 10, 22)</option>
+										<option value="string">string (abc, cake, apple)</option>
+									</select>
+
 								</div>
 								<button type="submit" class="btn btn-success">Save changes</button>
 							</form>
