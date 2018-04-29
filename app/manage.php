@@ -173,9 +173,83 @@
 				}
 
 ///////////////////////////////////////////////////				
-// MANAGE TASK / Job Type
+// MANAGE MEASURE TYPE
+			} elseif ($manage_type == "measure_type") {
+				// Make sure we have required values for a change 
+				if(!isset($_POST['mt-name'])) {
+					$return_message = "Measure type name was not provided.";
+				} elseif(!isset($_POST['mt-id'])) {
+					$return_message = "Measure type id was not provided.";
+				} elseif(!isset($_POST['mt-type'])) {
+					$return_message = "Measure type data type was not provided.";
+				} else {
+					// Sanitize Strings
+					$mt_id = filter_var ( $_POST['mt-id'], FILTER_SANITIZE_STRING);
+					$mt_name = filter_var ( $_POST['mt-name'], FILTER_SANITIZE_STRING);
+					$mt_type = filter_var ( $_POST['mt-type'], FILTER_SANITIZE_STRING);
+
+					// Determine if this is create or update
+					if ($mt_id == "new") {
+						// Update String Query
+						$update_type = "create";
+						$update_string = "INSERT INTO measure_type (measure_type, measure_data_type)
+											VALUES ('".$mt_name."','".$mt_type."')";
+					} else {
+						// Update String Query
+						$update_type = "update";
+						$update_string = "UPDATE measure_type
+											SET measure_type = '".$mt_name."',
+												measure_data_type = '".$mt_type."'
+											WHERE id = ".$mt_id;
+					}					
+					if ($db->executeStatement($update_string,[])) {
+						// Success
+						$return_message = "Successfully ".$update_type."d measure type!";
+					} else {
+						// Failure
+						$return_message = "Sorry! Was unable to ".$update_type." the measure type.";
+					}
+				}
+
+///////////////////////////////////////////////////				
+// MANAGE METRIC CATEGORY
+			} elseif ($manage_type == "metric_category") {
+				// Make sure we have required values for a change 
+				if(!isset($_POST['mc-name'])) {
+					$return_message = "Metric category name was not provided.";
+				} elseif(!isset($_POST['mc-id'])) {
+					$return_message = "Metric category id was not provided.";
+				} else {
+					// Sanitize Strings
+					$mc_id = filter_var ( $_POST['mc-id'], FILTER_SANITIZE_STRING);
+					$mc_name = filter_var ( $_POST['mc-name'], FILTER_SANITIZE_STRING);
+
+					// Determine if this is create or update
+					if ($mc_id == "new") {
+						// Update String Query
+						$update_type = "create";
+						$update_string = "INSERT INTO metric_category (metric_category)
+											VALUES ('".$mc_name."')";
+					} else {
+						// Update String Query
+						$update_type = "update";
+						$update_string = "UPDATE metric_category
+											SET metric_category = '".$mc_name."'
+											WHERE id = ".$mc_id;
+					}					
+					if ($db->executeStatement($update_string,[])) {
+						// Success
+						$return_message = "Successfully ".$update_type."d metric category!";
+					} else {
+						// Failure
+						$return_message = "Sorry! Was unable to ".$update_type." the metric category.";
+					}
+				}
+
+///////////////////////////////////////////////////				
+// MANAGE PROGRAM
 			} elseif ($manage_type == "program") {
-				// Make sure we have required values for a Task change 
+				// Make sure we have required values for a change 
 				if(!isset($_POST['program-name'])) {
 					$return_message = "Program name was not provided.";
 				} elseif(!isset($_POST['program-id'])) {
@@ -207,7 +281,7 @@
 				}
 
 ///////////////////////////////////////////////////				
-// MANAGE TASK / Job Type
+// MANAGE TASK / JOB TYPE
 			} elseif ($manage_type == "job_type") {
 				// Make sure we have required values for a Task change 
 				if(!isset($_POST['task-name'])) {
