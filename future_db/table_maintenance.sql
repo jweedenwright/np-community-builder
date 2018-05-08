@@ -23,7 +23,8 @@ CREATE UNIQUE INDEX UQ_job_type ON dbo.job_type (job_type)
 CREATE TABLE dbo.location (
 	id int NOT NULL IDENTITY(1,1),
 	location_name varchar(100) NOT NULL,
-	internal BIT NULL,
+	delivery BIT NOT NULL DEFAULT(0),
+	internal BIT NOT NULL DEFAULT(0),
 	active bit NOT NULL DEFAULT(1),
 	CONSTRAINT PK_location PRIMARY KEY (id)
 )
@@ -151,17 +152,17 @@ INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALU
 INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('malinda@thenashvillefoodproject.org','tester','2018-04-12',1, 1);
 
 SET IDENTITY_INSERT dbo.location ON
-INSERT INTO dbo.location (id,location_name,internal,active) VALUES (1,'Blackman Road Garden',0,1);
-INSERT INTO dbo.location (id,location_name,internal,active) VALUES (2,'Haywood Lane Garden',0,1);
-INSERT INTO dbo.location (id,location_name,internal,active) VALUES (5,'McGruder Garden',0,1);
-INSERT INTO dbo.location (id,location_name,internal,active) VALUES (4,'South Hall Kitchen',0,1);
-INSERT INTO dbo.location (id,location_name,internal,active) VALUES (6,'St Luke''s Kitchen',0,1);
-INSERT INTO dbo.location (id,location_name,internal,active) VALUES (7,'Wedgewood Garden',0,1);
-INSERT INTO dbo.location (id,location_name,internal,active) VALUES (3,'Woodmont Garden',0,1);
-INSERT INTO dbo.location (id,location_name,internal,active) VALUES (9,'Fall Hamilton',1,1);
-INSERT INTO dbo.location (id,location_name,internal,active) VALUES (10,'Cottage Cove',1,1);
-INSERT INTO dbo.location (id,location_name,internal,active) VALUES (11,'Harvest Hands',1,1);
-INSERT INTO dbo.location (id,location_name,internal,active) VALUES (12,'Wedgewood Garden Neighbors',1,1);
+INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (1,'Blackman Road Garden',0,0,1);
+INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (2,'Haywood Lane Garden',0,0,1);
+INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (5,'McGruder Garden',0,0,1);
+INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (4,'South Hall Kitchen',0,0,1);
+INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (6,'St Luke''s Kitchen',0,0,1);
+INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (7,'Wedgewood Garden',0,0,1);
+INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (3,'Woodmont Garden',0,0,1);
+INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (9,'Fall Hamilton',0,1,1);
+INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (10,'Cottage Cove',0,1,1);
+INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (11,'Harvest Hands',0,1,1);
+INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (12,'Wedgewood Garden Neighbors',0,1,1);
 SET IDENTITY_INSERT dbo.location OFF
 
 SET IDENTITY_INSERT dbo.job_type ON

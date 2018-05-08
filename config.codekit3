@@ -249,6 +249,12 @@
 		"oAP": "\/footer.php",
 		"oF": 0
 		},
+	"\/future_db\/DBDiff.txt": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/future_db\/DBDiff.txt",
+		"oF": 0
+		},
 	"\/future_db\/drop_tables.sql": {
 		"ft": 8192,
 		"oA": 2,
