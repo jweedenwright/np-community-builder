@@ -21,7 +21,7 @@
 		?>
 		<div class="container">
 			<h1>Volunteer Listing</h1>
-			
+			<blockquote><strong>Please Note:</strong> Filtering volunteers is dynamic but can take a while with over 5000 volunteers. Please give the application time to finish the search. Thanks!</blockquote>
 			<form id="vol-search">
 				<div class="form-group">
 					<label for="search-vols" class="sr-only">Search Volunteers</label>

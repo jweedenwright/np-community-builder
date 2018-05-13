@@ -14,7 +14,11 @@ Volunteer
 Volunteer_Period
 - Change to volunteer period: Feedback is now Feedback_ID
 
-1) CREATE TEMP TABLE TO MIGRATE DATA IN PROD DB
+
+0) XX BACK UP THE DATABASE!!
+
+
+1) XX CREATE TEMP TABLE TO MIGRATE DATA IN PROD DB
 
 CREATE TABLE dbo.feedback (
 	id int NOT NULL IDENTITY(1,1),
@@ -46,7 +50,7 @@ CREATE TABLE dbo.volunteer_period_temp (
 )
 
 
-2) RUN QUERY THAT PULLS FROM VOLUNTEER PERIOD AND INSERTS INTO FEEDBACK AND VOLUNTEER_PERIOD_TEMP
+2) XX RUN QUERY THAT PULLS FROM VOLUNTEER PERIOD AND INSERTS INTO FEEDBACK AND VOLUNTEER_PERIOD_TEMP
 
 -- Set Variables
 DECLARE @au_id char( 11 ), 
@@ -110,7 +114,7 @@ WHILE @au_id IS NOT NULL
 	    SELECT @au_id = min( id ) FROM volunteer_period WHERE id > @au_id
 	END
 
-3) Test outputs by running the following and ensure they are matching
+3) XX Test outputs by running the following and ensure they are matching
 -- MATCH
 select count(id) as 'EXISTING volunteer period count' from volunteer_period 
 select count(id) as 'NEW volunteer period count' from volunteer_period_temp

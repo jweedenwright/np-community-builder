@@ -16,6 +16,7 @@
 	<div class="row">
 		<div id="filter-section" class="col-sm-12">
 			<form id="data-filter" method="POST">
+				<blockquote><strong>Please Note:</strong> When filtering on task or location, you will also need to select dates.</blockquote>
 				<div class="form-group col-sm-3">
 					<label for="datetime-picker">Start Date</label>
 					<input type='text' class="form-control datetime-picker" id="start-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="starttime" placeholder="MM/DD/YYYY 12:01 AM" />

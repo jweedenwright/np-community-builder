@@ -266,7 +266,7 @@ function setPreferences() {
 
 function checkPreferences() {
 	// Check for preferences
-	if (typeof(Storage) !== "undefined") {
+	if (typeof(Storage) !== "undefined" && window.location.pathname.indexOf("dashboard.php") === -1) {
 		var location_value = localStorage.location;
 		if (location_value !== undefined && location_value !== "") {
 			var element = document.getElementById('location');
