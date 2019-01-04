@@ -118,7 +118,7 @@
 	<table id="report-table" class="table table-condensed table-striped table-hover sortable">
 		<thead>
 			<tr>
-				<th class="text-center">Total Hours</th><th class="text-center">Count</th><th>Last Visit</th><th>First Visit</th><th>Name</th><th>Email</th>
+				<th class="text-center">Total Hours</th><th class="text-center">Count</th><th>First Visit</th><th>Latest Visit</th><th>Name</th><th>Email</th>
 			</tr>
 		</thead>
 		<tbody>

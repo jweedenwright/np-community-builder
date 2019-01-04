@@ -150,6 +150,7 @@ INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALU
 INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('joyce.pfeffer@hcahealthcare.com','tester','2018-04-12',1, 1);
 INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('mariah@thenashvillefoodproject.org','tester','2018-04-12',1, 1);
 INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('malinda@thenashvillefoodproject.org','tester','2018-04-12',1, 1);
+INSERT INTO dbo.app_user (username, password, date_added, is_admin, active) VALUES ('Jasmyn@thenashvillefoodproject.org','tester','2018-06-18',1, 1);
 
 SET IDENTITY_INSERT dbo.location ON
 INSERT INTO dbo.location (id,location_name,delivery,internal,active) VALUES (1,'Blackman Road Garden',0,0,1);

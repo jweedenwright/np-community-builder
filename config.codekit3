@@ -261,6 +261,12 @@
 		"oAP": "\/future_db\/drop_tables.sql",
 		"oF": 0
 		},
+	"\/future_db\/report_queries.txt": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/future_db\/report_queries.txt",
+		"oF": 0
+		},
 	"\/future_db\/table_maintenance.sql": {
 		"ft": 8192,
 		"oA": 2,
