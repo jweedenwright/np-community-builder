@@ -58,7 +58,7 @@ window.addEventListener("load",function() {
 		// Setup Pagination
 		setupPagination(".paginate-row",".pagination",1,10)
 	
-		// Setup CSV data
+		// Setup CSV data - Volunteers
 		var rows = document.querySelectorAll("#report-table tr");
 		for (var i = 0; i < rows.length; i++) {
 			var row = rows[i];
@@ -74,16 +74,38 @@ window.addEventListener("load",function() {
 			}
 			table_data += row_values + "\n";
 		}
+		
+		// Setup CSV data - Feedback
+		var rows = document.querySelectorAll("#feedback-table tr");
+		for (var i = 0; i < rows.length; i++) {
+			var row = rows[i];
+			var data_items = row.querySelectorAll("td");
+			var row_values = "";
+			for (var j = 0; j < data_items.length; j++) {
+				var data_item = data_items[j];
+				if (j !== 0) {
+					row_values += ",";
+				}
+				// Trim values
+				row_values += '"' + jQuery.trim(data_item.innerText) + '"';
+			}
+			feedback_table_data += row_values + "\n";
+		}
 	}
 });
 
-// CSV Download
+// CSV Download - Volunteer
 var table_data = "Total Hours," +
 					"Visit Count," +
 					"First Visit," +
 					"Last Visit," +
 					"Name," +
 					"Email";
+
+// CSV Download - Feedback
+var feedback_table_data = "Check In," +
+							"Email," +
+							"Feedback";
 
 // Resets the dashboard
 function resetDashboard() {
@@ -121,5 +143,45 @@ function getCsv() {
 			link.click();
 			document.body.removeChild(link);    
 		}
+	}
+}
+
+// Get the CSV Data
+function getFeedbackCsv() {
+	if (isSafari) {
+		var link = document.createElement("a");
+		link.id = "feedCsvDwnLink";
+		document.body.appendChild(link);
+		window.URL = window.URL || window.webkitURL;
+		var csv = "\ufeff" + feedback_table_data,
+			csvData = 'data:attachment/csv;charset=utf-8,' + encodeURIComponent(csv),
+			filename = 'feedback-report.csv';
+		$("#feedCsvDwnLink").attr({'download': filename, 'href': csvData});
+		$('#feedCsvDwnLink')[0].click();
+		document.body.removeChild(link);	
+	} else {
+		var csvData = new Blob([feedback_table_data], {type: 'text/csv;charset=utf-8;'});
+		var exportFilename = "feedback-report.csv";
+		// IE11 & Edge
+		if (navigator.msSaveBlob) {
+			navigator.msSaveBlob(csvData, exportFilename);
+		} else {
+			// In FF link must be added to DOM to be clicked
+			var link = document.createElement('a');
+			link.href = window.URL.createObjectURL(csvData);
+			link.setAttribute('download', exportFilename);
+			document.body.appendChild(link);    
+			link.click();
+			document.body.removeChild(link);    
+		}
+	}
+}
+
+// Signout all users
+function signout() {
+	if (window.confirm("Are you sure you want to sign everyone out? 2 hours will be logged for each volunteer.")) {
+		window.location.href = "/pages/autosignout.php";
+	} else {
+		return false;
 	}
 }

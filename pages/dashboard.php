@@ -56,9 +56,13 @@
 					</select>
 				</div>
 				<div class="form-group col-sm-12 text-right">
-					<button type="submit" class="btn btn-primary">Search</button>
-					<button class="btn btn-warning" onclick="getCsv();return false;">Download CSV</button>
-					<button class="btn btn-danger" onclick="resetDashboard();return false;">Reset Filters</button>
+					<button type="button" class="btn btn-danger pull-left" onclick="signout(); return false;">Signout All Volunteers</button>
+					<div class="btn-group pull-right" role="group" aria-label="Search Actions">
+						<button type="submit" class="btn btn-primary">Search</button>
+						<button type="button" class="btn btn-default" onclick="getCsv();return false;">Download Volunteers</button>
+						<button type="button" class="btn btn-default" onclick="getFeedbackCsv();return false;">Download Feedback</button>
+						<button type="button" class="btn btn-default" onclick="resetDashboard();return false;">Reset Filters</button>
+					</div>
 				</div>
 			</form>
 		</div>
@@ -142,6 +146,29 @@
 		</tbody>
 	</table>	
 	<div class="pagination"></div>
+	
+	<h2>Feedback</h2>
+	<table id="feedback-table" class="table table-condensed table-striped table-hover sortable">
+		<thead>
+			<tr>
+				<th class="text-center">Check In Date</th><th>Volunteer Email</th><th>Feedback</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php
+			foreach ($feedback_query_results as $result) {
+				$checkin_date = date_parse_from_format ( $sql_date_format , $result['check_in_time']  );
+		?>
+			<tr>
+				<td class="text-center"><?=$checkin_date['month']."/".$checkin_date['day']."/".$checkin_date['year']?></td>
+				<td><?= $result['email'] ?></td>
+				<td><?= $result['feedback'] ?></td>
+			</tr>
+		<?php
+			}
+		?>
+		</tbody>
+	</table>
 </div>
 <?php
 	}

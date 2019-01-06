@@ -85,6 +85,17 @@
 						.$filter_query
 						. " GROUP BY v.email, v.first_name, v.last_name ORDER BY hours desc";
 
+	// Feedback Query
+	$feedback_filter_query = ($filter_query != "") ? $filter_query." and f.feedback != ''" : " WHERE f.feedback != ''";
+	$feedback_query = "SELECT v.email, vp.check_in_time, f.feedback
+						FROM feedback f
+						JOIN volunteer v on v.id = f.volunteer_id
+						JOIN volunteer_period vp on f.id = vp.feedback_id
+						JOIN job_type jt on jt.id = vp.job_type_id
+						JOIN location l on l.id = vp.location_id"
+						.$feedback_filter_query
+						. " ORDER BY vp.check_in_time";
+
 	// Chart values for % of visits by location and job type
 	$location_query = "";
 	$job_type_query = "";
@@ -122,4 +133,5 @@
 	$location_percentages = $db->executeStatement($location_query,[])->fetchAll();
 	$job_type_percentages = $db->executeStatement($job_type_query,[])->fetchAll();
 	$volunteer_query_results = $db->executeStatement($volunteer_query,[])->fetchAll();
+	$feedback_query_results = $db->executeStatement($feedback_query,[])->fetchAll();
 ?>

@@ -31,7 +31,6 @@ window.addEventListener("load",function() {
 	
 	// Dashboard Page
 	if (default_start_date || default_end_date) {
-		console.log('test');
 		if(default_end_date) {
 			$("#end-datetime-picker").datetimepicker({
 				"defaultDate": default_end_date,

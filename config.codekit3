@@ -99,12 +99,6 @@
 		"oAP": "\/app\/test\/email-test.php",
 		"oF": 0
 		},
-	"\/app\/util\/autosignout.php": {
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/app\/util\/autosignout.php",
-		"oF": 0
-		},
 	"\/css\/app-build-styles.less": {
 		"aP": 0,
 		"bl": 0,
@@ -483,6 +477,12 @@
 		"opt": 0,
 		"oT": 1,
 		"q": 100
+		},
+	"\/pages\/autosignout.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/pages\/autosignout.php",
+		"oF": 0
 		},
 	"\/pages\/bulk.php": {
 		"ft": 8192,
