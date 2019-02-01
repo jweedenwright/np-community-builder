@@ -35,8 +35,15 @@
 		if (isset($_GET['search-vols'])) {
 			
 			// Clean it up and query - check first name, last name, email and volunteer period - affiliation
-			
-			$all_vols = "SELECT * FROM volunteer";
+			$query_string = strtoupper(filter_var ( $_GET['search-vols'], FILTER_SANITIZE_STRING));
+			$all_vols = "SELECT DISTINCT v.id, v.first_name, v.last_name, v.email
+					 		FROM volunteer v
+							JOIN volunteer_period vp on vp.volunteer_id = v.id
+							WHERE v.email LIKE '%".$query_string."%'
+							OR v.first_name LIKE '%".$query_string."%'
+							OR v.last_name LIKE '%".$query_string."%'
+							OR vp.affiliation LIKE '%".$query_string."%'";
+
 			$results = $db->executeStatement($all_vols,[])->fetchAll();
 		}
 	}
