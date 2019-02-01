@@ -31,7 +31,13 @@
 
 	// Get All Users
 	} else {
-		$all_vols = "SELECT * FROM volunteer";
-		$results = $db->executeStatement($all_vols,[])->fetchAll();
+		// Check for query string
+		if (isset($_GET['search-vols'])) {
+			
+			// Clean it up and query - check first name, last name, email and volunteer period - affiliation
+			
+			$all_vols = "SELECT * FROM volunteer";
+			$results = $db->executeStatement($all_vols,[])->fetchAll();
+		}
 	}
 ?>

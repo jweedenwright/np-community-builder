@@ -14,51 +14,9 @@
 	} else {
 		// Logic
 		include_once '../app/manage-volunteers.php';
-		
-/////////////////////////////////////
-// Not individual - list of volunteers page
-		if (sizeof($results) > 1) {
-		?>
-		<div class="container">
-			<h1>Volunteer Listing</h1>
-			<blockquote><strong>Please Note:</strong> Filtering volunteers is dynamic but can take a while with over 5000 volunteers. Please give the application time to finish the search. Thanks!</blockquote>
-			<form id="vol-search">
-				<div class="form-group">
-					<label for="search-vols" class="sr-only">Search Volunteers</label>
-					<input class="form-control" id="search-vols" name="search-vols" placeholder="Search Volunteers" type="text" onkeyup="filterItems(this);return true;">
-				</div>
-			</form>
 
-			<table class="table table-striped table-responsive">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Email</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					foreach ($results as $volunteer) {
-					?>
-					<tr class="search-row" data-search="<?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?> <?=$volunteer["email"]?>">
-						<td><?=$volunteer["id"]?></td>
-						<td><?=$volunteer["first_name"]?></td>
-						<td><?=$volunteer["last_name"]?></td>
-						<td><a href="?email=<?=$volunteer["email"]?>"><?=$volunteer["email"]?></a></td>
-					</tr>
-					<?php
-					}
-					?>
-				</tbody>
-			</table>
-		</div>	
-
-		<?php
-/////////////////////////////////////
 //  Individual - Page
-		} elseif (sizeof($results) == 1)  {
+		if (isset($results) && sizeof($results) == 1)  {
 			$volunteer = $results[0];
 			?>
 			<div id="management-form" class="container">
@@ -346,6 +304,51 @@
 				</div><!-- /modal-dialog -->
 			</div><!-- /modal -->
 			<?php
+		} else {
+/////////////////////////////////////
+// Not individual - list of volunteers page
+			?>
+			<div class="container">
+				<h1>Volunteer Listing</h1>
+				<form id="vol-search">
+					<div class="form-group col-sm-9">
+						<label for="search-vols" class="sr-only">Search Volunteers</label>
+						<input class="form-control" id="search-vols" name="search-vols" placeholder="Search Volunteers" type="text">
+					</div>
+					<div class="form-group col-sm-3">
+						<button class="form-control btn btn-primary" id="search-vols-submit" type="submit">Search</button>
+					</div>
+				</form>
+
+				<?php if (isset($results)) { ?>
+					<table class="table table-striped table-responsive">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Email</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							foreach ($results as $volunteer) {
+							?>
+							<tr class="search-row" data-search="<?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?> <?=$volunteer["email"]?>">
+								<td><?=$volunteer["id"]?></td>
+								<td><?=$volunteer["first_name"]?></td>
+								<td><?=$volunteer["last_name"]?></td>
+								<td><a href="?email=<?=$volunteer["email"]?>"><?=$volunteer["email"]?></a></td>
+							</tr>
+							<?php
+							}
+							?>
+						</tbody>
+					</table>
+				<?php } ?>
+			</div>	
+			<?php
+/////////////////////////////////////
 		}
 	}
 	include_once '../footer.php';
