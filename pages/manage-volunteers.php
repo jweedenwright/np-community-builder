@@ -209,7 +209,8 @@
 
 								<div class="form-group">
 									<label for="email">Email Address (Do Not Edit)</label>
-									<input disabled class="form-control" type="text" id="email" name="email" value="<?=$volunteer["email"]?>">
+									<input disabled class="form-control" type="text" id="email-label" name="email-label" value="<?=$volunteer["email"]?>">
+									<input type="hidden" id="email" name="email" value="<?=$volunteer["email"]?>">
 								</div>
 								<div class="form-group">
 									<label for="fn">First Name</label>
