@@ -313,7 +313,7 @@
 				<form id="vol-search">
 					<div class="form-group col-sm-9">
 						<label for="search-vols" class="sr-only">Search Volunteers</label>
-						<input class="form-control" id="search-vols" name="search-vols" placeholder="Search Volunteers" type="text">
+						<input class="form-control" id="search-vols" name="search-vols" placeholder="Search Volunteers" required type="text">
 					</div>
 					<div class="form-group col-sm-3">
 						<button class="form-control btn btn-primary" id="search-vols-submit" type="submit">Search</button>
