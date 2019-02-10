@@ -8,7 +8,6 @@ function loadServiceData(element, service, callback, url_params) {
 	if (url_params !== "") {
 		url = url + "&" + url_params;
 	}
-	console.log("go get it: " + url);
 	$.get(url, function(results) {
 		// Load the options up!
 		results = JSON.parse(results);

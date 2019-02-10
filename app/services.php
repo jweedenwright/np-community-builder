@@ -65,7 +65,7 @@
 		} else if ($service === "check_email") {
 			// Check for email
 			if(isset($_GET['email'])) {
-				$email = filter_var ( $_GET['email'], FILTER_SANITIZE_STRING);
+				$email = strtolower (filter_var ( $_GET['email'], FILTER_SANITIZE_STRING));
 				if ($email !== "") {
 					// Query locations
 					$query_string = "SELECT v.id, v.first_name, v.last_name, v.email

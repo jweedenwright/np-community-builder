@@ -34,9 +34,9 @@
 		//////////////////////
 		// Get and Sanitize all Form POST inputs
 		//////////////////////
-		$first_name = filter_var ( $_POST['firstname'], FILTER_SANITIZE_STRING);
-		$last_name = filter_var ( $_POST['lastname'], FILTER_SANITIZE_STRING);
-		$email = filter_var ( $_POST['email'], FILTER_SANITIZE_STRING);
+		$first_name = strtolower ( filter_var ( $_POST['firstname'], FILTER_SANITIZE_STRING));
+		$last_name = strtolower ( filter_var ( $_POST['lastname'], FILTER_SANITIZE_STRING));
+		$email = strtolower ( filter_var ( $_POST['email'], FILTER_SANITIZE_STRING));
 		$liability_check = (int) filter_var ( $_POST['general-liability-check'], FILTER_SANITIZE_STRING);
 		$health_check = (int) filter_var ( $_POST['health-release-check'], FILTER_SANITIZE_STRING);
 		$photo_check = (int) filter_var ( $_POST['photo-release-check'], FILTER_SANITIZE_STRING);

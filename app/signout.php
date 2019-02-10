@@ -14,7 +14,7 @@
 	// Only process if email was passed
 	if(isset($_POST['email'])) {
 	
-		$email = $_POST['email'];
+		$email = strtolower ( $_POST['email']);
 		if(isset($_POST['signouttime'])) {
 			$signout_time = $_POST['signouttime'];
 		}

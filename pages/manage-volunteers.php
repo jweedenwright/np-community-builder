@@ -16,7 +16,7 @@
 		include_once '../app/manage-volunteers.php';
 
 //  Individual - Page
-		if (isset($results) && sizeof($results) == 1)  {
+		if (isset($_GET['email']) && isset($results) && sizeof($results) == 1)  {
 			$volunteer = $results[0];
 			?>
 			<div id="management-form" class="container">
@@ -208,16 +208,16 @@
 								<input type="hidden" id="type" name="type" value="volunteer">
 
 								<div class="form-group">
+									<label for="email">Email Address (Do Not Edit)</label>
+									<input disabled class="form-control" type="text" id="email" name="email" value="<?=$volunteer["email"]?>">
+								</div>
+								<div class="form-group">
 									<label for="fn">First Name</label>
 									<input class="form-control" type="text" id="fn" name="fn" value="<?=$volunteer["first_name"]?>">
 								</div>
 								<div class="form-group">
 									<label for="ln">Last Name</label>
 									<input class="form-control" type="text" id="ln" name="ln" value="<?=$volunteer["last_name"]?>">
-								</div>
-								<div class="form-group">
-									<label for="email">Email Address</label>
-									<input class="form-control" type="text" id="email" name="email" value="<?=$volunteer["email"]?>">
 								</div>
 								<div class="form-group">
 									<label for="phone">Emergency Contact Number</label>
