@@ -14,8 +14,8 @@
 	$GLOBALS['org_name'] = "The Nashville Food Project";
 	$GLOBALS['org_short_name'] = "TNFP";
 	$GLOBALS['org_url'] = "thenashvillefoodproject.org";
-	$GLOBALS['org_address'] = "3605 Hillsboro Pike";
-	$GLOBALS['org_city_state'] = "Nashville, TN 37215";
+	$GLOBALS['org_address'] = "5904 California Ave";
+	$GLOBALS['org_city_state'] = "Nashville, TN 37209";
 	$GLOBALS['org_phone'] = "(615) 460-0172";
 	$GLOBALS['org_phone_tel'] = "6154600172";
 	$GLOBALS['liability_release'] = "I understand that as a volunteer for The Nashville Food Project I may be involved in physical activities that have a potential risk of injury. I assume this risk. I agree that I will perform activities that I am comfortable doing and follow instructions as provided. I hereby release and discharge The Nashville Food Project, its community service partners, officers, directors, employees,agents and volunteers from any claim, demand or cause of action that may be asserted by or on behalf of me as a result of my volunteering. I agree to be responsible for my behavior and to indemnify and hold harmless The Nashville Food Project, its community service partner, officers, directors, employees, agents and volunteers from any damages or liabilities arising out of my volunteer activities.";
@@ -90,13 +90,27 @@
 	$reset_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/reset.php";
 	
 	// Global Functions
-	function calculateHours($in_time, $out_time) {
+	function calculateHours($in_time, $out_time) {			
 		$hours = $out_time["hour"] - $in_time["hour"];
 		if ($in_time["minute"] != $out_time["minute"]) {
 			$minutes = (60 - $in_time["minute"]) + $out_time["minute"];
-			if ($minutes >= 30) {
-				$hours = $hours + .5;
+			// If the difference in minutes is negative, need to subtract 1 hour
+			if ($out_time["minute"] - $in_time["minute"] < 0) {
+				// Subtract an hour (less than an hour worked in minutes) 
+				if ($hours > 0) {
+					$hours = $hours - 1;
+				}
+				if ($minutes >= 30) {
+					$hours = $hours + 1;
+				} else if ($minutes > 0) {
+					$hours = $hours + .5;
+				}
+			} else {
+				if ($minutes >= 30) {
+					$hours = $hours + .5;
+				}
 			}
+			
 		}
 		return $hours;
 	}
