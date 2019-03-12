@@ -100,7 +100,7 @@
 				if ($hours > 0) {
 					$hours = $hours - 1;
 				}
-				if ($minutes >= 30) {
+				if ($minutes > 30) {
 					$hours = $hours + 1;
 				} else if ($minutes > 0) {
 					$hours = $hours + .5;
