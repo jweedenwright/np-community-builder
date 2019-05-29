@@ -2,7 +2,7 @@
 	$page_title = "Thank You";
 	include_once '../header.php';
 ?>
-		<div class="container thank-you">
+		<div class="container thank-you text-center">
 			<div class="row">
 				<div class="col-xs-12">
 					<h1>Thank you for volunteering with <?=$org_name?>!</h1>
@@ -14,7 +14,7 @@
 			</div>
 			<div class="row">
 				<div id="back-to-home" class="col-xs-12">
-					<a href="../index.php" class="line-link">Back to Home</a>
+					<a tabindex="1" href="../index.php" class="line-link form-control">Back to Home</a>
 				</div>
 			</div>
 		</div>

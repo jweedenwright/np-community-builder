@@ -3,7 +3,10 @@
 @font-gray:#454545;
 @danger-color:rgb(148, 3, 3);
 @success-color:rgb(0, 146, 2);
+@success-hover:rgb(0, 146, 2);
 @hover-light-link:#6fbeff;
+@orange:#d67410;
+@orange-hover:#c56c10;
 @white-hover:#E5E5E5;
 
 // Overrides ///////////////////
@@ -57,7 +60,10 @@ h1, h2, h3 {
 	border: 1px solid @success-color;
 	color: @white;
 }
-
+.form-control {
+	font-size:18px;
+	height:38px;
+}
 // Header ///////////////////////////
 header {
 	.staff-log-out {
@@ -125,20 +131,35 @@ header {
 }
 
 .line-link {
-	cursor:pointer;
-	padding-bottom: 5px;
-	font-size: 20px;
-	margin-top: 10px;
-	width: 100%;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    background: @orange;
+    border-radius: 4px;
+
 	&:hover,
-	&focus {
+	&:focus {
+		color:white;
 		text-decoration:none;
-		border-bottom: 4px solid #23527c;
+		box-shadow: 0 0 8px 1px #585858;
+		background:@orange-hover;
 	}
 
 	.glyphicon {
 		top: 2px;
 		padding-right: 10px;
+	}
+}
+.volunteer-btns .line-link {
+	width:inherit;
+}
+.success-link {
+	background: @success-color;
+	
+	&:hover,
+	&:focus {
+		background: @success-hover;
 	}
 }
 
@@ -168,9 +189,10 @@ footer .address {
 }
 
 // Sign In ////////////////////////
-.req-field-warning.badge {
+.req-field-warning-badge {
+	color:@danger-color;
 	font-weight: normal;
-	font-size: 18px;
+	font-size: 16px;
 	padding: 5px 9px;
 	border-radius: 4px;
 	float: right;
@@ -362,7 +384,7 @@ h2 .program-chart-options {
 			}
 		}
 	}
-	.req-field-warning.badge {
+	.req-field-warning-badge {
 		font-size: 14px;
 		margin: 10px 0px;
 	}

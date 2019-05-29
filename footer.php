@@ -10,7 +10,7 @@
 					<div class="address-title"><?=$org_name?></div>
 					<div class="street-address"><?=$org_address?></div>
 					<div class="city-state"><?=$org_city_state?></div>
-					<div class="phone"><a href="tel:<?=$org_phone_tel?>"><span class="glyphicon glyphicon-earphone"></span> <?=$org_phone?></a></div>
+					<div class="phone"><a href="tel:<?=$org_phone_tel?>" tabindex="20"><span class="glyphicon glyphicon-earphone"></span> <?=$org_phone?></a></div>
 				</div>
 			</div>
 		</footer>

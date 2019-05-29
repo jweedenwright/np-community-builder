@@ -39,7 +39,7 @@
 				<div class="row">
 					<div class="danger" id="danger"></div>
 					<div class="col-md-12 col-xs-12 text-center">
-						<a class="sign-out line-link" onclick="return signOut();">Sign Out</button>
+						<button class="sign-out line-link form-control" onclick="return signOut();">Sign Out</button>
 					</div>
 				</div>
 			</div>
