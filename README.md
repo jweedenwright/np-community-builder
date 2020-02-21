@@ -19,13 +19,13 @@ This software solution was originally built on the Microsoft Axure cloud. The ap
 The easiest way to do setup for this project is to use the Azure Cloud. This is important if you are a non-profit as you get credits for cloud usage that could pay for your entire installation.
 
 1. **Setup a new _App Service_**: This is the service that will run your website.
-   i. When starting out, you'll want to setup a _resource group_ for this particular app/project. It is used to manage and control permissions/access in Azure.
-   ii. Choose PHP as the Runtime stack.
-   iii. In the SKU and Size section, remember, to save on costs you can go with a smaller size server. This is especially useful (and probably needed) for test or development environments.
+   1. When starting out, you'll want to setup a _resource group_ for this particular app/project. It is used to manage and control permissions/access in Azure.
+   2. Choose PHP as the Runtime stack.
+   3. In the SKU and Size section, remember, to save on costs you can go with a smaller size server. This is especially useful (and probably needed) for test or development environments.
 
 2. **Setup a _SQL Server_**: This is the actual server that will house the database instances you create. You can generally have 1 server with multiple databases running on it.
-   i. Choose your resource group, give your server a name, and specify the login and password (VERY important for going in and actually creating tables/querying)
-   ii. Ensure the server was created (completed) by Azure before you go to the next step!
+   1. Choose your resource group, give your server a name, and specify the login and password (VERY important for going in and actually creating tables/querying)
+   2. Ensure the server was created (completed) by Azure before you go to the next step!
 
 3. **Setup a _SQL Database_**: You'll need to do this for each environment that you plan to have.
    i. Choose your resource group, give your database a name (test, master, etc), choose your *_SQL Server_* (created in the last step), and configure the database.
