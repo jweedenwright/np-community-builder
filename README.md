@@ -17,27 +17,27 @@ This software solution was originally built on the Microsoft Axure cloud. The ap
 
 ### Setup on Azure
 The easiest way to do setup for this project is to use the Azure Cloud. This is important if you are a non-profit as you get credits for cloud usage that could pay for your entire installation.
-1. *Setup a new _App Service_*: This is the 
+1. **Setup a new _App Service_**: This is the 
   a. When starting out, you'll want to setup a _resource group_ for this particular app/project. It is used to manage and control permissions/access in Azure.
   b. Choose PHP as the Runtime stack.
   c. In the SKU and Size section, remember, to save on costs you can go with a smaller size server. This is especially useful (and probably needed) for test or development environments.
-2. *Setup a _SQL Server_*: This is the actual server that will house the database instances you create. You can generally have 1 server with multiple databases running on it.
+2. **Setup a _SQL Server_**: This is the actual server that will house the database instances you create. You can generally have 1 server with multiple databases running on it.
   a. Choose your resource group, give your server a name, and specify the login and password (VERY important for going in and actually creating tables/querying)
   b. Ensure the server was created (completed) by Azure before you go to the next step!
-3. *Setup a _SQL Database_*: You'll need to do this for each environment that you plan to have.
+3. **Setup a _SQL Database_**: You'll need to do this for each environment that you plan to have.
   a. Choose your resource group, give your database a name (test, master, etc), choose your *_SQL Server_* (created in the last step), and configure the database.
   b. When configuring, you can choose multiple levels (basic, standard, premium, general purpose, hyperscale, business critical). For a test database, we will use basic.
-4. *_FTP_ files to the server*:
+4. **_FTP_ files to the server**:
   a. Go to all resources and click on the _app service_ you created.
-  b. Search on *ftp* and click on _Deployment Center_
+  b. Search on **ftp** and click on _Deployment Center_
   c. Scroll to manual deployment and select _FTP_. Click on _dashboard_.
   d. Decide to use app credentials or user credentials. These are what you'll use in the FTP client of your choice to connect and upload files.
   e. Using Filezilla or an FTP product of your choice, use FTPS to connect using the credentials and the FTPS Endpoint specified in Azure on the FTP Dashboard.
-  f. Transfer over the *app, css, fonts, img, js, and pages* folders.
-  g. Transfer over the files: *footer.php, header.php, index.html, index.php, robots.txt, and web.config*
+  f. Transfer over the **app, css, fonts, img, js, and pages** folders.
+  g. Transfer over the files: **footer.php, header.php, index.html, index.php, robots.txt, and web.config**
   h. Visit your azure website and you should see the beginnings of your checkin system!
-4. *Setup _Application Settings_*: These are basically server variables that allow the app to determine what connection strings to use for databases. This is more secure than saving connection settings within the code itself AND it allows for multiple environment configurations.
-  a. Search on *Configuration* and click _Configuration_ in the results.
+4. **Setup _Application Settings_**: These are basically server variables that allow the app to determine what connection strings to use for databases. This is more secure than saving connection settings within the code itself AND it allows for multiple environment configurations.
+  a. Search on **Configuration** and click _Configuration_ in the results.
   b. Go to the _Application Settings_ section.
   c. Add the following variables:
 ```
@@ -46,18 +46,18 @@ DB_NAME // From your SQL Database setup
 DB_USER // From your SQL Database setup
 DB_PASSWORD // From your SQL Database setup
 ```
-5. *_Connect_ and _Install_ the database*:
-  a. Go to your *SQL Server* resource you created in step 2 above.
-  b. Search on *Security* and click _Firewalls and Virtual Networks_ in the results.
+5. **_Connect_ and _Install_ the database**:
+  a. Go to your **SQL Server** resource you created in step 2 above.
+  b. Search on **Security** and click _Firewalls and Virtual Networks_ in the results.
   c. Looking at your IP Address (displayed on the page), add a new rule that allows your IP address to connect to the server. *NOTE: This step will be needed for every location in which you plan to connect to the database to query or make changes that is not the app server!!*
   d. Save the firewall rules/updates. 
   e. Use your favorite database connection tool (such as SQL Server Management Studio or DBeaver) to connect to your database.
-  f. Open up the database you created in step 3, open a SQL editor, and run the /future_db/table_maintenance.sql script.
-  g. Edit the /future_db/data_import.sql file to include the necessary data you need to start work. Some examples are in the current file.
-  h. Run the /future_db/data_import.sql file on the database.
-6. *Start to update files*
-  a. Update images in /img/ to be your organization's knockout logo (_knockout-logo.png_) and a banner image (_header.jpg_)
-  b. Update variables in /app/global.php to reflect the necessary data for your organization.
+  f. Open up the database you created in step 3, open a SQL editor, and run the **/future_db/table_maintenance.sql** script.
+  g. Edit the **/future_db/data_import.sql** file to include the necessary data you need to start work. Some examples are in the current file.
+  h. Run the **/future_db/data_import.sql** file on the database.
+6. **Start to update files**
+  a. Update images in **/img/** to be your organization's knockout logo (_knockout-logo.png_) and a banner image (_header.jpg_)
+  b. Update variables in **/app/global.php** to reflect the necessary data for your organization.
   c. FTP the changed files up to the server.
 
 ### Setting Up A User
