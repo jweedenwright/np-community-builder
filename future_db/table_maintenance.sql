@@ -2,12 +2,12 @@
 -- Drop Tables to Start
 IF OBJECT_ID('dbo.volunteer_period', 'U') IS NOT NULL DROP TABLE dbo.volunteer_period
 IF OBJECT_ID('dbo.feedback', 'U') IS NOT NULL DROP TABLE dbo.feedback
+IF OBJECT_ID('dbo.address', 'U') IS NOT NULL DROP TABLE dbo.address
+IF OBJECT_ID('dbo.emergency_contact', 'U') IS NOT NULL DROP TABLE dbo.emergency_contact
 IF OBJECT_ID('dbo.volunteer', 'U') IS NOT NULL DROP TABLE dbo.volunteer
 IF OBJECT_ID('dbo.event', 'U') IS NOT NULL DROP TABLE dbo.event
 IF OBJECT_ID('dbo.app_user', 'U') IS NOT NULL DROP TABLE dbo.app_user
 IF OBJECT_ID('dbo.user_type', 'U') IS NOT NULL DROP TABLE dbo.user_type
-IF OBJECT_ID('dbo.address', 'U') IS NOT NULL DROP TABLE dbo.address
-IF OBJECT_ID('dbo.emergency_contact', 'U') IS NOT NULL DROP TABLE dbo.emergency_contact
 IF OBJECT_ID('dbo.job_type', 'U') IS NOT NULL DROP TABLE dbo.job_type
 IF OBJECT_ID('dbo.location', 'U') IS NOT NULL DROP TABLE dbo.location
 
@@ -43,25 +43,6 @@ CREATE TABLE dbo.user_type (
 )
 CREATE UNIQUE INDEX UQ_user_type ON dbo.user_type (user_type)
 
-CREATE TABLE dbo.address (
-	id int NOT NULL IDENTITY(1,1),
-	street_one varchar(255) NOT NULL,
-	street_two varchar(255) NULL,
-	city varchar(100) NOT NULL,
-	state varchar(2) NOT NULL,
-	zip int NOT NULL,
-	user_type_name varchar(100) NOT NULL,
-	CONSTRAINT PK_address PRIMARY KEY (id)
-)
-
-CREATE TABLE dbo.emergency_contact (
-	id int NOT NULL IDENTITY(1,1),
-	first_name varchar(100) NOT NULL,
-	last_name varchar(100) NOT NULL,
-	phone varchar(15) NOT NULL,
-	CONSTRAINT PK_emergency_contact PRIMARY KEY (id)
-)
-
 CREATE TABLE dbo.volunteer (
 	id int NOT NULL IDENTITY(1,1),
 	first_name varchar(100) NOT NULL,
@@ -76,14 +57,30 @@ CREATE TABLE dbo.volunteer (
 	availability varchar(255) NULL,
 	find_out_about_us varchar(255) NULL,
 	include_email_dist bit NULL,
-	address_id int NOT NULL,
-	emergency_contact_id int NOT NULL,
 	active bit NOT NULL DEFAULT(1),
-	CONSTRAINT PK_volunteer PRIMARY KEY (id),
-	CONSTRAINT FK_volunteer_address FOREIGN KEY (address_id) REFERENCES dbo.address(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_volunteer_emergency_contact FOREIGN KEY (emergency_contact_id) REFERENCES dbo.emergency_contact(id) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT PK_volunteer PRIMARY KEY (id)
 )
 CREATE UNIQUE INDEX UQ_volunteer_email ON dbo.volunteer (email)
+
+CREATE TABLE dbo.address (
+	volunteer_id int NOT NULL,
+	street_one varchar(255) NOT NULL,
+	street_two varchar(255) NULL,
+	city varchar(100) NOT NULL,
+	state varchar(2) NOT NULL,
+	zip int NOT NULL,
+	CONSTRAINT PK_address PRIMARY KEY (volunteer_id),
+	CONSTRAINT FK_address_volunteer FOREIGN KEY (volunteer_id) REFERENCES dbo.volunteer(id) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+CREATE TABLE dbo.emergency_contact (
+	volunteer_id int NOT NULL,
+	first_name varchar(100) NOT NULL,
+	last_name varchar(100) NOT NULL,
+	phone varchar(15) NOT NULL,
+	CONSTRAINT PK_emergency_contact PRIMARY KEY (volunteer_id),
+	CONSTRAINT FK_emergency_contact_volunteer FOREIGN KEY (volunteer_id) REFERENCES dbo.volunteer(id) ON DELETE CASCADE ON UPDATE CASCADE
+)
 
 CREATE TABLE dbo.feedback (
 	id int NOT NULL IDENTITY(1,1),
@@ -160,14 +157,27 @@ INSERT INTO dbo.user_type (id,user_type) VALUES (4,'volunteer');
 SET IDENTITY_INSERT dbo.user_type OFF
 
 -- Setup Default volunteers
-INSERT INTO dbo.volunteer () VALUES();
+SET IDENTITY_INSERT dbo.volunteer ON
+INSERT INTO dbo.volunteer (first_name,middle_name,last_name,suffix,email,phone,dob,address_id,emergency_contact_id,active) VALUES();
+INSERT INTO dbo.volunteer (first_name,middle_name,last_name,suffix,email,phone,dob,address_id,emergency_contact_id,active) VALUES();
+INSERT INTO dbo.volunteer (first_name,middle_name,last_name,suffix,email,phone,dob,address_id,emergency_contact_id,active) VALUES();
+INSERT INTO dbo.volunteer (first_name,middle_name,last_name,suffix,email,phone,dob,address_id,emergency_contact_id,active) VALUES();
+SET IDENTITY_INSERT dbo.volunteer OFF
+
+INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES();
+INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES();
+INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES();
+INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES();
+
+INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES();
+INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES();
+INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES();
+INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES();
 
 -- Setup Default admins
 INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('jeremiah.weedenwright@gmail.com','tester', '2020-02-20',1,1,1);
-INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('','tester', '2020-02-20',1,2,1);
+INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('iwilson0722@gmail.com','tester', '2020-02-20',1,2,1);
 INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('Shalonda.Brown@bgcrc.net','tester', '2020-02-20',1,3,1);
 INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('recruitment@bgcrc.net','tester','2020-02-20',1,4,1);
-
-
 
 SELECT * from dbo.location
