@@ -11,46 +11,36 @@
 	////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////
 	// Organization Variables
-	$GLOBALS['org_name'] = "The Nashville Food Project";
-	$GLOBALS['org_short_name'] = "TNFP";
-	$GLOBALS['org_url'] = "thenashvillefoodproject.org";
-	$GLOBALS['org_address'] = "5904 California Ave";
-	$GLOBALS['org_city_state'] = "Nashville, TN 37209";
-	$GLOBALS['org_phone'] = "(615) 460-0172";
-	$GLOBALS['org_phone_tel'] = "6154600172";
+	$GLOBALS['org_name'] = "Boys and Girls Club of Rutherford County";
+	$GLOBALS['org_short_name'] = "BGCRC";
+	$GLOBALS['org_url'] = "https://www.bgcrc.net/";
+
+	
+
+
+	$GLOBALS['org_address'] = "820 Jones Blvd";
+	$GLOBALS['org_city_state'] = "Murfreesboro, TN 37129";
+	$GLOBALS['org_phone'] = "(615) 893-5437";
+	$GLOBALS['org_phone_tel'] = "6158935437";
+
 	$GLOBALS['liability_release'] = "I understand that as a volunteer for The Nashville Food Project I may be involved in physical activities that have a potential risk of injury. I assume this risk. I agree that I will perform activities that I am comfortable doing and follow instructions as provided. I hereby release and discharge The Nashville Food Project, its community service partners, officers, directors, employees,agents and volunteers from any claim, demand or cause of action that may be asserted by or on behalf of me as a result of my volunteering. I agree to be responsible for my behavior and to indemnify and hold harmless The Nashville Food Project, its community service partner, officers, directors, employees, agents and volunteers from any damages or liabilities arising out of my volunteer activities.";
 	$GLOBALS['health_release'] = "I understand that I may not volunteer in The Nashville Food Project's meals program if I have experienced a fever, sore throat, vomiting, diarrhea within the last 24 hours. By checking this box I agree that I have not experienced any of these symptoms in the last 24 hours.";
 	$GLOBALS['photo_release'] = "I grant The Nashville Food Project and its partners the irrevocable right to use photographs and video or audio recordings of me made while volunteering. I understand that I will not be compensated for the use of my image in any medium.";
-	$GLOBALS['give_url'] = "https://thenashvillefoodproject.kindful.com/";
-	$GLOBALS['give_desc'] = "And continue this important work to cultivate community<br>and alleviate hunger in our city.";
-	$GLOBALS['sendgrid_api_key'] = $_SERVER['SEND_GRID_KEY'];
-
-	// Prod Database
-	$GLOBALS['prod_protocol'] = "https";
-	$GLOBALS['prod_domain'] = "thenashvillefoodproject.azurewebsites.net";
-	$GLOBALS['prod_db_hostname'] = "tnfp.database.windows.net";
-	$GLOBALS['prod_db_port'] = "1433";
-	$GLOBALS['prod_db_name'] = $_SERVER['PROD_DB_NAME'];
-	$GLOBALS['prod_db_user'] = $_SERVER['PROD_DB_USER'];
-	$GLOBALS['prod_db_password'] = $_SERVER['PROD_DB_PASSWORD'];
 	
-	// QA Database
-	$GLOBALS['qa_protocol'] = "https";
-	$GLOBALS['qa_domain'] = "tnfp-dev.azurewebsites.net";
-	$GLOBALS['qa_db_hostname'] = "tnfp-dev.database.windows.net";
-	$GLOBALS['qa_db_port'] = "1433";
-	$GLOBALS['qa_db_name'] = $_SERVER['QA_DB_NAME'];
-	$GLOBALS['qa_db_user'] = $_SERVER['QA_DB_USER'];
-	$GLOBALS['qa_db_password'] = $_SERVER['QA_DB_PASSWORD'];
+	$GLOBALS['give_url'] = "https://www.bgcrc.net/other-ways-to-give/";
+	$GLOBALS['give_desc'] = "And continue this important work to cultivate community<br>and alleviate hunger in our city.";
+	$GLOBALS['sendgrid_api_key'] = getenv('SEND_GRID_KEY');
 
-	// Dev Database
-	$GLOBALS['dev_protocol'] = "https";
+	// Environments
+	$GLOBALS['protocol'] = "https";
+	$GLOBALS['prod_domain'] = "thenashvillefoodproject.azurewebsites.net";
+//	$GLOBALS['qa_domain'] = "tnfp-dev.azurewebsites.net";
 	$GLOBALS['dev_domain'] = "tnfp-future.azurewebsites.net";
-	$GLOBALS['dev_db_hostname']= "tnfp-dev.database.windows.net";	
-	$GLOBALS['dev_db_port'] = "1433";	
-	$GLOBALS['dev_db_name'] = $_SERVER['DEV_DB_NAME'];
-	$GLOBALS['dev_db_user'] = $_SERVER['DEV_DB_USER'];
-	$GLOBALS['dev_db_password'] = $_SERVER['DEV_DB_PASSWORD'];
+	$GLOBALS['db_hostname']= "bgcrc-signin-db.database.windows.net";	
+	$GLOBALS['db_port'] = "1433";	
+	$GLOBALS['db_name'] = getenv('DB_NAME');
+	$GLOBALS['db_user'] = getenv('DB_USER');
+	$GLOBALS['db_password'] = getenv('DB_PASSWORD');
 
 	// Start the session
 	session_start();
