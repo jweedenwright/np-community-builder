@@ -1,5 +1,5 @@
 <?php
-	include_once 'app/global.php';
+	include_once '../app/global.php';
 
 	//	Header
 	$page_title = "Dashboard";

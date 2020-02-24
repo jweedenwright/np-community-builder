@@ -72,7 +72,7 @@
 		$referring_url = $_SERVER['HTTP_REFERER'];
 	}
 	$reset_url = "https://".$GLOBALS['current_domain'] . $root_dir . "/pages/reset.php";
-	
+
 	// Global Functions
 	function calculateHours($in_time, $out_time) {			
 		$hours = $out_time["hour"] - $in_time["hour"];

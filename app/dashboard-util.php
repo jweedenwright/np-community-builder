@@ -66,7 +66,6 @@
 	// Get locations
 	$query_string = "SELECT id, location_name
 						FROM location
-						WHERE internal = 0
 						ORDER BY location_name";			
 	$location_results = $db->executeStatement($query_string,[])->fetchAll();
 

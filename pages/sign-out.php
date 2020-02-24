@@ -1,4 +1,6 @@
 <?php
+	include_once '../app/global.php';
+
 	$page_title = "Sign Out";
 	include_once '../header.php';
 ?>

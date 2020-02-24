@@ -2,7 +2,7 @@
 	// Error display
 	//error_reporting(E_ALL);
 	//ini_set('display_errors', 1);
-	include_once 'app/global.php';
+	include_once '../app/global.php';
 
 	//	Header
 	$page_title = "Location Management";

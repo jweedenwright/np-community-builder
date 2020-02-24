@@ -1,28 +1,28 @@
 <?php
-	include_once 'app/global.php';
-
-	//	Header
-	$page_title = "Bulk";
-	include_once '../header.php';
-
-	// Pull locations
-	$query_string = "SELECT id, location_name
-						FROM location
-						WHERE internal = 0 AND active = 1
-						ORDER BY location_name";			
-	$location_results = $db->executeStatement($query_string,[])->fetchAll();
-
-	// Pull Job Types
-	$query_string = "SELECT id, job_type
-						FROM job_type
-						WHERE active = 1
-						ORDER BY job_type";
-	$type_results = $db->executeStatement($query_string,[])->fetchAll();
+	include_once '../app/global.php';
 
 	if (!isset($_SESSION['email'])) {
 		//	Session variable not set - redirect to login
 		header("Location: " . $login_url);
+		exit;
 	} else {
+		//	Header
+		$page_title = "Bulk";
+		include_once '../header.php';
+
+		// Pull locations
+		$query_string = "SELECT id, location_name
+							FROM location
+							WHERE active = 1
+							ORDER BY location_name";			
+		$location_results = $db->executeStatement($query_string,[])->fetchAll();
+
+		// Pull Job Types
+		$query_string = "SELECT id, job_type
+							FROM job_type
+							WHERE active = 1
+							ORDER BY job_type";
+		$type_results = $db->executeStatement($query_string,[])->fetchAll();
 ?>
 <div class="container">
 	<div class="danger"></div>
@@ -91,6 +91,6 @@
 	<button type="button" class="save-attendees btn btn-success pull-right" onclick="bulkImport();">Save</button>
 </div><!-- /container -->
 <?php
+		include_once '../footer.php';
 	}
-	include_once '../footer.php';
 ?>

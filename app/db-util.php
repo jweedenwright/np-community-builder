@@ -1,5 +1,9 @@
 <?php
 
+	// Error display
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+
 //////////////////////
 // Class for handling DB Connections
 //////////////////////

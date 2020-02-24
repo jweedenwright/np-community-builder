@@ -1,14 +1,13 @@
 <?php
-	include_once 'app/global.php';
-
-	//	Header
-	$page_title = "Manage";
-	include_once '../header.php';
+	include_once '../app/global.php';
 
 	if (!isset($_SESSION['email'])) {
 		//	Session variable not set - redirect to login
 		header("Location: " . $login_url);
 	} else {
+		//	Header
+		$page_title = "Manage";
+		include_once '../header.php';
 ?>
 <style type="text/css">
 	.tab-content {

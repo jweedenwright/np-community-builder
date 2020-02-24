@@ -3,8 +3,6 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 
-	// Setup Globals and connections
-	include_once 'app/global.php';
 ?>
 <!DOCTYPE html>
 <html lang="en-us">

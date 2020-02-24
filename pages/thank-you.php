@@ -1,4 +1,6 @@
 <?php
+	include_once '../app/global.php';
+
 	$page_title = "Thank You";
 	include_once '../header.php';
 ?>

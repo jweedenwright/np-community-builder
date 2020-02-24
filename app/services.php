@@ -23,8 +23,7 @@
 
 			$query_string = "SELECT id, location_name
 								FROM location
-								WHERE internal = 0
-								AND active = 1
+								WHERE active = 1
 								ORDER BY location_name";			
 			$results = $db->executeStatement($query_string,[])->fetchAll();
 			$json_result = "[";
