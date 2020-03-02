@@ -18,9 +18,9 @@ class comm_builder_send_email {
 											."\"to\": [ { \"email\": \"".$email_address."\" } ],"
 											."\"subject\": \"".$subject."\" "
 										."} ],"
-										."\"from\": { \"email\": \"admin@thenashvillefoodproject.org\" },"
+										."\"from\": { \"email\": \"admin@".$GLOBALS['org_domain']."\" },"
 										."\"content\": [ { \"type\": \"text/html\","
-											."\"value\": \"$message\" "
+											."\"value\": \"".$message."\" "
 											."} ] "
 									."}",
 			CURLOPT_HTTPHEADER => array(

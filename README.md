@@ -66,6 +66,9 @@ DB_PASSWORD // From your SQL Database setup
    2. Update variables in **/app/global.php** to reflect the necessary data for your organization.
    3. FTP the changed files up to the server.
 
+8. **Set SendGrid for Email**
+   1. 
+
 ### Setting Up A User
 To setup a user in the system:
 1. You will need a database admin to add the email address to the database

@@ -13,7 +13,7 @@
 	$name = "Jeremiah"; //$_POST['name']; 
 	$email = "jeremiah.weedenwright@gmail.com"; //$_POST['email']; 
 	$subject = "SendGrid Test"; //$_POST['subject']; 
-	$message = "This is a test from tnfp-future"; //$_POST['message'];
+	$message = "This is a test from npcb"; //$_POST['message'];
 
 	echo "No Class Approach";
 	curl_setopt_array($curl, array(
@@ -24,7 +24,7 @@
 		CURLOPT_TIMEOUT => 30,
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => "POST",
-		CURLOPT_POSTFIELDS => "{\n  \"personalizations\": [\n    {\n      \"to\": [\n        {\n          \"email\": \"jeremiah.weedenwright@gmail.com\"\n        }\n      ],\n      \"subject\": \"New Contact\"\n    }\n  ],\n  \"from\": {\n    \"email\": \"tnfp-future@thenashvillefoodproject.org\"\n  },\n  \"content\": [\n    {\n      \"type\": \"text/html\",\n      \"value\": \"$name<br>$email<br>$subject<br>$message\"\n    }\n  ]\n}",
+		CURLOPT_POSTFIELDS => "{\n  \"personalizations\": [\n    {\n      \"to\": [\n        {\n          \"email\": \"jeremiah.weedenwright@gmail.com\"\n        }\n      ],\n      \"subject\": \"New Contact\"\n    }\n  ],\n  \"from\": {\n    \"email\": \"test-email@npcb-tester.com\"\n  },\n  \"content\": [\n    {\n      \"type\": \"text/html\",\n      \"value\": \"$name<br>$email<br>$subject<br>$message\"\n    }\n  ]\n}",
 		CURLOPT_HTTPHEADER => array(
 			"authorization: Bearer ".$GLOBALS['sendgrid_api_key'],
 			"cache-control: no-cache",
@@ -42,6 +42,6 @@
 	}
 
 	echo "Class Approach";
-	$results = $email_util->sendEmail("admin@thenashvillefoodproject.org", "Let's do this", "I hope this worked...");
+	$results = $email_util->sendEmail("admin@".$GLOBALS['org_domain'], "Let's do this", "I hope this worked...");
 	echo $results;
 ?>

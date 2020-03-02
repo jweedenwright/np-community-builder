@@ -7,7 +7,7 @@
 <div class="container">
 	<div class="row">
 		<div id="mission-statement" class="col-sm-push-2 col-sm-8 card text-center">
-			<p>Bringing people together to grow, cook and share nourishing food, with the goals of cultivating community and alleviating hunger in our city.</p>
+			<p><?=$GLOBALS['org_mission']?></p>
 		</div>
 	</div>
 	<div class="row">
