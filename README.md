@@ -67,7 +67,13 @@ DB_PASSWORD // From your SQL Database setup
    3. FTP the changed files up to the server.
 
 8. **Set SendGrid for Email**
-   1. 
+   1. Search in Azure for **SendGrid Accounts** and select the item.
+   2. Create a new account and populate all required fields. Keep on the free tier (25k emails a month). Be sure to select the resource group you've been using.
+   3. Once deployed, go to the resource.
+   4. When you are viewing the resource, there is a button that says manage. This will take you to SendGrid. It should auto-authenticate, but if it doesn't, try a second time.
+   5. Click on _Email API_ and then _Integration Guide_.
+   6. Follow the Web API steps until you are able to create an API key.
+   7. Copy the key and paste it into the SEND_GRID_KEY variable we created in step 5.
 
 ### Setting Up A User
 To setup a user in the system:
