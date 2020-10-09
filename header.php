@@ -51,7 +51,7 @@
 							</li>
 							<li>
 								<a href="<?=$root_dir?>/index.php" class="nav-signin-btn">
-									Volunteer Sign In/Out
+									Volunteer Clock In/Out
 								</a>
 							</li>
 						</ul>

@@ -53,7 +53,6 @@
 						<tr class="search-row" data-search="<?=$location["location_name"]?>">
 							<td><?=$location["id"]?></td>
 							<td><?=$location["location_name"]?></td>
-							<td><?=$location["internal"]?></td>
 							<td><?=$location["active"]?></td>
 							<td>							
 								<a href="#" class="edit-location manage-action" data-id="<?=$location["id"]?>" 
@@ -105,10 +104,6 @@
 								<div class="form-group">
 									<label for="loc-name">Location Name</label>
 									<input class="form-control" type="text" id="loc-name" name="loc-name" value="">
-								</div>
-								<div class="form-group">
-									<label for="loc-internal">Internal Use Only? (0 = Volunteers can Use to Book Time / 1 = Internal Only)</label>
-									<input class="form-control" type="text" id="loc-internal" name="loc-internal" value="">
 								</div>
 								<button type="submit" class="btn btn-success">Save changes</button>
 							</form>

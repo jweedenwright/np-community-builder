@@ -22,10 +22,6 @@ function checkEmailCallback(element, results) {
 		var person = results.data[0]; 
 		var first_name = person.firstName;
 		var last_name = person.lastName;
-		// Check and collapse liability boxes (previously logged in)
-		document.getElementById("general-liability-check").checked = true;
-		document.getElementById("photo-release-check").checked = true;
-		document.getElementById("health-release-check-collapse").classList.add("in");
 		
 		// Set first and last name (previously logged in)
 		document.getElementById("first-name").value = first_name;
@@ -33,27 +29,17 @@ function checkEmailCallback(element, results) {
 		// Hide Fields
 		document.getElementsByClassName("first-name")[0].style.display = "none";
 		document.getElementsByClassName("last-name")[0].style.display = "none";
-		document.getElementById("photo-release-check-panel").style.display = "none";
-		document.getElementById("general-liability-check-panel").style.display = "none";
 		document.getElementById("sign-in-opts-accordion").style.display = "none";
 
 		// Change field-error/glyphicon-remove to field-ok/glyphicon-ok
 		flipInputGroupIcon(".email .input-group-addon, .last-name .input-group-addon, .first-name .input-group-addon", "ok");
 	// Failure
 	} else {
-		
-		// Uncheck boxes
-		document.getElementById("general-liability-check").checked = false;
-		document.getElementById("health-release-check").checked = false;
-		document.getElementById("photo-release-check").checked = false;
-
 		// Show fields
 		document.getElementsByClassName("first-name")[0].style.display = "table";
 		document.getElementById("first-name").value = "";
 		document.getElementsByClassName("last-name")[0].style.display = "table";
 		document.getElementById("last-name").value = "";
-		document.getElementById("photo-release-check-panel").style.display = "block";
-		document.getElementById("general-liability-check-panel").style.display = "block";
 		document.getElementById("sign-in-opts-accordion").style.display = "block";
 		
 		// Change field-ok/glyphicon-ok to field-error/glyphicon-remove
@@ -73,12 +59,6 @@ function signIn() {
 	var valid_form = true;
 	
 	// required validations
-	valid_form = document.getElementsByName("general-liability-check")[0].checked;
-	if(!valid_form) { return handleInvalid("Please be sure to accept the general liability form."); }
-	valid_form = document.getElementsByName("health-release-check")[0].checked;
-	if(!valid_form) { return handleInvalid("Please be sure to accept the health release form."); }
-	valid_form = document.getElementsByName("photo-release-check")[0].checked;
-	if(!valid_form) { return handleInvalid("Please be sure to accept the photo release form."); }
 	valid_form = document.getElementsByName("firstname")[0].value !== "";
 	if(!valid_form) { return handleInvalid("Please be sure to provide your first name."); }
 	valid_form = document.getElementsByName("lastname")[0].value !== "";

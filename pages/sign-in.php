@@ -7,7 +7,7 @@
 	// Pull locations
 	$query_string = "SELECT id, location_name
 						FROM location
-						WHERE internal = 0 AND active = 1
+						WHERE active = 1
 						ORDER BY location_name";			
 	$location_results = $db->executeStatement($query_string,[])->fetchAll();
 
@@ -110,6 +110,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- Clock in Time needs to be disabled -->
 					<div class="row">
 						<div class="col-md-12 col-xs-12">
 							<div class="input-group signin-time">
@@ -120,66 +121,15 @@
 					</div>
 				</div>
 			</div>
-
+			<!--
 			<div class="col-xs-12">
-				<div class="panel-group terms" id="accordion">
-					<div id="general-liability-check-panel" class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordion" href="#general-liability-check-collapse" tabindex="8"><i class="glyphicon glyphicon-plus"></i>General Liability *</a>
-							</h4>
-						</div>
-						<div id="general-liability-check-collapse" class="panel-collapse collapse in">
-							<div class="panel-body">
-								<p><?=$liability_release?></p>
-								<div class="col-md-12 col-xs-12 checkbox">
-									<label>
-										<input class="release-handler" type="checkbox" id="general-liability-check" name="general-liability-check" value="1" tabindex="9">Yes, I agree
-									</label>
-								</div>
-								<input type="hidden" name="agree" value="no" />
-							</div>
-						</div>
-					</div>
-					<div id="health-release-check-panel" class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordion" href="#health-release-check-collapse" class="collapsed" tabindex="10"><i class="glyphicon glyphicon-plus"></i>Health Release *</a>
-							</h4>
-						</div>
-						<div id="health-release-check-collapse" class="panel-collapse collapse">
-							<div class="panel-body">
-								<p><?=$health_release?></p>
-								<div class="col-md-12 col-xs-12 checkbox">
-									<label>
-										<input class="release-handler" type="checkbox" id="health-release-check" name="health-release-check" value="1" tabindex="11">Yes, I agree
-									</label>
-								</div>
-								<input type="hidden" name="agree" value="no" />
-							</div>
-						</div>
-					</div>
-					<div id="photo-release-check-panel" class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordion" href="#photo-release-check-collapse" class="collapsed" tabindex="12"><i class="glyphicon glyphicon-plus"></i>Photo Release *</a>
-							</h4>
-						</div>
-						<div id="photo-release-check-collapse" class="panel-collapse collapse">
-							<div class="panel-body">
-								<p><?=$photo_release?></p>
-								<div class="col-md-12 col-xs-12 checkbox">
-									<label>
-										<input class="release-handler" type="checkbox" id="photo-release-check" name="photo-release-check" value="1" tabindex="13">Yes, I agree
-									</label>
-								</div>
-								<input type="hidden" name="agree" value="no" />
-							</div>
-						</div>
-					</div>
+				<div class="hidden panel-group terms">
+					<input class="release-handler" type="checkbox" id="general-liability-check" name="general-liability-check" value="1" tabindex="9">
+					<input class="release-handler" type="checkbox" id="health-release-check" name="health-release-check" value="1" tabindex="11">
+					<input class="release-handler" type="checkbox" id="photo-release-check" name="photo-release-check" value="1" tabindex="13">
 				</div>
 			</div>
-
+			-->
 			<div class="col-xs-12">					
 				<!-- optional fields -->
 				<div class="panel-group accordion" id="sign-in-opts-accordion">

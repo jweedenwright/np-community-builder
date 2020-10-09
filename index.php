@@ -12,8 +12,8 @@
 	</div>
 	<div class="row">
 		<div class="volunteer-btns text-center col-sm-push-3 col-sm-6 col-xs-12">
-			<a tabindex="1" href="<?=$root_dir?>/pages/sign-in.php" class="col-sm-3 form-control line-link success-link">Sign in</a>
-			<a tabindex="2" href="<?=$root_dir?>/pages/sign-out.php" class="col-sm-3 form-control line-link">Sign out</a>
+			<a tabindex="1" href="<?=$root_dir?>/pages/sign-in.php" class="col-sm-3 form-control line-link success-link">Clock In</a>
+			<a tabindex="2" href="<?=$root_dir?>/pages/sign-out.php" class="col-sm-3 form-control line-link">Clock Out</a>
 		</div>
 	</div>
 	<div class="row">
