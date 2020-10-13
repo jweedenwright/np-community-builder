@@ -121,15 +121,6 @@
 					</div>
 				</div>
 			</div>
-			<!--
-			<div class="col-xs-12">
-				<div class="hidden panel-group terms">
-					<input class="release-handler" type="checkbox" id="general-liability-check" name="general-liability-check" value="1" tabindex="9">
-					<input class="release-handler" type="checkbox" id="health-release-check" name="health-release-check" value="1" tabindex="11">
-					<input class="release-handler" type="checkbox" id="photo-release-check" name="photo-release-check" value="1" tabindex="13">
-				</div>
-			</div>
-			-->
 			<div class="col-xs-12">					
 				<!-- optional fields -->
 				<div class="panel-group accordion" id="sign-in-opts-accordion">

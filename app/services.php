@@ -16,7 +16,7 @@
 		$service = $_GET['service'];
 
 //////////////////////
-// LOCATIONS npcb-service.php?service=locations
+// LOCATIONS /app/services.php?service=locations
 //////////////////////
 		if ($service === "locations") {
 			// Query locations
@@ -39,7 +39,7 @@
 			$data = '{ "status":"Success", "service":"'.$service.'", "data":'.$json_result.'}';
 
 //////////////////////
-// JOB TYPES npcb-service.php?service=job_type
+// JOB TYPES  /app/services.php?service=job_type
 //////////////////////
 		} else if ($service === "job_type") {
 			// Query Job Types
@@ -60,7 +60,7 @@
 			$data = '{ "status":"Success", "service":"'.$service.'", "data":'.$json_result.'}';
 
 //////////////////////
-// PREVIOUS USERS npcb-service.php?service=users
+// PREVIOUS USERS  /app/services.php?service=check_email
 //////////////////////
 		} else if ($service === "check_email") {
 			// Check for email

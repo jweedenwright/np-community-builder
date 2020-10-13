@@ -82,13 +82,6 @@ function signIn() {
 	var task_item = document.getElementsByName("task")[0];
 	valid_form = (/^[0-9]*$/).test(task_item.options[task_item.selectedIndex].value);
 	if(!valid_form) { return handleInvalid("Please be sure to select a program."); }
-	
-	// Check non-req field validation
-	var emer_phone = document.getElementsByName("emergency-phone-number")[0].value;
-	if (emer_phone !== "") {
-		valid_form = (/[0-9]{3}-[0-9]{3}-[0-9]{4}/).test(emer_phone);
-		if(!valid_form) { return handleInvalid("Please be sure your emergency contact info is in the xxx-xxx-xxxx format."); }
-	}
 
 	if (valid_form) {
 		// AJAX Post to PHP
@@ -96,13 +89,14 @@ function signIn() {
 			type: "POST",
 			url: signin_url,
 			data: $("#sign-in-form").serialize(), // serializes the form's elements.
-			success: function(data) {
-				if (data.indexOf("ERROR") !== -1) {
+			success: function (data) {
+				
+				//if (data.indexOf("ERROR") !== -1) {
 					$(".danger").html(data);
-				} else {
+				//} else {
 					// Redirect to thank you
-					location.href = 'thank-you.php';
-				}
+				//	location.href = 'thank-you.php';
+				//}
 			}
 		});
 	}

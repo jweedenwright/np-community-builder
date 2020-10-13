@@ -16,7 +16,7 @@
 		//////////////////////
 
 		// Do the query (from logic above)
-		$hours_to_add = 2;
+		$hours_to_add = 4;
 		$error_occurred = false;
 		$error_string = "";
 
@@ -26,7 +26,7 @@
 							." WHERE vp.check_in_time = vp.check_out_time";
 		$logged_in_results = $db->executeStatement($logged_in_query, [])->fetchAll();	
 		
-		// For each of those, update with 2+ hours
+		// For each of those, update with 4+ hours
 		foreach ($logged_in_results as $result) {
 			$vp_id = $result['id'];
 			// Calculate time

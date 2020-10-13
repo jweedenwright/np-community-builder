@@ -30,44 +30,42 @@
 				<h1><?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?></h1>
 				<ul>
 					<li><strong>Email Address</strong> - <?=$volunteer["email"]?></li>
-					<li><strong>Emergency Contact</strong> - <?=$volunteer["emergency_contact_phone"]?></li>
 					<li><strong>Skills</strong> - <?=$volunteer["skills"]?></li>
 					<li><strong>Interests</strong> - <?=$volunteer["interests"]?></li>
 					<li><strong>Availability</strong> - <?=$volunteer["availability"]?></li>
 					<li><strong>How did you find out about us</strong> - <?=$volunteer["find_out_about_us"]?></li>
-
 					<?php
 						$email_dist = 'Yes';
-
 						if($volunteer["include_email_dist"] == 0){
 							$email_dist = 'No';
 						}
-
-						$volunteer_time = $vol_periods[0];
-						$vol_start_date = date_parse_from_format ( $sql_date_format , $volunteer_time["check_in_time"]);
-						$start_date = $vol_start_date["month"] . "-" . $vol_start_date["day"] . "-" . $vol_start_date["year"];
-						$current_year =  date("Y");
-						$vol_duration = $current_year - $vol_start_date["year"];
-						if ($vol_duration < 1) {
-							$vol_duration = "<1";
+					?>
+					<li><strong>Email Distribution</strong> - <?=$email_dist?></li>
+					<?php
+						if(sizeof($vol_periods) > 0) {
+							$volunteer_time = $vol_periods[0];
+							$vol_start_date = date_parse_from_format ( $sql_date_format , $volunteer_time["check_in_time"]);
+							$start_date = $vol_start_date["month"] . "-" . $vol_start_date["day"] . "-" . $vol_start_date["year"];
+							$current_year =  date("Y");
+							$vol_duration = $current_year - $vol_start_date["year"];
+							if ($vol_duration < 1) {
+								$vol_duration = "<1";
+							}
+						?>
+							<li><strong>Volunteer since</strong> <?=$start_date?> (<?=$vol_duration?> year(s))</li>
+						<?php
 						}
 					?>
 
-					<li><strong>Email Distribution</strong> - <?=$email_dist?></li>
-					<li><strong>Volunteer since</strong> <?=$start_date?> (<?=$vol_duration?> year(s))</li>
-
 					<?php
+						$total_time = 0;
 						$total_visits = sizeof($vol_periods);
-
 						if ($total_visits > 0) {
-							$total_time = 0;
-
 							foreach ($vol_periods as $vol_period) {
 								$total_time = $total_time + $vol_period["hours"];
 							}
 						}
 					?>
-				
 					<li><strong>Activity</strong> - <?=$total_time?> hours and <?=$total_visits?> visits</li>
 				</ul>
 				<!-- Retrieve volunteer periods -->
@@ -219,10 +217,6 @@
 								<div class="form-group">
 									<label for="ln">Last Name</label>
 									<input class="form-control" type="text" id="ln" name="ln" value="<?=$volunteer["last_name"]?>">
-								</div>
-								<div class="form-group">
-									<label for="phone">Emergency Contact Number</label>
-									<input class="form-control" type="text" id="phone" name="phone" value="<?=$volunteer["emergency_contact_phone"]?>">
 								</div>
 								<div class="form-group">
 									<label for="skills">Skills</label>

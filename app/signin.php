@@ -3,7 +3,11 @@
 	// Checkin Page for Volunteers
 	// - Form POSTS to this page
 	//////////////////////
-	
+
+	// Error display
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+		
 	// Setup Globals
 	include_once 'global.php';
 	
@@ -17,12 +21,6 @@
 		?> <p class='alert alert-danger'>First name is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 	} elseif(!isset($_POST['lastname'])) {
 		?> <p class='alert alert-danger'>Last name is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
-	} elseif(!isset($_POST['general-liability-check'])) {
-		?> <p class='alert alert-danger'>Volunteers must accept the general liability terms. <span class="hidden">ERROR: Missing field</span></p> <?php
-	} elseif(!isset($_POST['health-release-check'])) {
-		?> <p class='alert alert-danger'>Volunteers must accept the health release terms. <span class="hidden">ERROR: Missing field</span></p> <?php
-	} elseif(!isset($_POST['photo-release-check'])) {
-		?> <p class='alert alert-danger'>Volunteers must record a choice on the photo release terms. <span class="hidden">ERROR: Missing field</span></p> <?php
 	} elseif(!isset($_POST['signintime'])) {
 		?> <p class='alert alert-danger'>Datetime is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 	} elseif(!isset($_POST['location'])) {
@@ -37,13 +35,14 @@
 		$first_name = strtolower ( filter_var ( $_POST['firstname'], FILTER_SANITIZE_STRING));
 		$last_name = strtolower ( filter_var ( $_POST['lastname'], FILTER_SANITIZE_STRING));
 		$email = strtolower ( filter_var ( $_POST['email'], FILTER_SANITIZE_STRING));
-		$liability_check = (int) filter_var ( $_POST['general-liability-check'], FILTER_SANITIZE_STRING);
-		$health_check = (int) filter_var ( $_POST['health-release-check'], FILTER_SANITIZE_STRING);
-		$photo_check = (int) filter_var ( $_POST['photo-release-check'], FILTER_SANITIZE_STRING);
 		$signin_date = filter_var ( $_POST['signintime'], FILTER_SANITIZE_STRING); // 02/07/2017 6:48 PM
 		$location_id = (int) filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
 		$task_id = (int) filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
 		$first_time = 0;
+		// Removed from UI for BGCRC - set to 1 by default
+		$liability_check = 1;
+		$health_check = 1;
+		$photo_check = 1;
 
 		$affiliation = "";
 		if(isset($_POST['affiliation'])) {
@@ -52,10 +51,6 @@
 		$community_service = 0;
 		if(isset($_POST['community-service'])) {
 			$community_service = (int) filter_var ( $_POST['community-service'], FILTER_SANITIZE_STRING);
-		}
-		$emergency_phone_number = "";
-		if(isset($_POST['emergency-phone-number'])) {
-			$emergency_phone_number = filter_var ( $_POST['emergency-phone-number'], FILTER_SANITIZE_STRING);
 		}
 		$skills = "";
 		if(isset($_POST['skills'])) {
@@ -69,7 +64,7 @@
 		if(isset($_POST['include-email-dist'])) {
 			$include_email_dist = (int) filter_var ( $_POST['include-email-dist'], FILTER_SANITIZE_STRING);
 		}
-	
+
 		//////////////////////
 		// Format any values for DB
 		//////////////////////
@@ -85,11 +80,12 @@
 		$process_fail = false;
 		$check_query = "SELECT id FROM volunteer WHERE email = ?";
 		$results = $db->executeStatement($check_query, array($email))->fetchAll();
+
 		// Without fetchAll, result count won't be checked
 		if (sizeof($results) == 0) {
 			// Didn't find anyone with a matching email - insert the new volunteer
-			$volunteer_insert = "INSERT INTO volunteer (first_name,last_name,email,skills,emergency_contact_phone,interests,availability,find_out_about_us,include_email_dist)"
-				." VALUES ('".$first_name."','".$last_name."','".$email."','".$skills."','".$emergency_phone_number."','','','".$find_out_about_us."',".$include_email_dist.")";
+			$volunteer_insert = "INSERT INTO volunteer (first_name,last_name,email,skills,interests,availability,find_out_about_us,include_email_dist)"
+				." VALUES ('".$first_name."','".$last_name."','".$email."','".$skills."','','','".$find_out_about_us."',".$include_email_dist.")";
 			if ($db->executeStatement($volunteer_insert,[])) {
 				// Success - query to get id
 				$new_volunteer = "SELECT id FROM volunteer WHERE email = ?";
@@ -109,7 +105,7 @@
 			$volunteer_row = $results[0];
 			$volunteer_id = $volunteer_row['id'];
 		}
-
+		
 		//////////////////////
 		// Insert Volunteer Period
 		// - Be sure to make sure they have not signed in already today!

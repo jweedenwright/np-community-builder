@@ -41,7 +41,6 @@
 						<tr>
 							<th>ID</th>
 							<th>Location Name</th>
-							<th>Internal Use Only</th>
 							<th>Is Active</th>
 							<th></th>
 						</tr>
@@ -57,7 +56,6 @@
 							<td>							
 								<a href="#" class="edit-location manage-action" data-id="<?=$location["id"]?>" 
 															data-name="<?=$location["location_name"]?>" 
-															data-internal="<?=$location["internal"]?>"
 															data-toggle="modal" 
 															data-target="#edit-details" 
 															onclick="editLocation(this); return false;">

@@ -20,7 +20,6 @@
 		// Pull locations
 		$query_string = "SELECT id, location_name
 							FROM location
-							WHERE internal = 0
 							ORDER BY location_name";			
 		$location_results = $db->executeStatement($query_string,[])->fetchAll();
 		// Pull Job Types
@@ -38,7 +37,7 @@
 			$query_string = strtoupper(filter_var ( $_GET['search-vols'], FILTER_SANITIZE_STRING));
 			$all_vols = "SELECT DISTINCT v.id, v.first_name, v.last_name, v.email
 					 		FROM volunteer v
-							JOIN volunteer_period vp on vp.volunteer_id = v.id
+							LEFT JOIN volunteer_period vp on vp.volunteer_id = v.id
 							WHERE v.email LIKE '%".$query_string."%'
 							OR v.first_name LIKE '%".$query_string."%'
 							OR v.last_name LIKE '%".$query_string."%'
