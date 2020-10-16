@@ -25,7 +25,7 @@
 					<?php if (isset($_SESSION['email'])) { ?>
 						<div class="staff-log-out">
 							<a href="<?=$root_dir?>/pages/logout.php">
-								Staff Log Out
+								Log Out
 							</a>
 						</div>
 					<?php } ?>
@@ -36,17 +36,7 @@
 						<ul>
 							<li>
 								<a href="<?=$root_dir?>/pages/dashboard.php">
-									Staff Dashboard
-								</a>
-							</li>
-							<li>
-								<a href="<?=$root_dir?>/pages/manage.php">
-									Manage
-								</a>
-							</li>
-							<li>
-								<a href="<?=$root_dir?>/pages/bulk.php">
-									Bulk Sign In
+									Dashboard
 								</a>
 							</li>
 							<li>
