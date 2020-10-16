@@ -94,3 +94,9 @@ gulp css
 ```
 gulp js
 ```
+
+## Boys and Girls Club of Rutherford County
+
+### Database Schema
+
+![Image](BGCRC-ER-Diagram.png)
