@@ -99,4 +99,4 @@ gulp js
 
 ### Database Schema
 
-![Image](BGCRC-ER-Diagram.png)
+![Image](BGCRC-ER-Diagram.png?raw=true)
