@@ -84,7 +84,7 @@ To setup a user in the system:
 
 ### Modifying Styles or JavaScript
 The styles (CSS) and JavaScript are built via [gulp.js](https://gulpjs.com/) in the root folder gulpfile.js. 
-* Global styles are all in the /css/style.css file.
+* Global styles are all in the /css/style.css file. All styles are compiled to /css/app.min.css.
 * For CSS changes, you would run the following from the command line in the root directory of the project to concatenate all files.
 ```
 gulp css
