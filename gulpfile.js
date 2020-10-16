@@ -19,11 +19,28 @@ js_files = ["\\js\\vendor\\jquery-1.11.2.min.js"
     , "\\js\\manage.js"
 ]
 
+// CSS files that need to be concatenated
+css_files = ["\\css\\vendor\\bootstrap.min.css"
+    , "\\css\\vendor\\bootstrap-theme.min.css"
+    , "\\css\\vendor\\bootstrap-datetimepicker.min.css"
+    , "\\css\\style.css"
+]
+
 // Generic function to run concatenation of JavaScript files
-function concat_js_files(src_arr, filename) {
+function concat_files(src_arr, filename) {
 	return gulp.src(src_arr)
 		.pipe(concat(filename))
 		.pipe(gulp.dest('.'));
+}
+
+// Concat function for running JavaScript Only
+function build_js() {
+    return concat_files(js_files, "\\js\\main.min.js")
+}
+
+// Concat function for running JavaScript Only
+function build_css() {
+    return concat_files(css_files, "\\css\\app.min.css")
 }
 
 // Concat function for running all
@@ -34,12 +51,8 @@ function pass_param() {
     });
 }
 
-// Concat function for running JavaScript Only
-function build_js() {
-    return concat_js_files(js_files, "\\js\\main.min.js")
-}
-
 // Setup of concat function. From command line type: gulp concat
 // Minification is not done here as once we put the code into a Tag in GTM, GTM does it's own minification
 exports.default = pass_param;
 exports.js = build_js;
+exports.css = build_css;
