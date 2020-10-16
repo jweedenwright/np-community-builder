@@ -5,7 +5,6 @@ var service_url = protocol + "//" + domain + "/app/services.php?service=";
 var signin_url = protocol + "//" + domain + "/app/signin.php";
 var signout_url = protocol + "//" + domain + "/app/signout.php";
 var quick_signin = $("#quick-sign-in-name");
-var code_version = "2.1.1";
 
 //////////////////////
 // AUTOPOPULATE DATES
@@ -31,16 +30,13 @@ function clearErrorMsgs() {
 	}
 }
 
-// for auto populating fields
+// for auto populating fields :-)
 function botamatic() {
 	$("input[name='firstname']").val("Rusty");
 	$("input[name='lastname']").val("Von Shackleford");
 	$("input[name='email']").val("backwoods007@shackleford.edu");
 	document.getElementById('location').value = 3;
 	document.getElementById('task').value = 2;	
-	$(".release-handler").each(function () {
-		$(this).prop("checked", true);
-	});
 }
 
 // Get URL parameters
@@ -61,7 +57,7 @@ function getParameterByName(name, url) {
 }
 
 // Set input group addon values
-// Check off that req field is now valid
+// Switches required field indicators from ERROR to OK if text entered 
 function flipInputGroupIcon(querySelector, status) {
 	var field_inputs = document.querySelectorAll(querySelector);
 	for (var i = 0; i < field_inputs.length; i++) {
@@ -95,4 +91,34 @@ function post(path, params, method) {
 	}
 	document.body.appendChild(form);
 	form.submit();
+}
+
+// Setting preferences from the index page
+function setPreferences() {
+	// Get location and store in local storage
+	if (typeof (Storage) !== "undefined") {
+		var location_value = document.getElementById("location").value;
+		if (location_value !== "") {
+			localStorage.setItem("location", location_value);
+		}
+		document.getElementById("prefs-set").innerHTML = "<p>Preferences Set!</p>";
+	} else {
+		document.getElementById("prefs-failed").innerHTML = "<p>Sorry! This browser doesn't support local storage or setting of preferences!</p>";
+	}
+}
+
+// Checking preferences setup on the index page
+function checkPreferences() {
+	// Check for preferences
+	if (typeof (Storage) !== "undefined" && window.location.pathname.indexOf("dashboard.php") === -1) {
+		var location_value = localStorage.location;
+		if (location_value !== undefined && location_value !== "") {
+			var element = document.getElementById('location');
+			if (element !== null && element !== undefined) {
+				element.value = location_value;
+				// Check off that req field is now valid
+				flipInputGroupIcon(".location .input-group-addon", "ok");
+			}
+		}
+	}
 }

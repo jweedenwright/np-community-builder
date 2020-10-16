@@ -133,6 +133,11 @@ function setupPaginationNavigation(selected_page, number_of_items, per_page) {
 	}
 }
 
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+//
+// PRIMARY PAGINATION FUNCTION
+//
 // Initially used to setup pages and pagination
 // - item_selector - CSS/jQuery selector to select all items needing pagination
 // - pagination_html_container_selector - CSS/jQuery selector to select container

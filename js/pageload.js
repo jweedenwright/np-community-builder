@@ -5,6 +5,7 @@
 // For safari specific functionality
 var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
 
+// On load
 window.addEventListener("load",function() {
 
 	// Check for hours passed in the URL
@@ -14,10 +15,10 @@ window.addEventListener("load",function() {
 		$("#hours-worked").show();
 	}
 	
-	// Botomatic for testing
+	// Botomatic (in global.js) - used for testing
 	//botamatic();
 	
-	// Setup datetime picker / check for status page
+	// Setup datetime picker defaults / check for status page
 	if (document.getElementById("startdate-default")) {
 		var default_start_date = document.getElementById("startdate-default").value;
 	}
@@ -51,12 +52,14 @@ window.addEventListener("load",function() {
 	} else {		
 		$(".datetime-picker").datetimepicker(default_datetime_picker_options);
 	}
-	// Check / Set preferences
+
+	// Check / Set preferences - preferences currently is only the default location set at clock in
 	checkPreferences();
 
 	//////////////////////
 	// SERVICE CALLS
 	//////////////////////
+	// Make calls to the service for all items matching the npcb-service class on the page and load the data
 	var service_calls = $(".npcb-service");
 	for (var i = 0; i < service_calls.length; i++) {
 		var service_call = service_calls[i];
@@ -85,15 +88,6 @@ window.addEventListener("load",function() {
 	});
 	$(".datetime-picker").focus().blur();
 	$("#quick-sign-in-name").focus();
-
-	// Setup on change for organization
-	$("#organization").on("change",function() {
-		if ($(this).val() !== "") {
-			flipInputGroupIcon(".organization .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".organization .input-group-addon", "error");
-		}
-	});
 
 	// Setup on change for task drop down
 	$("#task").on("change",function() {
@@ -139,63 +133,8 @@ window.addEventListener("load",function() {
 			flipInputGroupIcon(".last-name .input-group-addon", "error");
 		}
 	});
-	
-	// Expand / Collapse release forms sections
-	$(".release-handler").on("click",function() {
-
-		// Remove in on ALL to cover our bases
-		$(".panel-collapse").each(function() {
-			$(this).removeClass("in");
-		});
-
-		// Remove and add 'in' to expand/collapse
-		var parents = $(this).parents(".panel-collapse");
-		if (parents.length > 0) {
-			// Remove the in, collapsing the panel
-			var parent_item = parents[0];
-			$(parent_item).removeClass("in");
-			$(parent_item).siblings().find("a").addClass("collapsed");
-
-			// Go up another level to find the next panel
-			var panel_items = $(parent_item).parents(".panel");
-			if (panel_items.length > 0) {
-				// get next panel
-				var panel_item = panel_items[0];
-				var next_items = $(panel_item).next(".panel");
-				if (next_items.length > 0) {
-					// We have another panel, expand it
-					var next_item = next_items[0];
-					$($(next_item).children(".panel-heading")[0]).find("a").removeClass("collapsed");
-					$($(next_item).children(".panel-collapse")[0]).addClass("in");
-				}
-			}
-		}
-	});
-	
+		
 	// Scroll to top
 	jQuery('html,body').animate({scrollTop:0},200);
-	
-	//////////////////////////////////
-	// PAGE SPECIFIC LOGIC - Bulk Page
-	$(".add-attendee").on("click", function() {
-		var attendee_count = document.getElementsByClassName("attendee").length,
-			attendee_wrapper = $("#bulk-import .attendee-wrap"),
-			attendee_field_wrapper = $("<div id=\"attendee" + attendee_count + "\" class=\"row attendee\">"),
-			attendee_email = $("<div class=\"form-group col-sm-3\"><label for=\"email\">Email</label><input type=\"text\" class=\"form-control\" id=\"quick-sign-in-name\" name=\"email\" autocomplete=\"on\" placeholder=\"Enter an email\"></div>"),
-			attendee_first_name = $("<div class=\"form-group col-sm-3\"><label for=\"firstName\">First Name</label><input type=\"text\" class=\"form-control\" id=\"firstName\" name=\"firstName\" autocomplete=\"on\" placeholder=\"First Name\"></div>"),
-			attendee_last_name = $("<div class=\"form-group col-sm-3\"><label for=\"lastName\">Last Name</label><input type=\"text\" class=\"form-control\" id=\"lastName\" name=\"lastName\" autocomplete=\"on\" placeholder=\"Last Name\"></div>"),
-			attendee_removal = $("<div class=\"pull-left\"><button type=\"button\" class=\"remove btn btn-default active\"><i class='glyphicon glyphicon-minus' aria-hidden=\"true\"></i><span class=\"sr-only\">Remove a field</span></button></div>");
 
-		attendee_field_wrapper.append(attendee_email);
-		attendee_field_wrapper.append(attendee_first_name);
-		attendee_field_wrapper.append(attendee_last_name);
-		attendee_field_wrapper.append(attendee_removal);
-		attendee_wrapper.append(attendee_field_wrapper);
-		// Set the focus
-		$('.attendee').last().find('input').first().focus();
-
-		$(".attendee-wrap .remove").on("click", function() {
-			$(this).parents(".attendee").remove();
-		});
-	});
 });

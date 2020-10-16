@@ -1,4 +1,5 @@
 // Fires for all NPCB service call attribures on page load
+// -> fired on page load in pageload.js 
 function loadServiceData(element, service, callback, url_params) {
 	var supported_services = ["locations", "job_type","check_email"];
 	var url = service_url;
@@ -8,7 +9,6 @@ function loadServiceData(element, service, callback, url_params) {
 	if (url_params !== "") {
 		url = url + "&" + url_params;
     }
-    console.log(url);
 	$.get(url, function(results) {
 		// Load the options up!
 		results = JSON.parse(results);

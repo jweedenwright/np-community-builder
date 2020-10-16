@@ -1,3 +1,5 @@
+// Manage Pages JavaScript
+
 // Update a Location Modal
 function editLocation(location_sel) {
 	var id = $(location_sel).data("id");
@@ -9,44 +11,6 @@ function editLocation(location_sel) {
 		$("#loc-name").attr("value", "");
 		$("#loc-internal").attr("value", "");
 		$("#loc-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
-	}
-}
-
-// Update a Measure Type
-function editMeasureType(mt_sel) {
-	var id = $(mt_sel).data("id");
-	if (id !== "new") {
-		$("#mt-name").attr("value", $(mt_sel).data("name"));	
-		$("#mt-type").val($(mt_sel).data("type"));
-		$("#mt-id").attr("value", id);
-	} else {
-		$("#mt-name").attr("value", "");
-		$("#mt-type").val("");
-		$("#mt-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
-	}
-}
-
-// Update a Metric Category
-function editMetricCategory(mc_sel) {
-	var id = $(mc_sel).data("id");
-	if (id !== "new") {
-		$("#mc-name").attr("value", $(mc_sel).data("name"));
-		$("#mc-id").attr("value", id);
-	} else {
-		$("#mc-name").attr("value", "");
-		$("#mc-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
-	}
-}
-
-// Update a Program Modal
-function editProgram(prog_sel) {
-	var id = $(prog_sel).data("id");
-	if (id !== "new") {
-		$("#program-name").attr("value", $(prog_sel).data("name"));
-		$("#program-id").attr("value", id);
-	} else {
-		$("#program-name").attr("value", "");
-		$("#program-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
 	}
 }
 
@@ -82,6 +46,7 @@ function deactivate(item_to_deactivate) {
 		return handleInvalid("Deactivation of " + type + " cancelled.");
 	}
 }
+
 // Activate
 function activate(item_to_activate) {
 	var id = item_to_activate.dataset.id;
