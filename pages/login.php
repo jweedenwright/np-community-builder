@@ -1,12 +1,13 @@
 <?php
 	include_once '../app/global.php';
-
-	//	Header
-	$page_title = "Login";
-	include_once '../header.php';
-
-	//	Require login
-	if (!isset($_SESSION['email'])) {
+	
+	//	Check if already logged in
+	if (isset($_SESSION['email'])) {
+		//	Session variables already set - move forward to the dashboard
+		header("Location: " . $dashboard_url);
+	
+	} else {
+		//	Globals
 		$email = "";
 		$password = "";
 		$message = "";
@@ -96,6 +97,9 @@
 			$message_class = "hide-it";
 		}
 
+		// If here and not redirected, either initial login or login failed. Load the header.
+		$page_title = "Login";
+		include_once '../header.php';
 ?>
 	<div class="container">
 		<div class="row">
@@ -141,8 +145,5 @@
 	</div>
 <?php
 		include_once '../footer.php';
-	} else {
-		//	Session variables already set - move forward to the dashboard
-		header("Location: " . $dashboard_url);
 	}
 ?>
