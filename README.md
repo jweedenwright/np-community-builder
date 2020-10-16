@@ -83,14 +83,14 @@ To setup a user in the system:
 4. Reset your password on that page and you'll be set.
 
 ### Modifying Styles or JavaScript
-The styles (CSS) and JavaScript are built via [gulp.js](https://gulpjs.com/) in the root folder gulpfile.js.
-
-Once you make modifications to CSS in the /css/style.css (all site styles should be in this file) or to the any of the JavaScript files in /js, you can run the following commands to concatenate all files together:
-* For CSS, you would run the following from the command line in the root directory of the project and all CSS is concatenated to /css/app.min.css
+The styles (CSS) and JavaScript are built via [gulp.js](https://gulpjs.com/) in the root folder gulpfile.js. 
+* Global styles are all in the /css/style.css file.
+* For CSS changes, you would run the following from the command line in the root directory of the project to concatenate all files.
 ```
 gulp css
 ```
-* For JavaScript, you would run the following from the command line in the root directory of the project and all JavaScript is concatenated to /js/main.min.js
+* All JavaScript files are in the /js folder and are compiled to /js/main.min.js.
+* For JavaScript changes, you would run the following from the command line in the root directory of the project to concatenate all files.
 ```
 gulp js
 ```
