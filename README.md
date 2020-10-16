@@ -100,3 +100,14 @@ gulp js
 ### Database Schema
 
 ![Image](BGCRC-ER-Diagram.png?raw=true)
+
+* **location** - Holds a list of all locations for BGCRC. Should only be allowed to be managed in the app by staff or admins.
+* **job_type** - Known as *tasks*, holds a list of all tasks for BGCRC. Should only be allowed to be managed in the app by staff or admins.
+* **event** - Used in situations where a *one-time event* is occurring. User's should be able to choose the one-time event they are signing into. The default is 'General'.
+* **feedback** - Table used to hold feedback from a user clocking out (signing out).
+* **volunteer_period** - Associates a volunteer to a period of time in which they volunteered. Includes references to location, event, task, and their feedback of the event.
+* **volunteer** - Primary table for holding all details around a volunteer. App_users can be volunteers, hence the connection between the 2 tables.
+* **address** - Holds a single address for each volunteer (REQUIRED for each volunteer)
+* **emergency_contact** - Holds a single emergency contact for each volunteer (REQUIRED for each volunteer)
+* **app_user** - an entry in this table is required to login to the system. Long-term volunteers and interns would need to be in this table. 
+* **user_type** - indicates whether a user is admin, staff, intern, or volunteer
