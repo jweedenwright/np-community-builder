@@ -36,22 +36,43 @@ INSERT INTO dbo.volunteer (id,first_name,middle_name,last_name,suffix,email,phon
 INSERT INTO dbo.volunteer (id,first_name,middle_name,last_name,suffix,email,phone,dob,skills,interests,availability,find_out_about_us,include_email_dist,active) VALUES(2,'Chelsey','','Curtis','','recruitment@bgcrc.net','615-111-1111','20000101','','','','',1,1);
 INSERT INTO dbo.volunteer (id,first_name,middle_name,last_name,suffix,email,phone,dob,skills,interests,availability,find_out_about_us,include_email_dist,active) VALUES(3,'Jeremiah','D','Weeden-Wright','','jeremiah.weedenwright@gmail.com','615-111-1111','20000101','','','','',1,1);
 INSERT INTO dbo.volunteer (id,first_name,middle_name,last_name,suffix,email,phone,dob,skills,interests,availability,find_out_about_us,include_email_dist,active) VALUES(4,'Carson','','Kuhl','','Carson.Kuhl@hcahealthcare.com','615-111-1111','20000101','','','','',1,1);
+INSERT INTO dbo.volunteer (id,first_name,middle_name,last_name,suffix,email,phone,dob,skills,interests,availability,find_out_about_us,include_email_dist,active) VALUES(5,'Emily','','Collins','','emily.collins@infoworks-tn.com','615-111-1111','20000101','','','','',1,1);
+INSERT INTO dbo.volunteer (id,first_name,middle_name,last_name,suffix,email,phone,dob,skills,interests,availability,find_out_about_us,include_email_dist,active) VALUES(6,'Raja','','Karnati','','raja.karnati@hcahealthcare','615-111-1111','20000101','','','','',1,1);
+INSERT INTO dbo.volunteer (id,first_name,middle_name,last_name,suffix,email,phone,dob,skills,interests,availability,find_out_about_us,include_email_dist,active) VALUES(7,'Adam','','Alvis','','aalvis@deloitte','615-111-1111','20000101','','','','',1,1);
+INSERT INTO dbo.volunteer (id,first_name,middle_name,last_name,suffix,email,phone,dob,skills,interests,availability,find_out_about_us,include_email_dist,active) VALUES(8,'Kishan','','Patel','','kpatel@genospace','615-111-1111','20000101','','','','',1,1);
+INSERT INTO dbo.volunteer (id,first_name,middle_name,last_name,suffix,email,phone,dob,skills,interests,availability,find_out_about_us,include_email_dist,active) VALUES(9,'Karla','','Ramirez','','kramirezmal@gmail','615-111-1111','20000101','','','','',1,1);
 SET IDENTITY_INSERT dbo.volunteer OFF
 
+-- Setup Addresses
 INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES(1,'101 N 1st','','Nashville','TN','37215');
 INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES(2,'105 N 1st','','Nashville','TN','37215');
 INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES(3,'105 N 1st','','Nashville','TN','37215');
 INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES(4,'107 N 1st','','Nashville','TN','37215');
+INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES(5,'101 N 1st','','Nashville','TN','37215');
+INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES(6,'105 N 1st','','Nashville','TN','37215');
+INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES(7,'105 N 1st','','Nashville','TN','37215');
+INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES(8,'107 N 1st','','Nashville','TN','37215');
+INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES(9,'101 N 1st','','Nashville','TN','37215');
 
+-- Setup Emergency Contacts
 INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES(1,'Emergency','Contact','615-333-3333');
 INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES(2,'Emergency','Contact','615-333-3333');
 INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES(3,'Emergency','Contact','615-333-3333');
 INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES(4,'Emergency','Contact','615-333-3333');
+INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES(5,'Emergency','Contact','615-333-3333');
+INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES(6,'Emergency','Contact','615-333-3333');
+INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES(7,'Emergency','Contact','615-333-3333');
+INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES(8,'Emergency','Contact','615-333-3333');
+INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES(9,'Emergency','Contact','615-333-3333');
 
 -- Setup Default admins
 INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('Shalonda.Brown@bgcrc.net','tester', '2020-10-16',1,1,1);
 INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('recruitment@bgcrc.net','tester', '2020-10-16',1,2,1);
 INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('jeremiah.weedenwright@gmail.com','tester', '2020-10-16',1,3,1);
-INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('iwilson0722@gmail.com','tester', '2020-10-16',1,4,1);
-
+INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('Carson.Kuhl@hcahealthcare.com','tester', '2020-10-16',1,4,1);
+INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('emily.collins@infoworks-tn.com','tester', '2020-10-16',1,5,1);
+INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('raja.karnati@hcahealthcare.com','tester', '2020-10-16',1,6,1);
+INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('aalvis@deloitte.com','tester', '2020-10-16',1,7,1);
+INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('kpatel@genospace.com','tester', '2020-10-16',1,8,1);
+INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('kramirezmal@gmail.com','tester', '2020-10-16',1,9,1);
 SELECT * from dbo.location
