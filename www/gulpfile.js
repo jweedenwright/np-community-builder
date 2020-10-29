@@ -3,27 +3,27 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 
 // JavaScript files that need to be concatenated
-js_files = ["\\js\\vendor\\jquery-1.11.2.min.js"
-    , "\\js\\vendor\\bootstrap.min.js"
-    , "\\js\\vendor\\moment.min.js"
-    , "\\js\\vendor\\bootstrap-datetimepicker.min.js"
-    , "\\js\\global.js"
-    , "\\js\\callbacks.js"
-    , "\\js\\services.js"
-    , "\\js\\signin.js"
-    , "\\js\\signout.js"
-    , "\\js\\pageload.js"
-    , "\\js\\pagination.js"
-    , "\\js\\report.js"
-    , "\\js\\login.js"
-    , "\\js\\manage.js"
+js_files = ["*(\/|\\)js*(\/|\\)vendor*(\/|\\)jquery-1.11.2.min.js"
+    , "*(\/|\\)js*(\/|\\)vendor*(\/|\\)bootstrap.min.js"
+    , "*(\/|\\)js*(\/|\\)vendor*(\/|\\)moment.min.js"
+    , "*(\/|\\)js*(\/|\\)vendor*(\/|\\)bootstrap-datetimepicker.min.js"
+    , "*(\/|\\)js*(\/|\\)global.js"
+    , "*(\/|\\)js*(\/|\\)callbacks.js"
+    , "*(\/|\\)js*(\/|\\)services.js"
+    , "*(\/|\\)js*(\/|\\)signin.js"
+    , "*(\/|\\)js*(\/|\\)signout.js"
+    , "*(\/|\\)js*(\/|\\)pageload.js"
+    , "*(\/|\\)js*(\/|\\)pagination.js"
+    , "*(\/|\\)js*(\/|\\)report.js"
+    , "*(\/|\\)js*(\/|\\)login.js"
+    , "*(\/|\\)js*(\/|\\)manage.js"
 ]
 
 // CSS files that need to be concatenated
-css_files = ["\\css\\vendor\\bootstrap.min.css"
-    , "\\css\\vendor\\bootstrap-theme.min.css"
-    , "\\css\\vendor\\bootstrap-datetimepicker.min.css"
-    , "\\css\\style.css"
+css_files = ["*(\/|\\)css*(\/|\\)vendor*(\/|\\)bootstrap.min.css"
+    , "*(\/|\\)css*(\/|\\)vendor*(\/|\\)bootstrap-theme.min.css"
+    , "*(\/|\\)css*(\/|\\)vendor*(\/|\\)bootstrap-datetimepicker.min.css"
+    , "*(\/|\\)css*(\/|\\)style.css"
 ]
 
 // Generic function to run concatenation of JavaScript files
@@ -35,12 +35,12 @@ function concat_files(src_arr, filename) {
 
 // Concat function for running JavaScript Only
 function build_js() {
-    return concat_files(js_files, "\\js\\main.min.js")
+    return concat_files(js_files, "*(\/|\\)js*(\/|\\)main.min.js")
 }
 
 // Concat function for running JavaScript Only
 function build_css() {
-    return concat_files(css_files, "\\css\\app.min.css")
+    return concat_files(css_files, "*(\/|\\)css*(\/|\\)app.min.css")
 }
 
 // Concat function for running all
