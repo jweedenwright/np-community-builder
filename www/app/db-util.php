@@ -81,7 +81,7 @@ class pdo_dblib_mssql {
 		// TODO: add support for additional db drivers?
 		switch ($driver) {
 			case 'mysql':
-				$connectionString = "mysql:host=$this->hostname;dbname=$this->dbname";
+				$connectionString = "mysql:host=$this->hostname;dbname=$this->dbname;port=$this->port";
 				break;
 			default: // defaults to MS SQL Server
 				$connectionString = "sqlsrv:Server=$this->hostname,$this->port;Database=$this->dbname";

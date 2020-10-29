@@ -13,6 +13,11 @@ window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\
 var today = new Date();
 $('#myDate').val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
 
+// sets up formatting for tel inputs
+$('input[type="tel"]').usPhoneFormat({
+	format: '(xxx) xxx-xxxx'
+});
+
 // Handline invalid input
 function handleInvalid(msg) {
 	var error_divs = document.querySelectorAll(".danger");
@@ -125,10 +130,21 @@ function checkPreferences() {
 
 /**
  * Returns true if date is in a valid format
- * @param {string} date - date to validate
+ * Ex. MM/DD/YYYY
+ * @param {string} date - date input
  * @return {boolean}
  */
 function isValidDate(date) {
 	const dateRegex = /(0?[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.]\d{2,4}/;
 	return dateRegex.test(date);
+}
+
+/**
+ * Returns true if phoneNumber is in a valid format
+ * Ex. (xxx) xxx-xxxx
+ * @param {string} phoneNumber - phone number input
+ */
+function isValidPhoneNumber(phoneNumber) {
+	const phoneRegex = /\([0-9]{3}\)\s[0-9]{3}\-[0-9]{4}/;
+	return phoneRegex.test(phoneNumber);
 }
