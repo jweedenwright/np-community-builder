@@ -79,7 +79,7 @@
 					<div class="row">
 						<div class="form-group col-md-6 col-xs-12">
 							<div class="input-group phone">
-								<input type='tel' class="form-control" id="phone" name="dob" placeholder="Phone number" tabindex="5" />
+								<input type='tel' class="form-control" id="phone" name="phone" placeholder="Phone number" tabindex="5" />
 								<span class='input-group-addon field-error'><i class='glyphicon glyphicon-asterisk'></i></span>
 							</div>
 						</div>
@@ -182,7 +182,7 @@
 					<div class="row">
 						<div class="form-group col-md-12 col-xs-12">
 							<label for="ec_phone" class="sr-only">Phone</label>
-							<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="text">
+							<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="tel">
 						</div>
 					</div>
 				</div>

@@ -73,7 +73,8 @@ error_reporting(E_ALL);
 	// Format for reporting page dates
 	$report_date_format = "Y-m-d";
 	// UI date format - 02/07/2017 6:48 PM
-	$ui_date_format = "m/d/Y g:i A";
+	$ui_datetime_format = "m/d/Y g:i A";
+	$ui_date_format = 'm/d/Y';
 	// SQL Server Date format - 2016-11-14 14:00:00
 	$sql_date_format = "Y-m-d g:i:s"; // 2016-10-13 07:00:00
 	// Variables
