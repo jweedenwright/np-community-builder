@@ -6,7 +6,7 @@
 	// Individual Lookup / Manage
 	if (isset($_GET['email'])) {
 		$email = filter_var ( $_GET['email'], FILTER_SANITIZE_STRING);
-		$vol_query = "SELECT * FROM volunteer WHERE email = ?";
+		$vol_query = "SELECT * FROM address AS a INNER JOIN volunteer AS b ON a.volunteer_id = b.id WHERE email = ?";
 		$results = $db->executeStatement($vol_query, array($email))->fetchAll();
 		$is_individual = true;
 		

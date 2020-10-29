@@ -39,6 +39,14 @@
 		$location_id = (int) filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
 		$task_id = (int) filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
 		$first_time = 0;
+
+		// address fields
+		$street_one = filter_var($_POST['street_one'], FILTER_SANITIZE_STRING);
+		$street_two = filter_var($_POST['street_two'], FILTER_SANITIZE_STRING);
+		$city = filter_var($_POST['city'], FILTER_SANITIZE_STRING);
+		$state = filter_var($_POST['state'], FILTER_SANITIZE_STRING);
+		$zip = filter_var($_POST['zip'], FILTER_SANITIZE_STRING);
+
 		// Removed from UI for BGCRC - set to 1 by default
 		$liability_check = 1;
 		$health_check = 1;
@@ -94,6 +102,12 @@
 					// Get the id
 					$volunteer_row = $results[0];
 					$volunteer_id = $volunteer_row['id'];
+
+					// add address
+					$address_insert = "INSERT INTO address (volunteer_id, street_one, street_two, city, state, zip)"
+					. "VALUES (\"$volunteer_id\", \"$street_one\", \"$street_two\", \"$city\", \"$state\", \"$zip\")";
+
+					$db->executeStatement($address_insert, []);
 				}
 			} else {
 				// Failure
