@@ -31,7 +31,7 @@
 	$GLOBALS['protocol'] = "https";
 	$GLOBALS['prod_domain'] = "xxx";
 	$GLOBALS['qa_domain'] = "zzz";
-	$GLOBALS['dev_domain'] = "bgcrc-signin-test.azurewebsites.net";
+	$GLOBALS['dev_domain'] = $_SERVER['SERVER_NAME'];
 	$GLOBALS['db_hostname']= "bgcrc-signin-db.database.windows.net";	
 	$GLOBALS['db_port'] = "1433";	
 	$GLOBALS['db_name'] = getenv('DB_NAME');
