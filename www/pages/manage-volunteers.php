@@ -304,6 +304,11 @@
 // Not individual - list of volunteers page
 			?>
 			<div class="container">
+				<!-- Button for new volunteer -->
+				<span><a class="back details-btn" onclick="window.history.back();">Back</a></span>
+				<span class="pull-right">
+					<button type="button" class="details btn" data-toggle="modal" data-target="#new-vol">New Volunteer</button>
+				</span>
 				<h1>Volunteer Listing</h1>
 				<form id="vol-search">
 					<div class="form-group col-sm-9">
@@ -341,6 +346,55 @@
 						</tbody>
 					</table>
 				<?php } ?>
+							
+				<!-- Modal for New Volunteer -->
+				<div class="modal fade" id="new-vol" role="dialog">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">New Volunteer Form</h4>
+							</div>
+							<div class="modal-body">
+								<form id="new-vol-form" method="POST" action="../app/manage-volunteers.php">
+										<div class="form-group">
+											<label for="new_email">Email Address</label>
+											<input class="form-control" type="text" id="new_email" name="new_email">
+										</div>
+										<div class="form-group">
+											<label for="fn">First Name</label>
+											<input class="form-control" type="text" id="fn" name="fn">
+										</div>
+										<div class="form-group">
+											<label for="ln">Last Name</label>
+											<input class="form-control" type="text" id="ln" name="ln">
+										</div>
+										<div class="form-group">
+											<label for="skills">Skills</label>
+											<input class="form-control" type="text" id="skills" name="skills">
+										</div>
+										<div class="form-group">
+											<label for="interests">Interests</label>
+											<input class="form-control" type="text" id="interests" name="interests">
+										</div>
+										<div class="form-group">
+											<label for="availability">Availability</label>
+											<input class="form-control" type="text" id="availability" name="availability">
+										</div>
+										<div class="form-group">
+											<label for="email_dist">Include me in the email distribution</label>
+											<input class="block" type="checkBox" id="email_dist" name="email_dist">
+										</div>
+										
+									</form>
+							</div>
+							<div class="modal-footer">
+							<button type="submit" class="btn btn-success">Save New Volunteer</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>	
 			<?php
 /////////////////////////////////////
