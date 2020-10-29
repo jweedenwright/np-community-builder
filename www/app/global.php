@@ -13,8 +13,13 @@ error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 
 	// Load environment variables
-	$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
-	$dotenv->load();
+	try {
+		$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+		$dotenv->load();
+	} catch (Exception $e) {
+		// if one does not exist it will look for server vars
+		// the production environment has these vars set
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////
