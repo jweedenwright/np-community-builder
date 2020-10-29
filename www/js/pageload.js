@@ -133,6 +133,38 @@ window.addEventListener("load",function() {
 			flipInputGroupIcon(".last-name .input-group-addon", "error");
 		}
 	});
+
+	$('#phone').on('blur', function () {
+		var phoneNumber = $(this).val();
+		if (isValidPhoneNumber(phoneNumber)) {
+			flipInputGroupIcon(".phone .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".phone .input-group-addon", "error");
+		}
+	});
+
+	$('#dob').on('blur', function () {
+		var dob = $(this).val();
+		if (isValidDate(dob)) {
+			flipInputGroupIcon(".dob .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".dob .input-group-addon", "error");
+		}
+	});
+
+	// automatically adds slaces to number input
+	$('#dob').on('keyup', function (e) {
+		var BACKSPACE_CODE = 8;
+		var value = $(this).val();
+
+		if (e.which === BACKSPACE_CODE && (value.length === 3 || value.length === 6)) {
+			value = value.slice(0, -1);
+		} else if (value.length === 2 || value.length === 5) {
+			value += '/';
+		}
+
+		$(this).val(value);
+	});
 		
 	// Scroll to top
 	jQuery('html,body').animate({scrollTop:0},200);

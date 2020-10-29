@@ -39,6 +39,7 @@
 		$location_id = (int) filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
 		$task_id = (int) filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
 		$first_time = 0;
+		$phone = filter_var($_POST['phone'], FILTER_SANITIZE_STRING);
 
 		// address fields
 		$street_one = filter_var($_POST['street_one'], FILTER_SANITIZE_STRING);
