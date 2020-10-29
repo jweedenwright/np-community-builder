@@ -122,3 +122,13 @@ function checkPreferences() {
 		}
 	}
 }
+
+/**
+ * Returns true if date is in a valid format
+ * @param {string} date - date to validate
+ * @return {boolean}
+ */
+function isValidDate(date) {
+	const dateRegex = /(0?[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.]\d{2,4}/;
+	return dateRegex.test(date);
+}

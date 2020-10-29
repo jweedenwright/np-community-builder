@@ -47,6 +47,11 @@
 		$state = filter_var($_POST['state'], FILTER_SANITIZE_STRING);
 		$zip = filter_var($_POST['zip'], FILTER_SANITIZE_STRING);
 
+		// emergency contact fields
+		$ec_first_name = filter_var($_POST['ec_first_name'], FILTER_SANITIZE_STRING);
+		$ec_last_name = filter_var($_POST['ec_last_name'], FILTER_SANITIZE_STRING);
+		$ec_phone = filter_var($_POST['ec_phone'], FILTER_SANITIZE_STRING);
+
 		// Removed from UI for BGCRC - set to 1 by default
 		$liability_check = 1;
 		$health_check = 1;
@@ -103,11 +108,17 @@
 					$volunteer_row = $results[0];
 					$volunteer_id = $volunteer_row['id'];
 
-					// add address
+					// add initial address
 					$address_insert = "INSERT INTO address (volunteer_id, street_one, street_two, city, state, zip)"
 					. "VALUES (\"$volunteer_id\", \"$street_one\", \"$street_two\", \"$city\", \"$state\", \"$zip\")";
 
 					$db->executeStatement($address_insert, []);
+
+					// add initial emergency contact
+					$emergency_contact_insert = "INSERT INTO address (volunteer_id, first_name, last_name, phone)"
+					. "VALUES (\"$volunteer_id\", \"$ec_first_name\", \"$ec_last_name\", \"$ec_phone\")";
+
+					$db->executeStatement($emergency_contact_insert, []);
 				}
 			} else {
 				// Failure
