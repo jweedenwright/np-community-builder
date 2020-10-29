@@ -15,6 +15,13 @@ This software solution was originally built on the Microsoft Axure cloud. The ap
 * Email support on your PHP server
 * SQL Server
 
+### Local Environment Setup
+
+1. **Local server** - You will need a local server pointed to the /www directory inside the repo.  Any local server that supports PHP will work (Apache, Laravel Valet, built-in php server etc.).
+2. **Install php dependencies** - You need to have [composer](https://getcomposer.org/) installed, and run `composer install` in the /www directory.  This will load the PHP dependencies.
+3. **Configuring environment** - You will need to setup your local environment settings.  There is an '.env.example` file at the root of the repo.  Copy this fill and update the example settings to match your local development environment settings.
+4. **Running the app** - This will very based on the server being used.  For example, if you are using the built-in php server by running the command `php -S localhost:5000` then you will navigate to http://localhost:5000 to view the app.
+
 ### Setup on Azure
 The easiest way to do setup for this project is to use the Azure Cloud. This is important if you are a non-profit as you get credits for cloud usage that could pay for your entire installation.
 
