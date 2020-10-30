@@ -4,9 +4,7 @@
 
 	//	Check if already logged in
 	if (isLoggedIn()) {
-		//	Session variables already set - move forward to the dashboard
 		header("Location: " . $dashboard_url);
-	
 	} else {
 		//	Globals
 		$email = "";
