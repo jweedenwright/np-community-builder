@@ -299,8 +299,11 @@ h2 .program-chart-options a {
 .alert p {
   margin-bottom: 0;
 }
+.validation-error {
+  border-left: 5px solid #940303;
+}
 @media (min-width: 768px) {
-  .container {
+    .container {
     width: 100%;
   }
 }

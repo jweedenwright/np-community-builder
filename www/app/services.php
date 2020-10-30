@@ -60,39 +60,6 @@
 			$data = '{ "status":"Success", "service":"'.$service.'", "data":'.$json_result.'}';
 
 //////////////////////
-// PREVIOUS USERS  /app/services.php?service=check_email
-//////////////////////
-		} else if ($service === "check_email") {
-			// Check for email
-			if(isset($_GET['email'])) {
-				$email = strtolower (filter_var ( $_GET['email'], FILTER_SANITIZE_STRING));
-				if ($email !== "") {
-					// Query locations
-					$query_string = "SELECT v.id, v.first_name, v.last_name, v.email
-										FROM volunteer v
-										WHERE v.email = ?
-										ORDER BY last_name";
-
-					$results = $db->executeStatement($query_string, array($email))->fetchAll();
-					$json_result = "[";
-					$result_count = 0;
-					foreach ($results as $row) {
-						if ($result_count != 0) {
-							$json_result = 	$json_result . ',';
-						}
-						$json_result = 	$json_result . '{ "id":"'.$row['id'].'","firstName":"'.$row['first_name'].'","lastName":"'.$row['last_name'].'","email":"'.$row['email'].'"}';
-						$result_count = $result_count + 1;
-					}
-					$json_result = $json_result . "]";
-					$data = '{ "status":"Success", "service":"'.$service.'", "data":'.$json_result.'}';
-				} else {
-					$data = '{ "status":"Error", "message":"Required fields were blank for '.$service.'."}';	
-				}
-			} else {
-				$data = '{ "status":"Error", "message":"Did not pass required fields to service '.$service.'."}';	
-			}
-
-//////////////////////
 // UNSUPPORTED SERVICE
 //////////////////////
 		} else {
