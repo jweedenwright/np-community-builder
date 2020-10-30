@@ -435,23 +435,23 @@
 								<form id="new-vol-form" method="POST" action="../app/create-volunteer.php">
                                     <div class="form-group">
                                         <label for="fn" class="sr-only">First Name</label>
-                                        <input class="form-control" type="text" id="fn" name="fn" placeholder="First Name" tabindex="1">
+                                        <input class="form-control" type="text" id="fn" name="fn" placeholder="First Name" tabindex="1" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="middle_name" class="sr-only">First Name</label>
+                                        <label for="middle_name" class="sr-only">Middle Name</label>
                                         <input class="form-control" type="text" id="middle_name" name="middle_name" placeholder="Middle Name" tabindex="1">
                                     </div>
                                     <div class="form-group">
                                         <label for="ln" class="sr-only">Last Name</label>
-                                        <input class="form-control" type="text" id="ln" name="ln" placeholder="Last Name" tabindex="2">
+                                        <input class="form-control" type="text" id="ln" name="ln" placeholder="Last Name" tabindex="2" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="suffix" class="sr-only">Last Name</label>
+                                        <label for="suffix" class="sr-only">Suffix</label>
                                         <input class="form-control" type="text" id="suffix" name="suffix" placeholder="Suffix" tabindex="2">
                                     </div>
 										<div class="form-group">
-											<label for="email" class="sr-only">Email Address</label>
-											<input class="form-control" type="text" id="email" name="email" placeholder="Email Address" tabindex="3">
+											<label for="email" class="sr-only">Email Address *</label>
+											<input class="form-control" type="text" id="email" name="email" placeholder="Email Address" tabindex="3" required>
 										</div>
                                         <div class="row">
                                             <div class="form-group col-md-10 col-xs-10">
