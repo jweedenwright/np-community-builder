@@ -223,7 +223,7 @@
 						// Update String Query
 						$update_type = "create";
 						$update_string = "INSERT INTO location (location_name)
-											VALUES ('".$location_name.")";
+											VALUES ('".$location_name."')";
 					} else {
 						// Update String Query
 						$update_type = "update";
