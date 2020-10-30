@@ -4,7 +4,7 @@ include_once 'global.php';
 
 // Individual Lookup / Manage
 if (isLoggedIn()) {
-    $email = filter_var($_SESSION['email'], FILTER_SANITIZE_STRING);
+    $email = getLoggedInUserEmail();
     $vol_query = "SELECT * FROM volunteer WHERE email = ?";
     $results = $db->executeStatement($vol_query, array($email))->fetchAll();
 

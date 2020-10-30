@@ -19,13 +19,11 @@
 	<?php
 		$admin_staff = false;
 
-		echo($_SESSION['user_type_id']);
+		$user_type_id = getLoggedInUserTypeId();
 
-		if (isset($_SESSION['user_type_id'])) {
-            if($_SESSION['user_type_id'] == 1 || $_SESSION['user_type_id'] == 2) {
-                $admin_staff = true;
-            }
-        }
+		if($user_type_id == 1 || $user_type_id == 2) {
+			$admin_staff = true;
+		}
 
 		if($admin_staff) {
 			include_once 'staff-dashboard.php';
