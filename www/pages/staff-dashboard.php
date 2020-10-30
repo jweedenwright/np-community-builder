@@ -33,59 +33,63 @@
 </div> 
 
 <div class="row">
-	<div id="filter-section" class="col-sm-12">
-		<form id="data-filter" method="POST">
-			<div class="form-group col-sm-3">
-				<label for="vol_name">Name</label>
-				<select required class="form-control" id="vol_name" name="vol_name">
-					<option disabled selected="true" value="">Please Select A Volunteer</option>
-					<?php
-						foreach ($vol_results as $row) {
-					?>
-						<option value="<?=$row['id']?>"><?=$row['first_name']?> <?=$row['last_name']?></option>
-					<?php
-						}
-					?>
-				</select>
-			</div>
-
-			<div class="form-group col-sm-3">
-				<label for="datetime-picker">Start Date</label>
-				<input type='text' class="form-control datetime-picker" id="signin-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signintime" placeholder="MM/DD/YYYY 12:01 AM" />
-			</div>
-			
-			<div class="form-group col-sm-3">
-				<label for="datetime-picker">End Date</label>
-				<input type='text' class="form-control datetime-picker" id="signout-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signouttime" placeholder="MM/DD/YYYY 12:01 AM" />
-			</div>
-			
-			<div class="form-group col-sm-3">
-				<label for="activity">Activity</label>
-				<select required class="form-control" id="task" name="task">
-					<option disabled selected="true" value="">Please Select A Task</option>
-					<?php
-						foreach ($type_results as $row) {
-					?>
-						<option value="<?=$row['id']?>"><?=$row['job_type']?></option>
-					<?php
-						}
-					?>
-				</select>
-			</div>
-
-			<div class="form-group col-sm-3">
-				<label for="location">Location</label>
-				<select required class="form-control" id="location" name="location">
-					<option disabled selected="true" value="">Please Choose A Location</option>
-					<?php
-						foreach ($location_results as $row) {
-					?>
-						<option value="<?=$row['id']?>"><?=$row['location_name']?></option>
+		<div id="filter-section" class="col-sm-12">
+			<form id="data-filter" method="POST">
+				<blockquote><strong>Please Note:</strong> When filtering on task or location, you will also need to select dates.</blockquote>
+				
+				<div class="form-group col-sm-3">
+					<label for="vol_name">Name</label>
+					<select class="form-control" id="vol_name" name="vol_name">
+						<option selected="true" value="">Please Select A Name</option>
 						<?php
-						}
+							foreach ($name_results as $row) {
+								?>
+									<option <?php if ($name_filter == $row['id']) { echo "selected=selected"; } ?>
+									 value="<?=$row['id']?>"><?=$row['first_name']?> <?=$row['last_name']?></option>
+								<?php
+							}
 						?>
-				</select>
-			</div>
+					</select>
+				</div>
+				
+				<div class="form-group col-sm-3">
+					<label for="datetime-picker">Start Date</label>
+					<input type='text' class="form-control datetime-picker" id="start-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="starttime" placeholder="MM/DD/YYYY 12:01 AM" />
+					<input type="hidden" id="startdate-default" value="<?=$start_filter?>">
+				</div>
+				<div class="form-group col-sm-3">
+					<label for="datetime-picker">End Date</label>
+					<input type='text' class="form-control datetime-picker" id="end-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="endtime" placeholder="MM/DD/YYYY 12:01 AM" />
+					<input type="hidden" id="enddate-default" value="<?=$end_filter?>">
+				</div>
+				<div class="form-group col-sm-3">
+					<label for="activity">Activity</label>
+					<select class="form-control" id="task" name="task">
+						<option selected="true" value="">Please Select A Task</option>
+						<?php
+							foreach ($type_results as $row) {
+								?>
+									<option <?php if ($task_filter == $row['id']) { echo "selected=selected"; } ?>
+									 value="<?=$row['id']?>"><?=$row['job_type']?></option>
+								<?php
+							}
+						?>
+					</select>
+				</div>
+				<div class="form-group col-sm-3">
+					<label for="location">Location</label>
+					<select class="form-control" id="location" name="location">
+						<option selected="true" value="">Please Choose A Location</option>
+						<?php
+							foreach ($location_results as $row) {
+								?>
+									<option <?php if ($location_filter == $row['id']) { echo "selected=selected"; } ?>
+									value="<?=$row['id']?>"><?=$row['location_name']?></option>
+								<?php
+							}
+						?>
+					</select>
+				</div>
 
 			<div class="form-group col-sm-12 text-right">
 					<button type="button" class="btn btn-danger pull-left" onclick="signout(); return false;">Signout All Volunteers</button>
@@ -128,9 +132,9 @@
 			?>
 			<tr>
 				<td><?=$vol_period["first_name"]?> <?=$vol_period["last_name"]?></td>
-				<?php
+		<?php
 					$checkin_date = date_parse_from_format ( $sql_date_format , $vol_period["check_in_time"]);
-					$checkedin_date = $checkin_date["month"] . "-" . $checkin_date["day"] . "-" . $checkin_date["year"]; 
+					$checkedin_date = $checkin_date["month"] . "-" . $checkin_date["day"] . "-" . $checkin_date["year"];
 					$checkout_date = date_parse_from_format ( $sql_date_format , $vol_period["check_out_time"]);
 
 					// Time stamps
@@ -138,7 +142,7 @@
 					if(strlen($checkin_day."") == 1) {
 						$checkin_day = "0".$checkin_day;
 					}
-								
+
 					$checkin_month = $checkin_date["month"];
 					if(strlen($checkin_month."") == 1) {
 						$checkin_month = "0".$checkin_month;
@@ -177,7 +181,7 @@
 							}
 						} elseif ($checkout_date["hour"] == 12) {
 							$checkout_ampm = "PM";
-						} 
+						}
 					}
 
 				?>
