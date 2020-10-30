@@ -203,7 +203,7 @@ error_reporting(E_ALL);
 	 * @return string|null
 	 */
 	function getLoggedInUserTypeId() {
-		return !empty($GLOBALS['logged_in-user'])
+		return !empty($GLOBALS['logged_in_user'])
 			? $GLOBALS['logged_in_user']['user_type_id']
 			: null;
 	}
