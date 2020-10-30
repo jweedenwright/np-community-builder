@@ -28,6 +28,67 @@
 				</span>
 
 				<h1><?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?></h1>
+
+				<div class="container">
+					<!-- edit form column -->
+					<div class="col-lg-8 push-lg-4 personal-info">
+						<form role="form">
+							<div class="form-group row">
+								<label class="col-lg-3 col-form-label form-control-label">Email</label>
+								<div class="col-lg-4">
+									<input disabled class="form-control" type="text" id="email-label" name="email-label" value="<?=$volunteer["email"]?>">
+									<input type="hidden" id="email" name="email" value="<?=$volunteer["email"]?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3" for="active">Is User Active?</label>
+								<input type='checkbox' name='active' value='active' id="active"  <?php if($volunteer["active"]==1){echo "checked";}?> />
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 col-form-label form-control-label">First Name</label>
+								<div class="col-lg-4">
+									<input class="form-control" type="text" value="<?=$volunteer["first_name"]?>" />
+								</div>
+							</div>
+							<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Last Name</label>
+									<div class="col-lg-4">
+										<input class="form-control" type="text" value="<?=$volunteer["last_name"]?>" />
+									</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 for="skills">Skills</label>
+								<div class="col-lg-8">
+								<input class="form-control" type="text" id="skills" name="skills" value="<?=$volunteer["skills"]?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 for="interests">Interests</label>
+								<div class="col-lg-8">
+								<input class="form-control" type="text" id="interests" name="interests" value="<?=$volunteer["interests"]?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 for="availability">Availability</label>
+								<div class="col-lg-8">
+								<input class="form-control" type="text" id="availability" name="availability" value="<?=$volunteer["availability"]?>">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="email_dist">Include in the email distribution?</label>
+								<input class="block" type="checkBox" id="email_dist" name="email_dist" value="<?=$volunteer["include_email_dist"]?>">
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 col-form-label form-control-label"></label>
+								<div class="col-lg-9">
+									<input type="reset" class="btn btn-secondary" value="Cancel" />
+									<input type="button" class="btn btn-primary" value="Save Changes" />
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
 				<ul>
 					<li><strong>Email Address</strong> - <?=$volunteer["email"]?></li>
 					<li><strong>Skills</strong> - <?=$volunteer["skills"]?></li>
@@ -393,7 +454,7 @@
 											<input class="form-control" type="text" id="availability" name="availability">
 										</div>
 										<div class="form-group">
-											<label for="email_dist">Include me in the email distribution</label>
+											<label for="email_dist">Add to email distribution</label>
 											<input class="block" type="checkBox" id="email_dist" name="email_dist">
 										</div>
 										
