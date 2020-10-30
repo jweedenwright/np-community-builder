@@ -19,10 +19,10 @@
 		if(isset($_POST['type'])) {
 			$manage_type = $_POST['type'];
 
+
 ////////////////////////////////////////////////////				
 // MANAGE VOLUNTEER
 // - TEST: type=volunteer-period&vol-id=1&signintime=03/15/2018 1:30 PM&signouttime=03/15/2018 3:30 PM&location=7&task=1&organization=HCA
-
 			if ($manage_type == "volunteer") {
 				// Make sure we have required values for a VOLUNTEER update
 				if(!isset($_POST['fn'])) {
@@ -37,13 +37,13 @@
 					$vol_fn = filter_var ( $_POST['fn'], FILTER_SANITIZE_STRING);
 					$vol_ln = filter_var ( $_POST['ln'], FILTER_SANITIZE_STRING);
 					$vol_email = filter_var ( $_POST['email'], FILTER_SANITIZE_STRING);
-					
+
 					// Update String Query
 					$update_string = "UPDATE volunteer
 										SET email = '".$vol_email."'
 											,first_name = '".$vol_fn."'
 											,last_name = '".$vol_ln."'";
-					
+
 					// Optional fields
 					 if(isset($_POST['phone'])) {
 						 $vol_phone = filter_var ( $_POST['phone'], FILTER_SANITIZE_STRING);
@@ -66,20 +66,92 @@
 						 $update_string = $update_string . ",include_email_dist = '".$vol_email_dist."'";
 	   				} 
 					$update_string = $update_string . "WHERE id = ".$vol_id;
-					if ($db->executeStatement($update_string,[])) {
-						// Success
-						$return_message = "Successfully Updated Volunteer!";
-					} else {
-						// Failure
-						$return_message = "Sorry! Was unable to update the volunteer.";
-					}
+
+                    // update address fields
+                    $addressUpdated = false;
+                    $update_address_string = "UPDATE address
+                                                SET ";
+                    if(isset($_POST['street_one'])) {
+                        $vol_street_one = filter_var ( $_POST['street_one'], FILTER_SANITIZE_STRING);
+                        $update_address_string = $update_address_string . "street_one = '".$vol_street_one."',";
+                        $addressUpdated = true;
+                    }
+                    if(isset($_POST['street_two'])) {
+                        $vol_street_two = filter_var ( $_POST['street_two'], FILTER_SANITIZE_STRING);
+                        $update_address_string = $update_address_string . "street_two = '".$vol_street_two."',";
+                        $addressUpdated = true;
+                    }
+                    if(isset($_POST['city'])) {
+                        $vol_city = filter_var ( $_POST['city'], FILTER_SANITIZE_STRING);
+                        $update_address_string = $update_address_string . "city = '".$vol_city."',";
+                        $addressUpdated = true;
+                    }
+                    if(isset($_POST['state'])) {
+                        $vol_state = filter_var ( $_POST['state'], FILTER_SANITIZE_STRING);
+                        $update_address_string = $update_address_string . "state = '".$vol_state."',";
+                        $addressUpdated = true;
+                    }
+                    if(isset($_POST['zip'])) {
+                        $vol_zip = filter_var ( $_POST['zip'], FILTER_SANITIZE_STRING);
+                        $update_address_string = $update_address_string . "zip = '".$vol_zip."',";
+                        $addressUpdated = true;
+                    }
+                    $update_address_string = substr($update_address_string, 0, -1); // remove extra comma
+                    $update_address_string = $update_address_string . " WHERE volunteer_id = ".$vol_id;
+
+                    // update emergency contact fields
+                    $ecUpdated = false;
+                    $update_ec_string = "UPDATE emergency_contact
+                                                    SET ";
+                    if(isset($_POST['ec_first_name'])) {
+                        $ec_first_name = filter_var ( $_POST['ec_first_name'], FILTER_SANITIZE_STRING);
+                        $update_ec_string = $update_ec_string . "first_name = '".$ec_first_name."',";
+                        $ecUpdated = true;
+                    }
+                    if(isset($_POST['ec_last_name'])) {
+                        $ec_last_name = filter_var ( $_POST['ec_last_name'], FILTER_SANITIZE_STRING);
+                        $update_ec_string = $update_ec_string . "last_name = '".$ec_last_name."',";
+                        $ecUpdated = true;
+                    }
+                    if(isset($_POST['ec_phone'])) {
+                        $ec_phone = filter_var ( $_POST['ec_phone'], FILTER_SANITIZE_STRING);
+                        $update_ec_string = $update_ec_string . "phone = '".$ec_phone."',";
+                        $ecUpdated = true;
+                    }
+                    $update_ec_string = substr($update_ec_string, 0, -1); // remove extra comma
+                    $update_ec_string = $update_ec_string . " WHERE volunteer_id = ".$vol_id;
+
+					// update Volunteer table
+                    $updatedFailed = false;
+                    if ($db->executeStatement($update_string,[])) {
+                        if ($addressUpdated) {
+                            // update Address table
+                            if ($db->executeStatement($update_address_string,[])) {
+                                if ($ecUpdated) {
+                                    // update Emergency Contact table
+                                    if ($db->executeStatement($update_ec_string,[])) {
+                                        $return_message = "Successfully Updated Volunteer!";
+                                    } else {
+                                        $updatedFailed = true;
+                                    }
+                                }
+                            } else {
+                                $updatedFailed = true;
+                            }
+                        }
+                    } else {
+                        $updatedFailed = true;
+                    }
+
+                    if ($updatedFailed) {
+                        $return_message = "Sorry! Was unable to update the volunteer.";
+                    }
 
 ////////////////////////////////////////////////////				
 // MANAGE VOLUNTEER PERIOD
 // - TEST: type=volunteer-period&vol-id=1&signintime=03/15/2018 1:30 PM&signouttime=03/15/2018 3:30 PM&location=7&task=1&organization=HCA
 
 			} elseif ($manage_type == "volunteer-period") {
-
 				// Make sure we have required values for a VOLUNTEER PERIOD UPDATE
 				if(!isset($_POST['vol-period-id'])) {
 					$return_message = "Volunteer period id was not provided.";
