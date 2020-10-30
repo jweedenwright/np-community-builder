@@ -443,46 +443,71 @@
 				<?php } ?>
 							
 				<!-- Modal for New Volunteer -->
-				<div class="modal fade modal-lg" id="new-vol" role="dialog">
-					<div class="modal-dialog modal-lg" role="document">
+				<div class="modal fade" id="new-vol" role="dialog">
+					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">New Volunteer Form</h4>
 							</div>
 							<div class="modal-body">
-								<form id="new-vol-form" method="POST" action="../app/manage-volunteers.php">
+								<form id="new-vol-form" method="POST" action="../app/create-volunteer.php">
+                                    <div class="form-group">
+                                        <label for="fn" class="sr-only">First Name</label>
+                                        <input class="form-control" type="text" id="fn" name="fn" placeholder="First Name" tabindex="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="middle_name" class="sr-only">First Name</label>
+                                        <input class="form-control" type="text" id="middle_name" name="middle_name" placeholder="Middle Name" tabindex="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ln" class="sr-only">Last Name</label>
+                                        <input class="form-control" type="text" id="ln" name="ln" placeholder="Last Name" tabindex="2">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="suffix" class="sr-only">Last Name</label>
+                                        <input class="form-control" type="text" id="suffix" name="suffix" placeholder="Suffix" tabindex="2">
+                                    </div>
 										<div class="form-group">
-											<label for="new_email" class="sr-only">Email Address</label>
-											<input class="form-control" type="text" id="new_email" name="new_email" placeholder="Email Address" tabindex="1">
+											<label for="email" class="sr-only">Email Address</label>
+											<input class="form-control" type="text" id="email" name="email" placeholder="Email Address" tabindex="3">
 										</div>
-										<div class="form-group">
-											<label for="fn" class="sr-only">First Name</label>
-											<input class="form-control" type="text" id="fn" name="fn" placeholder="First Name" tabindex="2">
-										</div>
-										<div class="form-group">
-											<label for="ln" class="sr-only">Last Name</label>
-											<input class="form-control" type="text" id="ln" name="ln" placeholder="Last Name" tabindex="3">
-										</div>
+                                        <div class="row">
+                                            <div class="form-group col-md-10 col-xs-10">
+                                                <label for="phone" class="sr-only">Phone</label>
+                                                <input class="form-control" id="phone" name="phone" placeholder="Phone" type="tel" tabindex="4">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-12">
+                                            <div class="dob">
+                                                <input type='text'
+                                                       class="form-control"
+                                                       id="dob"
+                                                       name="dob"
+                                                       placeholder="Date of Birth (MM/DD/YYYY)"
+                                                       tabindex="5"
+                                                       maxlength="10"
+                                                       data-validation="true"
+                                                       data-validationtype="regex"
+                                                       data-validationregex="(0?[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.]\d{2,4}"
+                                                       data-validationmessage="Please be sure your date of birth is in the correct format.">
+                                            </div>
+                                        </div>
 										<div class="form-group">
 											<label for="skills" class="sr-only">Skills</label>
-											<input class="form-control" type="text" id="skills" name="skills" placeholder="Skills" tabindex="4">
+											<input class="form-control" type="text" id="skills" name="skills" placeholder="Skills" tabindex="5">
 										</div>
 										<div class="form-group">
 											<label for="interests" class="sr-only">Interests</label>
-											<input class="form-control" type="text" id="interests" name="interests" placeholder="Interests" tabindex="5">
+											<input class="form-control" type="text" id="interests" name="interests" placeholder="Interests" tabindex="6">
 										</div>
 										<div class="form-group">
 											<label for="availability" class="sr-only">Availability</label>
-											<input class="form-control" id="availability" name="availability" placeholder="Availability" type="text" tabindex="6">
-										</div>
-										<div class="form-group">
-											<label for="affiliation" class="sr-only">Affiliation</label>
-											<input class="form-control" id="affiliation" name="affiliation" placeholder="Affiliation, i.e. Company A, Organization B" type="text" tabindex="7">
+											<input class="form-control" id="availability" name="availability" placeholder="Availability" type="text" tabindex="7">
 										</div>
 										<div class="form-group">
 											<label for="find-out-about-us" class="sr-only">How did you find out about us?</label>
-											<textarea class="form-control" id="find-out-about-us" name="find-out-about-us" placeholder="How did you find out about us?" tabindex="8"></textarea>
+											<textarea class="form-control" id="find_out_about_us" name="find_out_about_us" placeholder="How did you find out about us?" tabindex="8"></textarea>
 										</div>
 										<div class="row">
 											<div class="col-md-10">
@@ -504,65 +529,10 @@
 												<label for="city" class="sr-only">City</label>
 												<input class="form-control" id="city" name="city" placeholder="City" tabindex="11" type="text">
 											</div>
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="state" class="sr-only">State</label>
-
-												<select class="form-control" id="state" tabindex="12">
-													<option value="">Please select a state...</option>
-													<option value="AL">Alabama</option>
-													<option value="AK">Alaska</option>
-													<option value="AZ">Arizona</option>
-													<option value="AR">Arkansas</option>
-													<option value="CA">California</option>
-													<option value="CO">Colorado</option>
-													<option value="CT">Connecticut</option>
-													<option value="DE">Delaware</option>
-													<option value="DC">District Of Columbia</option>
-													<option value="FL">Florida</option>
-													<option value="GA">Georgia</option>
-													<option value="HI">Hawaii</option>
-													<option value="ID">Idaho</option>
-													<option value="IL">Illinois</option>
-													<option value="IN">Indiana</option>
-													<option value="IA">Iowa</option>
-													<option value="KS">Kansas</option>
-													<option value="KY">Kentucky</option>
-													<option value="LA">Louisiana</option>
-													<option value="ME">Maine</option>
-													<option value="MD">Maryland</option>
-													<option value="MA">Massachusetts</option>
-													<option value="MI">Michigan</option>
-													<option value="MN">Minnesota</option>
-													<option value="MS">Mississippi</option>
-													<option value="MO">Missouri</option>
-													<option value="MT">Montana</option>
-													<option value="NE">Nebraska</option>
-													<option value="NV">Nevada</option>
-													<option value="NH">New Hampshire</option>
-													<option value="NJ">New Jersey</option>
-													<option value="NM">New Mexico</option>
-													<option value="NY">New York</option>
-													<option value="NC">North Carolina</option>
-													<option value="ND">North Dakota</option>
-													<option value="OH">Ohio</option>
-													<option value="OK">Oklahoma</option>
-													<option value="OR">Oregon</option>
-													<option value="PA">Pennsylvania</option>
-													<option value="RI">Rhode Island</option>
-													<option value="SC">South Carolina</option>
-													<option value="SD">South Dakota</option>
-													<option value="TN">Tennessee</option>
-													<option value="TX">Texas</option>
-													<option value="UT">Utah</option>
-													<option value="VT">Vermont</option>
-													<option value="VA">Virginia</option>
-													<option value="WA">Washington</option>
-													<option value="WV">West Virginia</option>
-													<option value="WI">Wisconsin</option>
-													<option value="WY">Wyoming</option>
-												</select>
-
-											</div>
+                                            <div class="form-group col-md-6 col-xs-12">
+                                                <label for="state" class="sr-only">State</label>
+                                                <input class="form-control" id="state" name="state" placeholder="State" type="text">
+                                            </div>
 										</div>
 										<div class="row">
 											<div class="form-group col-md-10 col-xs-10">
@@ -597,12 +567,8 @@
 											<label for="email_dist">Add to email distribution</label>
 											<input class="block" type="checkBox" id="email_dist" name="email_dist">
 										</div>
-										
-									</form>
-							</div>
-							<div class="modal-footer">
-							<button type="submit" class="btn btn-success">Submit New Volunteer</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-success">Submit New Volunteer</button>
+                                    </form>
 							</div>
 						</div>
 					</div>
