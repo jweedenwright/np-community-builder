@@ -18,21 +18,43 @@
 	//////////////////////
 
 	$volunteer_id = getLoggedInUserId();
+	$email = getLoggedInUserEmail();
+	$process_fail = false;
+
+	// validate required params
+	if (!isset($_POST['signintime'])) {
+		?> <p class='alert alert-danger'>Datetime is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
+	} elseif(!isset($_POST['location'])) {
+		?> <p class='alert alert-danger'>Location is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
+	} elseif(!isset($_POST['task'])) {
+		?> <p class='alert alert-danger'>Task is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
+	}
+
+	$signin_date = filter_var ( $_POST['signintime'], FILTER_SANITIZE_STRING); // 02/07/2017 6:48 PM
+	$location_id = (int) filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
+	$task_id = (int) filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
+	$signin_date = date_parse_from_format ( $ui_datetime_format , $signin_date );
+	// Use passed date time to sign out - To SQL Format: 2016-11-14 14:00:00
+	$sign_in_time = $signin_date["year"] . "-" . $signin_date["month"] . "-" . $signin_date["day"] 
+	. " " . $signin_date["hour"] . ":" . $signin_date["minute"] .":00";
+	$first_time = 0;
+
+	// Removed from UI for BGCRC - set to 1 by default
+	$liability_check = 1;
+	$health_check = 1;
+	$photo_check = 1;
+
+	$affiliation = "";
+	$community_service = 0;
 
 	// only try to register volunteer if user is not logged in
-	if ($volunteer_id) {
+	if (!$volunteer_id) {
 		if(!isset($_POST['email'])) {
 			?> <p class='alert alert-danger'>Email is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 		} elseif(!isset($_POST['firstname'])) {
 			?> <p class='alert alert-danger'>First name is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 		} elseif(!isset($_POST['lastname'])) {
 			?> <p class='alert alert-danger'>Last name is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
-		} elseif(!isset($_POST['signintime'])) {
-			?> <p class='alert alert-danger'>Datetime is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
-		} elseif(!isset($_POST['location'])) {
-			?> <p class='alert alert-danger'>Location is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
-		} elseif(!isset($_POST['task'])) {
-			?> <p class='alert alert-danger'>Task is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 		} elseif(!isset($_POST['phone'])) {
 			?> <p class='alert alert-danger'>Phone number is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 		} elseif(!isset($_POST['dob'])) {
@@ -45,10 +67,6 @@
 			$first_name = strtolower ( filter_var ( $_POST['firstname'], FILTER_SANITIZE_STRING));
 			$last_name = strtolower ( filter_var ( $_POST['lastname'], FILTER_SANITIZE_STRING));
 			$email = strtolower ( filter_var ( $_POST['email'], FILTER_SANITIZE_STRING));
-			$signin_date = filter_var ( $_POST['signintime'], FILTER_SANITIZE_STRING); // 02/07/2017 6:48 PM
-			$location_id = (int) filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
-			$task_id = (int) filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
-			$first_time = 0;
 			$phone = filter_var($_POST['phone'], FILTER_SANITIZE_STRING);
 			$dob = filter_var($_POST['dob'], FILTER_SANITIZE_STRING);
 	
@@ -64,16 +82,10 @@
 			$ec_last_name = filter_var($_POST['ec_last_name'], FILTER_SANITIZE_STRING);
 			$ec_phone = filter_var($_POST['ec_phone'], FILTER_SANITIZE_STRING);
 	
-			// Removed from UI for BGCRC - set to 1 by default
-			$liability_check = 1;
-			$health_check = 1;
-			$photo_check = 1;
-	
-			$affiliation = "";
 			if(isset($_POST['affiliation'])) {
 				$affiliation = filter_var ( $_POST['affiliation'], FILTER_SANITIZE_STRING);
 			}
-			$community_service = 0;
+			
 			if(isset($_POST['community-service'])) {
 				$community_service = (int) filter_var ( $_POST['community-service'], FILTER_SANITIZE_STRING);
 			}
@@ -93,10 +105,6 @@
 			//////////////////////
 			// Format any values for DB
 			//////////////////////
-			// Use passed date time to sign out - To SQL Format: 2016-11-14 14:00:00
-			$signin_date = date_parse_from_format ( $ui_datetime_format , $signin_date );
-			$sign_in_time = $signin_date["year"] . "-" . $signin_date["month"] . "-" . $signin_date["day"] 
-								. " " . $signin_date["hour"] . ":" . $signin_date["minute"] .":00";
 			$formatted_dob = date('Y-m-d', strtotime($dob));
 	
 			//////////////////////

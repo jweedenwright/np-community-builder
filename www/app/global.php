@@ -126,9 +126,17 @@ error_reporting(E_ALL);
 
 	/**
 	 * Gets active user id if set
-	 * @return bool|null
+	 * @return string|null
 	 */
 	function getLoggedInUserId() {
 		return isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+	}
+
+	/**
+	 * Gets logged in user email if set
+	 * @return string|null;
+	 */
+	function getLoggedInUserEmail() {
+		return isset($_SESSION['email']) ? $_SESSION['email'] : null;
 	}
 ?>
