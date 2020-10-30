@@ -32,7 +32,9 @@
 				<div class="container">
 					<!-- edit form column -->
 					<div class="col-lg-8 push-lg-4 personal-info">
-						<form role="form">
+						<form role="form" id="edit-details-form" method="POST" action="../app/manage.php">
+							<input type="hidden" id="type" name="type" value="volunteer">
+							<input type="hidden" id="vol-id" name="vol-id" value="<?=$volunteer["id"]?>">
 							<div class="form-group row">
 								<label class="col-lg-3 col-form-label form-control-label">Email</label>
 								<div class="col-lg-4">
@@ -41,19 +43,20 @@
 								</div>
 							</div>
 							<div class="form-group row">
+								<!-- Need to work on unchecking action -->
 								<label class="col-lg-3" for="active">Is User Active?</label>
 								<input type='checkbox' name='active' value='active' id="active"  <?php if($volunteer["active"]==1){echo "checked";}?> />
 							</div>
 							<div class="form-group row">
-								<label class="col-lg-3 col-form-label form-control-label">First Name</label>
+								<label class="col-lg-3 col-form-label form-control-label for="fn">First Name</label>
 								<div class="col-lg-4">
-									<input class="form-control" type="text" value="<?=$volunteer["first_name"]?>" />
+									<input class="form-control" type="text" id="fn" name="fn" value="<?=$volunteer["first_name"]?>" />
 								</div>
 							</div>
 							<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">Last Name</label>
+									<label class="col-lg-3 col-form-label form-control-label for="ln">Last Name</label>
 									<div class="col-lg-4">
-										<input class="form-control" type="text" value="<?=$volunteer["last_name"]?>" />
+										<input class="form-control" type="text" id="ln" name="ln" value="<?=$volunteer["last_name"]?>" />
 									</div>
 							</div>
 							<div class="form-group row">
@@ -76,13 +79,12 @@
 							</div>
 							<div class="form-group">
 								<label for="email_dist">Include in the email distribution?</label>
-								<input class="block" type="checkBox" id="email_dist" name="email_dist" value="active" <?php if($volunteer["include_email_dist"]==1){echo "checked";}?> >
+								<input class="block" type="checkBox" id="email_dist" name="email_dist" value="1" <?php if($volunteer["include_email_dist"]==1){echo "checked";}?> >
 							</div>
 							<div class="form-group row">
-								<label class="col-lg-3 col-form-label form-control-label"></label>
 								<div class="col-lg-9">
+									<button type="submit" class="btn btn-primary">Save Changes</button>
 									<input type="reset" class="btn btn-secondary" value="Cancel" />
-									<input type="button" class="btn btn-primary" value="Save Changes" />
 								</div>
 							</div>
 						</form>
@@ -90,18 +92,6 @@
 				</div>
 
 				<ul>
-					<li><strong>Email Address</strong> - <?=$volunteer["email"]?></li>
-					<li><strong>Skills</strong> - <?=$volunteer["skills"]?></li>
-					<li><strong>Interests</strong> - <?=$volunteer["interests"]?></li>
-					<li><strong>Availability</strong> - <?=$volunteer["availability"]?></li>
-					<li><strong>How did you find out about us</strong> - <?=$volunteer["find_out_about_us"]?></li>
-					<?php
-						$email_dist = 'Yes';
-						if($volunteer["include_email_dist"] == 0){
-							$email_dist = 'No';
-						}
-					?>
-					<li><strong>Email Distribution</strong> - <?=$email_dist?></li>
 					<?php
 						if(sizeof($vol_periods) > 0) {
 							$volunteer_time = $vol_periods[0];
