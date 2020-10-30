@@ -52,7 +52,7 @@
 <?php } else { ?>
 		<h1>Success!</h1>
 <?php } ?>
-		<button type="button" class="btn btn-primary" onclick="window.history.go(-1); return false;">Back to previous page</a>	
+		<a type="button" class="btn btn-primary" href="/pages/dashboard.php">Back to Dashboard</a>	
 	</div>
 <?php
 	}
