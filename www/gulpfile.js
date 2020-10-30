@@ -18,6 +18,7 @@ js_files = ["node_modules/jquery/dist/jquery.min.js"
     , "js/report.js"
     , "js/login.js"
     , "js/manage.js"
+    , "js/downloadCSV.js"
 ]
 
 // CSS files that need to be concatenated
