@@ -98,7 +98,7 @@
 											</div>
 											<div class="form-group col-md-5 col-xs-10">
 												<label for="state" class="sr-only">State</label>
-												<select class="form-control" id="state" tabindex="12" value="<?=$volunteer["state"]?>">
+												<select class="form-control" id="state" tabindex="12" value="<?=$volunteer["state"]?>" selected="selected">
 													<option value="">Please select a state...</option>
 													<option value="AL">Alabama</option>
 													<option value="AK">Alaska</option>
@@ -162,6 +162,27 @@
 														oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
 											</div>
 										</div>
+										<div class="row">
+											<div class="col-md-10">
+												<h4>Emergency Contact</h4>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="ec_first_name" class="sr-only">First Name</label>
+												<input class="form-control" id="ec_first_name" name="ec_first_name" placeholder="First Name" tabindex="14" type="text" value="<?=$volunteer["ec_first_name"]?>">
+											</div>
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="ec_last_name" class="sr-only">Last Name</label>
+												<input class="form-control" id="ec_last_name" name="ec_last_name" placeholder="Last Name" tabindex="15" type="text" value="<?=$volunteer["ec_last_name"]?>">
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-10 col-xs-10">
+												<label for="ec_phone" class="sr-only">Phone</label>
+												<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="tel" tabindex="16" value="<?=$volunteer["ec_phone"]?>">
+											</div>
+										</div>
 
 							<div class="form-group row">
 								<div class="col-lg-9">
@@ -173,45 +194,6 @@
 					</div>
 				</div>
 
-				<ul>
-					<?php
-						if(sizeof($vol_periods) > 0) {
-							$volunteer_time = $vol_periods[0];
-							$vol_start_date = date_parse_from_format ( $sql_date_format , $volunteer_time["check_in_time"]);
-							$start_date = $vol_start_date["month"] . "-" . $vol_start_date["day"] . "-" . $vol_start_date["year"];
-							$current_year =  date("Y");
-							$vol_duration = $current_year - $vol_start_date["year"];
-							if ($vol_duration < 1) {
-								$vol_duration = "<1";
-							}
-						?>
-							<li><strong>Volunteer since</strong> <?=$start_date?> (<?=$vol_duration?> year(s))</li>
-						<?php
-						}
-					?>
-
-					<li><strong>Emergency contact</strong> - <?= $volunteer['emergency_contact']; ?></li>
-
-					<li>
-						<strong>Address</strong> -<br>
-						<?= $volunteer['street_one'] ?><br>
-						<?php if ($volunteer['street_two']): ?>
-							<?= $volunteer['street_two']; ?><br>
-						<?php endif; ?>
-						<?= sprintf('%s, %s %s', $volunteer['city'], $volunteer['state'], $volunteer['zip']) ?>
-					</li>
-
-					<?php
-						$total_time = 0;
-						$total_visits = sizeof($vol_periods);
-						if ($total_visits > 0) {
-							foreach ($vol_periods as $vol_period) {
-								$total_time = $total_time + $vol_period["hours"];
-							}
-						}
-					?>
-					<li><strong>Activity</strong> - <?=$total_time?> hours and <?=$total_visits?> visits</li>
-				</ul>
 				<!-- Retrieve volunteer periods -->
 				<div class="table-responsive">
 				<table id="vol-activity" class="table table-striped">
