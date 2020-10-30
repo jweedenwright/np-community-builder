@@ -19,10 +19,6 @@
 			<input type="hidden" id="npcb-protocol" value="<?=$GLOBALS['current_protocol']?>">
 		</fieldset>
 
-		<script src="<?=$root_dir?>/js/vendor/jquery-1.11.2.min.js"></script>
-		<script src="<?=$root_dir?>/js/vendor/bootstrap.min.js"></script>
-		<script src="<?=$root_dir?>/js/vendor/moment.min.js"></script><!-- Required for Datetime Picker -->
-		<script src="<?=$root_dir?>/js/vendor/bootstrap-datetimepicker.min.js"></script><!-- Datetime Picker -->
 		<script src="<?=$root_dir?>/js/main.min.js"></script>
 	</body>
 </html>
