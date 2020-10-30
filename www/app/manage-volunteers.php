@@ -7,7 +7,6 @@
 	if (isset($_GET['email'])) {
 		$email = filter_var ( $_GET['email'], FILTER_SANITIZE_STRING);
 		$vol_query = "SELECT * FROM Volunteer v LEFT OUTER JOIN address a ON v.id = a.volunteer_id WHERE email = ?";
-		echo $email;
 		$results = $db->executeStatement($vol_query, array($email))->fetchAll();
 		$is_individual = true;
 		
