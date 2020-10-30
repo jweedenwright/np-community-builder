@@ -277,6 +277,14 @@ section > section {
 .manage-action:hover {
   text-decoration: none;
 }
+.boom {
+    color: white;
+    background: #2e3738;
+    border: none;
+    box-shadow: none;
+    border-radius: 2px;
+    padding: 16px 20px;
+}
 .boom .value {
   font-size: 42px;
   padding: 10px;
