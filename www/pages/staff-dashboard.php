@@ -116,7 +116,6 @@
 					<div class="btn-group pull-right" role="group" aria-label="Search Actions">
 						<button type="submit" class="btn btn-primary">Search</button>
 						<button type="button" class="btn btn-default" onclick="getCsv();return false;">Download Volunteers</button>
-						<button type="button" class="btn btn-default" onclick="getFeedbackCsv();return false;">Download Feedback</button>
 						<button type="button" class="btn btn-default" onclick="resetDashboard();return false;">Reset Filters</button>
 					</div>
 				</div>
