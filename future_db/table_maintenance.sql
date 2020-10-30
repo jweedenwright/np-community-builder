@@ -58,7 +58,7 @@ CREATE TABLE dbo.volunteer (
 	find_out_about_us varchar(255) NULL,
 	include_email_dist bit NULL,
 	active bit NOT NULL DEFAULT(1),
-	CONSTRAINT PK_volunteer PRIMARY KEY (id),
+	CONSTRAINT PK_volunteer PRIMARY KEY (id)
 )
 CREATE UNIQUE INDEX UQ_volunteer_email ON dbo.volunteer (email)
 

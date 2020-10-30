@@ -8,7 +8,7 @@
 	$page_title = "Volunteer Management";
 	include_once '../header.php';
 
-	if (!isset($_SESSION['email'])) {
+	if (!isLoggedIn()) {
 		//	Session variable not set - redirect to login
 		header("Location: " . $login_url);
 	} else {
@@ -28,6 +28,67 @@
 				</span>
 
 				<h1><?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?></h1>
+
+				<div class="container">
+					<!-- edit form column -->
+					<div class="col-lg-8 push-lg-4 personal-info">
+						<form role="form">
+							<div class="form-group row">
+								<label class="col-lg-3 col-form-label form-control-label">Email</label>
+								<div class="col-lg-4">
+									<input disabled class="form-control" type="text" id="email-label" name="email-label" value="<?=$volunteer["email"]?>">
+									<input type="hidden" id="email" name="email" value="<?=$volunteer["email"]?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3" for="active">Is User Active?</label>
+								<input type='checkbox' name='active' value='active' id="active"  <?php if($volunteer["active"]==1){echo "checked";}?> />
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 col-form-label form-control-label">First Name</label>
+								<div class="col-lg-4">
+									<input class="form-control" type="text" value="<?=$volunteer["first_name"]?>" />
+								</div>
+							</div>
+							<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Last Name</label>
+									<div class="col-lg-4">
+										<input class="form-control" type="text" value="<?=$volunteer["last_name"]?>" />
+									</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 for="skills">Skills</label>
+								<div class="col-lg-8">
+								<input class="form-control" type="text" id="skills" name="skills" value="<?=$volunteer["skills"]?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 for="interests">Interests</label>
+								<div class="col-lg-8">
+								<input class="form-control" type="text" id="interests" name="interests" value="<?=$volunteer["interests"]?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 for="availability">Availability</label>
+								<div class="col-lg-8">
+								<input class="form-control" type="text" id="availability" name="availability" value="<?=$volunteer["availability"]?>">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="email_dist">Include in the email distribution?</label>
+								<input class="block" type="checkBox" id="email_dist" name="email_dist" value="active" <?php if($volunteer["include_email_dist"]==1){echo "checked";}?> >
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 col-form-label form-control-label"></label>
+								<div class="col-lg-9">
+									<input type="reset" class="btn btn-secondary" value="Cancel" />
+									<input type="button" class="btn btn-primary" value="Save Changes" />
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
 				<ul>
 					<li><strong>Email Address</strong> - <?=$volunteer["email"]?></li>
 					<li><strong>Skills</strong> - <?=$volunteer["skills"]?></li>
@@ -81,7 +142,7 @@
 				</ul>
 				<!-- Retrieve volunteer periods -->
 				<div class="table-responsive">
-				<table class="table table-striped">
+				<table id="vol-activity" class="table table-striped">
 				<thead>
 					<tr>
 						<th>Date</th>
@@ -315,6 +376,11 @@
 // Not individual - list of volunteers page
 			?>
 			<div class="container">
+				<!-- Button for new volunteer -->
+				<span><a class="back details-btn" onclick="window.history.back();">Back</a></span>
+				<span class="pull-right">
+					<button type="button" class="details btn" data-toggle="modal" data-target="#new-vol">New Volunteer</button>
+				</span>
 				<h1>Volunteer Listing</h1>
 				<form id="vol-search">
 					<div class="form-group col-sm-9">
@@ -352,6 +418,172 @@
 						</tbody>
 					</table>
 				<?php } ?>
+							
+				<!-- Modal for New Volunteer -->
+				<div class="modal fade modal-lg" id="new-vol" role="dialog">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">New Volunteer Form</h4>
+							</div>
+							<div class="modal-body">
+								<form id="new-vol-form" method="POST" action="../app/manage-volunteers.php">
+										<div class="form-group">
+											<label for="new_email" class="sr-only">Email Address</label>
+											<input class="form-control" type="text" id="new_email" name="new_email" placeholder="Email Address" tabindex="1">
+										</div>
+										<div class="form-group">
+											<label for="fn" class="sr-only">First Name</label>
+											<input class="form-control" type="text" id="fn" name="fn" placeholder="First Name" tabindex="2">
+										</div>
+										<div class="form-group">
+											<label for="ln" class="sr-only">Last Name</label>
+											<input class="form-control" type="text" id="ln" name="ln" placeholder="Last Name" tabindex="3">
+										</div>
+										<div class="form-group">
+											<label for="skills" class="sr-only">Skills</label>
+											<input class="form-control" type="text" id="skills" name="skills" placeholder="Skills" tabindex="4">
+										</div>
+										<div class="form-group">
+											<label for="interests" class="sr-only">Interests</label>
+											<input class="form-control" type="text" id="interests" name="interests" placeholder="Interests" tabindex="5">
+										</div>
+										<div class="form-group">
+											<label for="availability" class="sr-only">Availability</label>
+											<input class="form-control" id="availability" name="availability" placeholder="Availability" type="text" tabindex="6">
+										</div>
+										<div class="form-group">
+											<label for="affiliation" class="sr-only">Affiliation</label>
+											<input class="form-control" id="affiliation" name="affiliation" placeholder="Affiliation, i.e. Company A, Organization B" type="text" tabindex="7">
+										</div>
+										<div class="form-group">
+											<label for="find-out-about-us" class="sr-only">How did you find out about us?</label>
+											<textarea class="form-control" id="find-out-about-us" name="find-out-about-us" placeholder="How did you find out about us?" tabindex="8"></textarea>
+										</div>
+										<div class="row">
+											<div class="col-md-10">
+												<h4>Address Information</h4>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="street_one" class="sr-only">Address line 1</label>
+												<input class="form-control" id="street_one" name="street_one" placeholder="Address line 1" tabindex="9" type="text">
+											</div>
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="street_two" class="sr-only">Address line 1</label>
+												<input class="form-control" id="street_two" name="street_two" placeholder="Address line 2" tabindex="10" type="text">
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="city" class="sr-only">City</label>
+												<input class="form-control" id="city" name="city" placeholder="City" tabindex="11" type="text">
+											</div>
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="state" class="sr-only">State</label>
+
+												<select class="form-control" id="state" tabindex="12">
+													<option value="">Please select a state...</option>
+													<option value="AL">Alabama</option>
+													<option value="AK">Alaska</option>
+													<option value="AZ">Arizona</option>
+													<option value="AR">Arkansas</option>
+													<option value="CA">California</option>
+													<option value="CO">Colorado</option>
+													<option value="CT">Connecticut</option>
+													<option value="DE">Delaware</option>
+													<option value="DC">District Of Columbia</option>
+													<option value="FL">Florida</option>
+													<option value="GA">Georgia</option>
+													<option value="HI">Hawaii</option>
+													<option value="ID">Idaho</option>
+													<option value="IL">Illinois</option>
+													<option value="IN">Indiana</option>
+													<option value="IA">Iowa</option>
+													<option value="KS">Kansas</option>
+													<option value="KY">Kentucky</option>
+													<option value="LA">Louisiana</option>
+													<option value="ME">Maine</option>
+													<option value="MD">Maryland</option>
+													<option value="MA">Massachusetts</option>
+													<option value="MI">Michigan</option>
+													<option value="MN">Minnesota</option>
+													<option value="MS">Mississippi</option>
+													<option value="MO">Missouri</option>
+													<option value="MT">Montana</option>
+													<option value="NE">Nebraska</option>
+													<option value="NV">Nevada</option>
+													<option value="NH">New Hampshire</option>
+													<option value="NJ">New Jersey</option>
+													<option value="NM">New Mexico</option>
+													<option value="NY">New York</option>
+													<option value="NC">North Carolina</option>
+													<option value="ND">North Dakota</option>
+													<option value="OH">Ohio</option>
+													<option value="OK">Oklahoma</option>
+													<option value="OR">Oregon</option>
+													<option value="PA">Pennsylvania</option>
+													<option value="RI">Rhode Island</option>
+													<option value="SC">South Carolina</option>
+													<option value="SD">South Dakota</option>
+													<option value="TN">Tennessee</option>
+													<option value="TX">Texas</option>
+													<option value="UT">Utah</option>
+													<option value="VT">Vermont</option>
+													<option value="VA">Virginia</option>
+													<option value="WA">Washington</option>
+													<option value="WV">West Virginia</option>
+													<option value="WI">Wisconsin</option>
+													<option value="WY">Wyoming</option>
+												</select>
+
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-10 col-xs-10">
+												<label for="zip" class="sr-only">Zip Code</label>
+												<input class="form-control" id="zip" name="zip" placeholder="Zip Code" tabindex="13" type="number" maxlength="5"					
+														oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-md-10">
+												<h4>Emergency Contact</h4>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="ec_first_name" class="sr-only">First Name</label>
+												<input class="form-control" id="ec_first_name" name="ec_first_name" placeholder="First Name" tabindex="14" type="text">
+											</div>
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="ec_last_name" class="sr-only">Last Name</label>
+												<input class="form-control" id="ec_last_name" name="ec_last_name" placeholder="Last Name" tabindex="15" type="text">
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-10 col-xs-10">
+												<label for="ec_phone" class="sr-only">Phone</label>
+												<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="tel" tabindex="16">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="email_dist">Add to email distribution</label>
+											<input class="block" type="checkBox" id="email_dist" name="email_dist">
+										</div>
+										
+									</form>
+							</div>
+							<div class="modal-footer">
+							<button type="submit" class="btn btn-success">Submit New Volunteer</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>	
 			<?php
 /////////////////////////////////////

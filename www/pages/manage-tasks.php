@@ -8,7 +8,7 @@
 	$page_title = "Task Management";
 	include_once '../header.php';
 
-	if (!isset($_SESSION['email'])) {
+	if (!isLoggedIn()) {
 		//	Session variable not set - redirect to login
 		header("Location: " . $login_url);
 	} else {

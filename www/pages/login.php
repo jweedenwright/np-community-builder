@@ -2,7 +2,7 @@
 	include_once '../app/global.php';
 	
 	//	Check if already logged in
-	if (isset($_SESSION['email'])) {
+	if (isLoggedIn()) {
 		//	Session variables already set - move forward to the dashboard
 		header("Location: " . $dashboard_url);
 	
