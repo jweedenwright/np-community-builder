@@ -21,67 +21,182 @@
 			?>
 			<div id="management-form" class="container">
 				<span><a class="back details-btn" onclick="window.history.back();">Back</a></span>
-				<span class="pull-right">
-					<a href="#" class="details-btn" data-toggle="modal" data-target="#edit-details" onclick="return false;">
-						Edit
-					</a>
-				</span>
-
 				<h1><?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?></h1>
-				<ul>
-					<li><strong>Email Address</strong> - <?=$volunteer["email"]?></li>
-					<li><strong>Skills</strong> - <?=$volunteer["skills"]?></li>
-					<li><strong>Interests</strong> - <?=$volunteer["interests"]?></li>
-					<li><strong>Availability</strong> - <?=$volunteer["availability"]?></li>
-					<li><strong>How did you find out about us</strong> - <?=$volunteer["find_out_about_us"]?></li>
-					<?php
-						$email_dist = 'Yes';
-						if($volunteer["include_email_dist"] == 0){
-							$email_dist = 'No';
-						}
-					?>
-					<li><strong>Email Distribution</strong> - <?=$email_dist?></li>
-					<?php
-						if(sizeof($vol_periods) > 0) {
-							$volunteer_time = $vol_periods[0];
-							$vol_start_date = date_parse_from_format ( $sql_date_format , $volunteer_time["check_in_time"]);
-							$start_date = $vol_start_date["month"] . "-" . $vol_start_date["day"] . "-" . $vol_start_date["year"];
-							$current_year =  date("Y");
-							$vol_duration = $current_year - $vol_start_date["year"];
-							if ($vol_duration < 1) {
-								$vol_duration = "<1";
-							}
-						?>
-							<li><strong>Volunteer since</strong> <?=$start_date?> (<?=$vol_duration?> year(s))</li>
-						<?php
-						}
-					?>
+				<div class="container">
+					<!-- edit form column -->
+					<div class="col-lg-8 push-lg-4 personal-info">
+						<form role="form" id="edit-details-form" method="POST" action="../app/manage.php">
+							<input type="hidden" id="type" name="type" value="volunteer">
+							<input type="hidden" id="vol-id" name="vol-id" value="<?=$volunteer["id"]?>">
+							<div class="form-group row">
+								<label class="col-lg-3 col-form-label form-control-label">Email</label>
+								<div class="col-lg-4">
+									<input disabled class="form-control" type="text" id="email-label" name="email-label" value="<?=$volunteer["email"]?>">
+									<input type="hidden" id="email" name="email" value="<?=$volunteer["email"]?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<!-- Manage.php doesn't like this -->
+								<label class="col-lg-3" for="active">Is User Active?</label>
+								<input type='hidden' name='active' value='0' id="active" />
+								<input type='checkbox' name='active' value='1' id="active"  <?php if($volunteer["active"]==1){echo "checked";}?> />
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 col-form-label form-control-label for="fn">First Name</label>
+								<div class="col-lg-4">
+									<input class="form-control" type="text" id="fn" name="fn" value="<?=$volunteer["first_name"]?>" />
+								</div>
+							</div>
+							<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label for="ln">Last Name</label>
+									<div class="col-lg-4">
+										<input class="form-control" type="text" id="ln" name="ln" value="<?=$volunteer["last_name"]?>" />
+									</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 for="skills">Skills</label>
+								<div class="col-lg-8">
+								<input class="form-control" type="text" id="skills" name="skills" value="<?=$volunteer["skills"]?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 for="interests">Interests</label>
+								<div class="col-lg-8">
+								<input class="form-control" type="text" id="interests" name="interests" value="<?=$volunteer["interests"]?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3 for="availability">Availability</label>
+								<div class="col-lg-8">
+								<input class="form-control" type="text" id="availability" name="availability" value="<?=$volunteer["availability"]?>">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="email_dist">Include in the email distribution?</label>
+								<input type='hidden' name='email_dist' value='0' id="email_dist" />
+								<input class="block" type="checkBox" id="email_dist" name="email_dist" value="1" <?php if($volunteer["include_email_dist"]==1){echo "checked";}?> >
+							</div>
+							<div class="row">
+											<div class="col-md-10">
+												<h4>Address Information</h4>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="street_one" class="sr-only">Address line 1</label>
+												<input class="form-control" id="street_one" name="street_one" placeholder="Address line 1" tabindex="9" type="text" value="<?=$volunteer["street_one"]?>">
+											</div>
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="street_two" class="sr-only">Address line 2</label>
+												<input class="form-control" id="street_two" name="street_two" placeholder="Address line 2" tabindex="10" type="text"value="<?=$volunteer["street_two"]?>">
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="city" class="sr-only">City</label>
+												<input class="form-control" id="city" name="city" placeholder="City" tabindex="11" type="text" value="<?=$volunteer["city"]?>">
+											</div>
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="state" class="sr-only">State</label>
+												<select class="form-control" id="state" tabindex="12" value="<?=$volunteer["state"]?>" selected="selected">
+													<option value="">Please select a state...</option>
+													<option value="AL">Alabama</option>
+													<option value="AK">Alaska</option>
+													<option value="AZ">Arizona</option>
+													<option value="AR">Arkansas</option>
+													<option value="CA">California</option>
+													<option value="CO">Colorado</option>
+													<option value="CT">Connecticut</option>
+													<option value="DE">Delaware</option>
+													<option value="DC">District Of Columbia</option>
+													<option value="FL">Florida</option>
+													<option value="GA">Georgia</option>
+													<option value="HI">Hawaii</option>
+													<option value="ID">Idaho</option>
+													<option value="IL">Illinois</option>
+													<option value="IN">Indiana</option>
+													<option value="IA">Iowa</option>
+													<option value="KS">Kansas</option>
+													<option value="KY">Kentucky</option>
+													<option value="LA">Louisiana</option>
+													<option value="ME">Maine</option>
+													<option value="MD">Maryland</option>
+													<option value="MA">Massachusetts</option>
+													<option value="MI">Michigan</option>
+													<option value="MN">Minnesota</option>
+													<option value="MS">Mississippi</option>
+													<option value="MO">Missouri</option>
+													<option value="MT">Montana</option>
+													<option value="NE">Nebraska</option>
+													<option value="NV">Nevada</option>
+													<option value="NH">New Hampshire</option>
+													<option value="NJ">New Jersey</option>
+													<option value="NM">New Mexico</option>
+													<option value="NY">New York</option>
+													<option value="NC">North Carolina</option>
+													<option value="ND">North Dakota</option>
+													<option value="OH">Ohio</option>
+													<option value="OK">Oklahoma</option>
+													<option value="OR">Oregon</option>
+													<option value="PA">Pennsylvania</option>
+													<option value="RI">Rhode Island</option>
+													<option value="SC">South Carolina</option>
+													<option value="SD">South Dakota</option>
+													<option value="TN">Tennessee</option>
+													<option value="TX">Texas</option>
+													<option value="UT">Utah</option>
+													<option value="VT">Vermont</option>
+													<option value="VA">Virginia</option>
+													<option value="WA">Washington</option>
+													<option value="WV">West Virginia</option>
+													<option value="WI">Wisconsin</option>
+													<option value="WY">Wyoming</option>
+												</select>
 
-					<li><strong>Emergency contact</strong> - <?= $volunteer['emergency_contact']; ?></li>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-10 col-xs-10">
+												<label for="zip" class="sr-only">Zip Code</label>
+												<input class="form-control" id="zip" name="zip" placeholder="Zip Code" tabindex="13" type="number" maxlength="5" value="<?=$volunteer["zip"]?>"					
+														oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-10">
+												<h4>Emergency Contact</h4>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="ec_first_name" class="sr-only">First Name</label>
+												<input class="form-control" id="ec_first_name" name="ec_first_name" placeholder="First Name" tabindex="14" type="text" value="<?=$volunteer["ec_first_name"]?>">
+											</div>
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="ec_last_name" class="sr-only">Last Name</label>
+												<input class="form-control" id="ec_last_name" name="ec_last_name" placeholder="Last Name" tabindex="15" type="text" value="<?=$volunteer["ec_last_name"]?>">
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-10 col-xs-10">
+												<label for="ec_phone" class="sr-only">Phone</label>
+												<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="tel" tabindex="16" value="<?=$volunteer["ec_phone"]?>">
+											</div>
+										</div>
 
-					<li>
-						<strong>Address</strong> -<br>
-						<?= $volunteer['street_one'] ?><br>
-						<?php if ($volunteer['street_two']): ?>
-							<?= $volunteer['street_two']; ?><br>
-						<?php endif; ?>
-						<?= sprintf('%s, %s %s', $volunteer['city'], $volunteer['state'], $volunteer['zip']) ?>
-					</li>
+							<div class="form-group row">
+								<div class="col-lg-9">
+									<button type="submit" class="btn btn-primary">Save Changes</button>
+									<input type="reset" class="btn btn-secondary" value="Cancel" />
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 
-					<?php
-						$total_time = 0;
-						$total_visits = sizeof($vol_periods);
-						if ($total_visits > 0) {
-							foreach ($vol_periods as $vol_period) {
-								$total_time = $total_time + $vol_period["hours"];
-							}
-						}
-					?>
-					<li><strong>Activity</strong> - <?=$total_time?> hours and <?=$total_visits?> visits</li>
-				</ul>
 				<!-- Retrieve volunteer periods -->
 				<div class="table-responsive">
-				<table class="table table-striped">
+				<table id="vol-activity" class="table table-striped">
 				<thead>
 					<tr>
 						<th>Date</th>
@@ -202,56 +317,6 @@
 				</table>
 				</div>
 			</div>
-
-			<!-- Volunteer Details Modal -->
-			<div class="modal fade" id="edit-details" tabindex="-1" role="dialog" aria-labelledby="edit-label">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="edit-label">Edit Volunteer Details</h4>
-						</div>
-						<div class="modal-body">
-							<form id="edit-details-form" method="POST" action="../app/manage.php">
-								<input type="hidden" id="vol-id" name="vol-id" value="<?=$volunteer["id"]?>">
-								<input type="hidden" id="type" name="type" value="volunteer">
-
-								<div class="form-group">
-									<label for="email">Email Address (Do Not Edit)</label>
-									<input disabled class="form-control" type="text" id="email-label" name="email-label" value="<?=$volunteer["email"]?>">
-									<input type="hidden" id="email" name="email" value="<?=$volunteer["email"]?>">
-								</div>
-								<div class="form-group">
-									<label for="fn">First Name</label>
-									<input class="form-control" type="text" id="fn" name="fn" value="<?=$volunteer["first_name"]?>">
-								</div>
-								<div class="form-group">
-									<label for="ln">Last Name</label>
-									<input class="form-control" type="text" id="ln" name="ln" value="<?=$volunteer["last_name"]?>">
-								</div>
-								<div class="form-group">
-									<label for="skills">Skills</label>
-									<input class="form-control" type="text" id="skills" name="skills" value="<?=$volunteer["skills"]?>">
-								</div>
-								<div class="form-group">
-									<label for="interests">Interests</label>
-									<input class="form-control" type="text" id="interests" name="interests" value="<?=$volunteer["interests"]?>">
-								</div>
-								<div class="form-group">
-									<label for="availability">Availability</label>
-									<input class="form-control" type="text" id="availability" name="availability" value="<?=$volunteer["availability"]?>">
-								</div>
-								<div class="form-group">
-									<label for="email_dist">Include me in the email distribution</label>
-									<input class="block" type="checkBox" id="email_dist" name="email_dist" value="<?=$volunteer["include_email_dist"]?>">
-								</div>
-								<button type="submit" class="btn btn-success">Save changes</button>
-							</form>
-						</div><!-- /modal-body -->
-					</div><!-- /modal-content -->
-				</div><!-- /modal-dialog -->
-			</div><!-- /modal -->
-
 			<!-- Volunteer Period Modal -->
 			<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-label">
 				<div class="modal-dialog" role="document">
@@ -315,6 +380,11 @@
 // Not individual - list of volunteers page
 			?>
 			<div class="container">
+				<!-- Button for new volunteer -->
+				<span><a class="back details-btn" onclick="window.history.back();">Back</a></span>
+				<span class="pull-right">
+					<button type="button" class="details btn" data-toggle="modal" data-target="#new-vol">New Volunteer</button>
+				</span>
 				<h1>Volunteer Listing</h1>
 				<form id="vol-search">
 					<div class="form-group col-sm-9">
@@ -352,6 +422,192 @@
 						</tbody>
 					</table>
 				<?php } ?>
+							
+				<!-- Modal for New Volunteer -->
+				<div class="modal fade" id="new-vol" role="dialog">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">New Volunteer Form</h4>
+							</div>
+							<div class="modal-body">
+								<form id="new-vol-form" method="POST" action="../app/create-volunteer.php">
+                                    <div class="form-group">
+                                        <label for="fn" class="sr-only">First Name</label>
+                                        <input class="form-control" type="text" id="fn" name="fn" placeholder="First Name" tabindex="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="middle_name" class="sr-only">First Name</label>
+                                        <input class="form-control" type="text" id="middle_name" name="middle_name" placeholder="Middle Name" tabindex="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ln" class="sr-only">Last Name</label>
+                                        <input class="form-control" type="text" id="ln" name="ln" placeholder="Last Name" tabindex="2">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="suffix" class="sr-only">Last Name</label>
+                                        <input class="form-control" type="text" id="suffix" name="suffix" placeholder="Suffix" tabindex="2">
+                                    </div>
+										<div class="form-group">
+											<label for="email" class="sr-only">Email Address</label>
+											<input class="form-control" type="text" id="email" name="email" placeholder="Email Address" tabindex="3">
+										</div>
+                                        <div class="row">
+                                            <div class="form-group col-md-10 col-xs-10">
+                                                <label for="phone" class="sr-only">Phone</label>
+                                                <input class="form-control" id="phone" name="phone" placeholder="Phone" type="tel" tabindex="4">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-12">
+                                            <div class="dob">
+                                                <input type='text'
+                                                       class="form-control"
+                                                       id="dob"
+                                                       name="dob"
+                                                       placeholder="Date of Birth (MM/DD/YYYY)"
+                                                       tabindex="5"
+                                                       maxlength="10"
+                                                       data-validation="true"
+                                                       data-validationtype="regex"
+                                                       data-validationregex="(0?[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.]\d{2,4}"
+                                                       data-validationmessage="Please be sure your date of birth is in the correct format.">
+                                            </div>
+                                        </div>
+										<div class="form-group">
+											<label for="skills" class="sr-only">Skills</label>
+											<input class="form-control" type="text" id="skills" name="skills" placeholder="Skills" tabindex="5">
+										</div>
+										<div class="form-group">
+											<label for="interests" class="sr-only">Interests</label>
+											<input class="form-control" type="text" id="interests" name="interests" placeholder="Interests" tabindex="6">
+										</div>
+										<div class="form-group">
+											<label for="availability" class="sr-only">Availability</label>
+											<input class="form-control" id="availability" name="availability" placeholder="Availability" type="text" tabindex="7">
+										</div>
+										<div class="form-group">
+											<label for="find-out-about-us" class="sr-only">How did you find out about us?</label>
+											<textarea class="form-control" id="find_out_about_us" name="find_out_about_us" placeholder="How did you find out about us?" tabindex="8"></textarea>
+										</div>
+										<div class="row">
+											<div class="col-md-10">
+												<h4>Address Information</h4>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="street_one" class="sr-only">Address line 1</label>
+												<input class="form-control" id="street_one" name="street_one" placeholder="Address line 1" tabindex="9" type="text">
+											</div>
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="street_two" class="sr-only">Address line 1</label>
+												<input class="form-control" id="street_two" name="street_two" placeholder="Address line 2" tabindex="10" type="text">
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="city" class="sr-only">City</label>
+												<input class="form-control" id="city" name="city" placeholder="City" tabindex="11" type="text">
+											</div>
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="state" class="sr-only">State</label>
+												<select class="form-control" id="state" name="state" placeholder="State">
+													<option value="">Please select a state...</option>
+													<option value="AL">Alabama</option>
+													<option value="AK">Alaska</option>
+													<option value="AZ">Arizona</option>
+													<option value="AR">Arkansas</option>
+													<option value="CA">California</option>
+													<option value="CO">Colorado</option>
+													<option value="CT">Connecticut</option>
+													<option value="DE">Delaware</option>
+													<option value="DC">District Of Columbia</option>
+													<option value="FL">Florida</option>
+													<option value="GA">Georgia</option>
+													<option value="HI">Hawaii</option>
+													<option value="ID">Idaho</option>
+													<option value="IL">Illinois</option>
+													<option value="IN">Indiana</option>
+													<option value="IA">Iowa</option>
+													<option value="KS">Kansas</option>
+													<option value="KY">Kentucky</option>
+													<option value="LA">Louisiana</option>
+													<option value="ME">Maine</option>
+													<option value="MD">Maryland</option>
+													<option value="MA">Massachusetts</option>
+													<option value="MI">Michigan</option>
+													<option value="MN">Minnesota</option>
+													<option value="MS">Mississippi</option>
+													<option value="MO">Missouri</option>
+													<option value="MT">Montana</option>
+													<option value="NE">Nebraska</option>
+													<option value="NV">Nevada</option>
+													<option value="NH">New Hampshire</option>
+													<option value="NJ">New Jersey</option>
+													<option value="NM">New Mexico</option>
+													<option value="NY">New York</option>
+													<option value="NC">North Carolina</option>
+													<option value="ND">North Dakota</option>
+													<option value="OH">Ohio</option>
+													<option value="OK">Oklahoma</option>
+													<option value="OR">Oregon</option>
+													<option value="PA">Pennsylvania</option>
+													<option value="RI">Rhode Island</option>
+													<option value="SC">South Carolina</option>
+													<option value="SD">South Dakota</option>
+													<option value="TN">Tennessee</option>
+													<option value="TX">Texas</option>
+													<option value="UT">Utah</option>
+													<option value="VT">Vermont</option>
+													<option value="VA">Virginia</option>
+													<option value="WA">Washington</option>
+													<option value="WV">West Virginia</option>
+													<option value="WI">Wisconsin</option>
+													<option value="WY">Wyoming</option>
+												</select>
+
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-10 col-xs-10">
+												<label for="zip" class="sr-only">Zip Code</label>
+												<input class="form-control" id="zip" name="zip" placeholder="Zip Code" tabindex="13" type="number" maxlength="5"					
+														oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-md-10">
+												<h4>Emergency Contact</h4>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="ec_first_name" class="sr-only">First Name</label>
+												<input class="form-control" id="ec_first_name" name="ec_first_name" placeholder="First Name" tabindex="14" type="text">
+											</div>
+											<div class="form-group col-md-5 col-xs-10">
+												<label for="ec_last_name" class="sr-only">Last Name</label>
+												<input class="form-control" id="ec_last_name" name="ec_last_name" placeholder="Last Name" tabindex="15" type="text">
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-10 col-xs-10">
+												<label for="ec_phone" class="sr-only">Phone</label>
+												<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="tel" tabindex="16">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="email_dist">Add to email distribution</label>
+											<input class="block" type="checkBox" id="email_dist" name="email_dist">
+										</div>
+                                        <button type="submit" class="btn btn-success">Submit New Volunteer</button>
+                                    </form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>	
 			<?php
 /////////////////////////////////////

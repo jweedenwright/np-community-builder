@@ -115,5 +115,6 @@ if (isLoggedIn()) {
         $ec_last_name = filter_var($emergency_contacts[0]['last_name'], FILTER_SANITIZE_STRING);
         $ec_phone = filter_var($emergency_contacts[0]['phone'], FILTER_SANITIZE_STRING);
     }
+
 }
 ?>

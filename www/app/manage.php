@@ -339,7 +339,11 @@
 				$referring_url = preg_replace('/message=.*/', "message=".$return_message, $referring_url);
 				header("Location: " . $referring_url);
 			} else {
+				if (empty($return_message)) {
+					header("Location: " . $referring_url);
+				} else {
 				header("Location: " . $referring_url . "&message=".$return_message);	
+				}
 			}
 		} else {
 			header("Location: " . $referring_url . "?message=".$return_message);			

@@ -17,10 +17,9 @@ if (!isLoggedIn()) {
 
     if (isLoggedIn())  {
         $volunteer = $results[0];
-
         if (isset($vol_addresses[0])) {
             $address = $vol_addresses[0];
-            $formatted_address = "${address["street_one"]} ${address["street_two"]}, ${address["city"]} ${address["state"]} ${address["zip"]}";
+            $formatted_address = "${address["street_one"]} ${address["street_two"]}, ${address["city"]}, ${address["state"]} ${address["zip"]}";
         }
         if (isset($ec_first_name) && isset($ec_last_name)) {
             $emergency_contact_full_name = "${ec_first_name} ${ec_last_name}";
