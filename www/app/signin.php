@@ -36,6 +36,9 @@
 		$location_id = (int) filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
 		$task_id = (int) filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
 		$signin_date = date_parse_from_format ( $ui_datetime_format , $signin_date );
+		$event = isset($_POST['event'])
+			? (int) filter_var($_POST['event'], FILTER_SANITIZE_STRING)
+			: GENERAL_EVENT_ID; // default to General
 		// Use passed date time to sign out - To SQL Format: 2016-11-14 14:00:00
 		$sign_in_time = $signin_date["year"] . "-" . $signin_date["month"] . "-" . $signin_date["day"] 
 		. " " . $signin_date["hour"] . ":" . $signin_date["minute"] .":00";
@@ -203,7 +206,7 @@
 		// Only log time if passed to do so above
 		if ($log_time_period) {
 			$volunteer_period_insert = "INSERT INTO volunteer_period (check_in_time,check_out_time,hours,affiliation,health_release,photo_release,liability_release,first_time,job_type_id,location_id,community_service_hours,volunteer_id,event_id)"
-				." VALUES ('".$sign_in_time."','".$sign_in_time."','0.0','".$affiliation."',".$health_check.",".$photo_check.",".$liability_check.",".$first_time.",".$task_id.",".$location_id.",".$community_service.",".$volunteer_id.",".GENERAL_EVENT_ID.")";
+				." VALUES ('".$sign_in_time."','".$sign_in_time."','0.0','".$affiliation."',".$health_check.",".$photo_check.",".$liability_check.",".$first_time.",".$task_id.",".$location_id.",".$community_service.",".$volunteer_id.",".$event.")";
 			if ($db->executeStatement($volunteer_period_insert, [])) {
 				// Success - we are good to go
 				?> <p>Thanks for signing in!! <span class="hidden">SUCCESS</p> <?php
