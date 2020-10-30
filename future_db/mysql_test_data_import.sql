@@ -19,99 +19,99 @@ INSERT INTO app_user (username, password, date_added, user_type_id, volunteer_id
 -- 'Intern' Periods - 10/12 - 10/26
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-12 00:12:00.0', '2020-10-12 00:16:00.0', 4, NULL, 1, 1, 1, 0, 4, 1, 1, NULL, 21, NULL);
+	VALUES('2020-10-12 12:00:00.0', '2020-10-12 16:00:00.0', 4, NULL, 1, 1, 1, 0, 4, 1, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-13 00:11:30.0', '2020-10-12 00:16:00.0', 5.5, NULL, 1, 1, 1, 0, 4, 2, 1, NULL, 21, NULL);
+	VALUES('2020-10-13 11:00:30.0', '2020-10-12 16:00:00.0', 5.5, NULL, 1, 1, 1, 0, 4, 2, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-14 00:11:00.0', '2020-10-12 00:14:00.0', 3, NULL, 1, 1, 1, 0, 6, 2, 1, NULL, 21, NULL);
+	VALUES('2020-10-14 11:00:00.0', '2020-10-12 14:00:00.0', 3, NULL, 1, 1, 1, 0, 6, 2, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-15 00:12:30.0', '2020-10-12 00:14:30.0', 4, NULL, 1, 1, 1, 0, 6, 3, 1, NULL, 21, NULL);
+	VALUES('2020-10-15 12:30:00.0', '2020-10-12 14:30:00.0', 4, NULL, 1, 1, 1, 0, 6, 3, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-16 00:10:00.0', '2020-10-12 00:12:00.0', 2, NULL, 1, 1, 1, 0, 10, 3, 1, NULL, 21, NULL);
+	VALUES('2020-10-16 10:00:00.0', '2020-10-12 12:00:00.0', 2, NULL, 1, 1, 1, 0, 10, 3, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-17 00:12:00.0', '2020-10-12 00:16:00.0', 4, NULL, 1, 1, 1, 0, 4, 1, 1, NULL, 21, NULL);
+	VALUES('2020-10-17 12:00:00.0', '2020-10-12 16:00:00.0', 4, NULL, 1, 1, 1, 0, 4, 1, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-18 00:11:30.0', '2020-10-12 00:16:00.0', 5.5, NULL, 1, 1, 1, 0, 4, 2, 1, NULL, 21, NULL);
+	VALUES('2020-10-18 11:30:00.0', '2020-10-12 16:00:00.0', 5.5, NULL, 1, 1, 1, 0, 4, 2, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-19 00:11:00.0', '2020-10-12 00:14:00.0', 3, NULL, 1, 1, 1, 0, 6, 2, 1, NULL, 21, NULL);
+	VALUES('2020-10-19 11:00:00.0', '2020-10-12 14:00:00.0', 3, NULL, 1, 1, 1, 0, 6, 2, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-20 00:12:30.0', '2020-10-12 00:14:30.0', 4, NULL, 1, 1, 1, 0, 6, 3, 1, NULL, 21, NULL);
+	VALUES('2020-10-20 12:30:00.0', '2020-10-12 14:30:00.0', 4, NULL, 1, 1, 1, 0, 6, 3, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-21 00:10:00.0', '2020-10-12 00:12:00.0', 2, NULL, 1, 1, 1, 0, 10, 3, 1, NULL, 21, NULL);
+	VALUES('2020-10-21 10:00:00.0', '2020-10-12 12:00:00.0', 2, NULL, 1, 1, 1, 0, 10, 3, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-22 00:10:00.0', '2020-10-12 00:12:00.0', 2, NULL, 1, 1, 1, 0, 10, 3, 1, NULL, 21, NULL);
+	VALUES('2020-10-22 10:00:00.0', '2020-10-12 12:00:00.0', 2, NULL, 1, 1, 1, 0, 10, 3, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-23 00:11:30.0', '2020-10-12 00:16:00.0', 5.5, NULL, 1, 1, 1, 0, 4, 2, 1, NULL, 21, NULL);
+	VALUES('2020-10-23 11:30:00.0', '2020-10-12 16:00:00.0', 5.5, NULL, 1, 1, 1, 0, 4, 2, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-24 00:11:00.0', '2020-10-12 00:14:00.0', 3, NULL, 1, 1, 1, 0, 6, 2, 1, NULL, 21, NULL);
+	VALUES('2020-10-24 11:00:00.0', '2020-10-12 14:00:00.0', 3, NULL, 1, 1, 1, 0, 6, 2, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-25 00:12:30.0', '2020-10-12 00:14:30.0', 4, NULL, 1, 1, 1, 0, 6, 3, 1, NULL, 21, NULL);
+	VALUES('2020-10-25 12:30:00.0', '2020-10-12 14:30:00.0', 4, NULL, 1, 1, 1, 0, 6, 3, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-26 00:10:00.0', '2020-10-12 00:12:00.0', 2, NULL, 1, 1, 1, 0, 10, 3, 1, NULL, 21, NULL);
+	VALUES('2020-10-26 10:00:00.0', '2020-10-12 12:00:00.0', 2, NULL, 1, 1, 1, 0, 10, 3, 1, NULL, 21, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-27 00:10:00.0', '2020-10-12 00:12:00.0', 2, NULL, 1, 1, 1, 0, 10, 3, 1, NULL, 21, NULL);
+	VALUES('2020-10-27 10:00:00.0', '2020-10-12 12:00:00.0', 2, NULL, 1, 1, 1, 0, 10, 3, 1, NULL, 21, NULL);
 
 -- 'Volunteer' Periods - 10/14 - 10/28
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-14 00:11:00.0', '2020-10-12 00:14:00.0', 3, NULL, 1, 1, 1, 0, 5, 1, 1, NULL, 22, NULL);
+	VALUES('2020-10-14 11:00:00.0', '2020-10-12 14:00:00.0', 3, NULL, 1, 1, 1, 0, 5, 1, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-15 00:12:30.0', '2020-10-12 00:14:30.0', 4, NULL, 1, 1, 1, 0, 5, 1, 1, NULL, 22, NULL);
+	VALUES('2020-10-15 12:30:00.0', '2020-10-12 14:30:00.0', 4, NULL, 1, 1, 1, 0, 5, 1, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-16 00:10:00.0', '2020-10-12 00:12:00.0', 2, NULL, 1, 1, 1, 0, 2, 1, 1, NULL, 22, NULL);
+	VALUES('2020-10-16 10:00:00.0', '2020-10-12 12:00:00.0', 2, NULL, 1, 1, 1, 0, 2, 1, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-17 00:12:00.0', '2020-10-12 00:16:00.0', 4, NULL, 1, 1, 1, 0, 2, 3, 1, NULL, 22, NULL);
+	VALUES('2020-10-17 12:00:00.0', '2020-10-12 16:00:00.0', 4, NULL, 1, 1, 1, 0, 2, 3, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-18 00:11:30.0', '2020-10-12 00:16:00.0', 5.5, NULL, 1, 1, 1, 0, 5, 1, 1, NULL, 22, NULL);
+	VALUES('2020-10-18 11:30:00.0', '2020-10-12 16:00:00.0', 5.5, NULL, 1, 1, 1, 0, 5, 1, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-19 00:11:00.0', '2020-10-12 00:14:00.0', 3, NULL, 1, 1, 1, 0, 5, 3, 1, NULL, 22, NULL);
+	VALUES('2020-10-19 11:00:00.0', '2020-10-12 14:00:00.0', 3, NULL, 1, 1, 1, 0, 5, 3, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-20 00:12:30.0', '2020-10-12 00:14:30.0', 4, NULL, 1, 1, 1, 0, 2, 2, 1, NULL, 22, NULL);
+	VALUES('2020-10-20 12:30:00.0', '2020-10-12 14:30:00.0', 4, NULL, 1, 1, 1, 0, 2, 2, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-21 00:10:00.0', '2020-10-12 00:12:00.0', 2, NULL, 1, 1, 1, 0, 2, 1, 1, NULL, 22, NULL);
+	VALUES('2020-10-21 10:00:00.0', '2020-10-12 12:00:00.0', 2, NULL, 1, 1, 1, 0, 2, 1, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-22 00:10:00.0', '2020-10-12 00:12:00.0', 2, NULL, 1, 1, 1, 0, 6, 1, 1, NULL, 22, NULL);
+	VALUES('2020-10-22 10:00:00.0', '2020-10-12 12:00:00.0', 2, NULL, 1, 1, 1, 0, 6, 1, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-23 00:11:30.0', '2020-10-12 00:16:00.0', 5.5, NULL, 1, 1, 1, 0, 6, 3, 1, NULL, 22, NULL);
+	VALUES('2020-10-23 11:30:00.0', '2020-10-12 16:00:00.0', 5.5, NULL, 1, 1, 1, 0, 6, 3, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-24 00:11:00.0', '2020-10-12 00:14:00.0', 3, NULL, 1, 1, 1, 0, 6, 3, 1, NULL, 22, NULL);
+	VALUES('2020-10-24 11:00:00.0', '2020-10-12 14:00:00.0', 3, NULL, 1, 1, 1, 0, 6, 3, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-25 00:12:30.0', '2020-10-12 00:14:30.0', 4, NULL, 1, 1, 1, 0, 2, 1, 1, NULL, 22, NULL);
+	VALUES('2020-10-25 12:30:00.0', '2020-10-12 14:30:00.0', 4, NULL, 1, 1, 1, 0, 2, 1, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-26 00:10:00.0', '2020-10-12 00:12:00.0', 2, NULL, 1, 1, 1, 0, 10, 1, 1, NULL, 22, NULL);
+	VALUES('2020-10-26 10:00:00.0', '2020-10-12 12:00:00.0', 2, NULL, 1, 1, 1, 0, 10, 1, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-27 00:10:00.0', '2020-10-12 00:12:00.0', 2, NULL, 1, 1, 1, 0, 10, 2, 1, NULL, 22, NULL);
+	VALUES('2020-10-27 10:00:00.0', '2020-10-12 12:00:00.0', 2, NULL, 1, 1, 1, 0, 10, 2, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-28 00:12:00.0', '2020-10-12 00:16:00.0', 4, NULL, 1, 1, 1, 0, 3, 2, 1, NULL, 22, NULL);
+	VALUES('2020-10-28 12:00:00.0', '2020-10-12 16:00:00.0', 4, NULL, 1, 1, 1, 0, 3, 2, 1, NULL, 22, NULL);
 INSERT INTO volunteer_period
 (check_in_time, check_out_time, hours, affiliation, health_release, photo_release, liability_release, first_time, job_type_id, location_id, event_id, community_service_hours, volunteer_id, feedback_id)
-	VALUES('2020-10-29 00:11:30.0', '2020-10-12 00:16:00.0', 5.5, NULL, 1, 1, 1, 0, 3, 1, 1, NULL, 22, NULL);
+	VALUES('2020-10-29 11:30:00.0', '2020-10-12 16:00:00.0', 5.5, NULL, 1, 1, 1, 0, 3, 1, 1, NULL, 22, NULL);
