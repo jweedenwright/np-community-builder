@@ -8,6 +8,7 @@
 	<li><a href="/pages/manage-volunteers.php">Manage Volunteers</a></li>
 	<li><a href="/pages/manage-locations.php">Manage Locations</a></li>
 	<li><a href="/pages/manage-tasks.php">Manage Tasks</a></li>
+	<li><a href="/pages/manage-events.php">Manage Events</a></li>
 </ul>	
 
 <h2>Dashboard</h2>

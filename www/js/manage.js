@@ -26,6 +26,18 @@ function editTask(task_sel) {
 	}
 }
 
+// Update an Event Modal
+function editEvent(event_sel) {
+	var id = $(event_sel).data("id");
+	if (id !== "new") {
+		$("#task-name").attr("value", $(event_sel).data("name"));
+		$("#task-id").attr("value", id);
+	} else {
+		$("#task-name").attr("value", "");
+		$("#task-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
+	}
+}
+
 // Update the Volunteer Period Modal
 function editPeriod(vol_period_sel) {
 	$("#vol-period-id").attr("value", $(vol_period_sel).data("id"));
