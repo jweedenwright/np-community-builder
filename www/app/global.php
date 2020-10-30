@@ -24,8 +24,8 @@ error_reporting(E_ALL);
 	////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////
 	// Organization Variables
-	$GLOBALS['org_name'] = "Boys and Girls Club of Rutherford County";
-	$GLOBALS['org_mission'] = "Mission statement goes here!";
+	$GLOBALS['org_name'] = "Boys &amp; Girls Club of Rutherford County";
+	$GLOBALS['org_mission'] = "Boys &amp; Girls Clubs of Rutherford County works to save and change the lives of children and teens, especially those who need us most, by providing a safe, positive, and engaging environment and programs that prepare and inspire them to achieve Great Futures. <br><br> Thanks for all you do! All of your volunteer work is greatly appreciated!";
 	$GLOBALS['org_short_name'] = "BGCRC";
 	$GLOBALS['org_url'] = "https://www.bgcrc.net/";
 	$GLOBALS['org_domain'] = "bgcrc.net";
@@ -36,8 +36,8 @@ error_reporting(E_ALL);
 //	$GLOBALS['liability_release'] = "I understand that as a volunteer for The Nashville Food Project I may be involved in physical activities that have a potential risk of injury. I assume this risk. I agree that I will perform activities that I am comfortable doing and follow instructions as provided. I hereby release and discharge The Nashville Food Project, its community service partners, officers, directors, employees,agents and volunteers from any claim, demand or cause of action that may be asserted by or on behalf of me as a result of my volunteering. I agree to be responsible for my behavior and to indemnify and hold harmless The Nashville Food Project, its community service partner, officers, directors, employees, agents and volunteers from any damages or liabilities arising out of my volunteer activities.";
 //	$GLOBALS['health_release'] = "I understand that I may not volunteer in The Nashville Food Project's meals program if I have experienced a fever, sore throat, vomiting, diarrhea within the last 24 hours. By checking this box I agree that I have not experienced any of these symptoms in the last 24 hours.";
 //	$GLOBALS['photo_release'] = "I grant The Nashville Food Project and its partners the irrevocable right to use photographs and video or audio recordings of me made while volunteering. I understand that I will not be compensated for the use of my image in any medium.";
-	$GLOBALS['give_url'] = "https://www.bgcrc.net/other-ways-to-give/";
-	$GLOBALS['give_desc'] = "Text explaining how/why to give.";
+	$GLOBALS['give_url'] = "https://www.bgcrc.net/campaigns/custom-donation/donate/";
+	$GLOBALS['give_desc'] = "If you like what we do here at the Boys &amp; Girls Club of Rutherford County, please consider financially supporting our work!";
 	$GLOBALS['sendgrid_api_key'] = getenv('SEND_GRID_KEY');
 
 	// Environments
