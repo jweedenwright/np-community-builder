@@ -28,7 +28,7 @@
 		// parse the date
 		if (isset($signout_time)) {
 			// Use passed date time to sign out - date format is: 2016-10-12 (yyyy-mm-dd) and time 
-			$clean_date = date_parse_from_format ( $ui_date_format , $signout_time );
+			$clean_date = date_parse_from_format ( $ui_datetime_format , $signout_time );
 
 		} else {
 			// Use current date time to sign out - fixing issue because on west coa

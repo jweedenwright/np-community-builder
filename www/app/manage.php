@@ -103,10 +103,10 @@
 					$organization = filter_var ( $_POST['organization'], FILTER_SANITIZE_STRING);					
 					
 					// Format Dates
-					$signin_date = date_parse_from_format ( $ui_date_format , $signin_datetime );
+					$signin_date = date_parse_from_format ( $ui_datetime_format , $signin_datetime );
 					$sign_in_time = $signin_date["year"] . "-" . $signin_date["month"] . "-" . $signin_date["day"] 
 										. " " . $signin_date["hour"] . ":" . $signin_date["minute"] .":00";
-					$signout_date = date_parse_from_format ( $ui_date_format , $signout_datetime );
+					$signout_date = date_parse_from_format ( $ui_datetime_format , $signout_datetime );
 					$sign_out_time = $signout_date["year"] . "-" . $signout_date["month"] . "-" . $signout_date["day"] 
 										. " " . $signout_date["hour"] . ":" . $signout_date["minute"] .":00";
 

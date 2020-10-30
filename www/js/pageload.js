@@ -133,6 +133,47 @@ window.addEventListener("load",function() {
 			flipInputGroupIcon(".last-name .input-group-addon", "error");
 		}
 	});
+
+	$('#phone').on('blur', function () {
+		var phoneNumber = $(this).val();
+		if (isValidPhoneNumber(phoneNumber)) {
+			flipInputGroupIcon(".phone .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".phone .input-group-addon", "error");
+		}
+	});
+
+	$('#dob').on('blur', function () {
+		var dob = $(this).val();
+		if (isValidDate(dob)) {
+			flipInputGroupIcon(".dob .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".dob .input-group-addon", "error");
+		}
+	});
+
+	// automatically adds slaces to number input and prevents alpha input
+	$('#dob').on('keyup', function (e) {
+		var BACKSPACE_CODE = 8;
+		var BACKSPACE_KEY = 'Backspace';
+		var value = $(this).val();
+		var newNumber = parseInt(value.charAt(value.length - 1));
+
+		// if non numeric character remove it
+		if (isNaN(newNumber)) {
+			return $(this).val(value.slice(0, -1));
+		}
+
+		var isBackspaceKey = e.which === BACKSPACE_CODE || e.key === BACKSPACE_KEY;
+
+		if (isBackspaceKey && (value.length === 3 || value.length === 6)) {
+			value = value.slice(0, -1);
+		} else if (value.length === 2 || value.length === 5) {
+			value += '/';
+		}
+
+		$(this).val(value);
+	});
 		
 	// Scroll to top
 	jQuery('html,body').animate({scrollTop:0},200);
