@@ -14,7 +14,7 @@ include_once 'global.php';
 	$end_date_parsed = (isset($_POST['endtime']) && $_POST['endtime'] != "") ? date_parse_from_format ( $ui_date_format, filter_var ( $_POST['endtime'], FILTER_SANITIZE_STRING)) : "";
 	if ($end_date_parsed != "") {
 		$end_filter = $end_date_parsed["year"] . "-" . $end_date_parsed["month"] . "-" . $end_date_parsed["day"] 
-						. " 23:59:59";
+						. " 00:00:00";
 	} else {
 		$end_filter = "";
 	}
@@ -42,7 +42,7 @@ include_once 'global.php';
 
 	// Setup query - end date
 	if ($filter_query != "") {
-		$filter_query = ($end_filter != "") ? $filter_query." and vp.check_in_time < '".$end_filter."'" : $filter_query;
+		$filter_query = ($end_filter != "") ? $filter_query." and vp.check_out_time < '".$end_filter."'" : $filter_query;
 	} else {
 		$filter_query = ($end_filter != "") ? " where vp.check_out_time < '".$end_filter."'" : "";
 	}
