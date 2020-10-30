@@ -9,7 +9,7 @@
 			<div class="form-group col-md-12 col-xs-12 contribute">
 				<a href="<?=$give_url?>" target="_blank" rel="noopener noreferrer">
 					<button class="btn btn-lrg contribute-button card">
-						<p class="title-text">GIVE TO <?=strtoupper($org_name)?></p>
+						<p class="title-text">THANK YOU SO MUCH FOR GIVING YOUR TIME!</p>
 						<p class="sub-text"> <?=$give_desc?></p>
 					</button>
 				</a>
@@ -21,15 +21,17 @@
 			</div>
 			<div class="col-xs-12">
 				<div class="row">
-					<div class="form-group col-md-12 col-xs-12">
-						<label for="quick-sign-in-email" class="sr-only">Please enter your email</label>
-						<input type="text" 
-								class="form-control" 
-								id="quick-sign-in-name" 
-								name="email"
-								autocomplete="on" 
-								placeholder="Please enter your email" >
-					</div>
+					<?php if (!isLoggedIn()): ?>
+						<div class="form-group col-md-12 col-xs-12">
+							<label for="quick-sign-in-email" class="sr-only">Please enter your email</label>
+							<input type="text" 
+									class="form-control" 
+									id="quick-sign-in-name" 
+									name="email"
+									autocomplete="on" 
+									placeholder="Please enter your email" >
+						</div>
+					<?php endif; ?>
 					<div class="form-group col-md-12 col-xs-12">
 						<input type='text' class="form-control datetime-picker" id="signout-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signouttime" placeholder="MM/DD/YYYY 12:01 AM" />
 					</div>

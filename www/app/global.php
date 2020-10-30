@@ -6,6 +6,7 @@
 
 // setup autoloading
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../app/auth/token.php';
 
 	// Error display
 
@@ -51,6 +52,7 @@ error_reporting(E_ALL);
 	$GLOBALS['db_name'] = $_SERVER['DB_NAME'];
 	$GLOBALS['db_user'] = $_SERVER['DB_USER'];
 	$GLOBALS['db_password'] = $_SERVER['DB_PASSWORD'];
+	$GLOBALS['logged_in_user'] = null;
 
 	// Start the session
 	session_start();
@@ -58,6 +60,9 @@ error_reporting(E_ALL);
 	// Setup the db
 	include_once 'db-util.php';
 	$db = new pdo_dblib_mssql();
+
+	// set currently logged in user as global
+	setUserFromToken();
 
 	// Setup email
 	include_once 'email-util.php';
@@ -116,20 +121,71 @@ error_reporting(E_ALL);
 		return $hours;
 	}
 
+	// Helper methods for dealing with access token
+
+	function setUserFromToken(): void {
+		global $GLOBALS;
+
+		$token = AccessToken::get();
+		$username = !empty($token) ? $token['username'] : null;
+
+		if (!empty($username)) {
+			$user = getUserByUsername($username);
+
+			if (!empty($user)) {
+				$GLOBALS['logged_in_user'] = $user;
+			}
+		}
+	}
+
+	/**
+	 * Gets app user from db by id
+	 * @return array|null
+	 */
+	function getUserByUsername(string $username) {
+		global $db;
+
+		if (empty($username)) return null;
+
+		$user_query = "SELECT * FROM app_user WHERE username = ?";
+		$results = $db->executeStatement($user_query, [$username])->fetchAll();
+		
+		return count($results) > 0 ? $results[0] : null;
+	}
+
 	/**
 	 * Returns true if user is logged in
-	 * @return bool
 	 */
-	function isLoggedIn() {
-		return isset($_SESSION['email']);
+	function isLoggedIn() : bool {
+		return !empty($GLOBALS['logged_in_user']);
+	}
+
+	/**
+	 * Returns full user payload from access token
+	 * @return array|null
+	 */
+	function getLoggedInUser() {
+		return !empty($GLOBALS['logged_in_user'])
+			? $GLOBALS['logged_in_user']
+			: null;
+	}
+
+	/**
+	 * Returns volunteer id for logged in user
+	 */
+	function getLoggedInUserVolunteerId() {
+		return !empty($GLOBALS['logged_in_user'])
+			? $GLOBALS['logged_in_user']['volunteer_id']
+			: null;
 	}
 
 	/**
 	 * Gets active user id if set
-	 * @return string|null
 	 */
 	function getLoggedInUserId() {
-		return isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+		return !isset($GLOBALS['logged_in_user'])
+			? $GLOBALS['logged_in_user']['id']
+			: null;
 	}
 
 	/**
@@ -137,6 +193,8 @@ error_reporting(E_ALL);
 	 * @return string|null;
 	 */
 	function getLoggedInUserEmail() {
-		return isset($_SESSION['email']) ? $_SESSION['email'] : null;
+		return !empty($GLOBALS['logged_in_user'])
+			? $GLOBALS['logged_in_user']['username']
+			: null;
 	}
 ?>
