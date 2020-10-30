@@ -28,10 +28,11 @@ function editTask(task_sel) {
 
 // Update an Event Modal
 function editEvent(event_sel) {
+	console.log(event_sel);
 	var id = $(event_sel).data("id");
 	if (id !== "new") {
-		$("#task-name").attr("value", $(event_sel).data("name"));
-		$("#task-id").attr("value", id);
+		$("#event-name").attr("value", $(event_sel).data("name"));
+		$("#event-id").attr("value", id);
 	} else {
 		$("#task-name").attr("value", "");
 		$("#task-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons

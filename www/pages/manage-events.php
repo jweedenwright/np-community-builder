@@ -26,7 +26,7 @@
 						<a href="#" class="btn btn-primary create-event" data-id="new"
 													data-toggle="modal" 
 													data-target="#edit-details" 
-													onclick="editevent(this); return false;">
+													onclick="editEvent(this); return false;">
 							<span><i class="glyphicon glyphicon-plus manage-action" aria-hidden="true"></i>Add New</span>
 						</a>
 					</div>
@@ -58,7 +58,7 @@
 															data-name="<?=$event["event_name"]?>" 
 															data-toggle="modal" 
 															data-target="#edit-details" 
-															onclick="editevent(this); return false;">
+															onclick="editEvent(this); return false;">
 										<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
 										<span class="sr-only">Edit</span>
 								</a>
@@ -90,8 +90,8 @@
                 </div>
                 
                 <div class="form-group">
-									<label for="event-name">Event Name</label>
-									<input class="form-control" type="text" id="event-name" name="event-name" value="">
+									<label for="event-name">Event Date</label>
+									<input class="form-control" type="text" id="event-date" name="event-date" value="">
 								</div>
 								<button type="submit" class="btn btn-success">Save changes</button>
 							</form>
