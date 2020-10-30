@@ -49,13 +49,7 @@ if (!isLoggedIn()) {
 
     // Update String Query
     $insert_string = "INSERT INTO volunteer (email, first_name, last_name, dob, middle_name, suffix, phone)
-                                VALUES (email = '".$vol_email."'
-                                    ,first_name = '".$vol_fn."'
-                                    ,last_name = '".$vol_ln."'
-                                    ,dob = '".$formatted_dob."'
-                                    ,middle_name = '".$vol_middle_name."'
-                                    ,suffix = '".$vol_suffix."'
-                                    ,phone = '".$vol_phone."')";
+                      VALUES ('".$vol_email."','".$vol_fn."','".$vol_ln."','".$formatted_dob."','".$vol_middle_name."','".$vol_suffix."','".$vol_phone."')";
 
     echo($insert_string);
 //    die();
