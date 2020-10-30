@@ -17,6 +17,10 @@ if (!isset($_SESSION['email'])) {
 
     if (isset($_SESSION['email']))  {
         $volunteer = $results[0];
+        $address = $vol_addresses[0];
+        $formatted_address = "${address["street_one"]} ${address["street_two"]}, ${address["city"]} ${address["state"]} ${address["zip"]}";
+        $emergency_contact_full_name = "${ec_first_name} ${ec_last_name}";
+
         ?>
         <div id="management-form" class="container">
             <span><a class="back details-btn" onclick="window.history.back();">Back</a></span>
@@ -29,6 +33,8 @@ if (!isset($_SESSION['email'])) {
             <h1><?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?></h1>
             <ul>
                 <li><strong>Email Address</strong> - <?=$volunteer["email"]?></li>
+                <li><strong>Primary Address</strong> - <?=$formatted_address?></li>
+                <li><strong>Emergency Contact</strong> - <?=$emergency_contact_full_name?></li>
                 <li><strong>Skills</strong> - <?=$volunteer["skills"]?></li>
                 <li><strong>Interests</strong> - <?=$volunteer["interests"]?></li>
                 <li><strong>Availability</strong> - <?=$volunteer["availability"]?></li>
@@ -232,6 +238,58 @@ if (!isset($_SESSION['email'])) {
                             <div class="form-group">
                                 <label for="email_dist">Include me in the email distribution</label>
                                 <input class="block" type="checkBox" id="email_dist" name="email_dist" value="<?=$volunteer["include_email_dist"]?>">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>Address Information</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="street_one" class="sr-only">Address line 1</label>
+                                    <input class="form-control" id="street_one" name="street_one" placeholder="Address line 1" type="text" value="<?=$address["street_one"]?>">
+                                </div>
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="street_two" class="sr-only">Address line 2</label>
+                                    <input class="form-control" id="street_two" name="street_two" placeholder="Address line 2" type="text" value="<?=$address["street_two"]?>">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="city" class="sr-only">City</label>
+                                    <input class="form-control" id="city" name="city" placeholder="City" type="text" value="<?=$address["city"]?>">
+                                </div>
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="state" class="sr-only">State</label>
+                                    <input class="form-control" id="state" name="state" placeholder="State" type="text" value="<?=$address["state"]?>">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12 col-xs-12">
+                                    <label for="zip" class="sr-only">Zip Code</label>
+                                    <input class="form-control" id="zip" name="zip" placeholder="Zip Code" type="text" value="<?=$address["zip"]?>">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>Emergency Contact</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="ec_first_name" class="sr-only">First Name</label>
+                                    <input class="form-control" id="ec_first_name" name="ec_first_name" placeholder="First Name" type="text" value="<?=$ec_first_name?>">
+                                </div>
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="ec_last_name" class="sr-only">Last Name</label>
+                                    <input class="form-control" id="ec_last_name" name="ec_last_name" placeholder="Last Name" type="text" value="<?=$ec_last_name?>">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12 col-xs-12">
+                                    <label for="ec_phone" class="sr-only">Phone</label>
+                                    <input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="text" value="<?=$ec_phone?>">
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-success">Save changes</button>
                         </form>

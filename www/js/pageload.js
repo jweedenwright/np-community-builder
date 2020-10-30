@@ -89,90 +89,32 @@ window.addEventListener("load",function() {
 	$(".datetime-picker").focus().blur();
 	$("#quick-sign-in-name").focus();
 
-	// Setup on change for task drop down
-	$("#task").on("change",function() {
-		if ($(this).find(":selected").val() !== "") {
-			flipInputGroupIcon(".task .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".task .input-group-addon", "error");
-		}
-	});
-	
-	// Setup on change for location drop down
-	$("#location").on("change",function() {
-		if ($(this).find(":selected").val() !== "") {
-			flipInputGroupIcon(".location .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".location .input-group-addon", "error");
-		}
-	});
-	
-	// Setup on change for email
-	$("#quick-sign-in-name").on("blur",function() {
-		if ($(this).val() !== "") {
-			flipInputGroupIcon(".email .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".email .input-group-addon", "error");
-		}
-	});
-	
-	// Setup on change for first and last name
-	$("#first-name").on("blur",function() {
-		if ($(this).val() !== "") {
-			flipInputGroupIcon(".first-name .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".first-name .input-group-addon", "error");
-		}
-	});
-	
-	// Setup on change for first and last name
-	$("#last-name").on("blur",function() {
-		if ($(this).val() !== "") {
-			flipInputGroupIcon(".last-name .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".last-name .input-group-addon", "error");
-		}
-	});
-
-	$('#phone').on('blur', function () {
-		var phoneNumber = $(this).val();
-		if (isValidPhoneNumber(phoneNumber)) {
-			flipInputGroupIcon(".phone .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".phone .input-group-addon", "error");
-		}
-	});
-
-	$('#dob').on('blur', function () {
-		var dob = $(this).val();
-		if (isValidDate(dob)) {
-			flipInputGroupIcon(".dob .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".dob .input-group-addon", "error");
-		}
-	});
-
 	// automatically adds slaces to number input and prevents alpha input
 	$('#dob').on('keyup', function (e) {
-		var BACKSPACE_CODE = 8;
+		var nonNumberRegex = /[^0-9.]/g;
+		var BACKSPACE_KEY_CODE = 8;
 		var BACKSPACE_KEY = 'Backspace';
 		var value = $(this).val();
-		var newNumber = parseInt(value.charAt(value.length - 1));
+		var numberValue = value.replace(nonNumberRegex, '');
 
-		// if non numeric character remove it
-		if (isNaN(newNumber)) {
-			return $(this).val(value.slice(0, -1));
+		// do nothing on backspace
+		if (e.which === BACKSPACE_KEY_CODE || e.key === BACKSPACE_KEY) return;
+		
+		if (numberValue.length > 8) {
+			numberValue = numberValue.slice(0, 7);
+		};
+
+		var formattedDate = numberValue;
+
+		if (numberValue.length >= 2) {
+			formattedDate = formattedDate.substring(0, 2) + '/' + formattedDate.substring(2);
 		}
 
-		var isBackspaceKey = e.which === BACKSPACE_CODE || e.key === BACKSPACE_KEY;
-
-		if (isBackspaceKey && (value.length === 3 || value.length === 6)) {
-			value = value.slice(0, -1);
-		} else if (value.length === 2 || value.length === 5) {
-			value += '/';
+		if (numberValue.length >= 5) {
+			formattedDate = formattedDate.substring(0, 5) + '/' + formattedDate.substring(5);
 		}
 
-		$(this).val(value);
+		$(this).val(formattedDate);
 	});
 		
 	// Scroll to top

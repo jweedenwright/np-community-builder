@@ -128,23 +128,35 @@ function checkPreferences() {
 	}
 }
 
-/**
- * Returns true if date is in a valid format
- * Ex. MM/DD/YYYY
- * @param {string} date - date input
- * @return {boolean}
- */
-function isValidDate(date) {
-	const dateRegex = /(0?[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.]\d{2,4}/;
-	return dateRegex.test(date);
-}
-
-/**
- * Returns true if phoneNumber is in a valid format
- * Ex. (xxx) xxx-xxxx
- * @param {string} phoneNumber - phone number input
- */
-function isValidPhoneNumber(phoneNumber) {
-	const phoneRegex = /\([0-9]{3}\)\s[0-9]{3}\-[0-9]{4}/;
-	return phoneRegex.test(phoneNumber);
+// Form Validation
+function checkIfValid(formId) {
+	var is_valid = true;
+	var validation_fields = document.getElementById("sign-in-form").querySelectorAll("[data-validation]");
+	for (var i = 0; i < validation_fields.length; i++) {
+		var validation_field = validation_fields[i];
+		// Get value - check for input vs select
+		var field_value = "";
+		if (validation_field.nodeName.toLowerCase() === "select") {
+			field_value = validation_field.options[validation_field.selectedIndex].value.trim();
+		} else {
+			field_value = validation_field.value.trim();
+        }
+		switch (validation_field.dataset.validationtype) {
+			case "regex":
+				is_valid = (field_value.match(new RegExp(validation_field.dataset.validationregex))) ? true : validation_field.dataset.validationmessage;
+				break;
+			case "req":
+				is_valid = (field_value !== "") ? true : validation_field.dataset.validationmessage;				
+				break;
+			default:
+				// Do nothing - validation not setup correctly
+		}
+		if (is_valid !== true) {
+			validation_field.classList.add("validation-error");
+			break;
+		} else {
+			validation_field.classList.remove("validation-error");
+        }
+	}
+	return is_valid;
 }

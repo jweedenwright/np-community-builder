@@ -6,7 +6,7 @@
 	include_once '../header.php';
 	include_once '../app/dashboard-util.php'; 
 
-	if (!isset($_SESSION['email'])) {
+	if (!isLoggedIn()) {
 		//	Session variable not set - redirect to login
 		header("Location: " . $login_url);
 	} else {

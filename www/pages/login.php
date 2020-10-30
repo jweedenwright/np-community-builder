@@ -2,7 +2,7 @@
 	include_once '../app/global.php';
 	
 	//	Check if already logged in
-	if (isset($_SESSION['email'])) {
+	if (isLoggedIn()) {
 		//	Session variables already set - move forward to the dashboard
 		header("Location: " . $dashboard_url);
 	
@@ -28,18 +28,18 @@
 				$password = filter_var ( $_POST['password'], FILTER_SANITIZE_STRING);
 
 				//	Check if user exists
-				$query_string = "SELECT id, username, password, reset_id FROM app_user WHERE username = ?";			
+				$query_string = "SELECT id, username, password, reset_id, user_type_id FROM app_user WHERE username = ?";
 				$user_results = $db->executeStatement($query_string,array($email))->fetchAll();
 
 				//	If email exists in the db, log in
 				if (count($user_results) > 0) {
 					foreach ($user_results as $row) {
-
-						//	If reset id is set - they need to reset first	
+						//	If reset id is set - they need to reset first
 						if ($row['reset_id'] == "") {
 							if (password_verify($password, $row['password'])) {
 								$_SESSION['user_id'] = $row['id'];
 								$_SESSION['email'] = $row['username'];
+								$_SESSION['user_type_id'] = $row['user_type_id'];
 								header("Location: " . $dashboard_url);
 							} else {
 								$message .= "<p>Sorry, the password you entered is incorrect.</p>";
@@ -101,6 +101,7 @@
 		$page_title = "Login";
 		include_once '../header.php';
 ?>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4 col-sm-offset-4 <?=$message_class?>">
