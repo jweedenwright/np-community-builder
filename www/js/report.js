@@ -4,13 +4,13 @@
 
 // Signout all users
 function signout() {
-    if (window.confirm("Are you sure you want to sign everyone out? 2 hours will be logged for each volunteer.")) {
+    if (window.confirm("Are you sure you want to sign everyone out? 4 hours will be logged for each volunteer.")) {
         window.location.href = "/pages/autosignout.php";
     } else {
         return false;
     }
 }
-from Jeremiah Weeden - Wright to everyone: 11: 28 AM
+
 // Resets the dashboard
 function resetDashboard() {
     document.getElementsByName("vol_name")[0].options[0].selected = "selected";

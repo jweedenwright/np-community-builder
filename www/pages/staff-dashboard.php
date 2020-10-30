@@ -74,12 +74,12 @@
 				
 				<div class="form-group col-sm-3">
 					<label for="datetime-picker">Start Date</label>
-					<input type='text' class="form-control datetime-picker" id="start-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="starttime" placeholder="MM/DD/YYYY 12:01 AM" />
+					<input type='text' class="form-control datetime-picker" id="start-datetime-picker" autocomplete="chrome-off" data-format="yyyy-MM-dd hh:mm:00" name="starttime" placeholder="MM/DD/YYYY 12:01 AM" />
 					<input type="hidden" id="startdate-default" value="<?=$start_filter?>">
 				</div>
 				<div class="form-group col-sm-3">
 					<label for="datetime-picker">End Date</label>
-					<input type='text' class="form-control datetime-picker" id="end-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="endtime" placeholder="MM/DD/YYYY 12:01 AM" />
+					<input type='text' class="form-control datetime-picker" id="end-datetime-picker" autocomplete="chrome-off" data-format="yyyy-MM-dd hh:mm:00" name="endtime" placeholder="MM/DD/YYYY 12:01 AM" />
 					<input type="hidden" id="enddate-default" value="<?=$end_filter?>">
 				</div>
 				<div class="form-group col-sm-3">
@@ -112,7 +112,7 @@
 				</div>
 
 			<div class="form-group col-sm-12 text-right">
-					<button type="button" class="btn btn-danger pull-left" onclick="signout(); return false;">Signout All Volunteers</button>
+					<button type="button" class="btn btn-danger pull-left" onclick="signout();return false;">Signout All Volunteers</button>
 					<div class="btn-group pull-right" role="group" aria-label="Search Actions">
 						<button type="submit" class="btn btn-primary">Search</button>
 						<button type="button" class="btn btn-default" onclick="getCsv();return false;">Download Volunteers</button>

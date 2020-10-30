@@ -9,14 +9,14 @@
 	$start_date_parsed = (isset($_POST['starttime']) && $_POST['starttime'] != "") ? date_parse_from_format ( $ui_date_format, filter_var ( $_POST['starttime'], FILTER_SANITIZE_STRING)) : "";
 	if ($start_date_parsed != "") {
 		$start_filter = $start_date_parsed["year"] . "-" . $start_date_parsed["month"] . "-" . $start_date_parsed["day"] 
-						. " " . $start_date_parsed["hour"] . ":" . $start_date_parsed["minute"] .":00";	
+						. " 00:00:00";	
 	} else {
 		$start_filter = "";
 	}
 	$end_date_parsed = (isset($_POST['endtime']) && $_POST['endtime'] != "") ? date_parse_from_format ( $ui_date_format, filter_var ( $_POST['endtime'], FILTER_SANITIZE_STRING)) : "";
 	if ($end_date_parsed != "") {
 		$end_filter = $end_date_parsed["year"] . "-" . $end_date_parsed["month"] . "-" . $end_date_parsed["day"] 
-						. " " . $end_date_parsed["hour"] . ":" . $end_date_parsed["minute"] .":00";
+						. " 23:59:59";
 	} else {
 		$end_filter = "";
 	}
