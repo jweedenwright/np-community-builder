@@ -133,6 +133,52 @@ window.addEventListener("load",function() {
 			flipInputGroupIcon(".last-name .input-group-addon", "error");
 		}
 	});
+
+	$('#phone').on('blur', function () {
+		var phoneNumber = $(this).val();
+		if (isValidPhoneNumber(phoneNumber)) {
+			flipInputGroupIcon(".phone .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".phone .input-group-addon", "error");
+		}
+	});
+
+	$('#dob').on('blur', function () {
+		var dob = $(this).val();
+		if (isValidDate(dob)) {
+			flipInputGroupIcon(".dob .input-group-addon", "ok");
+		} else {
+			flipInputGroupIcon(".dob .input-group-addon", "error");
+		}
+	});
+
+	// automatically adds slaces to number input and prevents alpha input
+	$('#dob').on('keyup', function (e) {
+		var nonNumberRegex = /[^0-9.]/g;
+		var BACKSPACE_KEY_CODE = 8;
+		var BACKSPACE_KEY = 'Backspace';
+		var value = $(this).val();
+		var numberValue = value.replace(nonNumberRegex, '');
+
+		// do nothing on backspace
+		if (e.which === BACKSPACE_KEY_CODE || e.key === BACKSPACE_KEY) return;
+		
+		if (numberValue.length > 8) {
+			numberValue = numberValue.slice(0, 7);
+		};
+
+		var formattedDate = numberValue;
+
+		if (numberValue.length >= 2) {
+			formattedDate = formattedDate.substring(0, 2) + '/' + formattedDate.substring(2);
+		}
+
+		if (numberValue.length >= 5) {
+			formattedDate = formattedDate.substring(0, 5) + '/' + formattedDate.substring(5);
+		}
+
+		$(this).val(formattedDate);
+	});
 		
 	// Scroll to top
 	jQuery('html,body').animate({scrollTop:0},200);
