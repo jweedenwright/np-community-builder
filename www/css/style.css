@@ -106,21 +106,23 @@ header #main-nav ul li:last-child a:focus {
 #mission-statement p {
   margin: 10px;
 }
-.line-link {
-  color: white;
-  cursor: pointer;
-  font-size: 18px;
-  width: 100%;
-  background: #d67410;
-  border-radius: 4px;
+
+.line-link
+{
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    background: #0578a9;
+    border-radius: 4px;
 }
-.line-link:hover,
-.line-link:focus {
-  color: white;
-  text-decoration: none;
-  box-shadow: 0 0 8px 1px #585858;
-  background: #c56c10;
-}
+    .line-link:hover,
+    .line-link:focus {
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 0 8px 1px #585858;
+        background: #0695d1;
+    }
 .line-link .glyphicon {
   top: 2px;
   padding-right: 10px;
@@ -129,16 +131,16 @@ header #main-nav ul li:last-child a:focus {
   width: inherit;
 }
 .success-link {
-  background: #009202;
+    background: #234828;
 }
 .success-link:hover,
 .success-link:focus {
-  background: #009202;
+    background: #33713b;
 }
 footer {
-  background: rgba(52, 52, 52, 0.9);
-  color: #fff;
-  margin-top: 15px;
+    background: #2e3738;
+    color: #fff;
+    margin-top: 15px;
 }
 .footer-section {
   margin: 30px 0px;
@@ -198,7 +200,7 @@ footer .address a:hover {
 .contribute {
   text-align: center;
 }
-.contribute .contribute-button {
+.contribute .contribute-button, #mission-statement {
     color: #fff;
     background: #2e3738;
     margin-bottom: 15px;

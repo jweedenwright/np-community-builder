@@ -20,6 +20,7 @@
 	<li><a href="/pages/manage-volunteers.php">Manage Volunteers</a></li>
 	<li><a href="/pages/manage-locations.php">Manage Locations</a></li>
 	<li><a href="/pages/manage-tasks.php">Manage Tasks</a></li>
+	<li><a href="/pages/manage-events.php">Manage Events</a></li>
 </ul>	
 
 <h2>Dashboard</h2>
@@ -115,8 +116,8 @@
 					<button type="button" class="btn btn-danger pull-left" onclick="signout();return false;">Signout All Volunteers</button>
 					<div class="btn-group pull-right" role="group" aria-label="Search Actions">
 						<button type="submit" class="btn btn-primary">Search</button>
-						<button type="button" class="btn btn-default" onclick="getCsv();return false;">Download Volunteers</button>
-						<button type="button" class="btn btn-default" onclick="resetDashboard();return false;">Reset Filters</button>
+						<button type="button" class="btn btn-default" onclick="downloadCSV('vol-hours',8);return false;">Download Volunteers</button>
+						<button type="submit" class="btn btn-default" onclick="resetDashboard();return true;">Reset Filters</button>
 					</div>
 				</div>
 
@@ -126,7 +127,7 @@
 
 <!-- Retrieve volunteer periods -->
 <div class="table-responsive">
-	<table class="table table-striped">
+	<table id="vol-hours" class="table table-striped">
 		<thead>
 			<tr>
 				<th>Name</th>
@@ -137,7 +138,7 @@
 				<th>Activity</th>
 				<th>Location</th>
 				<th>Affiliation</th>
-				<th></th>
+				<th>Edit</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -177,7 +178,7 @@
 					if(strlen($checkin_hour."") > 1) {
 						if ($checkin_date["hour"] > 12) {
 							$checkin_hour = $checkin_date["hour"] - 12;
-							if ($checkin_hour["hour"] != 24) {
+							if ($checkin_date["hour"] != 24) {
 								$checkin_ampm = "PM";
 							}
 						} elseif ($checkin_date["hour"] == 12) {
