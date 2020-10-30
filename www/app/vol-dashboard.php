@@ -84,8 +84,8 @@ if (isLoggedIn()) {
     $state = '';
     $zip = '';
 
-    if (isset($vol_address_query[0])) {
-        if (isset($vol_addresses[0]['street_one'])) {
+	if (isset($vol_address_query[0])) {
+		if (isset($vol_addresses[0]['street_one'])) {
             $street_one = filter_var($vol_addresses[0]['street_one'], FILTER_SANITIZE_STRING);
         }
         if (isset($vol_addresses[0]['street_two'])) {
@@ -100,7 +100,7 @@ if (isLoggedIn()) {
         if (isset($vol_addresses[0]['zip'])) {
             $zip = filter_var($vol_addresses[0]['zip'], FILTER_SANITIZE_STRING);
         }
-    }
+	}
 
     $emergency_contact_query = "SELECT * FROM emergency_contact WHERE emergency_contact.volunteer_id = ?";
     $emergency_contacts = $db->executeStatement($emergency_contact_query, array($results[0]['id']))->fetchAll();
