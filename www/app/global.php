@@ -116,7 +116,19 @@ error_reporting(E_ALL);
 		return $hours;
 	}
 
+	/**
+	 * Returns true if user is logged in
+	 * @return bool
+	 */
 	function isLoggedIn() {
 		return isset($_SESSION['email']);
+	}
+
+	/**
+	 * Gets active user id if set
+	 * @return bool|null
+	 */
+	function getLoggedInUserId() {
+		return isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 	}
 ?>
