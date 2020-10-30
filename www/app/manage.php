@@ -272,7 +272,25 @@
 						$return_message = "Sorry! Was unable to ".$update_type." the task.";
 					}
 				}
-
+///////////////////////////////////////////////////				
+// MANAGE EVENT
+			} else if ($manage_type === 'event') {
+				// Make sure we have required values for a Task change 
+				if (!isset($_POST['event-name'])) {
+					$return_message = "Task name was not provided.";
+				} elseif (!isset($_POST['event-date'])) {
+					$return_message = "Task id was not provided.";
+				} else {
+					$event_name = filter_var($_POST['event-name'], FILTER_SANITIZE_STRING);
+					$event_date = filter_var($_POST['event-date'], FILTER_SANITIZE_STRING);
+					$formatted_date = date('Y-m-d H:i:s', strtotime($event_date));
+					$event_insert = "INSERT INTO event (event_name, event_date, active) VALUES ('$event_name', '$formatted_date', 1)";
+					if ($db->executeStatement($event_insert, [])) {
+						$return_message = 'Successfullly created event';
+					} else {
+						$return_message = 'Uh oh, we encountered a problem saving your event.';
+					}
+				}
 ///////////////////////////////////////////////////				
 // MANAGE ACTIVATE / DEACTIVATE
 			} elseif ($manage_type == "activate" || $manage_type == "deactivate") {
@@ -303,7 +321,7 @@
 					}
 				}
 			} else {
-				$return_message = "Sorry! You requested an unsupported action/type (type requested was <?=$manage_type?>).";
+				$return_message = "Sorry! You requested an unsupported action/type (type requested was $manage_type).";
 			}			
 		} else {
 			$return_message = "Sorry! There was an issue with the action/type you attempted to take.";

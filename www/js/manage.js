@@ -32,10 +32,13 @@ function editEvent(event_sel) {
 	var id = $(event_sel).data("id");
 	if (id !== "new") {
 		$("#event-name").attr("value", $(event_sel).data("name"));
+		var formattedDate = moment($(event_sel).data("date")).format('MM/DD/YYYY hh:mm a');
+		$("#event-date-time-picker").attr("value", formattedDate);
 		$("#event-id").attr("value", id);
 	} else {
-		$("#task-name").attr("value", "");
-		$("#task-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
+		$("#event-name").attr("value", "");
+		$("#event-date-time-picker").attr("value", "");
+		$("#event-id").attr("value", "new"); // new is required as value to ensure we are creating a new location - security and logic reasons
 	}
 }
 
@@ -77,6 +80,7 @@ function filterItems(search_field) {
 	// Start the search
 	for (var i = 0; i < search_rows.length; i++) {
 		search_row = search_rows[i];
+		// console.log(search_row.dataset.search);
 		var found = search_row.dataset.search.toLowerCase().indexOf(search_field.value.toLowerCase());
 		if (found === -1) {
 			search_row.classList.add("hidden");

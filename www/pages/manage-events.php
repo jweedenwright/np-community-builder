@@ -49,19 +49,35 @@
 						<?php
 						foreach ($results as $event) {
 						?>
-						<tr class="search-row" data-search="<?=$event["job_type"]?>">
+						<tr class="search-row" data-search="<?=$event["event_name"]?>">
 							<td><?=$event["id"]?></td>
 							<td><?=$event["event_name"]?></td>
 							<td><?=$event["event_date"]?></td>
 							<td>							
 								<a href="#" class="edit-event manage-action" data-id="<?=$event["id"]?>" 
-															data-name="<?=$event["event_name"]?>" 
+															data-name="<?= $event["event_name"] ?>"
+															data-date="<?= $event['event_date'] ?>"
 															data-toggle="modal" 
 															data-target="#edit-details" 
 															onclick="editEvent(this); return false;">
 										<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
 										<span class="sr-only">Edit</span>
 								</a>
+								<?php if ($event["active"] == 1) { ?>
+									<a href="#" class="deactivate-task manage-action" data-id="<?=$event["id"]?>" 
+																data-type='event'
+																onclick="deactivate(this); return false;">
+											<i class="glyphicon glyphicon-ban-circle" aria-hidden="true"></i>
+											<span class="sr-only">Deactivate</span>
+									</a>
+								<?php } else { ?>
+									<a href="#" class="activate-task manage-action" data-id="<?=$event["id"]?>" 
+																data-type='event'
+																onclick="activate(this); return false;">
+											<i class="glyphicon glyphicon-certificate" aria-hidden="true"></i>
+											<span class="sr-only">Activate</span>
+									</a>
+								<?php } ?>
 							</td>
 						</tr>
 						<?php
@@ -82,7 +98,7 @@
 						<div class="modal-body">
 							<form id="edit-details-form" method="POST" action="../app/manage.php">
 								<input type="hidden" id="event-id" name="event-id" value="">
-								<input type="hidden" id="type" name="type" value="job_type">
+								<input type="hidden" id="type" name="type" value="event">
 
 								<div class="form-group">
 									<label for="event-name">Event Name</label>
@@ -91,7 +107,16 @@
                 
                 <div class="form-group">
 									<label for="event-name">Event Date</label>
-									<input class="form-control" type="text" id="event-date" name="event-date" value="">
+									<input type='text' 
+										class="form-control datetime-picker" 
+										id="event-date-time-picker" 
+										data-format="yyyy-MM-dd hh:mm:00" 
+										name="event-date" 
+										placeholder="MM/DD/YYYY 12:01 AM" 
+										tabindex="8" 
+										data-validation="true"
+										data-validationtype="req"
+										data-validationmessage="Please be sure to provide your clock in date and time."/>
 								</div>
 								<button type="submit" class="btn btn-success">Save changes</button>
 							</form>
