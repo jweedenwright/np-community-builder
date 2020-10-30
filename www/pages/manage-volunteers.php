@@ -77,112 +77,112 @@
 								<input class="block" type="checkBox" id="email_dist" name="email_dist" value="1" <?php if($volunteer["include_email_dist"]==1){echo "checked";}?> >
 							</div>
 							<div class="row">
-											<div class="col-md-10">
-												<h4>Address Information</h4>
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="street_one" class="sr-only">Address line 1</label>
-												<input class="form-control" id="street_one" name="street_one" placeholder="Address line 1" tabindex="9" type="text" value="<?=$volunteer["street_one"]?>">
-											</div>
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="street_two" class="sr-only">Address line 2</label>
-												<input class="form-control" id="street_two" name="street_two" placeholder="Address line 2" tabindex="10" type="text"value="<?=$volunteer["street_two"]?>">
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="city" class="sr-only">City</label>
-												<input class="form-control" id="city" name="city" placeholder="City" tabindex="11" type="text" value="<?=$volunteer["city"]?>">
-											</div>
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="state" class="sr-only">State</label>
-												<select class="form-control" id="state" tabindex="12" value="<?=$volunteer["state"]?>" selected="selected">
-													<option value="">Please select a state...</option>
-													<option value="AL">Alabama</option>
-													<option value="AK">Alaska</option>
-													<option value="AZ">Arizona</option>
-													<option value="AR">Arkansas</option>
-													<option value="CA">California</option>
-													<option value="CO">Colorado</option>
-													<option value="CT">Connecticut</option>
-													<option value="DE">Delaware</option>
-													<option value="DC">District Of Columbia</option>
-													<option value="FL">Florida</option>
-													<option value="GA">Georgia</option>
-													<option value="HI">Hawaii</option>
-													<option value="ID">Idaho</option>
-													<option value="IL">Illinois</option>
-													<option value="IN">Indiana</option>
-													<option value="IA">Iowa</option>
-													<option value="KS">Kansas</option>
-													<option value="KY">Kentucky</option>
-													<option value="LA">Louisiana</option>
-													<option value="ME">Maine</option>
-													<option value="MD">Maryland</option>
-													<option value="MA">Massachusetts</option>
-													<option value="MI">Michigan</option>
-													<option value="MN">Minnesota</option>
-													<option value="MS">Mississippi</option>
-													<option value="MO">Missouri</option>
-													<option value="MT">Montana</option>
-													<option value="NE">Nebraska</option>
-													<option value="NV">Nevada</option>
-													<option value="NH">New Hampshire</option>
-													<option value="NJ">New Jersey</option>
-													<option value="NM">New Mexico</option>
-													<option value="NY">New York</option>
-													<option value="NC">North Carolina</option>
-													<option value="ND">North Dakota</option>
-													<option value="OH">Ohio</option>
-													<option value="OK">Oklahoma</option>
-													<option value="OR">Oregon</option>
-													<option value="PA">Pennsylvania</option>
-													<option value="RI">Rhode Island</option>
-													<option value="SC">South Carolina</option>
-													<option value="SD">South Dakota</option>
-													<option value="TN">Tennessee</option>
-													<option value="TX">Texas</option>
-													<option value="UT">Utah</option>
-													<option value="VT">Vermont</option>
-													<option value="VA">Virginia</option>
-													<option value="WA">Washington</option>
-													<option value="WV">West Virginia</option>
-													<option value="WI">Wisconsin</option>
-													<option value="WY">Wyoming</option>
-												</select>
+								<div class="col-md-10">
+									<h4>Address Information</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-5 col-xs-10">
+									<label for="street_one" class="sr-only">Address line 1</label>
+									<input class="form-control" id="street_one" name="street_one" placeholder="Address line 1" tabindex="9" type="text" value="<?=$volunteer["street_one"]?>">
+								</div>
+								<div class="form-group col-md-5 col-xs-10">
+									<label for="street_two" class="sr-only">Address line 2</label>
+									<input class="form-control" id="street_two" name="street_two" placeholder="Address line 2" tabindex="10" type="text"value="<?=$volunteer["street_two"]?>">
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-5 col-xs-10">
+									<label for="city" class="sr-only">City</label>
+									<input class="form-control" id="city" name="city" placeholder="City" tabindex="11" type="text" value="<?=$volunteer["city"]?>">
+								</div>
+								<div class="form-group col-md-5 col-xs-10">
+									<label for="state" class="sr-only">State</label>
+									<select class="form-control" id="state" tabindex="12" value="<?=$volunteer["state"]?>" selected="selected">
+										<option value="">Please select a state...</option>
+										<option value="AL">Alabama</option>
+										<option value="AK">Alaska</option>
+										<option value="AZ">Arizona</option>
+										<option value="AR">Arkansas</option>
+										<option value="CA">California</option>
+										<option value="CO">Colorado</option>
+										<option value="CT">Connecticut</option>
+										<option value="DE">Delaware</option>
+										<option value="DC">District Of Columbia</option>
+										<option value="FL">Florida</option>
+										<option value="GA">Georgia</option>
+										<option value="HI">Hawaii</option>
+										<option value="ID">Idaho</option>
+										<option value="IL">Illinois</option>
+										<option value="IN">Indiana</option>
+										<option value="IA">Iowa</option>
+										<option value="KS">Kansas</option>
+										<option value="KY">Kentucky</option>
+										<option value="LA">Louisiana</option>
+										<option value="ME">Maine</option>
+										<option value="MD">Maryland</option>
+										<option value="MA">Massachusetts</option>
+										<option value="MI">Michigan</option>
+										<option value="MN">Minnesota</option>
+										<option value="MS">Mississippi</option>
+										<option value="MO">Missouri</option>
+										<option value="MT">Montana</option>
+										<option value="NE">Nebraska</option>
+										<option value="NV">Nevada</option>
+										<option value="NH">New Hampshire</option>
+										<option value="NJ">New Jersey</option>
+										<option value="NM">New Mexico</option>
+										<option value="NY">New York</option>
+										<option value="NC">North Carolina</option>
+										<option value="ND">North Dakota</option>
+										<option value="OH">Ohio</option>
+										<option value="OK">Oklahoma</option>
+										<option value="OR">Oregon</option>
+										<option value="PA">Pennsylvania</option>
+										<option value="RI">Rhode Island</option>
+										<option value="SC">South Carolina</option>
+										<option value="SD">South Dakota</option>
+										<option value="TN">Tennessee</option>
+										<option value="TX">Texas</option>
+										<option value="UT">Utah</option>
+										<option value="VT">Vermont</option>
+										<option value="VA">Virginia</option>
+										<option value="WA">Washington</option>
+										<option value="WV">West Virginia</option>
+										<option value="WI">Wisconsin</option>
+										<option value="WY">Wyoming</option>
+									</select>
 
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-10 col-xs-10">
-												<label for="zip" class="sr-only">Zip Code</label>
-												<input class="form-control" id="zip" name="zip" placeholder="Zip Code" tabindex="13" type="number" maxlength="5" value="<?=$volunteer["zip"]?>"					
-														oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-10">
-												<h4>Emergency Contact</h4>
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="ec_first_name" class="sr-only">First Name</label>
-												<input class="form-control" id="ec_first_name" name="ec_first_name" placeholder="First Name" tabindex="14" type="text" value="<?=$volunteer["ec_first_name"]?>">
-											</div>
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="ec_last_name" class="sr-only">Last Name</label>
-												<input class="form-control" id="ec_last_name" name="ec_last_name" placeholder="Last Name" tabindex="15" type="text" value="<?=$volunteer["ec_last_name"]?>">
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-10 col-xs-10">
-												<label for="ec_phone" class="sr-only">Phone</label>
-												<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="tel" tabindex="16" value="<?=$volunteer["ec_phone"]?>">
-											</div>
-										</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-10 col-xs-10">
+									<label for="zip" class="sr-only">Zip Code</label>
+									<input class="form-control" id="zip" name="zip" placeholder="Zip Code" tabindex="13" type="number" maxlength="5" value="<?=$volunteer["zip"]?>"					
+											oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-10">
+									<h4>Emergency Contact</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-5 col-xs-10">
+									<label for="ec_first_name" class="sr-only">First Name</label>
+									<input class="form-control" id="ec_first_name" name="ec_first_name" placeholder="First Name" tabindex="14" type="text" value="<?=$volunteer["ec_first_name"]?>">
+								</div>
+								<div class="form-group col-md-5 col-xs-10">
+									<label for="ec_last_name" class="sr-only">Last Name</label>
+									<input class="form-control" id="ec_last_name" name="ec_last_name" placeholder="Last Name" tabindex="15" type="text" value="<?=$volunteer["ec_last_name"]?>">
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-10 col-xs-10">
+									<label for="ec_phone" class="sr-only">Phone</label>
+									<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="tel" tabindex="16" value="<?=$volunteer["ec_phone"]?>">
+								</div>
+							</div>
 
 							<div class="form-group row">
 								<div class="col-lg-9">
@@ -414,7 +414,7 @@
 								<td><?=$volunteer["id"]?></td>
 								<td><?=$volunteer["first_name"]?></td>
 								<td><?=$volunteer["last_name"]?></td>
-								<td><a href="?email=<?=$volunteer["email"]?>"><?=$volunteer["email"]?></a></td>
+								<td><a href="?email=<?= urlencode($volunteer["email"]) ?>"><?=$volunteer["email"]?></a></td>
 							</tr>
 							<?php
 							}
@@ -576,7 +576,6 @@
 														oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
 											</div>
 										</div>
-
 										<div class="row">
 											<div class="col-md-10">
 												<h4>Emergency Contact</h4>
@@ -602,8 +601,8 @@
 											<label for="email_dist">Add to email distribution</label>
 											<input class="block" type="checkBox" id="email_dist" name="email_dist">
 										</div>
-                                        <button type="submit" class="btn btn-success">Submit New Volunteer</button>
-                                    </form>
+										<button type="submit" class="btn btn-success">Submit New Volunteer</button>
+								</form>
 							</div>
 						</div>
 					</div>
