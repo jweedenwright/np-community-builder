@@ -128,27 +128,6 @@ function checkPreferences() {
 	}
 }
 
-/**
- * Returns true if date is in a valid format
- * Ex. MM/DD/YYYY
- * @param {string} date - date input
- * @return {boolean}
- */
-function isValidDate(date) {
-	const dateRegex = /(0?[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.]\d{2,4}/;
-	return dateRegex.test(date);
-}
-
-/**
- * Returns true if phoneNumber is in a valid format
- * Ex. (xxx) xxx-xxxx
- * @param {string} phoneNumber - phone number input
- */
-function isValidPhoneNumber(phoneNumber) {
-	const phoneRegex = /\([0-9]{3}\)\s[0-9]{3}\-[0-9]{4}/;
-	return phoneRegex.test(phoneNumber);
-}
-
 // Form Validation
 function checkIfValid(formId) {
 	var is_valid = true;
@@ -172,32 +151,12 @@ function checkIfValid(formId) {
 			default:
 				// Do nothing - validation not setup correctly
 		}
-		if (is_valid !== true) break;
+		if (is_valid !== true) {
+			validation_field.classList.add("validation-error");
+			break;
+		} else {
+			validation_field.classList.remove("validation-error");
+        }
 	}
 	return is_valid;
 }
-/* TODO: SIGN IN VALIDATIONS - ADD TO FORM WHEN ADAM IS DONE: required validations
-	valid_form = document.getElementsByName("firstname")[0].value !== "";
-	if(!valid_form) { return handleInvalid("Please be sure to provide your first name."); }
-	valid_form = document.getElementsByName("lastname")[0].value !== "";
-	if(!valid_form) { return handleInvalid("Please be sure to provide your last name."); }
-
-	// Complex validations
-	var email = document.getElementsByName("email")[0];
-	valid_form = email.value !== "";
-	if(!valid_form) { return handleInvalid("Please be sure to provide your email."); }
-	valid_form = (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email.value);
-	if(!valid_form) { return handleInvalid("Please be sure your email is in the correct format."); }
-
-	// Date: 02/07/2017 6:48 PM
-	var datetime = document.getElementsByName("signintime")[0];
-	valid_form = datetime.value !== "";
-	if(!valid_form) { return handleInvalid("Please be sure to provide your sign in date."); }
-
-	var location_item = document.getElementsByName("location")[0];
-	valid_form = (/^[0-9]*$/).test(location_item.options[location_item.selectedIndex].value);
-	if(!valid_form) { return handleInvalid("Please be sure to select a location."); }
-	var task_item = document.getElementsByName("task")[0];
-	valid_form = (/^[0-9]*$/).test(task_item.options[task_item.selectedIndex].value);
-	if(!valid_form) { return handleInvalid("Please be sure to select a program."); }
-	*/

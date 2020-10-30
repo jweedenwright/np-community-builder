@@ -89,69 +89,6 @@ window.addEventListener("load",function() {
 	$(".datetime-picker").focus().blur();
 	$("#quick-sign-in-name").focus();
 
-	// Setup on change for task drop down
-	$("#task").on("change",function() {
-		if ($(this).find(":selected").val() !== "") {
-			flipInputGroupIcon(".task .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".task .input-group-addon", "error");
-		}
-	});
-	
-	// Setup on change for location drop down
-	$("#location").on("change",function() {
-		if ($(this).find(":selected").val() !== "") {
-			flipInputGroupIcon(".location .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".location .input-group-addon", "error");
-		}
-	});
-	
-	// Setup on change for email
-	$("#quick-sign-in-name").on("blur",function() {
-		if ($(this).val() !== "") {
-			flipInputGroupIcon(".email .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".email .input-group-addon", "error");
-		}
-	});
-	
-	// Setup on change for first and last name
-	$("#first-name").on("blur",function() {
-		if ($(this).val() !== "") {
-			flipInputGroupIcon(".first-name .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".first-name .input-group-addon", "error");
-		}
-	});
-	
-	// Setup on change for first and last name
-	$("#last-name").on("blur",function() {
-		if ($(this).val() !== "") {
-			flipInputGroupIcon(".last-name .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".last-name .input-group-addon", "error");
-		}
-	});
-
-	$('#phone').on('blur', function () {
-		var phoneNumber = $(this).val();
-		if (isValidPhoneNumber(phoneNumber)) {
-			flipInputGroupIcon(".phone .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".phone .input-group-addon", "error");
-		}
-	});
-
-	$('#dob').on('blur', function () {
-		var dob = $(this).val();
-		if (isValidDate(dob)) {
-			flipInputGroupIcon(".dob .input-group-addon", "ok");
-		} else {
-			flipInputGroupIcon(".dob .input-group-addon", "error");
-		}
-	});
-
 	// automatically adds slaces to number input and prevents alpha input
 	$('#dob').on('keyup', function (e) {
 		var nonNumberRegex = /[^0-9.]/g;
