@@ -17,38 +17,41 @@
 	// Required Field Error Messages
 	//////////////////////
 
-	$volunteer_id = getLoggedInUserId();
+	$volunteer_id = getLoggedInUserVolunteerId();
 	$email = getLoggedInUserEmail();
 	$process_fail = false;
 
 	// validate required params
 	if (!isset($_POST['signintime'])) {
+		$process_fail = true;
 		?> <p class='alert alert-danger'>Datetime is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 	} elseif(!isset($_POST['location'])) {
+		$process_fail = true;
 		?> <p class='alert alert-danger'>Location is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 	} elseif(!isset($_POST['task'])) {
+		$process_fail = true;
 		?> <p class='alert alert-danger'>Task is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
+	} else {
+		$signin_date = filter_var ( $_POST['signintime'], FILTER_SANITIZE_STRING); // 02/07/2017 6:48 PM
+		$location_id = (int) filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
+		$task_id = (int) filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
+		$signin_date = date_parse_from_format ( $ui_datetime_format , $signin_date );
+		// Use passed date time to sign out - To SQL Format: 2016-11-14 14:00:00
+		$sign_in_time = $signin_date["year"] . "-" . $signin_date["month"] . "-" . $signin_date["day"] 
+		. " " . $signin_date["hour"] . ":" . $signin_date["minute"] .":00";
+		$first_time = 0;
+
+		// Removed from UI for BGCRC - set to 1 by default
+		$liability_check = 1;
+		$health_check = 1;
+		$photo_check = 1;
+
+		$affiliation = "";
+		$community_service = 0;
 	}
 
-	$signin_date = filter_var ( $_POST['signintime'], FILTER_SANITIZE_STRING); // 02/07/2017 6:48 PM
-	$location_id = (int) filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
-	$task_id = (int) filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
-	$signin_date = date_parse_from_format ( $ui_datetime_format , $signin_date );
-	// Use passed date time to sign out - To SQL Format: 2016-11-14 14:00:00
-	$sign_in_time = $signin_date["year"] . "-" . $signin_date["month"] . "-" . $signin_date["day"] 
-	. " " . $signin_date["hour"] . ":" . $signin_date["minute"] .":00";
-	$first_time = 0;
-
-	// Removed from UI for BGCRC - set to 1 by default
-	$liability_check = 1;
-	$health_check = 1;
-	$photo_check = 1;
-
-	$affiliation = "";
-	$community_service = 0;
-
 	// only try to register volunteer if user is not logged in
-	if (!$volunteer_id) {
+	if (!$volunteer_id && !$process_fail) {
 		if(!isset($_POST['email'])) {
 			?> <p class='alert alert-danger'>Email is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 		} elseif(!isset($_POST['firstname'])) {

@@ -1,7 +1,10 @@
 <?php
 	include_once '../app/global.php';
+	include_once '../app/auth/token.php';
+
 	$page_title = "Logout";
-	session_unset();
-	session_destroy();
+	
+	AccessToken::clear();
+
 	header("Location: " . $login_url);
 ?>
