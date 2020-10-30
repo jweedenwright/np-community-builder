@@ -85,11 +85,21 @@ if (isLoggedIn()) {
     $zip = '';
 
     if (isset($vol_address_query[0])) {
-        $street_one = filter_var($vol_addresses[0]['street_one'], FILTER_SANITIZE_STRING);
-        $street_two = filter_var($vol_addresses[0]['street_two'], FILTER_SANITIZE_STRING);
-        $city = filter_var($vol_addresses[0]['city'], FILTER_SANITIZE_STRING);
-        $state = filter_var($vol_addresses[0]['state'], FILTER_SANITIZE_STRING);
-        $zip = filter_var($vol_addresses[0]['zip'], FILTER_SANITIZE_STRING);
+        if (isset($vol_addresses[0]['street_one'])) {
+            $street_one = filter_var($vol_addresses[0]['street_one'], FILTER_SANITIZE_STRING);
+        }
+        if (isset($vol_addresses[0]['street_two'])) {
+            $street_two = filter_var($vol_addresses[0]['street_two'], FILTER_SANITIZE_STRING);
+        }
+        if (isset($vol_addresses[0]['city'])) {
+            $city = filter_var($vol_addresses[0]['city'], FILTER_SANITIZE_STRING);
+        }
+        if (isset($vol_addresses[0]['state'])) {
+            $state = filter_var($vol_addresses[0]['state'], FILTER_SANITIZE_STRING);
+        }
+        if (isset($vol_addresses[0]['zip'])) {
+            $zip = filter_var($vol_addresses[0]['zip'], FILTER_SANITIZE_STRING);
+        }
     }
 
     $emergency_contact_query = "SELECT * FROM emergency_contact WHERE emergency_contact.volunteer_id = ?";
