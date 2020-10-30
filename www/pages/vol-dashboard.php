@@ -23,18 +23,17 @@ if (!isLoggedIn()) {
 
         ?>
         <div id="management-form" class="container">
-            <span><a class="back details-btn" onclick="window.history.back();">Back</a></span>
             <span class="pull-right">
-					<a href="#" class="details-btn" data-toggle="modal" data-target="#edit-details" onclick="return false;">
-						Edit
-					</a>
-				</span>
+				<a href="#" class="details-btn" data-toggle="modal" data-target="#edit-details" onclick="return false;">
+					Edit
+				</a>
+			</span>
 
             <h1><?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?></h1>
             <ul>
                 <li><strong>Email Address</strong> - <?=$volunteer["email"]?></li>
                 <li><strong>Primary Address</strong> - <?=$formatted_address?></li>
-                <li><strong>Emergency Contact</strong> - <?=$emergency_contact_full_name?></li>
+                <li><strong>Emergency Contact</strong> - <?=$emergency_contact_full_name?> - <a href="tel:<?=$ec_phone?>"><?=$ec_phone?></a></li>
                 <li><strong>Skills</strong> - <?=$volunteer["skills"]?></li>
                 <li><strong>Interests</strong> - <?=$volunteer["interests"]?></li>
                 <li><strong>Availability</strong> - <?=$volunteer["availability"]?></li>
@@ -85,7 +84,6 @@ if (!isLoggedIn()) {
                         <th>Activity</th>
                         <th>Location</th>
                         <th>Affiliation</th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -171,20 +169,6 @@ if (!isLoggedIn()) {
                                 }
                                 ?>
                                 <td><?=$vol_period["affiliation"]?></td>
-                                <td>
-                                    <a href="#" class="edit-period" data-id="<?=$vol_period["id"]?>"
-                                       data-signin="<?=$checkin_month?>/<?=$checkin_day?>/<?=$checkin_date["year"]?> <?=$checkin_hour?>:<?=$checkin_minute?> <?=$checkin_ampm?>"
-                                       data-signout="<?=$checkin_month?>/<?=$checkin_day?>/<?=$checkin_date["year"]?> <?=$checkout_hour?>:<?=$checkout_minute?> <?=$checkout_ampm?>"
-                                       data-activity="<?=$vol_period["job_type_id"]?>"
-                                       data-location="<?=$vol_period["location_id"]?>"
-                                       data-org="<?=$vol_period["affiliation"]?>"
-                                       data-toggle="modal"
-                                       data-target="#edit-modal"
-                                       onclick="editPeriod(this); return false;">
-                                        <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
-                                        <span class="sr-only">Edit</span>
-                                    </a>
-                                </td>
                             </tr>
                             <?php
                         }
@@ -290,64 +274,6 @@ if (!isLoggedIn()) {
                                     <label for="ec_phone" class="sr-only">Phone</label>
                                     <input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="text" value="<?=$ec_phone?>">
                                 </div>
-                            </div>
-                            <button type="submit" class="btn btn-success">Save changes</button>
-                        </form>
-                    </div><!-- /modal-body -->
-                </div><!-- /modal-content -->
-            </div><!-- /modal-dialog -->
-        </div><!-- /modal -->
-
-        <!-- Volunteer Period Modal -->
-        <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-label">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="edit-label">Edit Period</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form id="edit-period-form" method="POST" action="../app/manage.php">
-                            <input type="hidden" id="vol-period-id" name="vol-period-id" value="">
-                            <input type="hidden" id="type" name="type" value="volunteer-period">
-
-                            <div class="form-group">
-                                <label for="datetime-picker">Sign In</label>
-                                <input type='text' class="form-control datetime-picker" id="signin-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signintime" placeholder="MM/DD/YYYY 12:01 AM" />
-                            </div>
-                            <div class="form-group">
-                                <label for="datetime-picker">Sign Out</label>
-                                <input type='text' class="form-control datetime-picker" id="signout-datetime-picker" data-format="yyyy-MM-dd hh:mm:00" name="signouttime" placeholder="MM/DD/YYYY 12:01 AM" />
-                            </div>
-                            <div class="form-group">
-                                <label for="activity">Activity</label>
-                                <select required class="form-control" id="task" name="task">
-                                    <option disabled selected="true" value="">Please Select A Task</option>
-                                    <?php
-                                    foreach ($type_results as $row) {
-                                        ?>
-                                        <option value="<?=$row['id']?>"><?=$row['job_type']?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="location">Location</label>
-                                <select required class="form-control" id="location" name="location">
-                                    <option disabled selected="true" value="">Please Choose A Location</option>
-                                    <?php
-                                    foreach ($location_results as $row) {
-                                        ?>
-                                        <option value="<?=$row['id']?>"><?=$row['location_name']?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="organization">Affiliation</label>
-                                <input class="form-control" type="text" id="organization" name="organization" value="">
                             </div>
                             <button type="submit" class="btn btn-success">Save changes</button>
                         </form>
