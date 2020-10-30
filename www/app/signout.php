@@ -17,12 +17,11 @@
 	if (empty($email) && isset($POST['email'])) {
 		$email = $_POST['email'];
 	}
-	
+
 	// Only process if email is set
 	if (!empty($email)) {
 		if(isset($_POST['signouttime'])) {
 			$signout_time = $_POST['signouttime'];
-			var_dump($signout_time); die();
 		}
 		$feedback = "";
 		if(isset($_POST['feedback'])) {
@@ -55,10 +54,11 @@
 		$query_string = "SELECT v.email as 'email', vp.id as 'id', vp.check_in_time as 'sign_in', vp.hours as 'hours', v.id as 'vid'
 							FROM volunteer v
 							JOIN volunteer_period vp on vp.volunteer_id = v.id
-							WHERE v.email = '".$clean_email."'
+							WHERE v.email = '".$clean_email."' AND vp.hours = '0.0'
 							AND vp.check_in_time > '".$lower_bound_date."' and vp.check_in_time < '".$upper_bound_date."'";
 
 		$results = $db->executeStatement($query_string,[])->fetchAll();
+
 		if (sizeof($results) > 0) {
 			$found_sign_in = false;
 			foreach ($results as $previous_login) {
