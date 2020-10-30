@@ -6,7 +6,7 @@
 	include_once '../header.php';
 
 	// TODO: Ensure user is logged in
-	if (!isLoggedIn()) {
+	if (!isset($_SESSION['email'])) {
 		//	Session variable not set - redirect to login
 		header("Location: " . $login_url);
 	} else {
