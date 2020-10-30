@@ -3,11 +3,11 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 
 // JavaScript files that need to be concatenated
-js_files = ["js/vendor/jquery-1.11.2.min.js"
-    , "js/vendor/jquery-input-mask-phone-number.min.js"
-    , "js/vendor/bootstrap.min.js"
-    , "js/vendor/moment.min.js"
-    , "js/vendor/bootstrap-datetimepicker.min.js"
+js_files = ["node_modules/jquery/dist/jquery.min.js"
+    , "node_modules/jquery-input-mask-phone-number/dist/jquery-input-mask-phone-number.min.js"
+    , "node_modules/bootstrap/dist/js/bootstrap.min.js"
+    , "node_modules/moment/min/moment.min.js"
+    , "node_modules/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"
     , "js/global.js"
     , "js/callbacks.js"
     , "js/services.js"
@@ -21,9 +21,9 @@ js_files = ["js/vendor/jquery-1.11.2.min.js"
 ]
 
 // CSS files that need to be concatenated
-css_files = ["css/vendor/bootstrap.min.css"
-    , "css/vendor/bootstrap-theme.min.css"
-    , "css/vendor/bootstrap-datetimepicker.min.css"
+css_files = ["node_modules/bootstrap/dist/css/bootstrap.min.css"
+    , "node_modules/bootstrap/dist/css/bootstrap-theme.min.css"
+    , "node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
     , "css/style.css"
 ]
 
