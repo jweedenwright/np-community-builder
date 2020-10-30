@@ -17,6 +17,13 @@
 						WHERE active = 1
 						ORDER BY job_type";
 	$type_results = $db->executeStatement($query_string,[])->fetchAll();
+
+	// Pull events
+	$query_string = "SELECT id, event_name
+						FROM event
+						WHERE active = 1
+						ORDER BY event_name";			
+	$event_results = $db->executeStatement($query_string,[])->fetchAll();
 ?>
 		<!-- Sign In -->
 		<form class="container" id="sign-in-form">
@@ -162,7 +169,7 @@
 				</div>
 				<!-- Clock in Time needs to be disabled -->
 				<div class="row">
-					<div class="col-md-12 col-xs-12 form-group">
+					<div class="col-md-6 col-xs-12 form-group">
 						<div class="signin-time">
 							<input type='text' 
 									class="form-control datetime-picker" 
@@ -174,6 +181,17 @@
 									data-validation="true"
 									data-validationtype="req"
 									data-validationmessage="Please be sure to provide your clock in date and time."/>
+						</div>
+					</div>
+					<div class="form-group col-md-6 col-xs-12">
+						<label for="event" class="sr-only">Event *</label>
+						<div class="event">
+							<select required class="form-control" id="event" name="event" tabindex="9">
+								<option required disabled selected="true">Please Choose An Event</option>
+								<?php foreach ($event_results as $row): ?>
+									<option value="<?= $row['id'] ?>"><?= $row['event_name'] ?></option>
+								<?php endforeach; ?>
+							</select>
 						</div>
 					</div>
 				</div>
