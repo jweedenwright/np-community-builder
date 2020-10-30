@@ -18,10 +18,16 @@
 <div class="container">
 	<?php
 		$admin_staff = false;
-//		if($_SESSION['user_type_id'] == 1 || $_SESSION['user_type_id'] == 2) {
-        if (true) {
-			$admin_staff = true;
-		}
+
+		// TODO: remove
+		echo('wattup');
+		echo($_SESSION['user_type_id']);
+
+		if (isset($_SESSION['user_type_id'])) {
+            if($_SESSION['user_type_id'] == 1 || $_SESSION['user_type_id'] == 2) {
+                $admin_staff = true;
+            }
+        }
 
 		if($admin_staff) {
 			include_once 'staff-dashboard.php';
