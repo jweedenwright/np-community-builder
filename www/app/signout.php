@@ -10,13 +10,19 @@
 
 	// Setup Globals
 	include_once 'global.php';
+
+	$email = getLoggedInUserEmail();
 	
-	// Only process if email was passed
-	if(isset($_POST['email'])) {
+	// if user is not logged in but has provided an email set the provided email
+	if (empty($email) && isset($POST['email'])) {
+		$email = $_POST['email'];
+	}
 	
-		$email = strtolower ( $_POST['email']);
+	// Only process if email is set
+	if (!empty($email)) {
 		if(isset($_POST['signouttime'])) {
 			$signout_time = $_POST['signouttime'];
+			var_dump($signout_time); die();
 		}
 		$feedback = "";
 		if(isset($_POST['feedback'])) {
