@@ -30,18 +30,23 @@ if (isset($_SESSION['email'])) {
     $vol_addresses = $db->executeStatement($vol_address_query, array($results[0]['id']))->fetchAll();
 
     // address fields
-    $street_one = filter_var($vol_addresses[0]['street_one'], FILTER_SANITIZE_STRING);
-    $street_two = filter_var($vol_addresses[0]['street_two'], FILTER_SANITIZE_STRING);
-    $city = filter_var($vol_addresses[0]['city'], FILTER_SANITIZE_STRING);
-    $state = filter_var($vol_addresses[0]['state'], FILTER_SANITIZE_STRING);
-    $zip = filter_var($vol_addresses[0]['zip'], FILTER_SANITIZE_STRING);
+    if (isset($vol_addresses[0])) {
+        $street_one = filter_var($vol_addresses[0]['street_one'], FILTER_SANITIZE_STRING);
+        $street_two = filter_var($vol_addresses[0]['street_two'], FILTER_SANITIZE_STRING);
+        $city = filter_var($vol_addresses[0]['city'], FILTER_SANITIZE_STRING);
+        $state = filter_var($vol_addresses[0]['state'], FILTER_SANITIZE_STRING);
+        $zip = filter_var($vol_addresses[0]['zip'], FILTER_SANITIZE_STRING);
+    }
 
     $emergency_contact_query = "SELECT * FROM emergency_contact WHERE emergency_contact.volunteer_id = ?";
     $emergency_contacts = $db->executeStatement($emergency_contact_query, array($results[0]['id']))->fetchAll();
 
     // emergency contact fields
-    $ec_first_name = filter_var($emergency_contacts[0]['first_name'], FILTER_SANITIZE_STRING);
-    $ec_last_name = filter_var($emergency_contacts[0]['last_name'], FILTER_SANITIZE_STRING);
-    $ec_phone = filter_var($emergency_contacts[0]['phone'], FILTER_SANITIZE_STRING);
+    if (isset($emergency_contacts[0])) {
+        $ec_first_name = filter_var($emergency_contacts[0]['first_name'], FILTER_SANITIZE_STRING);
+        $ec_last_name = filter_var($emergency_contacts[0]['last_name'], FILTER_SANITIZE_STRING);
+        $ec_phone = filter_var($emergency_contacts[0]['phone'], FILTER_SANITIZE_STRING);
+    }
+
 }
 ?>
