@@ -51,7 +51,7 @@
 		$filter_query = ($end_filter != "") ? " where vp.check_out_time < '".$end_filter."'" : "";
 	}
 
-	if (!isset($_SESSION['email'])) {
+	if (!isLoggedIn()) {
 		//	Session variable not set - redirect to login
 		header("Location: " . $login_url);
 	} else {
