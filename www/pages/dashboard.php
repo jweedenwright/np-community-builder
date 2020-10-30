@@ -16,12 +16,9 @@
 </div>
 
 <div class="container">
-
-	<h2>LOAD CONTENT and DATA BASED ON USER PERMISSIONS - intern/volunteer vs admin/staff</h2>	
 	<?php
 		$admin_staff = false;
-		// USER TYPE CHECK HERE
-		if(true) {
+		if($_SESSION['user_type_id'] == 1 || $_SESSION['user_type_id'] == 2) {
 			$admin_staff = true;
 		}
 
