@@ -420,46 +420,71 @@
 				<?php } ?>
 							
 				<!-- Modal for New Volunteer -->
-				<div class="modal fade modal-lg" id="new-vol" role="dialog">
-					<div class="modal-dialog modal-lg" role="document">
+				<div class="modal fade" id="new-vol" role="dialog">
+					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">New Volunteer Form</h4>
 							</div>
 							<div class="modal-body">
-								<form id="new-vol-form" method="POST" action="../app/manage-volunteers.php">
+								<form id="new-vol-form" method="POST" action="../app/create-volunteer.php">
+                                    <div class="form-group">
+                                        <label for="fn" class="sr-only">First Name</label>
+                                        <input class="form-control" type="text" id="fn" name="fn" placeholder="First Name" tabindex="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="middle_name" class="sr-only">First Name</label>
+                                        <input class="form-control" type="text" id="middle_name" name="middle_name" placeholder="Middle Name" tabindex="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ln" class="sr-only">Last Name</label>
+                                        <input class="form-control" type="text" id="ln" name="ln" placeholder="Last Name" tabindex="2">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="suffix" class="sr-only">Last Name</label>
+                                        <input class="form-control" type="text" id="suffix" name="suffix" placeholder="Suffix" tabindex="2">
+                                    </div>
 										<div class="form-group">
-											<label for="new_email" class="sr-only">Email Address</label>
-											<input class="form-control" type="text" id="new_email" name="new_email" placeholder="Email Address" tabindex="1">
+											<label for="email" class="sr-only">Email Address</label>
+											<input class="form-control" type="text" id="email" name="email" placeholder="Email Address" tabindex="3">
 										</div>
-										<div class="form-group">
-											<label for="fn" class="sr-only">First Name</label>
-											<input class="form-control" type="text" id="fn" name="fn" placeholder="First Name" tabindex="2">
-										</div>
-										<div class="form-group">
-											<label for="ln" class="sr-only">Last Name</label>
-											<input class="form-control" type="text" id="ln" name="ln" placeholder="Last Name" tabindex="3">
-										</div>
+                                        <div class="row">
+                                            <div class="form-group col-md-10 col-xs-10">
+                                                <label for="phone" class="sr-only">Phone</label>
+                                                <input class="form-control" id="phone" name="phone" placeholder="Phone" type="tel" tabindex="4">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 col-xs-12">
+                                            <div class="dob">
+                                                <input type='text'
+                                                       class="form-control"
+                                                       id="dob"
+                                                       name="dob"
+                                                       placeholder="Date of Birth (MM/DD/YYYY)"
+                                                       tabindex="5"
+                                                       maxlength="10"
+                                                       data-validation="true"
+                                                       data-validationtype="regex"
+                                                       data-validationregex="(0?[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.]\d{2,4}"
+                                                       data-validationmessage="Please be sure your date of birth is in the correct format.">
+                                            </div>
+                                        </div>
 										<div class="form-group">
 											<label for="skills" class="sr-only">Skills</label>
-											<input class="form-control" type="text" id="skills" name="skills" placeholder="Skills" tabindex="4">
+											<input class="form-control" type="text" id="skills" name="skills" placeholder="Skills" tabindex="5">
 										</div>
 										<div class="form-group">
 											<label for="interests" class="sr-only">Interests</label>
-											<input class="form-control" type="text" id="interests" name="interests" placeholder="Interests" tabindex="5">
+											<input class="form-control" type="text" id="interests" name="interests" placeholder="Interests" tabindex="6">
 										</div>
 										<div class="form-group">
 											<label for="availability" class="sr-only">Availability</label>
-											<input class="form-control" id="availability" name="availability" placeholder="Availability" type="text" tabindex="6">
-										</div>
-										<div class="form-group">
-											<label for="affiliation" class="sr-only">Affiliation</label>
-											<input class="form-control" id="affiliation" name="affiliation" placeholder="Affiliation, i.e. Company A, Organization B" type="text" tabindex="7">
+											<input class="form-control" id="availability" name="availability" placeholder="Availability" type="text" tabindex="7">
 										</div>
 										<div class="form-group">
 											<label for="find-out-about-us" class="sr-only">How did you find out about us?</label>
-											<textarea class="form-control" id="find-out-about-us" name="find-out-about-us" placeholder="How did you find out about us?" tabindex="8"></textarea>
+											<textarea class="form-control" id="find_out_about_us" name="find_out_about_us" placeholder="How did you find out about us?" tabindex="8"></textarea>
 										</div>
 										<div class="row">
 											<div class="col-md-10">
@@ -574,12 +599,8 @@
 											<label for="email_dist">Add to email distribution</label>
 											<input class="block" type="checkBox" id="email_dist" name="email_dist">
 										</div>
-										
-									</form>
-							</div>
-							<div class="modal-footer">
-							<button type="submit" class="btn btn-success">Submit New Volunteer</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-success">Submit New Volunteer</button>
+                                    </form>
 							</div>
 						</div>
 					</div>
