@@ -138,26 +138,13 @@ if (!isLoggedIn()) {
             if ($db->executeStatement($update_volunteer_string, [])) {
                 if ($addressSet) {
                     // insert to Address table
-                    $output_check = $db->executeStatement($insert_address_string, []);
-                    echo $output_check;
-//                    if ($db->executeStatement($insert_address_string, [])) {
-                    if ($output_check) {
-                    } else {
-                        echo 'here1';
-                        $updatedFailed = true;
-                    }
+                    $db->executeStatement($insert_address_string, []);
                 }
                 if ($ecSet) {
                     // insert to Emergency Contact table
-                    if ($db->executeStatement($insert_ec_string, [])) {
-                        $return_message = "Successfully Updated Volunteer!";
-                    } else {
-                        echo 'here2';
-                        $updatedFailed = true;
-                    }
+                    $db->executeStatement($insert_ec_string, []);
                 }
             } else {
-                echo 'here3';
                 $updatedFailed = true;
             }
 
