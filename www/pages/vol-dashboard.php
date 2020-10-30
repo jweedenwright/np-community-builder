@@ -18,7 +18,7 @@ if (!isLoggedIn()) {
     if (isLoggedIn())  {
         $volunteer = $results[0];
         $address = $vol_addresses[0];
-        $formatted_address = "${address["street_one"]} ${address["street_two"]}, ${address["city"]} ${address["state"]} ${address["zip"]}";
+        $formatted_address = "${address["street_one"]} ${address["street_two"]}, ${address["city"]}, ${address["state"]} ${address["zip"]}";
         $emergency_contact_full_name = "${ec_first_name} ${ec_last_name}";
 
         ?>
@@ -50,7 +50,7 @@ if (!isLoggedIn()) {
                 if(sizeof($vol_periods) > 0) {
                     $volunteer_time = $vol_periods[0];
                     $vol_start_date = date_parse_from_format ( $sql_date_format , $volunteer_time["check_in_time"]);
-                    $start_date = $vol_start_date["month"] . "-" . $vol_start_date["day"] . "-" . $vol_start_date["year"];
+                    $start_date = $vol_start_date["month"] . "/" . $vol_start_date["day"] . "/" . $vol_start_date["year"];
                     $current_year =  date("Y");
                     $vol_duration = $current_year - $vol_start_date["year"];
                     if ($vol_duration < 1) {
