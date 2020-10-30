@@ -76,7 +76,7 @@
 							</div>
 							<div class="form-group">
 								<label for="email_dist">Include in the email distribution?</label>
-								<input class="block" type="checkBox" id="email_dist" name="email_dist" value="<?=$volunteer["include_email_dist"]?>">
+								<input class="block" type="checkBox" id="email_dist" name="email_dist" value="active" <?php if($volunteer["include_email_dist"]==1){echo "checked";}?> >
 							</div>
 							<div class="form-group row">
 								<label class="col-lg-3 col-form-label form-control-label"></label>
