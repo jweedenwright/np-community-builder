@@ -281,11 +281,18 @@
 				} elseif (!isset($_POST['event-date'])) {
 					$return_message = "Task id was not provided.";
 				} else {
+					$event_id = filter_var($_POST['event-id'], FILTER_SANITIZE_STRING);
 					$event_name = filter_var($_POST['event-name'], FILTER_SANITIZE_STRING);
 					$event_date = filter_var($_POST['event-date'], FILTER_SANITIZE_STRING);
 					$formatted_date = date('Y-m-d H:i:s', strtotime($event_date));
-					$event_insert = "INSERT INTO event (event_name, event_date, active) VALUES ('$event_name', '$formatted_date', 1)";
-					if ($db->executeStatement($event_insert, [])) {
+
+					if ($event_id === 'new') {
+						$event_query = "INSERT INTO event (event_name, event_date, active) VALUES ('$event_name', '$formatted_date', 1)";
+					} else {
+						$event_query = "UPDATE event SET event_name = '$event_name', event_date = '$formatted_date' WHERE id = $event_id";
+					}
+					
+					if ($db->executeStatement($event_query, [])) {
 						$return_message = 'Successfullly created event';
 					} else {
 						$return_message = 'Uh oh, we encountered a problem saving your event.';
