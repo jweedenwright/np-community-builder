@@ -19,8 +19,6 @@
 	<?php
 		$admin_staff = false;
 
-		// TODO: remove
-		echo('wattup');
 		echo($_SESSION['user_type_id']);
 
 		if (isset($_SESSION['user_type_id'])) {
