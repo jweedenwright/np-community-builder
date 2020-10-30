@@ -26,5 +26,10 @@
 							FROM job_type
 							ORDER BY job_type";
 		$type_results = $db->executeStatement($query_string,[])->fetchAll();
+
+		$query_string = "SELECT id, first_name, last_name
+							FROM volunteer
+							ORDER BY first_name";			
+		$vol_results = $db->executeStatement($query_string,[])->fetchAll();
 	}
 ?>
