@@ -128,6 +128,7 @@
                             // update Address table
                             if ($db->executeStatement($update_address_string,[])) {
                                 if ($ecUpdated) {
+                                    // update Emergency Contact table
                                     if ($db->executeStatement($update_ec_string,[])) {
                                         $return_message = "Successfully Updated Volunteer!";
                                     } else {
