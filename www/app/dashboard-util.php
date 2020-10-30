@@ -56,11 +56,18 @@
 		header("Location: " . $login_url);
 	} else {
 		// Get All Users
-		$all_users = "SELECT COUNT(DISTINCT(v.id)) as 'userCount' FROM volunteer v
-					JOIN volunteer_period vp on vp.volunteer_id = v.id
+		$all_users = "SELECT COUNT(DISTINCT(v.id)) as 'userCount' 
+					FROM volunteer v";
+
+		$volunteer_results = $db->executeStatement($all_users,[])->fetchAll();
+
+		$all_hours = "SELECT count(vp.id) as 'volVisits', sum(vp.hours) as 'volHours' 
+					FROM volunteer_period vp
 					JOIN job_type jt on jt.id = vp.job_type_id
 					JOIN location l on l.id = vp.location_id";
-		$volunteer_results = $db->executeStatement($all_users,[])->fetchAll();
+		$vol_hours = $db->executeStatement($all_hours,[])->fetchAll();
+
+
 
 		$all_periods = "SELECT *
 							FROM volunteer v

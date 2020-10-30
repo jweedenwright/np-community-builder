@@ -33,6 +33,27 @@
 </div> 
 
 <div class="row">
+		<div id="total-vols-display-wrapper" class="col-sm-4 stat-item text-center">
+			<div id="total-vols-display" class="card boom">
+				<div class="stat-label">Total Volunteers</div>
+				<span class="value"><?=$volunteer_results[0]['userCount']?></span>
+			</div>
+		</div>
+		<div id="total-hours-display-wrapper" class="col-sm-4 stat-item text-center">
+			<div id="total-hours-display" class="card boom">
+				<div class="stat-label">Total Hours</div>
+				<span class="value"><?=$vol_hours[0]['volHours']?></span>
+			</div>
+		</div>
+		<div id="total-times-display-wrapper" class="col-sm-4 stat-item text-center">
+			<div id="total-times-display" class="card boom">
+				<div class="stat-label">Total Visits</div>
+				<span class="value"><?=$vol_hours[0]['volVisits']?></span>
+			</div>
+		</div>
+	</div>
+
+<div class="row">
 		<div id="filter-section" class="col-sm-12">
 			<form id="data-filter" method="POST">
 				<blockquote><strong>Please Note:</strong> When filtering on task or location, you will also need to select dates.</blockquote>
