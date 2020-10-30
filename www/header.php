@@ -22,7 +22,7 @@
 		<header>
 			<div class="jumbotron">
 				<div class="container">
-					<?php if (isset($_SESSION['email'])) { ?>
+					<?php if (isLoggedIn()) { ?>
 						<div class="staff-log-out">
 							<a href="<?=$root_dir?>/pages/logout.php">
 								Log Out

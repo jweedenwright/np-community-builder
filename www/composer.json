@@ -3,6 +3,7 @@
   "description": "BGCRC volunteer sign-in sign-out platform",
   "type": "project",
   "require": {
-      "vlucas/phpdotenv": "^5.2"
+    "vlucas/phpdotenv": "^5.2",
+    "firebase/php-jwt": "^5.2"
   }
 }

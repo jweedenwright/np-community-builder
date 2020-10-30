@@ -13,6 +13,11 @@ window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\
 var today = new Date();
 $('#myDate').val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
 
+// sets up formatting for tel inputs
+$('input[type="tel"]').usPhoneFormat({
+	format: '(xxx) xxx-xxxx'
+});
+
 // Handline invalid input
 function handleInvalid(msg) {
 	var error_divs = document.querySelectorAll(".danger");
@@ -35,6 +40,8 @@ function botamatic() {
 	$("input[name='firstname']").val("Rusty");
 	$("input[name='lastname']").val("Von Shackleford");
 	$("input[name='email']").val("backwoods007@shackleford.edu");
+	$("input[name='phone']").val("(222) 333-4444");
+	$("input[name='dob']").val("01/01/1982");
 	document.getElementById('location').value = 3;
 	document.getElementById('task').value = 2;	
 }
@@ -121,4 +128,37 @@ function checkPreferences() {
 			}
 		}
 	}
+}
+
+// Form Validation
+function checkIfValid(formId) {
+	var is_valid = true;
+	var validation_fields = document.getElementById("sign-in-form").querySelectorAll("[data-validation]");
+	for (var i = 0; i < validation_fields.length; i++) {
+		var validation_field = validation_fields[i];
+		// Get value - check for input vs select
+		var field_value = "";
+		if (validation_field.nodeName.toLowerCase() === "select") {
+			field_value = validation_field.options[validation_field.selectedIndex].value.trim();
+		} else {
+			field_value = validation_field.value.trim();
+        }
+		switch (validation_field.dataset.validationtype) {
+			case "regex":
+				is_valid = (field_value.match(new RegExp(validation_field.dataset.validationregex))) ? true : validation_field.dataset.validationmessage;
+				break;
+			case "req":
+				is_valid = (field_value !== "") ? true : validation_field.dataset.validationmessage;				
+				break;
+			default:
+				// Do nothing - validation not setup correctly
+		}
+		if (is_valid !== true) {
+			validation_field.classList.add("validation-error");
+			break;
+		} else {
+			validation_field.classList.remove("validation-error");
+        }
+	}
+	return is_valid;
 }

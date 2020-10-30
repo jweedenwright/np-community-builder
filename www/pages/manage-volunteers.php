@@ -8,7 +8,7 @@
 	$page_title = "Volunteer Management";
 	include_once '../header.php';
 
-	if (!isset($_SESSION['email'])) {
+	if (!isLoggedIn()) {
 		//	Session variable not set - redirect to login
 		header("Location: " . $login_url);
 	} else {
@@ -56,6 +56,17 @@
 						<?php
 						}
 					?>
+
+					<li><strong>Emergency contact</strong> - <?= $volunteer['emergency_contact']; ?></li>
+
+					<li>
+						<strong>Address</strong> -<br>
+						<?= $volunteer['street_one'] ?><br>
+						<?php if ($volunteer['street_two']): ?>
+							<?= $volunteer['street_two']; ?><br>
+						<?php endif; ?>
+						<?= sprintf('%s, %s %s', $volunteer['city'], $volunteer['state'], $volunteer['zip']) ?>
+					</li>
 
 					<?php
 						$total_time = 0;

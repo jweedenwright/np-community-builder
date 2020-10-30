@@ -1,7 +1,7 @@
 <?php
 	include_once '../app/global.php';
 
-	if (!isset($_SESSION['email'])) {
+	if (!isLoggedIn()) {
 		//	Session variable not set - redirect to login
 		header("Location: " . $login_url);
 	} else {
@@ -16,12 +16,12 @@
 </div>
 
 <div class="container">
-
-	<h2>LOAD CONTENT and DATA BASED ON USER PERMISSIONS - intern/volunteer vs admin/staff</h2>	
 	<?php
 		$admin_staff = false;
-		// USER TYPE CHECK HERE
-		if(true) {
+
+		$user_type_id = getLoggedInUserTypeId();
+
+		if($user_type_id == 1 || $user_type_id == 2) {
 			$admin_staff = true;
 		}
 
