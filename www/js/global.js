@@ -148,3 +148,56 @@ function isValidPhoneNumber(phoneNumber) {
 	const phoneRegex = /\([0-9]{3}\)\s[0-9]{3}\-[0-9]{4}/;
 	return phoneRegex.test(phoneNumber);
 }
+
+// Form Validation
+function checkIfValid(formId) {
+	var is_valid = true;
+	var validation_fields = document.getElementById("sign-in-form").querySelectorAll("[data-validation]");
+	for (var i = 0; i < validation_fields.length; i++) {
+		var validation_field = validation_fields[i];
+		// Get value - check for input vs select
+		var field_value = "";
+		if (validation_field.nodeName.toLowerCase() === "select") {
+			field_value = validation_field.options[validation_field.selectedIndex].value.trim();
+		} else {
+			field_value = validation_field.value.trim();
+        }
+		switch (validation_field.dataset.validationtype) {
+			case "regex":
+				is_valid = (field_value.match(new RegExp(validation_field.dataset.validationregex))) ? true : validation_field.dataset.validationmessage;
+				break;
+			case "req":
+				is_valid = (field_value !== "") ? true : validation_field.dataset.validationmessage;				
+				break;
+			default:
+				// Do nothing - validation not setup correctly
+		}
+		if (is_valid !== true) break;
+	}
+	return is_valid;
+}
+/* TODO: SIGN IN VALIDATIONS - ADD TO FORM WHEN ADAM IS DONE: required validations
+	valid_form = document.getElementsByName("firstname")[0].value !== "";
+	if(!valid_form) { return handleInvalid("Please be sure to provide your first name."); }
+	valid_form = document.getElementsByName("lastname")[0].value !== "";
+	if(!valid_form) { return handleInvalid("Please be sure to provide your last name."); }
+
+	// Complex validations
+	var email = document.getElementsByName("email")[0];
+	valid_form = email.value !== "";
+	if(!valid_form) { return handleInvalid("Please be sure to provide your email."); }
+	valid_form = (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email.value);
+	if(!valid_form) { return handleInvalid("Please be sure your email is in the correct format."); }
+
+	// Date: 02/07/2017 6:48 PM
+	var datetime = document.getElementsByName("signintime")[0];
+	valid_form = datetime.value !== "";
+	if(!valid_form) { return handleInvalid("Please be sure to provide your sign in date."); }
+
+	var location_item = document.getElementsByName("location")[0];
+	valid_form = (/^[0-9]*$/).test(location_item.options[location_item.selectedIndex].value);
+	if(!valid_form) { return handleInvalid("Please be sure to select a location."); }
+	var task_item = document.getElementsByName("task")[0];
+	valid_form = (/^[0-9]*$/).test(task_item.options[task_item.selectedIndex].value);
+	if(!valid_form) { return handleInvalid("Please be sure to select a program."); }
+	*/
