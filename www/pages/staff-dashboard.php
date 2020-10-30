@@ -178,7 +178,7 @@
 					if(strlen($checkin_hour."") > 1) {
 						if ($checkin_date["hour"] > 12) {
 							$checkin_hour = $checkin_date["hour"] - 12;
-							if ($checkin_hour["hour"] != 24) {
+							if ($checkin_date["hour"] != 24) {
 								$checkin_ampm = "PM";
 							}
 						} elseif ($checkin_date["hour"] == 12) {
