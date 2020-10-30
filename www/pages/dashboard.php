@@ -18,7 +18,8 @@
 <div class="container">
 	<?php
 		$admin_staff = false;
-		if($_SESSION['user_type_id'] == 1 || $_SESSION['user_type_id'] == 2) {
+//		if($_SESSION['user_type_id'] == 1 || $_SESSION['user_type_id'] == 2) {
+        if (true) {
 			$admin_staff = true;
 		}
 
