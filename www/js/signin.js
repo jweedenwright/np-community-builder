@@ -15,7 +15,12 @@ function signIn() {
 			url: signin_url,
 			data: $("#sign-in-form").serialize(), // serializes the form's elements.
 			success: function (data) {
-				$(".danger").html(data);
+				if (data.indexOf("ERROR") !== -1) {
+					$(".danger").html(data);
+				} else {
+					// Redirect to Thank you
+					location.href = 'thank-you.php';
+                }
 			}
 		});
 	}

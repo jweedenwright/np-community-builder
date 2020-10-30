@@ -74,7 +74,9 @@
 			$street_one = filter_var($_POST['street_one'], FILTER_SANITIZE_STRING);
 			$street_two = filter_var($_POST['street_two'], FILTER_SANITIZE_STRING);
 			$city = filter_var($_POST['city'], FILTER_SANITIZE_STRING);
-			$state = filter_var($_POST['state'], FILTER_SANITIZE_STRING);
+			if(isset($_POST['state'])) {
+				$state = filter_var($_POST['state'], FILTER_SANITIZE_STRING);
+			}
 			$zip = filter_var($_POST['zip'], FILTER_SANITIZE_STRING);
 	
 			// emergency contact fields
