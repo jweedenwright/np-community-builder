@@ -1,7 +1,7 @@
 <?php
 	include_once '../app/global.php';
 
-	$page_title = "Sign Out";
+	$page_title = "Clock Out";
 	include_once '../header.php';
 ?>
 
@@ -17,7 +17,7 @@
 		</div>
 		<form class="container" id="sign-out-form">
 			<div class="col-xs-12">
-				<h1>Sign Out Form</h1>
+				<h1>Clock Out Form</h1>
 			</div>
 			<div class="col-xs-12">
 				<div class="row">
@@ -43,7 +43,7 @@
 				<div class="row">
 					<div class="danger" id="danger"></div>
 					<div class="col-md-12 col-xs-12 text-center">
-						<button class="sign-out line-link form-control" onclick="return signOut();">Sign Out</button>
+						<button class="sign-out line-link form-control" onclick="return signOut();">Clock Out</button>
 					</div>
 				</div>
 			</div>

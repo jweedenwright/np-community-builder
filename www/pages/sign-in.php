@@ -1,7 +1,7 @@
 <?php
 	include_once '../app/global.php';
 	
-	$page_title = "Sign In";
+	$page_title = "Clock In";
 	include_once '../header.php';
 
 	// Pull locations
@@ -21,7 +21,7 @@
 		<!-- Sign In -->
 		<form class="container" id="sign-in-form">
 			<div class="col-xs-12">
-				<h1>Sign In Form</h1>
+				<h1>Clock In Form</h1>
 			</div>
 
 			<div class="col-xs-12">			
@@ -322,7 +322,7 @@
 				<div class="row">
 					<div class="col-md-12 col-xs-12 text-center">
 						<div class="danger"></div>
-						<button role="button" type="submit" class="submit line-link form-control" tabindex="20" onclick="return signIn();">Sign In</button>
+						<button role="button" type="submit" class="submit line-link form-control" tabindex="20" onclick="return signIn();">Clock In</button>
 					</div>
 				</div>
 			</div>
