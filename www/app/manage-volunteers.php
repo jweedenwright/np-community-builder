@@ -8,6 +8,11 @@
 		$email = filter_var ( $_GET['email'], FILTER_SANITIZE_STRING);
 		$vol_query = "SELECT * FROM Volunteer v LEFT OUTER JOIN address a ON v.id = a.volunteer_id WHERE email = ?";
 		$results = $db->executeStatement($vol_query, array($email))->fetchAll();
+		$emergency_contact_query = "SELECT * FROM emergency_contact WHERE emergency_contact.volunteer_id = ?";
+		$emergency_contact_results = $db->executeStatement($emergency_contact_query, [$results[0]['id']])->fetchAll();
+		$results[0]['ec_phone'] = $emergency_contact_results[0]['phone'];
+		$results[0]['ec_first_name'] = $emergency_contact_results[0]['first_name'];
+		$results[0]['ec_last_name'] = $emergency_contact_results[0]['last_name'];
 		$is_individual = true;
 		
 		// Get all Volunteer Periods
