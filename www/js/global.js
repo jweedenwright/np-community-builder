@@ -40,6 +40,8 @@ function botamatic() {
 	$("input[name='firstname']").val("Rusty");
 	$("input[name='lastname']").val("Von Shackleford");
 	$("input[name='email']").val("backwoods007@shackleford.edu");
+	$("input[name='phone']").val("(222) 333-4444");
+	$("input[name='dob']").val("01/01/1982");
 	document.getElementById('location').value = 3;
 	document.getElementById('task').value = 2;	
 }
