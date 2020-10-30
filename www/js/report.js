@@ -13,7 +13,9 @@ function signout() {
 
 // Resets the dashboard
 function resetDashboard() {
-    document.getElementsByName("vol_name")[0].options[0].selected = "selected";
+    if (document.getElementsByName("vol-name").length > 0) {
+        document.getElementsByName("vol_name")[0].options[0].selected = "selected";
+    }
     document.getElementsByName("task")[0].options[0].selected = "selected";
     document.getElementsByName("location")[0].options[0].selected = "selected";
     document.getElementsByName("endtime")[0].value = "";
