@@ -115,4 +115,8 @@ error_reporting(E_ALL);
 		}
 		return $hours;
 	}
+
+	function isLoggedIn() {
+		return isset($_SESSION['email']);
+	}
 ?>
