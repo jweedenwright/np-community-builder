@@ -114,7 +114,7 @@ if (!isLoggedIn()) {
             $vol_zip = filter_var($_POST['zip'], FILTER_SANITIZE_STRING);
             // update address fields
             $addressSet = false;
-            if (isset($vol_street_one) && isset($vol_city) && isset($vol_state) && isset($vol_zip)) {
+            if (!empty($vol_street_one) && !empty($vol_city) && !empty($vol_state) && !empty($vol_zip)) {
                 $addressSet = true;
             }
             $insert_address_string = "INSERT INTO address (volunteer_id, street_one, street_two, city, state, zip)
@@ -127,7 +127,7 @@ if (!isLoggedIn()) {
 
             // update emergency contact fields
             $ecSet = false;
-            if (isset($ec_first_name) && isset($ec_last_name) && isset($ec_phone)) {
+            if (!empty($ec_first_name) && !empty($ec_last_name) && !empty($ec_phone)) {
                 $ecSet = true;
             }
             $insert_ec_string = "INSERT INTO emergency_contact (volunteer_id, first_name, last_name, phone)
