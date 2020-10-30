@@ -24,7 +24,6 @@
 
 <h2>Dashboard</h2>
  <div class="row">
-	Total volunteers is <?=$volunteer_results[0]['userCount']?>.
 	<!--<ul>
 		<li>Provide a listing of all volunteers and hours (table probably)</li>
 		<li>Have filters allowing to filter on date, location, and individual volunteer</li>
