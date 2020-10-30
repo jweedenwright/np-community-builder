@@ -57,6 +57,17 @@
 						}
 					?>
 
+					<li><strong>Emergency contact</strong> - <?= $volunteer['emergency_contact']; ?></li>
+
+					<li>
+						<strong>Address</strong> -<br>
+						<?= $volunteer['street_one'] ?><br>
+						<?php if ($volunteer['street_two']): ?>
+							<?= $volunteer['street_two']; ?><br>
+						<?php endif; ?>
+						<?= sprintf('%s, %s %s', $volunteer['city'], $volunteer['state'], $volunteer['zip']) ?>
+					</li>
+
 					<?php
 						$total_time = 0;
 						$total_visits = sizeof($vol_periods);

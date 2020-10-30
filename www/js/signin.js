@@ -76,6 +76,16 @@ function signIn() {
 	valid_form = datetime.value !== "";
 	if(!valid_form) { return handleInvalid("Please be sure to provide your sign in date."); }
 
+	// validate phone number
+	var phone = document.getElementById('phone').value;
+	valid_form = isValidPhoneNumber(phone);
+	if (!valid_form) { return handleInvalid('Please provide a valid phone number in (XXX) XXX-XXXX format'); }
+
+	// validate date of brith
+	var dob = document.getElementById('dob').value;
+	valid_form = isValidDate(dob); // validates dob if its set
+	if (!valid_form) { return handleInvalid('Please be sure to provide your birthdate in MM/DD/YYYY format'); }
+
 	var location_item = document.getElementsByName("location")[0];
 	valid_form = (/^[0-9]*$/).test(location_item.options[location_item.selectedIndex].value);
 	if(!valid_form) { return handleInvalid("Please be sure to select a location."); }

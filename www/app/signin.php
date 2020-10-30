@@ -10,6 +10,8 @@
 		
 	// Setup Globals
 	include_once 'global.php';
+
+	define('GENERAL_EVENT_ID', 1);
 	
 	//////////////////////
 	// Required Field Error Messages
@@ -27,6 +29,10 @@
 		?> <p class='alert alert-danger'>Location is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 	} elseif(!isset($_POST['task'])) {
 		?> <p class='alert alert-danger'>Task is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
+	} elseif(!isset($_POST['phone'])) {
+		?> <p class='alert alert-danger'>Phone number is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
+	} elseif(!isset($_POST['dob'])) {
+		?> <p class='alert alert-danger'>Date of birth is a required field. <span class="hidden">ERROR: Missing field</span></p> <?php
 	} else {
 		
 		//////////////////////
@@ -39,6 +45,21 @@
 		$location_id = (int) filter_var ( $_POST['location'], FILTER_SANITIZE_STRING);
 		$task_id = (int) filter_var ( $_POST['task'], FILTER_SANITIZE_STRING);
 		$first_time = 0;
+		$phone = filter_var($_POST['phone'], FILTER_SANITIZE_STRING);
+		$dob = filter_var($_POST['dob'], FILTER_SANITIZE_STRING);
+
+		// address fields
+		$street_one = filter_var($_POST['street_one'], FILTER_SANITIZE_STRING);
+		$street_two = filter_var($_POST['street_two'], FILTER_SANITIZE_STRING);
+		$city = filter_var($_POST['city'], FILTER_SANITIZE_STRING);
+		$state = filter_var($_POST['state'], FILTER_SANITIZE_STRING);
+		$zip = filter_var($_POST['zip'], FILTER_SANITIZE_STRING);
+
+		// emergency contact fields
+		$ec_first_name = filter_var($_POST['ec_first_name'], FILTER_SANITIZE_STRING);
+		$ec_last_name = filter_var($_POST['ec_last_name'], FILTER_SANITIZE_STRING);
+		$ec_phone = filter_var($_POST['ec_phone'], FILTER_SANITIZE_STRING);
+
 		// Removed from UI for BGCRC - set to 1 by default
 		$liability_check = 1;
 		$health_check = 1;
@@ -69,9 +90,10 @@
 		// Format any values for DB
 		//////////////////////
 		// Use passed date time to sign out - To SQL Format: 2016-11-14 14:00:00
-		$signin_date = date_parse_from_format ( $ui_date_format , $signin_date );
+		$signin_date = date_parse_from_format ( $ui_datetime_format , $signin_date );
 		$sign_in_time = $signin_date["year"] . "-" . $signin_date["month"] . "-" . $signin_date["day"] 
 							. " " . $signin_date["hour"] . ":" . $signin_date["minute"] .":00";
+		$formatted_dob = date('Y-m-d', strtotime($dob));
 
 		//////////////////////
 		// Insert Volunteer IF IT DOES NOT already exist
@@ -84,8 +106,8 @@
 		// Without fetchAll, result count won't be checked
 		if (sizeof($results) == 0) {
 			// Didn't find anyone with a matching email - insert the new volunteer
-			$volunteer_insert = "INSERT INTO volunteer (first_name,last_name,email,skills,interests,availability,find_out_about_us,include_email_dist)"
-				." VALUES ('".$first_name."','".$last_name."','".$email."','".$skills."','','','".$find_out_about_us."',".$include_email_dist.")";
+			$volunteer_insert = "INSERT INTO volunteer (first_name,last_name,email,skills,interests,availability,find_out_about_us,include_email_dist,phone,dob)"
+				." VALUES ('".$first_name."','".$last_name."','".$email."','".$skills."','','','".$find_out_about_us."','".$include_email_dist."','".$phone."','".$formatted_dob."')";
 			if ($db->executeStatement($volunteer_insert,[])) {
 				// Success - query to get id
 				$new_volunteer = "SELECT id FROM volunteer WHERE email = ?";
@@ -94,6 +116,22 @@
 					// Get the id
 					$volunteer_row = $results[0];
 					$volunteer_id = $volunteer_row['id'];
+
+					// add initial address
+					if ($street_one) {
+						$address_insert = "INSERT INTO address (volunteer_id, street_one, street_two, city, state, zip)"
+						. "VALUES (\"$volunteer_id\", \"$street_one\", \"$street_two\", \"$city\", \"$state\", \"$zip\")";
+
+						$db->executeStatement($address_insert, []);
+					}
+
+					// add initial emergency contact
+					if ($ec_first_name) {
+						$emergency_contact_insert = "INSERT INTO emergency_contact (volunteer_id, first_name, last_name, phone)"
+						. "VALUES (\"$volunteer_id\", \"$ec_first_name\", \"$ec_last_name\", \"$ec_phone\")";
+
+						$db->executeStatement($emergency_contact_insert, []);
+					}
 				}
 			} else {
 				// Failure
@@ -145,8 +183,8 @@
 			
 			// Only log time if passed to do so above
 			if ($log_time_period) {
-				$volunteer_period_insert = "INSERT INTO volunteer_period (check_in_time,check_out_time,hours,affiliation,health_release,photo_release,liability_release,first_time,job_type_id,location_id,community_service_hours,volunteer_id)"
-					." VALUES ('".$sign_in_time."','".$sign_in_time."','0.0','".$affiliation."',".$health_check.",".$photo_check.",".$liability_check.",".$first_time.",".$task_id.",".$location_id.",".$community_service.",".$volunteer_id.")";
+				$volunteer_period_insert = "INSERT INTO volunteer_period (check_in_time,check_out_time,hours,affiliation,health_release,photo_release,liability_release,first_time,job_type_id,location_id,community_service_hours,volunteer_id,event_id)"
+					." VALUES ('".$sign_in_time."','".$sign_in_time."','0.0','".$affiliation."',".$health_check.",".$photo_check.",".$liability_check.",".$first_time.",".$task_id.",".$location_id.",".$community_service.",".$volunteer_id.",".GENERAL_EVENT_ID.")";
 				if ($db->executeStatement($volunteer_period_insert, [])) {
 					// Success - we are good to go
 					?> <p>Thanks for signing in!! <span class="hidden">SUCCESS</p> <?php
