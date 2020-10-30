@@ -9,7 +9,7 @@
 			<div class="form-group col-md-12 col-xs-12 contribute">
 				<a href="<?=$give_url?>" target="_blank" rel="noopener noreferrer">
 					<button class="btn btn-lrg contribute-button card">
-						<p class="title-text">Thank you so much giving your time!</p>
+						<p class="title-text">THANK YOU SO MUCH FOR GIVING YOUR TIME!</p>
 						<p class="sub-text"> <?=$give_desc?></p>
 					</button>
 				</a>
