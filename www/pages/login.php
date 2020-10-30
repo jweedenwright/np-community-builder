@@ -1,11 +1,10 @@
 <?php
 	include_once '../app/global.php';
-	
+	require_once '../app/auth/token.php';
+
 	//	Check if already logged in
 	if (isLoggedIn()) {
-		//	Session variables already set - move forward to the dashboard
 		header("Location: " . $dashboard_url);
-	
 	} else {
 		//	Globals
 		$email = "";
@@ -37,9 +36,7 @@
 						//	If reset id is set - they need to reset first
 						if ($row['reset_id'] == "") {
 							if (password_verify($password, $row['password'])) {
-								$_SESSION['user_id'] = $row['id'];
-								$_SESSION['email'] = $row['username'];
-								$_SESSION['user_type_id'] = $row['user_type_id'];
+								AccessToken::set($row); // sets access token cookie with user payload
 								header("Location: " . $dashboard_url);
 							} else {
 								$message .= "<p>Sorry, the password you entered is incorrect.</p>";

@@ -8,14 +8,14 @@ include_once '../app/global.php';
 $page_title = "Volunteer Dashboard";
 include_once '../header.php';
 
-if (!isset($_SESSION['email'])) {
+if (!isLoggedIn()) {
     //	Session variable not set - redirect to login
     header("Location: " . $login_url);
 } else {
     // Logic
     include_once '../app/vol-dashboard.php';
 
-    if (isset($_SESSION['email']))  {
+    if (isLoggedIn())  {
         $volunteer = $results[0];
         $address = $vol_addresses[0];
         $formatted_address = "${address["street_one"]} ${address["street_two"]}, ${address["city"]} ${address["state"]} ${address["zip"]}";
