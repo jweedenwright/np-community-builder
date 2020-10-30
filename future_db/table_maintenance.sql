@@ -32,6 +32,7 @@ CREATE TABLE dbo.event (
 	id int NOT NULL IDENTITY(1,1),
 	event_name varchar(100) NOT NULL,
 	event_date datetime NOT NULL,
+	active bit NOT NULL DEFAULT(1),
 	CONSTRAINT PK_event PRIMARY KEY (id)
 )
 CREATE UNIQUE INDEX UQ_event ON dbo.event (event_name)

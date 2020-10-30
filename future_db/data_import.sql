@@ -27,7 +27,7 @@ SET IDENTITY_INSERT dbo.user_type OFF
 
 -- Default Event for all regular volunteers
 SET IDENTITY_INSERT dbo.event ON
-INSERT INTO dbo.event (id,event_name,event_date) VALUES (1,'General','2020-01-01')
+INSERT INTO dbo.event (id,event_name,event_date,active) VALUES (1,'General','2020-01-01',1);
 SET IDENTITY_INSERT dbo.event OFF
 
 -- Setup Default volunteers
