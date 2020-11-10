@@ -122,7 +122,6 @@ error_reporting(E_ALL);
 	}
 
 	// Helper methods for dealing with access token
-
 	function setUserFromToken(): void {
 		global $GLOBALS;
 
