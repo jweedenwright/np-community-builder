@@ -52,6 +52,7 @@ error_reporting(E_ALL);
 	$GLOBALS['db_name'] = $_SERVER['DB_NAME'];
 	$GLOBALS['db_user'] = $_SERVER['DB_USER'];
 	$GLOBALS['db_password'] = $_SERVER['DB_PASSWORD'];
+	$GLOBALS['sendgrid_api_key'] = $_SERVER['SEND_GRID_KEY'];
 	$GLOBALS['logged_in_user'] = null;
 
 	// Start the session
