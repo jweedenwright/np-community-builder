@@ -8,13 +8,9 @@
 		//	Header
 		$page_title = "Dashboard";
 		include_once '../header.php';
-		include_once '../app/dashboard-util.php'; 
+		// Logic
+		include_once '../app/dashboard-util.php';
 ?>
-<div id="npcb-report" class="container">
-	
-	
-</div>
-
 <div class="container">
 	<?php
 		$admin_staff = false;

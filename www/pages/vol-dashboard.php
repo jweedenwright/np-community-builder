@@ -125,7 +125,7 @@ if (!isLoggedIn()) {
 			<div class="form-group col-sm-12 text-right">
 					<div class="btn-group pull-right" role="group" aria-label="Search Actions">
 						<button type="submit" class="btn btn-primary">Search</button>
-						<button type="button" class="btn btn-default" onclick="downloadCSV('vol-hours');return false;">Download Volunteers</button>
+						<button type="button" class="btn btn-default" onclick="downloadCSV('vol-hours');return false;">Download Hours</button>
 						<button type="submit" class="btn btn-default" onclick="resetDashboard();return true;">Reset Filters</button>
 					</div>
 				</div>

@@ -1,20 +1,9 @@
 <?php 
-	include_once '../app/global.php';
-
-	//	Header
-	$page_title = "Staff Dashboard";
-	include_once '../header.php';
-
-	// TODO: Ensure user is logged in
-	if (!isset($_SESSION['email'])) {
-		//	Session variable not set - redirect to login
-		header("Location: " . $login_url);
-	} else {
-		// Logic
-		include_once '../app/dashboard-util.php';
-	// TODO: Check permissions again so that no one can get directly to this page
+if (!isLoggedIn()) {
+	//	Session variable not set - redirect to login
+	header("Location: " . $login_url);
+} else {
 ?>
-
 <h2>Website Management</h2>
 <ul>
 	<li><a href="/pages/manage-volunteers.php">Manage Volunteers</a></li>
@@ -116,7 +105,7 @@
 					<button type="button" class="btn btn-danger pull-left" onclick="signout();return false;">Signout All Volunteers</button>
 					<div class="btn-group pull-right" role="group" aria-label="Search Actions">
 						<button type="submit" class="btn btn-primary">Search</button>
-						<button type="button" class="btn btn-default" onclick="downloadCSV('vol-hours',8);return false;">Download Volunteers</button>
+						<button type="button" class="btn btn-default" onclick="downloadCSV('vol-hours',8);return false;">Download Displayed Volunteer Hours</button>
 						<button type="submit" class="btn btn-default" onclick="resetDashboard();return true;">Reset Filters</button>
 					</div>
 				</div>
@@ -308,8 +297,6 @@
 					</div><!-- /modal-content -->
 				</div><!-- /modal-dialog -->
 			</div><!-- /modal -->
-
-
 <?php 
 }
 ?>
