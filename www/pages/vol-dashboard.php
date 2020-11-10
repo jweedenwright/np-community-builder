@@ -1,16 +1,7 @@
-<?php
-// Error display
-//error_reporting(E_ALL);
-//ini_set('display_errors', 1);
-include_once '../app/global.php';
-
-//	Header
-$page_title = "Volunteer Dashboard";
-include_once '../header.php';
-
+<?php 
 if (!isLoggedIn()) {
-    //	Session variable not set - redirect to login
-    header("Location: " . $login_url);
+	//	Session variable not set - redirect to login
+	header("Location: " . $login_url);
 } else {
     // Logic
     include_once '../app/vol-dashboard.php';
@@ -24,8 +15,7 @@ if (!isLoggedIn()) {
         if (isset($ec_first_name) && isset($ec_last_name)) {
             $emergency_contact_full_name = "${ec_first_name} ${ec_last_name}";
         }
-
-        ?>
+?>
 
         <div id="management-form" class="container">
             <span class="pull-right">
