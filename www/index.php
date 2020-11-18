@@ -1,8 +1,18 @@
 <?php
+	// Error display
+	//error_reporting(E_ALL);
+	//ini_set('display_errors', 1);
 	include_once 'app/global.php';
 
+	// Header
 	$page_title = "Welcome";
 	include_once 'header.php';
+
+	if (!isLoggedIn()) {
+		//	Session variable not set - redirect to login
+		header("Location: " . $login_url);
+	} else {
+		// Logic
 ?>
 <div class="container">
 	<div class="row">
@@ -34,5 +44,6 @@
 	</div><!-- /row -->
 </div><!-- /container -->
 <?php
+	}
 	include_once 'footer.php';
 ?>

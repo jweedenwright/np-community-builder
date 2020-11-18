@@ -20,6 +20,7 @@
 		if (sizeof($results) > 0) {
 ?>
 			<div class="container">
+				<span><a class="pull-right btn btn-default" onclick="window.history.back();">Back</a></span>
 				<h1>Event Listing</h1>
 				<form id="event-search">
 					<div class="form-group col-sm-2">
@@ -118,7 +119,7 @@
 										data-validationtype="req"
 										data-validationmessage="Please be sure to provide your clock in date and time."/>
 								</div>
-								<button type="submit" class="btn btn-success">Save changes</button>
+								<button type="submit" class="btn btn-success form-control">Save changes</button>
 							</form>
 						</div><!-- /modal-body -->
 					</div><!-- /modal-content -->

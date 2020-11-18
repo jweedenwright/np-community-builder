@@ -22,30 +22,30 @@
 		<header>
 			<div class="jumbotron">
 				<div class="container">
-					<?php if (isLoggedIn()) { ?>
-						<div class="staff-log-out">
-							<a href="<?=$root_dir?>/pages/logout.php">
-								Log Out
-							</a>
-						</div>
-					<?php } ?>
 					<div class="hero-image">
 						<a href="<?=$root_dir?>/index.php"><img src="<?=$root_dir?>/img/knockout-logo.png" title="<?=$org_name?> Logo"/></a>
 					</div>
-					<nav id="main-nav" role="navigation">
-						<ul>
-							<li>
-								<a href="<?=$root_dir?>/pages/dashboard.php">
-									Dashboard
-								</a>
-							</li>
-							<li>
-								<a href="<?=$root_dir?>/index.php" class="nav-signin-btn">
-									Volunteer Clock In/Out
-								</a>
-							</li>
-						</ul>
-					</nav>
+					<?php if (isLoggedIn()) { ?>
+						<nav id="main-nav" role="navigation">
+							<ul>
+								<li>
+									<a href="<?=$root_dir?>/pages/dashboard.php">
+										Dashboard
+									</a>
+								</li>
+								<li>
+									<a href="<?=$root_dir?>/index.php">
+										Volunteer Clock In/Out
+									</a>
+								</li>
+								<li class="staff-log-out">
+									<a href="<?=$root_dir?>/pages/logout.php">
+										Log Out
+									</a>
+								</li>
+							</ul>
+						</nav>
+					<?php } ?>
 				</div>
 			</div>
 		</header>

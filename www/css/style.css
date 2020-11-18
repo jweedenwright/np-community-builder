@@ -49,8 +49,12 @@ h3 {
   color: #fff;
 }
 .form-control {
-  font-size: 18px;
-  height: 38px;
+    background-image: none;
+    font-size: 18px;
+    height: 38px;
+}
+.btn {
+    background-image: none;
 }
 header .staff-log-out {
   float: right;
@@ -89,19 +93,6 @@ header #main-nav ul li:first-child {
 }
 header #main-nav ul li:last-child {
   margin-right: 0;
-}
-header #main-nav ul li:last-child a {
-  color: #fff;
-  background: transparent;
-  padding: 15px 20px;
-  border: 2px solid #fff;
-  border-radius: 30px;
-}
-header #main-nav ul li:last-child a:hover,
-header #main-nav ul li:last-child a:focus {
-  color: #000;
-  background: #fff;
-  text-decoration: none;
 }
 #mission-statement p {
   margin: 10px;

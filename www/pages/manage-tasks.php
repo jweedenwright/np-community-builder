@@ -20,6 +20,7 @@
 		if (sizeof($results) > 1) {
 ?>
 			<div class="container">
+				<span><a class="pull-right btn btn-default" onclick="window.history.back();">Back</a></span>
 				<h1>Task Listing</h1>
 				<form id="task-search">
 					<div class="form-group col-sm-2">
@@ -103,7 +104,7 @@
 									<label for="task-name">Task Name</label>
 									<input class="form-control" type="text" id="task-name" name="task-name" value="">
 								</div>
-								<button type="submit" class="btn btn-success">Save changes</button>
+								<button type="submit" class="btn btn-success form-control">Save changes</button>
 							</form>
 						</div><!-- /modal-body -->
 					</div><!-- /modal-content -->

@@ -20,7 +20,7 @@
 			$volunteer = $results[0];
 			?>
 			<div id="management-form" class="container">
-				<span><a class="back details-btn" onclick="window.history.back();">Back</a></span>
+				<span><a class="pull-right btn btn-default" onclick="window.history.back();">Back</a></span>
 				<h1><?=$volunteer["first_name"]?> <?=$volunteer["last_name"]?></h1>
 				<div class="container">
 					<!-- edit form column -->
@@ -195,6 +195,7 @@
 				</div>
 
 				<!-- Retrieve volunteer periods -->
+				<h2>Volunteer Periods</h2>
 				<div class="table-responsive">
 				<table id="vol-activity" class="table table-striped">
 				<thead>
@@ -244,7 +245,7 @@
 								if(strlen($checkin_hour."") > 1) {
 									if ($checkin_date["hour"] > 12) {
 										$checkin_hour = $checkin_date["hour"] - 12;
-										if ($checkin_hour["hour"] != 24) {
+										if ($checkin_date["hour"] != 24) {
 											$checkin_ampm = "PM";
 										}
 									} elseif ($checkin_date["hour"] == 12) {
@@ -368,7 +369,7 @@
 									<label for="organization">Affiliation</label>
 									<input class="form-control" type="text" id="organization" name="organization" value="">
 								</div>
-								<button type="submit" class="btn btn-success">Save changes</button>
+								<button type="submit" class="btn btn-success form-control">Save changes</button>
 							</form>
 						</div><!-- /modal-body -->
 					</div><!-- /modal-content -->
@@ -380,19 +381,18 @@
 // Not individual - list of volunteers page
 			?>
 			<div class="container">
-				<!-- Button for new volunteer -->
-				<span><a class="back details-btn" onclick="window.history.back();">Back</a></span>
-				<span class="pull-right">
-					<button type="button" class="details btn" data-toggle="modal" data-target="#new-vol">New Volunteer</button>
-				</span>
+				<span><a class="pull-right btn btn-default" onclick="window.history.back();">Back</a></span>
 				<h1>Volunteer Listing</h1>
 				<form id="vol-search">
-					<div class="form-group col-sm-9">
+					<div class="form-group col-sm-6">
 						<label for="search-vols" class="sr-only">Search Volunteers</label>
 						<input class="form-control" id="search-vols" name="search-vols" placeholder="Search Volunteers" required type="text">
 					</div>
 					<div class="form-group col-sm-3">
 						<button class="form-control btn btn-primary" id="search-vols-submit" type="submit">Search</button>
+					</div>
+					<div class="form-group col-sm-3">
+						<button type="button" class="form-control btn btn-default" data-toggle="modal" data-target="#new-vol">New Volunteer</button>
 					</div>
 				</form>
 
@@ -449,159 +449,148 @@
                                         <label for="suffix" class="sr-only">Suffix</label>
                                         <input class="form-control" type="text" id="suffix" name="suffix" placeholder="Suffix" tabindex="2">
                                     </div>
-										<div class="form-group">
-											<label for="email" class="sr-only">Email Address *</label>
-											<input class="form-control" type="text" id="email" name="email" placeholder="Email Address" tabindex="3" required>
-										</div>
-                                        <div class="row">
-                                            <div class="form-group col-md-10 col-xs-10">
-                                                <label for="phone" class="sr-only">Phone</label>
-                                                <input class="form-control" id="phone" name="phone" placeholder="Phone" type="tel" tabindex="4">
-                                            </div>
+									<div class="form-group">
+										<label for="email" class="sr-only">Email Address *</label>
+										<input class="form-control" type="text" id="email" name="email" placeholder="Email Address" tabindex="3" required>
+									</div>
+                                    <div class="form-group">
+                                        <label for="phone" class="sr-only">Phone</label>
+                                        <input class="form-control" id="phone" name="phone" placeholder="Phone" type="tel" tabindex="4">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="dob">
+                                            <input type='text'
+                                                    class="form-control"
+                                                    id="dob"
+                                                    name="dob"
+                                                    placeholder="Date of Birth (MM/DD/YYYY)"
+                                                    tabindex="5"
+                                                    maxlength="10"
+                                                    data-validation="true"
+                                                    data-validationtype="regex"
+                                                    data-validationregex="(0?[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.]\d{2,4}"
+                                                    data-validationmessage="Please be sure your date of birth is in the correct format.">
                                         </div>
-                                        <div class="form-group col-md-6 col-xs-12">
-                                            <div class="dob">
-                                                <input type='text'
-                                                       class="form-control"
-                                                       id="dob"
-                                                       name="dob"
-                                                       placeholder="Date of Birth (MM/DD/YYYY)"
-                                                       tabindex="5"
-                                                       maxlength="10"
-                                                       data-validation="true"
-                                                       data-validationtype="regex"
-                                                       data-validationregex="(0?[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.]\d{2,4}"
-                                                       data-validationmessage="Please be sure your date of birth is in the correct format.">
-                                            </div>
-                                        </div>
-										<div class="form-group">
-											<label for="skills" class="sr-only">Skills</label>
-											<input class="form-control" type="text" id="skills" name="skills" placeholder="Skills" tabindex="5">
-										</div>
-										<div class="form-group">
-											<label for="interests" class="sr-only">Interests</label>
-											<input class="form-control" type="text" id="interests" name="interests" placeholder="Interests" tabindex="6">
-										</div>
-										<div class="form-group">
-											<label for="availability" class="sr-only">Availability</label>
-											<input class="form-control" id="availability" name="availability" placeholder="Availability" type="text" tabindex="7">
-										</div>
-										<div class="form-group">
-											<label for="find-out-about-us" class="sr-only">How did you find out about us?</label>
-											<textarea class="form-control" id="find_out_about_us" name="find_out_about_us" placeholder="How did you find out about us?" tabindex="8"></textarea>
-										</div>
-										<div class="row">
-											<div class="col-md-10">
-												<h4>Address Information</h4>
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="street_one" class="sr-only">Address line 1</label>
-												<input class="form-control" id="street_one" name="street_one" placeholder="Address line 1" tabindex="9" type="text">
-											</div>
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="street_two" class="sr-only">Address line 1</label>
-												<input class="form-control" id="street_two" name="street_two" placeholder="Address line 2" tabindex="10" type="text">
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="city" class="sr-only">City</label>
-												<input class="form-control" id="city" name="city" placeholder="City" tabindex="11" type="text">
-											</div>
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="state" class="sr-only">State</label>
-												<select class="form-control" id="state" name="state" placeholder="State">
-													<option value="">Please select a state...</option>
-													<option value="AL">Alabama</option>
-													<option value="AK">Alaska</option>
-													<option value="AZ">Arizona</option>
-													<option value="AR">Arkansas</option>
-													<option value="CA">California</option>
-													<option value="CO">Colorado</option>
-													<option value="CT">Connecticut</option>
-													<option value="DE">Delaware</option>
-													<option value="DC">District Of Columbia</option>
-													<option value="FL">Florida</option>
-													<option value="GA">Georgia</option>
-													<option value="HI">Hawaii</option>
-													<option value="ID">Idaho</option>
-													<option value="IL">Illinois</option>
-													<option value="IN">Indiana</option>
-													<option value="IA">Iowa</option>
-													<option value="KS">Kansas</option>
-													<option value="KY">Kentucky</option>
-													<option value="LA">Louisiana</option>
-													<option value="ME">Maine</option>
-													<option value="MD">Maryland</option>
-													<option value="MA">Massachusetts</option>
-													<option value="MI">Michigan</option>
-													<option value="MN">Minnesota</option>
-													<option value="MS">Mississippi</option>
-													<option value="MO">Missouri</option>
-													<option value="MT">Montana</option>
-													<option value="NE">Nebraska</option>
-													<option value="NV">Nevada</option>
-													<option value="NH">New Hampshire</option>
-													<option value="NJ">New Jersey</option>
-													<option value="NM">New Mexico</option>
-													<option value="NY">New York</option>
-													<option value="NC">North Carolina</option>
-													<option value="ND">North Dakota</option>
-													<option value="OH">Ohio</option>
-													<option value="OK">Oklahoma</option>
-													<option value="OR">Oregon</option>
-													<option value="PA">Pennsylvania</option>
-													<option value="RI">Rhode Island</option>
-													<option value="SC">South Carolina</option>
-													<option value="SD">South Dakota</option>
-													<option value="TN">Tennessee</option>
-													<option value="TX">Texas</option>
-													<option value="UT">Utah</option>
-													<option value="VT">Vermont</option>
-													<option value="VA">Virginia</option>
-													<option value="WA">Washington</option>
-													<option value="WV">West Virginia</option>
-													<option value="WI">Wisconsin</option>
-													<option value="WY">Wyoming</option>
-												</select>
+                                    </div>
+									<div class="form-group">
+										<label for="skills" class="sr-only">Skills</label>
+										<input class="form-control" type="text" id="skills" name="skills" placeholder="Skills" tabindex="5">
+									</div>
+									<div class="form-group">
+										<label for="interests" class="sr-only">Interests</label>
+										<input class="form-control" type="text" id="interests" name="interests" placeholder="Interests" tabindex="6">
+									</div>
+									<div class="form-group">
+										<label for="availability" class="sr-only">Availability</label>
+										<input class="form-control" id="availability" name="availability" placeholder="Availability" type="text" tabindex="7">
+									</div>
+									<div class="form-group">
+										<label for="find-out-about-us" class="sr-only">How did you find out about us?</label>
+										<textarea class="form-control" id="find_out_about_us" name="find_out_about_us" placeholder="How did you find out about us?" tabindex="8"></textarea>
+									</div>
 
-											</div>
+									<div class="row">
+										<div class="col-md-10">
+											<h4>Address Information</h4>
 										</div>
-										<div class="row">
-											<div class="form-group col-md-10 col-xs-10">
-												<label for="zip" class="sr-only">Zip Code</label>
-												<input class="form-control" id="zip" name="zip" placeholder="Zip Code" tabindex="13" type="number" maxlength="5"					
-														oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-											</div>
+									</div>
+									<div class="form-group">
+										<label for="street_one" class="sr-only">Address line 1</label>
+										<input class="form-control" id="street_one" name="street_one" placeholder="Address line 1" tabindex="9" type="text">
+									</div>
+									<div class="form-group">
+										<label for="street_two" class="sr-only">Address line 1</label>
+										<input class="form-control" id="street_two" name="street_two" placeholder="Address line 2" tabindex="10" type="text">
+									</div>
+									<div class="form-group">
+										<label for="city" class="sr-only">City</label>
+										<input class="form-control" id="city" name="city" placeholder="City" tabindex="11" type="text">
+									</div>
+									<div class="form-group">
+										<label for="state" class="sr-only">State</label>
+										<select class="form-control" id="state" name="state" placeholder="State">
+											<option value="">Please select a state...</option>
+											<option value="AL">Alabama</option>
+											<option value="AK">Alaska</option>
+											<option value="AZ">Arizona</option>
+											<option value="AR">Arkansas</option>
+											<option value="CA">California</option>
+											<option value="CO">Colorado</option>
+											<option value="CT">Connecticut</option>
+											<option value="DE">Delaware</option>
+											<option value="DC">District Of Columbia</option>
+											<option value="FL">Florida</option>
+											<option value="GA">Georgia</option>
+											<option value="HI">Hawaii</option>
+											<option value="ID">Idaho</option>
+											<option value="IL">Illinois</option>
+											<option value="IN">Indiana</option>
+											<option value="IA">Iowa</option>
+											<option value="KS">Kansas</option>
+											<option value="KY">Kentucky</option>
+											<option value="LA">Louisiana</option>
+											<option value="ME">Maine</option>
+											<option value="MD">Maryland</option>
+											<option value="MA">Massachusetts</option>
+											<option value="MI">Michigan</option>
+											<option value="MN">Minnesota</option>
+											<option value="MS">Mississippi</option>
+											<option value="MO">Missouri</option>
+											<option value="MT">Montana</option>
+											<option value="NE">Nebraska</option>
+											<option value="NV">Nevada</option>
+											<option value="NH">New Hampshire</option>
+											<option value="NJ">New Jersey</option>
+											<option value="NM">New Mexico</option>
+											<option value="NY">New York</option>
+											<option value="NC">North Carolina</option>
+											<option value="ND">North Dakota</option>
+											<option value="OH">Ohio</option>
+											<option value="OK">Oklahoma</option>
+											<option value="OR">Oregon</option>
+											<option value="PA">Pennsylvania</option>
+											<option value="RI">Rhode Island</option>
+											<option value="SC">South Carolina</option>
+											<option value="SD">South Dakota</option>
+											<option value="TN">Tennessee</option>
+											<option value="TX">Texas</option>
+											<option value="UT">Utah</option>
+											<option value="VT">Vermont</option>
+											<option value="VA">Virginia</option>
+											<option value="WA">Washington</option>
+											<option value="WV">West Virginia</option>
+											<option value="WI">Wisconsin</option>
+											<option value="WY">Wyoming</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="zip" class="sr-only">Zip Code</label>
+										<input class="form-control" id="zip" name="zip" placeholder="Zip Code" tabindex="13" type="number" maxlength="5"					
+												oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+									</div>
+
+									<div class="row">
+										<div class="col-md-10">
+											<h4>Emergency Contact</h4>
 										</div>
-										<div class="row">
-											<div class="col-md-10">
-												<h4>Emergency Contact</h4>
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="ec_first_name" class="sr-only">First Name</label>
-												<input class="form-control" id="ec_first_name" name="ec_first_name" placeholder="First Name" tabindex="14" type="text">
-											</div>
-											<div class="form-group col-md-5 col-xs-10">
-												<label for="ec_last_name" class="sr-only">Last Name</label>
-												<input class="form-control" id="ec_last_name" name="ec_last_name" placeholder="Last Name" tabindex="15" type="text">
-											</div>
-										</div>
-										<div class="row">
-											<div class="form-group col-md-10 col-xs-10">
-												<label for="ec_phone" class="sr-only">Phone</label>
-												<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="tel" tabindex="16">
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="email_dist">Add to email distribution</label>
-											<input class="block" type="checkBox" id="email_dist" name="email_dist">
-										</div>
-										<button type="submit" class="btn btn-success">Submit New Volunteer</button>
+									</div>
+									<div class="form-group">
+										<label for="ec_first_name" class="sr-only">First Name</label>
+										<input class="form-control" id="ec_first_name" name="ec_first_name" placeholder="First Name" tabindex="14" type="text">
+									</div>
+									<div class="form-group">
+										<label for="ec_last_name" class="sr-only">Last Name</label>
+										<input class="form-control" id="ec_last_name" name="ec_last_name" placeholder="Last Name" tabindex="15" type="text">
+									</div>
+									<div class="form-group">
+										<label for="ec_phone" class="sr-only">Phone</label>
+										<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="tel" tabindex="16">
+									</div>
+									<div class="form-group hidden">
+										<label for="email_dist">Add to email distribution</label>
+										<input class="block" type="checkBox" id="email_dist" name="email_dist">
+									</div>
+									<button type="submit" class="form-control btn btn-success">Submit New Volunteer</button>
 								</form>
 							</div>
 						</div>
