@@ -103,21 +103,29 @@
 
 								<div class="form-group">
 									<label for="event-name">Event Name</label>
-									<input class="form-control" type="text" id="event-name" name="event-name" value="">
+									<input required
+											class="form-control" 
+											type="text" 
+											id="event-name" 
+											name="event-name" 
+											value=""
+											data-validation="true"
+											data-validationtype="req"
+											data-validationmessage="Please be sure to provide an event name.">
                 </div>
                 
                 <div class="form-group">
 									<label for="event-name">Event Date</label>
-									<input type='text' 
+									<input required type='text' 
 										class="form-control datetime-picker" 
 										id="event-date-time-picker" 
 										data-format="yyyy-MM-dd hh:mm:00" 
 										name="event-date" 
-										placeholder="MM/DD/YYYY 12:01 AM" 
-										tabindex="8" 
+										placeholder="MM/DD/YYYY 12:01 AM"  
 										data-validation="true"
-										data-validationtype="req"
-										data-validationmessage="Please be sure to provide your clock in date and time."/>
+										data-validationtype="regex"
+										data-validationregex="(0?[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.]\d{2,4}"
+										data-validationmessage="Please be sure your event date is in the correct format."/>
 								</div>
 								<button type="submit" class="btn btn-success form-control">Save changes</button>
 							</form>

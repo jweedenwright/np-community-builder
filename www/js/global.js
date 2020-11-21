@@ -133,7 +133,7 @@ function checkPreferences() {
 // Form Validation
 function checkIfValid(formId) {
 	var is_valid = true;
-	var validation_fields = document.getElementById("sign-in-form").querySelectorAll("[data-validation]");
+	var validation_fields = document.getElementById(formId).querySelectorAll("[data-validation]");
 	for (var i = 0; i < validation_fields.length; i++) {
 		var validation_field = validation_fields[i];
 		// Get value - check for input vs select

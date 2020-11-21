@@ -28,7 +28,6 @@ function editTask(task_sel) {
 
 // Update an Event Modal
 function editEvent(event_sel) {
-	console.log(event_sel);
 	var id = $(event_sel).data("id");
 	if (id !== "new") {
 		$("#event-name").attr("value", $(event_sel).data("name"));

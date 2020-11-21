@@ -210,9 +210,9 @@
 // MANAGE LOCATION
 			} elseif ($manage_type == "location") {
 				// Make sure we have required values for a Location change 
-				if(!isset($_POST['loc-name'])) {
+				if(!isset($_POST['loc-name']) || $_POST['loc-name'] == "") {
 					$return_message = "Location name was not provided.";
-				} elseif(!isset($_POST['loc-id'])) {
+				} elseif(!isset($_POST['loc-id']) || $_POST['loc-id'] == "") {
 					$return_message = "Location id was not provided.";
 				} else {
 					// Sanitize Strings
@@ -243,9 +243,9 @@
 // MANAGE TASK / JOB TYPE
 			} elseif ($manage_type == "job_type") {
 				// Make sure we have required values for a Task change 
-				if(!isset($_POST['task-name'])) {
+				if(!isset($_POST['task-name']) || $_POST['task-name'] == "") {
 					$return_message = "Task name was not provided.";
-				} elseif(!isset($_POST['task-id'])) {
+				} elseif(!isset($_POST['task-id']) || $_POST['task-id'] == "") {
 					$return_message = "Task id was not provided.";
 				} else {
 					// Sanitize Strings
@@ -276,16 +276,15 @@
 // MANAGE EVENT
 			} else if ($manage_type === 'event') {
 				// Make sure we have required values for a Task change 
-				if (!isset($_POST['event-name'])) {
+				if (!isset($_POST['event-name']) || $_POST['event-name'] == "") {
 					$return_message = "Task name was not provided.";
-				} elseif (!isset($_POST['event-date'])) {
+				} elseif (!isset($_POST['event-date']) || $_POST['event-date'] == "") {
 					$return_message = "Task id was not provided.";
 				} else {
 					$event_id = filter_var($_POST['event-id'], FILTER_SANITIZE_STRING);
 					$event_name = filter_var($_POST['event-name'], FILTER_SANITIZE_STRING);
 					$event_date = filter_var($_POST['event-date'], FILTER_SANITIZE_STRING);
 					$formatted_date = date('Y-m-d H:i:s', strtotime($event_date));
-
 					if ($event_id === 'new') {
 						$event_query = "INSERT INTO event (event_name, event_date, active) VALUES ('$event_name', '$formatted_date', 1)";
 					} else {
@@ -301,9 +300,9 @@
 ///////////////////////////////////////////////////				
 // MANAGE ACTIVATE / DEACTIVATE
 			} elseif ($manage_type == "activate" || $manage_type == "deactivate") {
-				if(!isset($_POST['id'])) {
+				if(!isset($_POST['id']) || $_POST['id'] == "") {
 					$return_message = "Item id was not provided.";
-				} elseif(!isset($_POST['item-type'])) {
+				} elseif(!isset($_POST['item-type']) || $_POST['item-type'] == "") {
 					$return_message = "Item type was not provided.";
 				} else {
 					// Sanitize Strings
