@@ -222,6 +222,18 @@ INSERT INTO dbo.app_user (username, password, date_added, user_type_id, voluntee
 INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('marta_van_hoose@sbcglobal.net','tester','2021-01-04',4,36,1);
 
 /* TESTING DATA
+-- Insert Test Intern
+SET IDENTITY_INSERT dbo.volunteer ON
+INSERT INTO dbo.volunteer (id,first_name,middle_name,last_name,suffix,email,phone,dob,skills,interests,availability,find_out_about_us,include_email_dist,active) 
+	VALUES(100,'Intern','','VonTern','','jeremiah.weedenwright+1@gmail.com','615-111-1111','20000101','','','','',1,1);
+SET IDENTITY_INSERT dbo.volunteer OFF
+-- Setup Addresses
+INSERT INTO dbo.address (volunteer_id, street_one,street_two,city,state,zip) VALUES(100,'101 N 1st','','Nashville','TN','37215');
+-- Setup Emergency Contacts
+INSERT INTO dbo.emergency_contact (volunteer_id, first_name,last_name,phone) VALUES(100,'Emergency','Contact','615-333-3333');
+-- Setup Default admins
+INSERT INTO dbo.app_user (username, password, date_added, user_type_id, volunteer_id, active) VALUES ('jeremiah.weedenwright+1@gmail.com','tester', '2020-10-16',3,100,1);
+
 -- Insert Vol and Intern Data
 SET IDENTITY_INSERT dbo.volunteer ON
 INSERT INTO dbo.volunteer (id,first_name,middle_name,last_name,suffix,email,phone,dob,skills,interests,availability,find_out_about_us,include_email_dist,active) 

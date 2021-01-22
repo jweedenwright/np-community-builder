@@ -98,59 +98,59 @@
 								</div>
 								<div class="form-group col-md-5 col-xs-10">
 									<label for="state" class="sr-only">State</label>
-									<select class="form-control" id="state" tabindex="12" value="<?=$volunteer["state"]?>" selected="selected">
-										<option value="">Please select a state...</option>
-										<option value="AL">Alabama</option>
-										<option value="AK">Alaska</option>
-										<option value="AZ">Arizona</option>
-										<option value="AR">Arkansas</option>
-										<option value="CA">California</option>
-										<option value="CO">Colorado</option>
-										<option value="CT">Connecticut</option>
-										<option value="DE">Delaware</option>
-										<option value="DC">District Of Columbia</option>
-										<option value="FL">Florida</option>
-										<option value="GA">Georgia</option>
-										<option value="HI">Hawaii</option>
-										<option value="ID">Idaho</option>
-										<option value="IL">Illinois</option>
-										<option value="IN">Indiana</option>
-										<option value="IA">Iowa</option>
-										<option value="KS">Kansas</option>
-										<option value="KY">Kentucky</option>
-										<option value="LA">Louisiana</option>
-										<option value="ME">Maine</option>
-										<option value="MD">Maryland</option>
-										<option value="MA">Massachusetts</option>
-										<option value="MI">Michigan</option>
-										<option value="MN">Minnesota</option>
-										<option value="MS">Mississippi</option>
-										<option value="MO">Missouri</option>
-										<option value="MT">Montana</option>
-										<option value="NE">Nebraska</option>
-										<option value="NV">Nevada</option>
-										<option value="NH">New Hampshire</option>
-										<option value="NJ">New Jersey</option>
-										<option value="NM">New Mexico</option>
-										<option value="NY">New York</option>
-										<option value="NC">North Carolina</option>
-										<option value="ND">North Dakota</option>
-										<option value="OH">Ohio</option>
-										<option value="OK">Oklahoma</option>
-										<option value="OR">Oregon</option>
-										<option value="PA">Pennsylvania</option>
-										<option value="RI">Rhode Island</option>
-										<option value="SC">South Carolina</option>
-										<option value="SD">South Dakota</option>
-										<option value="TN">Tennessee</option>
-										<option value="TX">Texas</option>
-										<option value="UT">Utah</option>
-										<option value="VT">Vermont</option>
-										<option value="VA">Virginia</option>
-										<option value="WA">Washington</option>
-										<option value="WV">West Virginia</option>
-										<option value="WI">Wisconsin</option>
-										<option value="WY">Wyoming</option>
+									<select class="form-control" id="state" name="state" tabindex="12" value="<?=$volunteer["state"]?>" selected="selected">
+										<option value="">Please select a state...<?=$volunteer["state"]?></option>
+										<option value="AL" <?php if($volunteer["state"]=="AL"){?>selected<?php }?> >Alabama</option>
+										<option value="AK" <?php if($volunteer["state"]=="AK"){?>selected<?php }?> >Alaska</option>
+										<option value="AZ" <?php if($volunteer["state"]=="AZ"){?>selected<?php }?> >Arizona</option>
+										<option value="AR" <?php if($volunteer["state"]=="AR"){?>selected<?php }?> >Arkansas</option>
+										<option value="CA" <?php if($volunteer["state"]=="CA"){?>selected<?php }?> >California</option>
+										<option value="CO" <?php if($volunteer["state"]=="CO"){?>selected<?php }?> >Colorado</option>
+										<option value="CT" <?php if($volunteer["state"]=="CT"){?>selected<?php }?> >Connecticut</option>
+										<option value="DE" <?php if($volunteer["state"]=="DE"){?>selected<?php }?> >Delaware</option>
+										<option value="DC" <?php if($volunteer["state"]=="DC"){?>selected<?php }?> >District Of Columbia</option>
+										<option value="FL" <?php if($volunteer["state"]=="FL"){?>selected<?php }?> >Florida</option>
+										<option value="GA" <?php if($volunteer["state"]=="GA"){?>selected<?php }?> >Georgia</option>
+										<option value="HI" <?php if($volunteer["state"]=="HI"){?>selected<?php }?> >Hawaii</option>
+										<option value="ID" <?php if($volunteer["state"]=="ID"){?>selected<?php }?> >Idaho</option>
+										<option value="IL" <?php if($volunteer["state"]=="IL"){?>selected<?php }?> >Illinois</option>
+										<option value="IN" <?php if($volunteer["state"]=="IN"){?>selected<?php }?> >Indiana</option>
+										<option value="IA" <?php if($volunteer["state"]=="IA"){?>selected<?php }?> >Iowa</option>
+										<option value="KS" <?php if($volunteer["state"]=="KS"){?>selected<?php }?> >Kansas</option>
+										<option value="KY" <?php if($volunteer["state"]=="KY"){?>selected<?php }?> >Kentucky</option>
+										<option value="LA" <?php if($volunteer["state"]=="LA"){?>selected<?php }?> >Louisiana</option>
+										<option value="ME" <?php if($volunteer["state"]=="ME"){?>selected<?php }?> >Maine</option>
+										<option value="MD" <?php if($volunteer["state"]=="MD"){?>selected<?php }?> >Maryland</option>
+										<option value="MA" <?php if($volunteer["state"]=="MA"){?>selected<?php }?> >Massachusetts</option>
+										<option value="MI" <?php if($volunteer["state"]=="MI"){?>selected<?php }?> >Michigan</option>
+										<option value="MN" <?php if($volunteer["state"]=="MN"){?>selected<?php }?> >Minnesota</option>
+										<option value="MS" <?php if($volunteer["state"]=="MS"){?>selected<?php }?> >Mississippi</option>
+										<option value="MO" <?php if($volunteer["state"]=="MO"){?>selected<?php }?> >Missouri</option>
+										<option value="MT" <?php if($volunteer["state"]=="MT"){?>selected<?php }?> >Montana</option>
+										<option value="NE" <?php if($volunteer["state"]=="NE"){?>selected<?php }?> >Nebraska</option>
+										<option value="NV" <?php if($volunteer["state"]=="NV"){?>selected<?php }?> >Nevada</option>
+										<option value="NH" <?php if($volunteer["state"]=="NH"){?>selected<?php }?> >New Hampshire</option>
+										<option value="NJ" <?php if($volunteer["state"]=="NJ"){?>selected<?php }?> >New Jersey</option>
+										<option value="NM" <?php if($volunteer["state"]=="NM"){?>selected<?php }?> >New Mexico</option>
+										<option value="NY" <?php if($volunteer["state"]=="NY"){?>selected<?php }?> >New York</option>
+										<option value="NC" <?php if($volunteer["state"]=="NC"){?>selected<?php }?> >North Carolina</option>
+										<option value="ND" <?php if($volunteer["state"]=="ND"){?>selected<?php }?> >North Dakota</option>
+										<option value="OH" <?php if($volunteer["state"]=="OH"){?>selected<?php }?> >Ohio</option>
+										<option value="OK" <?php if($volunteer["state"]=="OK"){?>selected<?php }?> >Oklahoma</option>
+										<option value="OR" <?php if($volunteer["state"]=="OR"){?>selected<?php }?> >Oregon</option>
+										<option value="PA" <?php if($volunteer["state"]=="PA"){?>selected<?php }?> >Pennsylvania</option>
+										<option value="RI" <?php if($volunteer["state"]=="RI"){?>selected<?php }?> >Rhode Island</option>
+										<option value="SC" <?php if($volunteer["state"]=="SC"){?>selected<?php }?> >South Carolina</option>
+										<option value="SD" <?php if($volunteer["state"]=="SD"){?>selected<?php }?> >South Dakota</option>
+										<option value="TN" <?php if($volunteer["state"]=="TN"){?>selected<?php }?> >Tennessee</option>
+										<option value="TX" <?php if($volunteer["state"]=="TX"){?>selected<?php }?> >Texas</option>
+										<option value="UT" <?php if($volunteer["state"]=="UT"){?>selected<?php }?> >Utah</option>
+										<option value="VT" <?php if($volunteer["state"]=="VT"){?>selected<?php }?> >Vermont</option>
+										<option value="VA" <?php if($volunteer["state"]=="VA"){?>selected<?php }?> >Virginia</option>
+										<option value="WA" <?php if($volunteer["state"]=="WA"){?>selected<?php }?> >Washington</option>
+										<option value="WV" <?php if($volunteer["state"]=="WV"){?>selected<?php }?> >West Virginia</option>
+										<option value="WI" <?php if($volunteer["state"]=="WI"){?>selected<?php }?> >Wisconsin</option>
+										<option value="WY" <?php if($volunteer["state"]=="WY"){?>selected<?php }?> >Wyoming</option>
 									</select>
 
 								</div>
@@ -386,7 +386,7 @@
 				<form id="vol-search">
 					<div class="form-group col-sm-6">
 						<label for="search-vols" class="sr-only">Search Volunteers</label>
-						<input class="form-control" id="search-vols" name="search-vols" placeholder="Search Volunteers" required type="text">
+						<input class="form-control" id="search-vols" name="search-vols" placeholder="Search Volunteers - * to see all" required type="text">
 					</div>
 					<div class="form-group col-sm-3">
 						<button class="form-control btn btn-primary" id="search-vols-submit" type="submit">Search</button>

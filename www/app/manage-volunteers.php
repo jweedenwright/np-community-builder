@@ -39,17 +39,25 @@
 		// Check for query string
 		if (isset($_GET['search-vols'])) {
 			
-			// Clean it up and query - check first name, last name, email and volunteer period - affiliation
-			$query_string = strtoupper(filter_var ( $_GET['search-vols'], FILTER_SANITIZE_STRING));
-			$all_vols = "SELECT DISTINCT v.id, v.first_name, v.last_name, v.email
-					 		FROM volunteer v
-							LEFT JOIN volunteer_period vp on vp.volunteer_id = v.id
-							WHERE v.email LIKE '%".$query_string."%'
-							OR v.first_name LIKE '%".$query_string."%'
-							OR v.last_name LIKE '%".$query_string."%'
-							OR vp.affiliation LIKE '%".$query_string."%'";
+			if ($_GET['search-vols'] == "*") {
+				// Key to get all
+				$all_vols = "SELECT DISTINCT v.id, v.first_name, v.last_name, v.email
+					 			FROM volunteer v";
 
-			$results = $db->executeStatement($all_vols,[])->fetchAll();
+				$results = $db->executeStatement($all_vols,[])->fetchAll();
+			} else {
+				// Clean it up and query - check first name, last name, email and volunteer period - affiliation
+				$query_string = strtoupper(filter_var ( $_GET['search-vols'], FILTER_SANITIZE_STRING));
+				$all_vols = "SELECT DISTINCT v.id, v.first_name, v.last_name, v.email
+					 			FROM volunteer v
+								LEFT JOIN volunteer_period vp on vp.volunteer_id = v.id
+								WHERE v.email LIKE '%".$query_string."%'
+								OR v.first_name LIKE '%".$query_string."%'
+								OR v.last_name LIKE '%".$query_string."%'
+								OR vp.affiliation LIKE '%".$query_string."%'";
+
+				$results = $db->executeStatement($all_vols,[])->fetchAll();
+			}
 		}
 	}
 ?>
