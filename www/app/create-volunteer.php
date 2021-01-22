@@ -31,6 +31,20 @@ if (!isLoggedIn()) {
         $return_message = "Must provide suffix for volunteer.";
     } elseif(!isset($_POST['phone'])) {
         $return_message = "Must provide phone for volunteer.";
+    } elseif(!isset($_POST['street_one'])) {
+        $return_message = "Must provide street address for volunteer.";
+    } elseif(!isset($_POST['city'])) {
+        $return_message = "Must provide city for volunteer.";
+    } elseif(!isset($_POST['state'])) {
+        $return_message = "Must provide state for volunteer.";
+    } elseif(!isset($_POST['zip'])) {
+        $return_message = "Must provide zip for volunteer.";
+    } elseif(!isset($_POST['ec_first_name'])) {
+        $return_message = "Must provide emergency contact first name for volunteer.";
+    } elseif(!isset($_POST['ec_last_name'])) {
+        $return_message = "Must provide emergency contact last name for volunteer.";
+    } elseif(!isset($_POST['ec_phone'])) {
+        $return_message = "Must provide emergency contact phone for volunteer.";
     } else {
         // Sanitize Strings
         $vol_fn = filter_var($_POST['fn'], FILTER_SANITIZE_STRING);

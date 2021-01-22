@@ -45,25 +45,30 @@
 											,last_name = '".$vol_ln."'";
 
 					// Optional fields
-					 if(isset($_POST['phone'])) {
-						 $vol_phone = filter_var ( $_POST['phone'], FILTER_SANITIZE_STRING);
-						 $update_string = $update_string . ",emergency_contact_phone = '".$vol_phone."'";
+					if(isset($_POST['dob'])) {
+						$vol_dob = filter_var ( $_POST['dob'], FILTER_SANITIZE_STRING);
+						$formatted_dob = date('Y-m-d', strtotime($vol_dob));
+						$update_string = $update_string . ",dob = '".$formatted_dob."'";
+	   				}
+					if(isset($_POST['phone'])) {
+						$vol_phone = filter_var ( $_POST['phone'], FILTER_SANITIZE_STRING);
+						$update_string = $update_string . ",phone = '".$vol_phone."'";
 	   				}
 					if(isset($_POST['skills'])) {
 						$vol_skills = filter_var ( $_POST['skills'], FILTER_SANITIZE_STRING);
-						 $update_string = $update_string . ",skills = '".$vol_skills."'";
+						$update_string = $update_string . ",skills = '".$vol_skills."'";
 	   				}
 					if(isset($_POST['interests'])) {
 						$vol_interests = filter_var ( $_POST['interests'], FILTER_SANITIZE_STRING);
-						 $update_string = $update_string . ",interests = '".$vol_interests."'";
+						$update_string = $update_string . ",interests = '".$vol_interests."'";
 	   				}
 					if(isset($_POST['availability'])) {
 						$vol_availability = filter_var ( $_POST['availability'], FILTER_SANITIZE_STRING);
-						 $update_string = $update_string . ",availability = '".$vol_availability."'";
+						$update_string = $update_string . ",availability = '".$vol_availability."'";
 	   				}
 					if(isset($_POST['email_dist'])) {
 						$vol_email_dist = filter_var ( $_POST['email_dist'], FILTER_SANITIZE_STRING);
-						 $update_string = $update_string . ",include_email_dist = '".$vol_email_dist."'";
+						$update_string = $update_string . ",include_email_dist = '".$vol_email_dist."'";
 	   				} 
 					$update_string = $update_string . "WHERE id = ".$vol_id;
 

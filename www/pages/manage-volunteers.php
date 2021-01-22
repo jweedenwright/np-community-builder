@@ -42,31 +42,52 @@
 								<input type='checkbox' name='active' value='1' id="active"  <?php if($volunteer["active"]==1){echo "checked";}?> />
 							</div>
 							<div class="form-group row">
-								<label class="col-lg-3 col-form-label form-control-label for="fn">First Name</label>
+								<label class="col-lg-3 col-form-label form-control-label" for="fn">First Name</label>
 								<div class="col-lg-4">
 									<input class="form-control" type="text" id="fn" name="fn" value="<?=$volunteer["first_name"]?>" />
 								</div>
 							</div>
 							<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label for="ln">Last Name</label>
+									<label class="col-lg-3 col-form-label form-control-label" for="ln">Last Name</label>
 									<div class="col-lg-4">
 										<input class="form-control" type="text" id="ln" name="ln" value="<?=$volunteer["last_name"]?>" />
 									</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-lg-3 for="skills">Skills</label>
+                                <?php
+									$clean_date = date_parse_from_format ( $sql_date_format , $volunteer["dob"] );
+									$dob_display = $clean_date["month"] . "/" . $clean_date["day"] ."/" . $clean_date["year"];
+								?>    
+									<label class="col-lg-3 col-form-label form-control-label" for="dob">Date of Birth</label>
+                                    <div class="col-lg-4">
+										<input type='text'
+												class="form-control"
+												value="<?=$dob_display?>"
+												id="dob"
+												name="dob"
+												placeholder="Date of Birth (MM/DD/YYYY)"
+												tabindex="5"
+												maxlength="10"
+												data-validation="true"
+												data-validationtype="regex"
+												data-validationregex="(0?[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.]\d{2,4}"
+												data-validationmessage="Please be sure your date of birth is in the correct format.">
+									</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-lg-3" for="skills">Skills</label>
 								<div class="col-lg-8">
 								<input class="form-control" type="text" id="skills" name="skills" value="<?=$volunteer["skills"]?>">
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-lg-3 for="interests">Interests</label>
+								<label class="col-lg-3" for="interests">Interests</label>
 								<div class="col-lg-8">
 								<input class="form-control" type="text" id="interests" name="interests" value="<?=$volunteer["interests"]?>">
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-lg-3 for="availability">Availability</label>
+								<label class="col-lg-3" for="availability">Availability</label>
 								<div class="col-lg-8">
 								<input class="form-control" type="text" id="availability" name="availability" value="<?=$volunteer["availability"]?>">
 								</div>
@@ -455,9 +476,9 @@
 									</div>
                                     <div class="form-group">
                                         <label for="phone" class="sr-only">Phone</label>
-                                        <input class="form-control" id="phone" name="phone" placeholder="Phone" type="tel" tabindex="4">
+                                        <input class="form-control" id="phone" name="phone" placeholder="Phone" type="tel" tabindex="4" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" required>
                                         <div class="dob">
                                             <input type='text'
                                                     class="form-control"
@@ -496,7 +517,7 @@
 									</div>
 									<div class="form-group">
 										<label for="street_one" class="sr-only">Address line 1</label>
-										<input class="form-control" id="street_one" name="street_one" placeholder="Address line 1" tabindex="9" type="text">
+										<input class="form-control" id="street_one" name="street_one" placeholder="Address line 1" tabindex="9" type="text" required>
 									</div>
 									<div class="form-group">
 										<label for="street_two" class="sr-only">Address line 1</label>
@@ -504,11 +525,11 @@
 									</div>
 									<div class="form-group">
 										<label for="city" class="sr-only">City</label>
-										<input class="form-control" id="city" name="city" placeholder="City" tabindex="11" type="text">
+										<input class="form-control" id="city" name="city" placeholder="City" tabindex="11" type="text" required>
 									</div>
 									<div class="form-group">
 										<label for="state" class="sr-only">State</label>
-										<select class="form-control" id="state" name="state" placeholder="State">
+										<select class="form-control" id="state" name="state" placeholder="State" required>
 											<option value="">Please select a state...</option>
 											<option value="AL">Alabama</option>
 											<option value="AK">Alaska</option>
@@ -566,7 +587,7 @@
 									<div class="form-group">
 										<label for="zip" class="sr-only">Zip Code</label>
 										<input class="form-control" id="zip" name="zip" placeholder="Zip Code" tabindex="13" type="number" maxlength="5"					
-												oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+												oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
 									</div>
 
 									<div class="row">
@@ -576,15 +597,15 @@
 									</div>
 									<div class="form-group">
 										<label for="ec_first_name" class="sr-only">First Name</label>
-										<input class="form-control" id="ec_first_name" name="ec_first_name" placeholder="First Name" tabindex="14" type="text">
+										<input class="form-control" id="ec_first_name" name="ec_first_name" placeholder="First Name" tabindex="14" type="text" required>
 									</div>
 									<div class="form-group">
 										<label for="ec_last_name" class="sr-only">Last Name</label>
-										<input class="form-control" id="ec_last_name" name="ec_last_name" placeholder="Last Name" tabindex="15" type="text">
+										<input class="form-control" id="ec_last_name" name="ec_last_name" placeholder="Last Name" tabindex="15" type="text" required>
 									</div>
 									<div class="form-group">
 										<label for="ec_phone" class="sr-only">Phone</label>
-										<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="tel" tabindex="16">
+										<input class="form-control" id="ec_phone" name="ec_phone" placeholder="Phone" type="tel" tabindex="16" required>
 									</div>
 									<div class="form-group hidden">
 										<label for="email_dist">Add to email distribution</label>
